@@ -112,3 +112,7 @@ Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll.meta
 UserSettings/Search.index
 UserSettings/
 *.dwlt
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+UserSettings/Search.settings
