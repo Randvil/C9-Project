@@ -33,6 +33,9 @@ public abstract class Entity : MonoBehaviour
     protected LayerMask enemyLayerMask;
 
     [SerializeField]
+    protected int damage;
+
+    [SerializeField]
     protected float attackRadius;
 
     [SerializeField]
@@ -131,11 +134,24 @@ public abstract class Entity : MonoBehaviour
     {
         health -= damage;
         healthBar.value = health;
+
+        if (health <= 0)
+            Die();
+    }
+
+    protected void Die()
+    {
+        //TODO: ƒобавить запуск анимации смерти, когда та будет готова
+        GetComponent<Collider>().enabled = false;
+
+        //TODO: ѕосле внедрени€ анимации, убрать это, чтоб труп оставалс€ лежать
+        Destroy(gameObject);
     }
 
     protected void DealDamage(Collider enemy, float damage)
     {
-        Destroy(enemy.gameObject);
+        //TODO: ¬ыбрать систему хп между целыми и нецелыми числами
+        enemy.GetComponent<Entity>().TakeDamage((int)damage);
     }
 
     protected IEnumerator TurnCoroutine(float direction)

@@ -35,6 +35,6 @@ public class PlayerController : Entity
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping) rigidbody.AddForce(new Vector3(0f, jumpSpeed, 0f), ForceMode.VelocityChange);
 
         // attack
-        if (Input.GetMouseButtonDown(0) && attackCoroutine == null) attackCoroutine = StartCoroutine(AttackCoroutine());
+        if (Input.GetMouseButtonDown(0) && attackCoroutine == null) attackCoroutine = StartCoroutine(AttackCoroutine(damage));
     }
 }
