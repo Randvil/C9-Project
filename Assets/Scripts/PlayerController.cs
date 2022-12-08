@@ -8,6 +8,8 @@ public class PlayerController : Entity
     protected override void Start()
     {
         base.Start();
+
+        rigidbody = GetComponentInParent<Rigidbody>();
     }
 
     protected override void Update()
@@ -15,7 +17,7 @@ public class PlayerController : Entity
         // moving
         float deltaX = Input.GetAxisRaw("Horizontal") * moveSpeed;
         rigidbody.velocity = new Vector3(deltaX, rigidbody.velocity.y, 0f);
-
+        
         // turning
         if (deltaX > 0f && direction != 0f)
         {

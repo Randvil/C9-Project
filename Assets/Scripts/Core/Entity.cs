@@ -144,8 +144,8 @@ public abstract class Entity : MonoBehaviour
         //TODO: Добавить запуск анимации смерти, когда та будет готова
         GetComponent<Collider>().enabled = false;
 
-        //TODO: После внедрения анимации, убрать это, чтоб труп оставался лежать
-        Destroy(gameObject);
+        //TODO: После внедрения анимации, убрать это, чтоб труп оставался лежать, но удалить healthbar
+        Destroy(transform.parent.gameObject);
     }
 
     protected void DealDamage(Collider enemy, float damage)
