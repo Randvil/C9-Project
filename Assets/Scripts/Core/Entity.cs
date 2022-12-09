@@ -12,7 +12,7 @@ public abstract class Entity : MonoBehaviour
     protected float turnSpeed;
 
     [SerializeField]
-    protected float tresholdAngle;
+    protected GameObject model;
 
     [SerializeField]
     protected float jumpSpeed;
@@ -44,26 +44,29 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected float attackCooldown;
 
-    public int health;
-
-    public int maxHealth;
-
-    private enum eAttackType
+    protected enum eAttackType
     {
         Single,
         Splash
     }
 
     [SerializeField]
-    private eAttackType attackType;
+    protected eAttackType attackType;
+
+    [SerializeField]
+    protected int health;
+
+    [SerializeField]
+    protected int maxHealth;
+
+    [SerializeField]
+    protected Slider healthBarSlider;
+
 
     protected float direction;
     protected bool isJumping;
     protected Coroutine turnCoroutine;
     protected Coroutine attackCoroutine;
-
-    [SerializeField]
-    private Slider healthBar;
 
     protected new Rigidbody rigidbody;
 
@@ -72,16 +75,15 @@ public abstract class Entity : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
 
-        maxHealth = 5;
-        health = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
+
+        healthBarSlider.maxValue = maxHealth;
+        healthBarSlider.value = maxHealth;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+
     }
 
     protected IEnumerator AttackCoroutine(float damage = 0f)
@@ -133,7 +135,7 @@ public abstract class Entity : MonoBehaviour
     protected void TakeDamage(int damage)
     {
         health -= damage;
-        healthBar.value = health;
+        healthBarSlider.value = health;
 
         if (health <= 0)
             Die();
@@ -156,16 +158,16 @@ public abstract class Entity : MonoBehaviour
 
     protected IEnumerator TurnCoroutine(float direction)
     {
-        float remainingAngle = direction - transform.rotation.eulerAngles.y;
-        while ((direction > 0) ? (remainingAngle > tresholdAngle) : (remainingAngle < -tresholdAngle))
+        float remainingAngle = direction - model.transform.rotation.eulerAngles.y;
+        while ((direction > 0) ? (remainingAngle > 0f) : (remainingAngle < 0f))
         {
             float deltaAngle = (direction > 0) ? (turnSpeed * Time.deltaTime) : -(turnSpeed * Time.deltaTime);
             //rigidbody.MoveRotation(Quaternion.AngleAxis(transform.rotation.eulerAngles.y + deltaAngle, Vector3.up));
-            transform.Rotate(new(0f, deltaAngle, 0f));
+            model.transform.Rotate(new(0f, deltaAngle, 0f));
             remainingAngle -= deltaAngle;
             yield return null;
         }
         //rigidbody.MoveRotation(Quaternion.AngleAxis(direction, Vector3.up));
-        transform.eulerAngles = new(0f, direction, 0f);
+        model.transform.eulerAngles = new(0f, direction, 0f);
     }
 }
