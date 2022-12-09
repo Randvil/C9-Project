@@ -2,73 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
+    private PlayerInput playerInput;
+
+    //gravity variables
+    private float gravity = -9.8f;
+    private float groundedGravity = -0.5f;
+
+    //jumping variables
+    private bool isJumpPressed;
+    private float initialJumpVelocity;
     [SerializeField]
-    private float moveSpeed;
-
+    private float maxJumpHeight = 25.0f;
     [SerializeField]
-    private float turnSpeed;
+    private float maxJumpTime = 1.5f;
+    private bool isGrounded;
 
-    [SerializeField]
-    private float tresholdAngle;
-
-    [SerializeField]
-    private float jumpSpeed;
-
-    [SerializeField]
-    private Transform bottomEdge;
-
-    [SerializeField]
-    private LayerMask groundLayerMask;
-
-    [SerializeField]
-    private float checkGroundRadius;
-
-    [SerializeField]
-    private GameObject weapon;
-
-    [SerializeField]
-    private LayerMask enemyLayerMask;
-
-    [SerializeField]
-    private float attackRadius;
-
-    [SerializeField]
-    private float attackDelay;
-
-    [SerializeField]
-    private float attackCooldown;
-
-
-    private enum eAttackType
+    private void Awake()
     {
-        Single,
-        Splash
+        playerInput = new PlayerInput();
+
+        //input callbacks for jumping
+        playerInput.PlayerControls.Jump.started += onJump;
+        playerInput.PlayerControls.Jump.canceled += onJump;
+
+        SetupJumpVariables();
     }
 
-    [SerializeField]
-    private eAttackType attackType;
-
-    private float direction;
-    private bool isJumping;
-    private Coroutine turnCoroutine;
-    private Coroutine attackCoroutine;
-
-    private new Rigidbody rigidbody;
-
-    private void Start()
+    private void OnEnable()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        playerInput.PlayerControls.Enable();
     }
 
-    private void Update()
+    protected override void Start()
+    {
+        base.Start();
+
+        rigidbody = GetComponentInParent<Rigidbody>();
+    }
+
+    protected override void Update()
+    {
+        PlayerMovement();
+        HandleGravity();
+        PlayerAttack();
+        PlayerJump();
+    }
+    
+    private void PlayerMovement()
     {
         // moving
         float deltaX = Input.GetAxisRaw("Horizontal") * moveSpeed;
         rigidbody.velocity = new Vector3(deltaX, rigidbody.velocity.y, 0f);
-
+        
         // turning
         if (deltaX > 0f && direction != 0f)
         {
@@ -82,78 +71,59 @@ public class PlayerController : MonoBehaviour
             if (turnCoroutine != null) StopCoroutine(turnCoroutine);
             turnCoroutine = StartCoroutine(TurnCoroutine(direction));
         }
+    }
 
+    //attack
+    private void PlayerAttack()
+    {
+        if (Input.GetMouseButtonDown(0) && attackCoroutine == null) attackCoroutine = StartCoroutine(AttackCoroutine(damage));
+    }
+
+    //changes isJumpPressed when Space button is pressed
+    private void onJump (InputAction.CallbackContext context)
+    {
+        isJumpPressed = context.ReadValueAsButton();
+    }
+
+    private void HandleGravity()
+    {
+        isGrounded = Physics.CheckSphere(bottomEdge.position, checkGroundRadius, groundLayerMask);
+
+        bool isFalling = rigidbody.velocity.y <= 0.0f || !isJumpPressed;
+        float fallMultiplier = 2.0f;
+
+        if (isGrounded)
+        {
+            rigidbody.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed,  groundedGravity, 0);
+        } else if (isFalling)
+        {
+            float previousYVelocity = rigidbody.velocity.y;
+            float newYVelocity = rigidbody.velocity.y + (fallMultiplier * gravity * Time.deltaTime);
+            float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
+            rigidbody.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed, nextYVelocity, 0);
+        } else
+        {
+            float previousYVelocity = rigidbody.velocity.y;
+            float newYVelocity = rigidbody.velocity.y + (gravity * Time.deltaTime);
+            float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
+            rigidbody.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed, nextYVelocity, 0);
+        }
+    }
+
+    private void SetupJumpVariables()
+    {
+        float timeToApex = maxJumpTime / 2;
+        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    }
+
+    private void PlayerJump()
+    {
         // jumping
-        isJumping = !Physics.CheckSphere(bottomEdge.position, checkGroundRadius, groundLayerMask);
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping) rigidbody.AddForce(new Vector3(0f, jumpSpeed, 0f), ForceMode.VelocityChange);
-
-        // attack
-        if (Input.GetMouseButtonDown(0) && attackCoroutine == null) attackCoroutine = StartCoroutine(AttackCoroutine());
-    }
-
-    private IEnumerator TurnCoroutine(float direction)
-    {
-        float remainingAngle = direction - transform.rotation.eulerAngles.y;
-        while ((direction > 0) ? (remainingAngle > tresholdAngle) : (remainingAngle < -tresholdAngle))
+        isGrounded = Physics.CheckSphere(bottomEdge.position, checkGroundRadius, groundLayerMask);
+        if (isJumpPressed && isGrounded)
         {
-            float deltaAngle = (direction > 0) ? (turnSpeed * Time.deltaTime) : -(turnSpeed * Time.deltaTime);
-            //rigidbody.MoveRotation(Quaternion.AngleAxis(transform.rotation.eulerAngles.y + deltaAngle, Vector3.up));
-            transform.Rotate(new(0f, deltaAngle, 0f));
-            remainingAngle -= deltaAngle;
-            yield return null;
+            rigidbody.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed, initialJumpVelocity * .5f, 0);
         }
-        //rigidbody.MoveRotation(Quaternion.AngleAxis(direction, Vector3.up));
-        transform.eulerAngles = new(0f, direction, 0f);
-    }
-
-    private IEnumerator AttackCoroutine(float damage = 0f)
-    {
-        weapon.SetActive(true);
-
-        yield return new WaitForSeconds(attackDelay);
-
-        Collider[] enemies = Physics.OverlapSphere(transform.position, attackRadius, enemyLayerMask);
-
-        switch (attackType)
-        {
-
-
-            case eAttackType.Single:
-
-                Collider nearestEnemy = null;
-                float distanceToNearestEnemy = float.MaxValue;
-
-                foreach (Collider enemy in enemies)
-                {
-                    if ((direction == 0 && enemy.transform.position.x >= transform.position.x) || (direction == 180 && enemy.transform.position.x <= transform.position.x))
-                    {
-                        if (Mathf.Abs(enemy.transform.position.x - transform.position.x) < distanceToNearestEnemy) nearestEnemy = enemy;
-                    }
-                }
-
-                if (nearestEnemy != null) DealDamage(nearestEnemy, damage);
-
-                break;
-
-            case eAttackType.Splash:
-
-                foreach (Collider enemy in enemies)
-                {
-                    if ((direction == 0 && enemy.transform.position.x >= transform.position.x) || (direction == 180 && enemy.transform.position.x <= transform.position.x)) DealDamage(enemy, damage);
-                }
-
-                break;
-        }
-
-        yield return new WaitForSeconds(attackCooldown - attackDelay);
-
-        weapon.SetActive(false);
-
-        attackCoroutine = null;
-    }
-
-    private void DealDamage(Collider enemy, float damage)
-    {
-        Destroy(enemy.gameObject);
     }
 }
