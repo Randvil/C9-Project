@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1159,7 +1159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738468905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.72, y: -10.08, z: 0}
+  m_LocalPosition: {x: -22.34, y: -9.66, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1203,6 +1203,8 @@ MonoBehaviour:
   maxHealth: 0
   attackType: 0
   healthBar: {fileID: 1860295796}
+  maxJumpHeight: 25
+  maxJumpTime: 1.5
 --- !u!54 &738468911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2471,7 +2473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690019708404811104, guid: 55e0438f48dcbf84aa02723d2ae03919, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.96
+      value: -2.56
       objectReference: {fileID: 0}
     - target: {fileID: 8690019708404811104, guid: 55e0438f48dcbf84aa02723d2ae03919, type: 3}
       propertyPath: m_LocalPosition.y

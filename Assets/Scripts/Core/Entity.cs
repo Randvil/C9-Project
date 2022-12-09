@@ -58,7 +58,7 @@ public abstract class Entity : MonoBehaviour
     private eAttackType attackType;
 
     protected float direction;
-    protected bool isJumping;
+    //protected bool isJumping;
     protected Coroutine turnCoroutine;
     protected Coroutine attackCoroutine;
 
