@@ -1,8 +1,8 @@
 {
-    "name": "PlayerInput",
+    "name": "GameInput",
     "maps": [
         {
-            "name": "PlayerControls",
+            "name": "GameControls",
             "id": "a29ddaf9-4601-4e9a-a6ea-372d47a861c5",
             "actions": [
                 {
@@ -48,8 +48,30 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "left",
+                    "name": "Up",
                     "id": "a5ed8409-37c7-4f2c-9970-364d305befab",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "006eb611-b341-485d-a338-98b52ad4f95d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "7ec3b53e-8134-4eff-b01c-69407b6be19f",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -59,8 +81,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "006eb611-b341-485d-a338-98b52ad4f95d",
+                    "name": "Right",
+                    "id": "f426e80b-8151-46d6-b196-e5db545f633c",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
