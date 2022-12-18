@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : Entity
 {
-    InputComponent inputComponent;
-    MovementComponent movementComponent;
-    PhysicsComponent physicsComponent;
+    GravityPhysics gravityPhysics;
+    Movement movement;
 
     //jumping variables
     private float initialJumpVelocity;
@@ -22,27 +20,11 @@ public class PlayerController : Entity
     [SerializeField]
     private float maxJumpTime = 1.5f;
 
-    bool isJumpPressed;
-    bool isGrounded;
-
-
     private void Awake()
     {
-        physicsComponent = gameObject.AddComponent<PhysicsComponent>();
-        inputComponent = gameObject.AddComponent<InputComponent>();
-        movementComponent = gameObject.AddComponent<MovementComponent>();
-        inputComponent.Awake();
+        gravityPhysics = new GravityPhysics();
+        movement = new Movement();
         SetupJumpVariables();
-    }
-
-    public void OnEnable()
-    {
-        inputComponent.OnEnable();
-    }
-
-    public void OnDisable()
-    {
-        inputComponent.OnDisable();
     }
 
     protected override void Start()
@@ -53,10 +35,6 @@ public class PlayerController : Entity
 
     protected override void Update()
     {
-        PlayerMove();
-        physicsComponent.HandleGravity(rigidbody, isJumpPressed, moveSpeed, checkGroundRadius, groundLayerMask, bottomEdge,
-          inputComponent.vectorMove.x, gravity, groundedGravity);
-        PlayerJump();
         PlayerAttack();
     }
 
@@ -65,17 +43,16 @@ public class PlayerController : Entity
         if (Input.GetMouseButtonDown(0) && attackCoroutine == null) attackCoroutine = StartCoroutine(AttackCoroutine(damage));
     }
 
-    private void PlayerMove()
+    public void PlayerMove(Vector2 vector2)
     {
-        rigidbody.velocity = movementComponent.Move(moveSpeed, inputComponent.vectorMove, rigidbody.velocity.y);
+        rigidbody.velocity = movement.Move(moveSpeed, vector2, rigidbody.velocity.y);
     }
-    private void PlayerJump()
+
+    public void PlayerJump(Vector2 vector2)
     {
-        isGrounded = physicsComponent.isGrounded;
-        isJumpPressed = inputComponent.isJumpPressed;
-        if (isJumpPressed && isGrounded)
+        if (gravityPhysics.IsGrounded(groundLayerMask, bottomEdge, checkGroundRadius))
         {
-            rigidbody.velocity = movementComponent.Jump(initialJumpVelocity, inputComponent.vectorMove.x, moveSpeed);
+            rigidbody.velocity = movement.Jump(initialJumpVelocity, vector2.x, moveSpeed);
         }
     }
 
@@ -84,5 +61,10 @@ public class PlayerController : Entity
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+    }
+
+    public void ApplyGravity(Vector2 vector2, bool isJump)
+    {
+        gravityPhysics.HandleGravity(rigidbody, isJump, moveSpeed, checkGroundRadius, groundLayerMask, bottomEdge, gravity, groundedGravity, vector2.x);
     }
 }

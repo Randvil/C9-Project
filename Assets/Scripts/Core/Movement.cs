@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementComponent : MonoBehaviour
+public class Movement
 {
     public Vector3 Move(float moveSpeed, Vector2 vector2, float y)
     {
