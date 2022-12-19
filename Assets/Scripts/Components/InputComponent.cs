@@ -9,6 +9,7 @@ public class InputComponent : MonoBehaviour
     public GameInput gameInput;
     public bool isJumpPressed;
     public bool isAttackPressed;
+    public bool isInteractPressed;
     public Vector2 vectorMove;
     public UnityEvent<Vector2, bool> changePositionEvent;
     public UnityEvent<Vector2> jumpButtonIsPressedEvent;
@@ -36,6 +37,8 @@ public class InputComponent : MonoBehaviour
         gameInput.GameControls.Move.canceled += onMove;
         gameInput.GameControls.Attack.started += onAttack;
         gameInput.GameControls.Attack.canceled += onAttack;
+        gameInput.GameControls.Interact.started += onInteract;
+        gameInput.GameControls.Interact.canceled += onInteract;
     }
 
     public void Update()
@@ -73,4 +76,8 @@ public class InputComponent : MonoBehaviour
         if (isAttackPressed) attackButtonIsPressedEvent.Invoke();
     }
 
+    private void onInteract(InputAction.CallbackContext context)
+    {
+        isInteractPressed = context.ReadValueAsButton();
+    }
 }
