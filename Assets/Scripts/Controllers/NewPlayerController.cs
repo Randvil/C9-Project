@@ -33,7 +33,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!alive) return;
 
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        /*float moveInput = Input.GetAxisRaw("Horizontal");
         if (moveInput == 1f)
         {
             movement.MoveRight();
@@ -56,8 +56,35 @@ public class NewPlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             attack.StartAttack(direction);
-        }
+        }*/
     }
+
+    public void PlayerMove(Vector2 vector2)
+    {
+        if (vector2.x == 1f)
+        {
+            movement.MoveRight();
+            direction = turning.TurnRight();
+
+        }
+        else if (vector2.x == -1f)
+        {
+            movement.MoveLeft();
+            direction = turning.TurnLeft();
+        }
+        else movement.StopMoving();
+    }
+
+    public void PlayerJump()
+    {
+        jump.Jump();
+    }
+
+    public void PlayerAttack()
+    {
+        attack.StartAttack(direction);
+    }
+
     private void OnDie()
     {
         //TODO: Добавить запуск анимации смерти, когда та будет готова

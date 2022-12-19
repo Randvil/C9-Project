@@ -12,7 +12,7 @@ public class InputComponent : MonoBehaviour
     public bool isInteractPressed;
     public Vector2 vectorMove;
     public UnityEvent<Vector2, bool> changePositionEvent;
-    public UnityEvent<Vector2> jumpButtonIsPressedEvent;
+    public UnityEvent jumpButtonIsPressedEvent;
     public UnityEvent<Vector2> movingOnHorizontalEvent;
     public UnityEvent attackButtonIsPressedEvent;
 
@@ -43,13 +43,13 @@ public class InputComponent : MonoBehaviour
 
     public void Update()
     {
-        changePositionEvent.Invoke(vectorMove, isJumpPressed);
+        //changePositionEvent.Invoke(vectorMove, isJumpPressed);
     }
 
     public void Start()
     {
         if (jumpButtonIsPressedEvent == null)
-            jumpButtonIsPressedEvent = new UnityEvent<Vector2>();
+            jumpButtonIsPressedEvent = new UnityEvent();
         if (movingOnHorizontalEvent == null)
             movingOnHorizontalEvent = new UnityEvent<Vector2>();
         if (attackButtonIsPressedEvent == null)
@@ -61,7 +61,7 @@ public class InputComponent : MonoBehaviour
     private void onJump(InputAction.CallbackContext context)
     {
         isJumpPressed = context.ReadValueAsButton();
-        if (isJumpPressed) jumpButtonIsPressedEvent.Invoke(vectorMove);
+        if (isJumpPressed) jumpButtonIsPressedEvent.Invoke();
     }
 
     private void onMove(InputAction.CallbackContext context)
