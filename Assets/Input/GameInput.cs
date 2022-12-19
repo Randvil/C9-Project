@@ -53,6 +53,24 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""61c399d0-2960-4fb6-8789-7c0afe3fea6b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sit"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7672130-86e0-4cf5-9d75-321bf08ff84c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,7 +110,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Down"",
                     ""id"": ""006eb611-b341-485d-a338-98b52ad4f95d"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,6 +150,28 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dfa3d13-8a91-4214-896f-da82722a8d71"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b0af1b5-3123-433f-a68c-bc65803ff737"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +183,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_GameControls_Jump = m_GameControls.FindAction("Jump", throwIfNotFound: true);
         m_GameControls_Move = m_GameControls.FindAction("Move", throwIfNotFound: true);
         m_GameControls_Attack = m_GameControls.FindAction("Attack", throwIfNotFound: true);
+        m_GameControls_Interact = m_GameControls.FindAction("Interact", throwIfNotFound: true);
+        m_GameControls_Sit = m_GameControls.FindAction("Sit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +247,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControls_Jump;
     private readonly InputAction m_GameControls_Move;
     private readonly InputAction m_GameControls_Attack;
+    private readonly InputAction m_GameControls_Interact;
+    private readonly InputAction m_GameControls_Sit;
     public struct GameControlsActions
     {
         private @GameInput m_Wrapper;
@@ -212,6 +256,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_GameControls_Jump;
         public InputAction @Move => m_Wrapper.m_GameControls_Move;
         public InputAction @Attack => m_Wrapper.m_GameControls_Attack;
+        public InputAction @Interact => m_Wrapper.m_GameControls_Interact;
+        public InputAction @Sit => m_Wrapper.m_GameControls_Sit;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +276,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
+                @Interact.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnInteract;
+                @Sit.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSit;
+                @Sit.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSit;
+                @Sit.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSit;
             }
             m_Wrapper.m_GameControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +295,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Sit.started += instance.OnSit;
+                @Sit.performed += instance.OnSit;
+                @Sit.canceled += instance.OnSit;
             }
         }
     }
@@ -252,5 +310,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnSit(InputAction.CallbackContext context);
     }
 }

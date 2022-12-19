@@ -15,6 +15,12 @@ public class Movement
         return new Vector3(x * moveSpeed, initialJumpVelocity * .5f, 0f);
     }
 
+    public Vector3 MoveVertical(float moveSpeed, Vector2 vector2, float x)
+    {
+        float deltaY = vector2.y * moveSpeed;
+        return new Vector3(x, deltaY, 0f);
+    }
+
     /*public void Turn(float deltaX, float direction, Coroutine turnCoroutine)
     {
         if (deltaX > 0f && direction != 0f)
