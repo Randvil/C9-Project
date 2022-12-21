@@ -16,6 +16,7 @@ public class NewPlayerController : MonoBehaviour
     private NewTurning turning;
     private NewAttack attack;
     private NewDamageInteraction damageInteraction;
+    private PlayerInterface playerInterface;
 
     private void Start()
     {
@@ -25,8 +26,10 @@ public class NewPlayerController : MonoBehaviour
         turning = GetComponent<NewTurning>();
         attack = GetComponent<NewAttack>();
         damageInteraction = GetComponent<NewDamageInteraction>();
+        playerInterface = GetComponent<PlayerInterface>();
 
         damageInteraction.DieEvent.AddListener(OnDie);
+        damageInteraction.DamageEvent.AddListener(playerInterface.OnDamageTaken);
     }
 
     private void Update()
@@ -83,6 +86,8 @@ public class NewPlayerController : MonoBehaviour
     public void PlayerAttack()
     {
         attack.StartAttack(direction);
+        //for test
+        damageInteraction.DamageEvent.Invoke(1);
     }
 
     private void OnDie()

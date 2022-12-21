@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 448081896}
   - component: {fileID: 448081897}
   - component: {fileID: 448081898}
+  - component: {fileID: 1765971910744784038}
   m_Layer: 7
   m_Name: Range Enemy
   m_TagString: Untagged
@@ -349,11 +350,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e617e4305aa9358479bff8b4f60246fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 1348356417575583777}
   maxHealth: 5
   DieEvent:
     m_PersistentCalls:
       m_Calls: []
+  DamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 448081897}
+        m_TargetAssemblyTypeName: NewDamageInteraction, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &448081898
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -367,6 +382,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.4, y: 5.85, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1765971910744784038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690019708404811107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa098e752fe226f4689857b9da895e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1348356417575583777}
 --- !u!1 &8906284933324529618
 GameObject:
   m_ObjectHideFlags: 0

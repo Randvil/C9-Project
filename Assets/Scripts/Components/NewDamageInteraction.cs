@@ -6,21 +6,19 @@ using UnityEngine.UI;
 
 public class NewDamageInteraction : MonoBehaviour
 {
-    [SerializeField]
-    private Slider healthBar;
-
-    [SerializeField]
-    private float maxHealth;
+    public float maxHealth;
 
     private float currentHealth;
 
     public UnityEvent DieEvent = new();
 
+    public UnityEvent<float> DamageEvent = new();
+
     private void Start()
     {
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
+
+        DamageEvent.AddListener(TakeDamage);
     }
 
     public void TakeDamage(float damage)
@@ -31,8 +29,7 @@ public class NewDamageInteraction : MonoBehaviour
         {
             currentHealth = 0f;
             DieEvent.Invoke();
+            Destroy(gameObject);
         }
-
-        healthBar.value = currentHealth;
     }
 }

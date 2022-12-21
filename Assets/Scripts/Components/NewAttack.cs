@@ -73,7 +73,7 @@ public class NewAttack : MonoBehaviour
                     }
                 }
 
-                if (nearestEnemy != null) nearestEnemy.TakeDamage(attackDamage);
+                if (nearestEnemy != null) nearestEnemy.DamageEvent.Invoke(attackDamage);
 
                 break;
 
@@ -85,7 +85,7 @@ public class NewAttack : MonoBehaviour
                 {
                     interactableEnemy = enemy.GetComponent<NewDamageInteraction>();
                     if (interactableEnemy == null) continue;
-                    if ((direction == eDirection.Right && interactableEnemy.transform.position.x >= transform.position.x) || (direction == eDirection.Left && enemy.transform.position.x <= transform.position.x)) interactableEnemy.TakeDamage(attackDamage);
+                    if ((direction == eDirection.Right && interactableEnemy.transform.position.x >= transform.position.x) || (direction == eDirection.Left && enemy.transform.position.x <= transform.position.x)) interactableEnemy.DamageEvent.Invoke(attackDamage);
                 }
 
                 break;

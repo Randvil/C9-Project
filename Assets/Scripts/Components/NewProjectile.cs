@@ -22,7 +22,7 @@ public class NewProjectile : MonoBehaviour
             NewDamageInteraction interactableEnemy = other.GetComponent<NewDamageInteraction>();
             if (interactableEnemy != null)
             {
-                interactableEnemy.TakeDamage(damage);
+                interactableEnemy.DamageEvent.Invoke(damage);
                 Destroy(gameObject);
             }
         }
