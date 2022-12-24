@@ -38,9 +38,8 @@ public class MainMenu : MonoBehaviour
     }
 
     void OnSettings()
-    {
-        
-        panelManager.CurrentPanel = panelManager.settingsDoc.rootVisualElement;
+    {       
+        panelManager.CurrentPanel = panelManager.docs[1].rootVisualElement;
     }
 
     void OnQuit()

@@ -39,7 +39,7 @@ public class SettingsMenu : MonoBehaviour
 
         soundToggle.RegisterValueChangedCallback(tog => GameSettings.SoundOn = soundToggle.value);
 
-        backButton.clicked += () => panelManager.CurrentPanel = panelManager.mainDoc.rootVisualElement;
+        backButton.clicked += () => panelManager.CurrentPanel = panelManager.firstDoc.rootVisualElement;
 
         effectsSlider.RegisterValueChangedCallback(_ => OnEffectsVolumeChange());
         musicSlider.RegisterValueChangedCallback(_ => OnMusicVolumeChanged());

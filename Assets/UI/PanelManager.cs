@@ -3,8 +3,8 @@ using UnityEngine.UIElements;
 
 public class PanelManager : MonoBehaviour
 {
-    public UIDocument mainDoc;
-    public UIDocument settingsDoc;
+    public UIDocument[] docs;
+    public UIDocument firstDoc;
 
     private VisualElement currentMenu;
     public VisualElement CurrentPanel
@@ -22,7 +22,9 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
-        settingsDoc.rootVisualElement.style.display = DisplayStyle.None;        
-        CurrentPanel = mainDoc.rootVisualElement;
+        foreach (var panel in docs)
+            panel.rootVisualElement.style.display = DisplayStyle.None;
+                
+        CurrentPanel = docs[0].rootVisualElement;
     }
 }

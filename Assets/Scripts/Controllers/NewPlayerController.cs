@@ -86,8 +86,6 @@ public class NewPlayerController : MonoBehaviour
     public void PlayerAttack()
     {
         attack.StartAttack(direction);
-        //for test
-        damageInteraction.DamageEvent.Invoke(1);
     }
 
     private void OnDie()
