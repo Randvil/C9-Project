@@ -4,11 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(InputSystemListener))]
 [RequireComponent(typeof(RigidbodyMovement), typeof(ParabolicJump), typeof(Turning))]
-[RequireComponent(typeof(SingleTargetMeleeWeapon), typeof(Stats), typeof(DamageHandler))]
-[RequireComponent(typeof(Roll))]
+[RequireComponent(typeof(SingleTargetMeleeWeapon), typeof(Stats), typeof(DamageHandlerPlayer))]
+[RequireComponent(typeof(Roll), typeof(Parry))]
 public class Player : MonoBehaviour, ITeam
 {
     private eTeam team = eTeam.Player;
+
+    private eDirection direction;
     public eTeam Team { get => team; }
 
     private bool moveRight;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour, ITeam
     private IWeapon weapon;
     private IStats stats;
     private IDamageHandler damageHandler;
+    private IParry parry;
 
     private void Start()
     {
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour, ITeam
         weapon = GetComponent<IWeapon>();
         stats = GetComponent<IStats>();
         damageHandler = GetComponent<IDamageHandler>();
+        parry = GetComponent<IParry>();
 
         AddInputListeners();
 
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour, ITeam
         playerInput.JumpEvent.AddListener(OnJump);
         playerInput.AttackEvent.AddListener(OnAttack);
         playerInput.RollEvent.AddListener(OnRoll);
+        playerInput.ParryEvent.AddListener(OnParry);
     }
 
     private void OnMove(eDirection direction)
@@ -78,7 +83,7 @@ public class Player : MonoBehaviour, ITeam
 
     private void HandleMovement()
     {
-        if (!isAlive || roll.IsRolling || weapon.IsAttacking)
+        if (!isAlive || roll.IsRolling || weapon.IsAttacking || parry.IsParrying)
             return;
 
         if (!moveRight && !moveLeft)
@@ -87,7 +92,8 @@ public class Player : MonoBehaviour, ITeam
             return;
         }
 
-        eDirection direction = eDirection.Right;
+        //eDirection
+        direction = eDirection.Right;
         if (moveLeft)
             direction = eDirection.Left;
 
@@ -142,5 +148,19 @@ public class Player : MonoBehaviour, ITeam
         roll.StopRoll();
 
         isAlive = false;
+    }
+
+    private void OnParry()
+    {
+        switch (direction)
+        {
+            case eDirection.Right:
+                parry.StartParry(Vector3.right);
+                break;
+            case eDirection.Left:
+                parry.StartParry(Vector3.left);
+                break;
+        }
+        
     }
 }

@@ -15,6 +15,7 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
     private UnityEvent attackEvent = new();
     private UnityEvent rollEvent = new();
     private UnityEvent<eAbilityType> abilityEvent = new();
+    private UnityEvent parryEvent = new();
 
     public UnityEvent<eDirection> MoveEvent { get => moveEvent;}
     public UnityEvent StopEvent { get => stopEvent;}
@@ -22,6 +23,7 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
     public UnityEvent AttackEvent { get => attackEvent; }
     public UnityEvent RollEvent { get => rollEvent; }
     public UnityEvent<eAbilityType> AbilityEvent { get => abilityEvent; }
+    public UnityEvent ParryEvent { get => parryEvent; }
 
     private void Awake()
     {
@@ -65,6 +67,13 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
 
                 if (context.action.phase == InputActionPhase.Started)
                     rollEvent.Invoke();
+
+                break;
+
+            case "Parry":
+
+                if (context.action.phase == InputActionPhase.Performed)
+                    parryEvent.Invoke();
 
                 break;
         }

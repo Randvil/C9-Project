@@ -15,7 +15,7 @@ public class SplashMeleeWeapon : AbstractMeleeWeapon
                 continue;
 
             if ((direction == eDirection.Right && enemy.transform.position.x >= transform.position.x) || (direction == eDirection.Left && enemy.transform.position.x <= transform.position.x))
-                damageableEnemy.TakeDamage(damage);
+                damageableEnemy.TakeDamage(damage, this);
         }
     }
 }
