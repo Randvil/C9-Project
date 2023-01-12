@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Arrow : MonoBehaviour, IProjectile
+public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
 {
     private eTeam ownerTeam;
     private Damage damage;
     private Vector2 velocityVector;
+
+    [SerializeField]
+    protected Damage damageMinus;
+    public Damage DamageMinus { get => damageMinus; }
 
     public UnityEvent SpawnEvent { get; } = new();
     public UnityEvent ExtinctionEvent { get; } = new();
@@ -53,7 +57,7 @@ public class Arrow : MonoBehaviour, IProjectile
         if (damageableEnemy == null)
             return;
 
-        damageableEnemy.TakeDamage(damage);
+        damageableEnemy.TakeDamage(damage, this);
 
         Remove();
     }

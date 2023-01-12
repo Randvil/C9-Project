@@ -29,6 +29,6 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
         }
 
         if (nearestEnemy != null)
-            nearestEnemy.TakeDamage(damage);
+            nearestEnemy.TakeDamage(damage, this);
     }
 }

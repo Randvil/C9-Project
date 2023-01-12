@@ -8,4 +8,5 @@ public interface IPlayerInput
     public UnityEvent AttackEvent { get; }
     public UnityEvent RollEvent { get; }
     public UnityEvent<eAbilityType> AbilityEvent { get; }
+    public UnityEvent ParryEvent { get; }
 }
