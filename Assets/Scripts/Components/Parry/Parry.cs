@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class Parry : MonoBehaviour, IParry
 {
     [SerializeField]
-    protected Damage takeDamage;
-    public Damage TakeDamage { get => takeDamage; }
+    protected Damage parryDamage;
+    public Damage ParryDamage { get => parryDamage; }
 
     [SerializeField]
     protected float parryRadius;
