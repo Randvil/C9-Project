@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, ITeam
     private IStats stats;
     private IDamageHandler damageHandler;
     private IParry parry;
+    private IUIComponent ui;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour, ITeam
         stats = GetComponent<IStats>();
         damageHandler = GetComponent<IDamageHandler>();
         parry = GetComponent<IParry>();
+        ui = GetComponent<IUIComponent>();
 
         AddInputListeners();
 

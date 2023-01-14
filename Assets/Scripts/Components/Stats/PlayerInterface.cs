@@ -10,22 +10,25 @@ public class PlayerInterface : MonoBehaviour, IUIComponent
     private ProgressBar healthBar;
     private ProgressBar manaBar;
 
-    private void Awake()
+    private IStats stats;
+
+    private void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
+
+        stats = GetComponent<Stats>();
+        stats.ChangeStatEvent.AddListener(OnHealthChange);
 
         healthBar = root.Q<ProgressBar>("healthBar");
         manaBar = root.Q<ProgressBar>("manaBar");
 
-        healthBar.value = healthBar.highValue = GetComponent<NewDamageInteraction>().maxHealth;
+        healthBar.value = healthBar.highValue = stats.GetStat(eStatType.MaxHealth);
         manaBar.value = manaBar.highValue;
     }
 
-    public void OnDamageTaken(float damage)
+    public void OnHealthChange(eStatType stat, float value)
     {
-        if (healthBar.value > damage)
-            healthBar.value -= damage;
-        else
-            healthBar.value = 0f;
+        if (stat == eStatType.CurrentHealth)
+            healthBar.value = Mathf.Clamp(value, 0f, healthBar.highValue);
     }
 }
