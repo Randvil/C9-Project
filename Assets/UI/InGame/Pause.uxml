@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/InGame/PauesStyles.uss?fileID=7433441132597879392&amp;guid=5b783fd5184b2634d820266906c796ad&amp;type=3#PauesStyles" />
+    <ui:VisualElement style="justify-content: center; flex-grow: 1; align-items: center; background-color: rgba(53, 53, 53, 0.75);">
+        <ui:VisualElement name="buttonContainer" style="flex-direction: row;">
+            <ui:Button text="Continue" display-tooltip-when-elided="true" focusable="false" name="continueButton" class="circleButton" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" focusable="false" name="settingsButton" class="circleButton" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" focusable="false" enable-rich-text="true" name="exitButton" class="circleButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
