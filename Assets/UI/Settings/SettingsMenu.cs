@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class SettingsMenu : MonoBehaviour
@@ -6,6 +7,8 @@ public class SettingsMenu : MonoBehaviour
     private VisualElement root;
 
     public PanelManager panelManager;
+
+    public AudioMixer mixer;
 
     private Toggle soundToggle;
 
@@ -35,11 +38,11 @@ public class SettingsMenu : MonoBehaviour
             "FHD 1920x1080",
             "HD  1366x768"
         };
-        resolutionsDropdown.value = "FHD 1920x 1080";
+        resolutionsDropdown.value = "FHD 1920x1080";
 
         soundToggle.RegisterValueChangedCallback(tog => GameSettings.SoundOn = soundToggle.value);
 
-        backButton.clicked += () => panelManager.CurrentPanel = panelManager.firstDoc.rootVisualElement;
+        backButton.clicked += panelManager.GoBack;
 
         effectsSlider.RegisterValueChangedCallback(_ => OnEffectsVolumeChange());
         musicSlider.RegisterValueChangedCallback(_ => OnMusicVolumeChanged());
@@ -76,12 +79,11 @@ public class SettingsMenu : MonoBehaviour
 
     private void OnEffectsVolumeChange()
     {
-        GameSettings.SoundVolume = effectsSlider.value;
-        Debug.Log("sdfsdffdfsfsd");
+        mixer.SetFloat("EffectsVolume", Mathf.Lerp(-80f, 0f, effectsSlider.value));
     }
 
     private void OnMusicVolumeChanged()
     {
-        GameSettings.MusicVolume = musicSlider.value;
+        mixer.SetFloat("MusicVolume", Mathf.Lerp(-80f, 0f, effectsSlider.value));
     }
 }

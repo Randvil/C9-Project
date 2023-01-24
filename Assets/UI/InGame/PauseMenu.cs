@@ -27,14 +27,11 @@ public class PauseMenu : MonoBehaviour
 
     void OnContinue()
     {
-        panelManager.CurrentPanel = panelManager.docs[0].rootVisualElement;
+        panelManager.GoBack();
         Time.timeScale = 1f;
     }
 
-    void OnSettings()
-    {
-        panelManager.CurrentPanel = panelManager.docs[2].rootVisualElement;
-    }
+    void OnSettings() => panelManager.SwitchTo(2);
 
     void OnExit()
     {

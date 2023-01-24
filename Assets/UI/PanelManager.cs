@@ -1,30 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PanelManager : MonoBehaviour
 {
     public UIDocument[] docs;
-    public UIDocument firstDoc;
 
-    private VisualElement currentMenu;
+    private Stack<VisualElement> history;
+
+    private VisualElement currentPanel;
     public VisualElement CurrentPanel
     {
-        get => currentMenu;
+        get => currentPanel;
         set
         {
-            if (currentMenu != null)
-                currentMenu.style.display = DisplayStyle.None;
-            currentMenu = value;
-            if (currentMenu != null)
-                currentMenu.style.display = DisplayStyle.Flex;
+            if (currentPanel != null)
+            {
+                currentPanel.style.display = DisplayStyle.None;
+                history.Push(currentPanel);
+            }                
+            currentPanel = value;
+            if (currentPanel != null)
+                currentPanel.style.display = DisplayStyle.Flex;
         }
     }
+
+    public void GoBack() => CurrentPanel = history.Pop();
+
+    public void SwitchTo(int index) => CurrentPanel = docs[index].rootVisualElement;
 
     private void Start()
     {
         foreach (var panel in docs)
             panel.rootVisualElement.style.display = DisplayStyle.None;
                 
-        CurrentPanel = docs[0].rootVisualElement;
+        SwitchTo(0);
     }
 }
