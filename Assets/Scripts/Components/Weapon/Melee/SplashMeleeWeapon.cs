@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class SplashMeleeWeapon : AbstractMeleeWeapon
 {
-    protected override void ReleaseAttack(eDirection direction)
+    protected Turning turning;
+
+    protected virtual void Start()
+    {
+        turning = GetComponent<Turning>();
+    }
+
+    protected override void ReleaseAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayerMask);
 
@@ -14,8 +21,8 @@ public class SplashMeleeWeapon : AbstractMeleeWeapon
             if (damageableEnemy == null)
                 continue;
 
-            if ((direction == eDirection.Right && enemy.transform.position.x >= transform.position.x) || (direction == eDirection.Left && enemy.transform.position.x <= transform.position.x))
-                damageableEnemy.TakeDamage(damage, this);
+            if ((turning.Direction == eDirection.Right && enemy.transform.position.x >= transform.position.x) || (turning.Direction == eDirection.Left && enemy.transform.position.x <= transform.position.x))
+                damageableEnemy.TakeDamage(damage);
         }
     }
 }

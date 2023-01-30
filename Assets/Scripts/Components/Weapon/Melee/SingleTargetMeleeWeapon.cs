@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 {
-    protected override void ReleaseAttack(eDirection direction)
+    protected Turning turning;
+
+    protected virtual void Start()
+    {
+        turning = GetComponent<Turning>();
+    }
+
+    protected override void ReleaseAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayerMask);
 
@@ -21,7 +28,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
             if (damageableEnemy == null)
                 continue;
 
-            if ((direction == eDirection.Right && enemy.transform.position.x >= transform.position.x) || (direction == eDirection.Left && enemy.transform.position.x <= transform.position.x))
+            if ((turning.Direction == eDirection.Right && enemy.transform.position.x >= transform.position.x) || (turning.Direction == eDirection.Left && enemy.transform.position.x <= transform.position.x))
             {
                 if (Mathf.Abs(enemy.transform.position.x - transform.position.x) < distanceToNearestEnemy)
                     nearestEnemy = damageableEnemy;
@@ -29,6 +36,6 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
         }
 
         if (nearestEnemy != null)
-            nearestEnemy.TakeDamage(damage, this);
+            nearestEnemy.TakeDamage(damage);
     }
 }

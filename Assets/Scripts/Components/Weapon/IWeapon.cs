@@ -4,7 +4,7 @@ public interface IWeapon
 {
     public Damage Damage { get; }
     public float AttackRadius { get; }
-    public void StartAttack(eDirection direction);
+    public void StartAttack();
     public void StopAttack();
     public bool IsAttacking { get; }
     public UnityEvent StartAttackEvent { get; }

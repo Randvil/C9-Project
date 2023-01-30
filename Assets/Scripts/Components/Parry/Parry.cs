@@ -5,63 +5,208 @@ using UnityEngine.Events;
 
 public class Parry : MonoBehaviour, IParry
 {
-    [SerializeField]
-    protected Damage parryDamage;
-    public Damage ParryDamage { get => parryDamage; }
+    [Header("Stance")]
 
-    [SerializeField]
-    protected float parryRadius;
-    public float ParryRadius { get => parryRadius; }
+    [SerializeField, Range(0f, 5f), Tooltip("Maximum stance duration, [seconds]")]
+    private float duration = 0.5f;
 
-    [SerializeField]
-    protected float parryDelay;
-    public float ParryDelay { get => parryDelay; }
+    [SerializeField, Range(0f, 10f), Tooltip("How often the player can stance [seconds]")]
+    private float cooldown = 2f;
+
+
+    [Header("Absorption")]
+
+    [SerializeField, Tooltip("Whether the damage should be absorbed in units or in parts of the incoming damage")]
+    private eParryType parryType = eParryType.RelativeAbsorption;
+
+    [SerializeField, Min(0f), Tooltip("Absorption value [units or parts of the incoming damage depending on parry type]")]
+    private float damageAbsorption = 1f;
+
+
+    [Header("Reflection")]
+
+    [SerializeField, Tooltip("Should melee damage be reflected?")]
+    private bool reflectMeleeDamage;
+
+    [SerializeField, Tooltip("Should projectiles be reflected?")]
+    private bool reflectProjectiles;
+
+    [SerializeField, Range(0f, 10f), Tooltip("How much damage should be reflected? [parts of the incoming damage]")]
+    private float reflectionDamageMultiplier = 1f;
+
+
+    [Header("Attack buff")]
+
+    [SerializeField, Tooltip("Should the damage of the following attacks be increased after successful melee parry?")]
+    private bool meleeParryAmplifyDamage = true;
+
+    [SerializeField, Tooltip("Should the damage of the following attacks be increased after successful range parry?")]
+    private bool rangeParryAmplifyDamage = false;
+
+    [SerializeField, Range(0f, 5f), Tooltip("How much extra damage your weapon should deal with the following attack? [parts of weapon damage]")]
+    private float extraDamage = 1f;
+
+    [SerializeField, Range(1, 10), Tooltip("How many attacks should be amplified?")]
+    private int attackNumber = 1;
+
+    [SerializeField, Range(0f, 10f), Tooltip("How long the attack buff will last? [seconds]")]
+    private float amplifyDuration = 3f;
+
+
+    private Coroutine parryCoroutine;
+    private float finishCooldownTime;
+    private IDamageModificator absorption;
+    private IDamageEffect meleeDamageReflection;
+    private IDamageEffect projectileReflection;
+    private IDamageModificator damageAmplification;
+    private Coroutine amplifyDamageCoroutine;
+    private int attackCounter;
+
+
+    private IDamageHandler damageHandler;
+    private ITurning turning;
+    private ITeam team;
+    private IWeapon weapon;
+
+
+    public bool IsOnCooldown { get => Time.time < finishCooldownTime; }
+    public bool IsParrying { get => parryCoroutine != null; }
+
 
     public UnityEvent StartParryEvent { get; } = new();
     public UnityEvent StopParryEvent { get; } = new();
-    public UnityEvent<IDamageReduced> WeaponWasParriedEvent { get; } = new();
 
-    public bool isParrying;
-    public bool IsParrying { get => isParrying; }
 
-    public void StartParry(Vector3 direction)
+    public float Duration { get => duration; set => duration = value; }
+    public float Cooldown { get => cooldown; set => cooldown = value; }
+    public eParryType ParryType { get => parryType; set => parryType = value; }
+    public float DamageAbsorption { get => damageAbsorption; set => damageAbsorption = value; }
+    public bool ReflectMeleeDamage { get => reflectMeleeDamage; set => reflectMeleeDamage = value; }
+    public bool ReflectProjectiles { get => reflectProjectiles; set => reflectProjectiles = value; }
+    public float ReflectionDamageMultiplier { get => reflectionDamageMultiplier; set => reflectionDamageMultiplier = value; }
+    public bool MeleeParryAmplifyDamage { get => meleeParryAmplifyDamage; set => meleeParryAmplifyDamage = value; }
+    public bool RangeParryAmplifyDamage { get => rangeParryAmplifyDamage; set => rangeParryAmplifyDamage = value; }
+    public float DamageBultiplier { get => extraDamage; set => extraDamage = value; }
+    public int AttackNumber { get => attackNumber; set => attackNumber = value; }
+
+
+    private void Start()
     {
-        StartCoroutine(ParryingCoroutine(direction));
+        damageHandler = GetComponent<IDamageHandler>();
+        turning = GetComponent<ITurning>();
+        team = GetComponent<ITeam>();
+        weapon = GetComponent<IWeapon>();
     }
 
-    public void StopParry(Vector3 direction)
+    public void StartParry(eDirection direction)
     {
-        StopCoroutine(ParryingCoroutine(direction));
+        if (parryCoroutine == null && !IsOnCooldown)
+            parryCoroutine = StartCoroutine(ParryCoroutine());
     }
 
-    //events can be used for animation
-    public IEnumerator ParryingCoroutine(Vector3 direction)
+    public void StopParry()
+    {
+        if (parryCoroutine != null)
+        {
+            StopCoroutine(parryCoroutine);
+            FinishParry();
+        }
+    }
+
+    public IEnumerator ParryCoroutine()
     { 
-        StartParryEvent.Invoke();
-        isParrying = true;
-        ApplyParry(direction);
-        yield return new WaitForSeconds(parryDelay);
-        isParrying = false;
-        StopParryEvent.Invoke();
+        SetParryConditions();
+
+        yield return new WaitForSeconds(duration);
+
+        FinishParry();
     }
 
-    protected void ApplyParry(Vector3 direction)
+    private void SetParryConditions()
     {
-        Collider2D[] objectsNear = Physics2D.OverlapCircleAll(transform.position, parryRadius);
+        StartParryEvent.Invoke();
 
-        if (objectsNear.Length == 0)
+        // absorptions
+        switch (parryType)
+        {
+            case eParryType.AbsoluteAbsorption:
+                absorption = new AbsoluteDamageModificator(-damageAbsorption);
+                break;
+
+            case eParryType.RelativeAbsorption:
+                absorption = new RelativeDamageModificator(-damageAbsorption);
+                break;
+        }
+        damageHandler.AddDamageModificator(absorption);
+
+        // reflections
+        if (reflectMeleeDamage)
+        {
+            meleeDamageReflection = new ParryMeleeDamageReflection(gameObject, turning);
+            damageHandler.AddDamageEffect(meleeDamageReflection);
+            if (meleeDamageReflection is IParryDamageEffect parryDamageEffect)
+                parryDamageEffect.SuccessfulParryEvent.AddListener(OnSuccessfulParry);
+        }
+
+        if (reflectProjectiles)
+        {
+            projectileReflection = new ParryProjectileReflection(gameObject, turning, team);
+            damageHandler.AddDamageEffect(projectileReflection);
+            if (projectileReflection is IParryDamageEffect parryDamageEffect)
+                parryDamageEffect.SuccessfulParryEvent.AddListener(OnSuccessfulParry);
+        }            
+    }
+
+    private void FinishParry()
+    {
+        damageHandler.RemoveDamageModificator(absorption);
+        damageHandler.RemoveDamageEffect(meleeDamageReflection);
+        damageHandler.RemoveDamageEffect(projectileReflection);
+
+        finishCooldownTime = Time.time + cooldown;
+        StopParryEvent.Invoke();
+        parryCoroutine = null;
+    }
+
+    private IEnumerator AmplifyDamageCoroutine()
+    {
+        // add amplification
+        damageAmplification = new RelativeDamageModificator(extraDamage);
+        weapon.Damage.modificators.Add(damageAmplification);
+        weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
+        attackCounter = 0;
+
+        yield return new WaitForSeconds(amplifyDuration);
+
+        RemoveAmplification();
+    }
+
+    private void RemoveAmplification()
+    {
+        weapon.Damage.modificators.Remove(damageAmplification);
+        weapon.ReleaseAttackEvent.RemoveListener(OnReleaseAttack);
+
+        amplifyDamageCoroutine = null;
+    }
+
+    private void OnSuccessfulParry()
+    {
+        if (amplifyDamageCoroutine != null)
             return;
 
-        foreach (Collider2D obj in objectsNear){
+        if (damageAmplification is MeleeDamageReflection && meleeParryAmplifyDamage || 
+            damageAmplification is ProjectileReflection && rangeParryAmplifyDamage)
+        {
+            amplifyDamageCoroutine = StartCoroutine(AmplifyDamageCoroutine());
+        }        
+    }
 
-            if(obj.gameObject.GetComponent<IDamageReduced>() != null && obj.gameObject.name != "Player")
-            {
-                if ((direction == Vector3.right && obj.transform.position.x >= transform.position.x) || 
-                    (direction == Vector3.left && obj.transform.position.x <= transform.position.x))
-                {
-                    WeaponWasParriedEvent.Invoke(obj.gameObject.GetComponent<IDamageReduced>());
-                }
-            }
+    private void OnReleaseAttack()
+    {
+        if (attackCounter >= attackNumber)
+        {
+            StopCoroutine(amplifyDamageCoroutine);
+            RemoveAmplification();
         }
     }
 }
