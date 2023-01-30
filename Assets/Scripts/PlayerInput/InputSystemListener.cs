@@ -16,6 +16,8 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
     private UnityEvent rollEvent = new();
     private UnityEvent<eAbilityType> abilityEvent = new();
     private UnityEvent parryEvent = new();
+    private UnityEvent interactEvent = new();
+    private UnityEvent<int> climbEvent = new();
 
     public UnityEvent<eDirection> MoveEvent { get => moveEvent;}
     public UnityEvent StopEvent { get => stopEvent;}
@@ -24,6 +26,8 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
     public UnityEvent RollEvent { get => rollEvent; }
     public UnityEvent<eAbilityType> AbilityEvent { get => abilityEvent; }
     public UnityEvent ParryEvent { get => parryEvent; }
+    public UnityEvent InteractEvent { get => interactEvent; }
+    public UnityEvent<int> ClimbEvent { get => climbEvent; }
 
     private void Awake()
     {
@@ -75,6 +79,25 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
                 if (context.action.phase == InputActionPhase.Performed)
                     parryEvent.Invoke();
 
+                break;
+            case "Interact":
+
+                if (context.action.phase == InputActionPhase.Started)
+                {
+                    interactEvent.Invoke();
+                }
+
+                break;
+            case "Climb":
+
+                float climbCommand = context.action.ReadValue<float>();
+
+                if (climbCommand > 0)
+                    climbEvent.Invoke(1);
+                else if (climbCommand < 0)
+                    climbEvent.Invoke(-1);
+                else if (context.action.phase == InputActionPhase.Performed)
+                    climbEvent.Invoke(0);
                 break;
         }
     }

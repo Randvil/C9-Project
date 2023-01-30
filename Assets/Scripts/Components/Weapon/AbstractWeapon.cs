@@ -24,6 +24,9 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
     public UnityEvent ReleaseAttackEvent { get; } = new();
     public UnityEvent StopAttackEvent { get; } = new();
 
+    //delete previous events later
+    public UnityEvent<int> EntityAttackEvent { get; } = new();
+
     protected Coroutine attackCoroutine;
 
     public void StartAttack(eDirection direction)
@@ -51,6 +54,7 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
         if (attackDelay > 0f)
             yield return new WaitForSeconds(attackDelay);
 
+        EntityAttackEvent.Invoke(1);
         ReleaseAttack(direction);
 
         float finishAttackDelay = attackCooldown - attackDelay;
@@ -67,6 +71,7 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
 
     protected virtual void FinishAttack()
     {
+        EntityAttackEvent.Invoke(0);
         StopAttackEvent.Invoke();
 
         attackCoroutine = null;

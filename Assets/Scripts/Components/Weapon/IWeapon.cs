@@ -10,4 +10,5 @@ public interface IWeapon
     public UnityEvent StartAttackEvent { get; }
     public UnityEvent ReleaseAttackEvent { get; }
     public UnityEvent StopAttackEvent { get; }
+    public UnityEvent<int> EntityAttackEvent { get; }
 }

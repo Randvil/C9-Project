@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(InputSystemListener))]
-[RequireComponent(typeof(RigidbodyMovement), typeof(ParabolicJump), typeof(Turning))]
+[RequireComponent(typeof(RigidbodyMovement), typeof(Jump), typeof(Turning))]
 [RequireComponent(typeof(SingleTargetMeleeWeapon), typeof(Stats), typeof(DamageHandlerPlayer))]
-[RequireComponent(typeof(Roll), typeof(Parry))]
+[RequireComponent(typeof(Roll), typeof(Parry), typeof(Gravity))]
+[RequireComponent(typeof(AnimationPlayerController), typeof(RigidbodyClimb), typeof(Interact))]
 public class Player : MonoBehaviour, ITeam
 {
     private eTeam team = eTeam.Player;
-
-    private eDirection direction;
     public eTeam Team { get => team; }
 
     private bool moveRight;
@@ -19,25 +19,29 @@ public class Player : MonoBehaviour, ITeam
 
     private IPlayerInput playerInput;
     private IMovement movement;
-    private IJump jump;
+    private IJumping jumping;
     private IRoll roll;
     private ITurning turning;
     private IWeapon weapon;
     private IStats stats;
     private IDamageHandler damageHandler;
     private IParry parry;
+    private IClimb climb;
+    private IInteract interact;
 
     private void Start()
     {
         playerInput = GetComponent<IPlayerInput>();
         movement = GetComponent<IMovement>();
-        jump = GetComponent<IJump>();
+        jumping = GetComponent<IJumping>();
         roll = GetComponent<IRoll>();
         turning = GetComponent<ITurning>();
         weapon = GetComponent<IWeapon>();
         stats = GetComponent<IStats>();
         damageHandler = GetComponent<IDamageHandler>();
         parry = GetComponent<IParry>();
+        climb = GetComponent<IClimb>();
+        interact = GetComponent<IInteract>();
 
         AddInputListeners();
 
@@ -57,6 +61,8 @@ public class Player : MonoBehaviour, ITeam
         playerInput.AttackEvent.AddListener(OnAttack);
         playerInput.RollEvent.AddListener(OnRoll);
         playerInput.ParryEvent.AddListener(OnParry);
+        playerInput.InteractEvent.AddListener(OnInteract);
+        playerInput.ClimbEvent.AddListener(OnClimb);
     }
 
     private void OnMove(eDirection direction)
@@ -92,8 +98,7 @@ public class Player : MonoBehaviour, ITeam
             return;
         }
 
-        //eDirection
-        direction = eDirection.Right;
+        eDirection direction = eDirection.Right;
         if (moveLeft)
             direction = eDirection.Left;
 
@@ -107,11 +112,11 @@ public class Player : MonoBehaviour, ITeam
 
     private void OnJump()
     {
-        if (isAlive && !jump.IsJumping)
+        if (isAlive && !jumping.IsJumping)
         {
             roll.StopRoll();
             weapon.StopAttack();
-            jump.StartJump();
+            jumping.HandleJump();
         }
     }
 
@@ -152,7 +157,7 @@ public class Player : MonoBehaviour, ITeam
 
     private void OnParry()
     {
-        switch (direction)
+        switch (turning.Direction)
         {
             case eDirection.Right:
                 parry.StartParry(Vector3.right);
@@ -162,5 +167,19 @@ public class Player : MonoBehaviour, ITeam
                 break;
         }
         
+    }
+
+    private void OnInteract()
+    {
+        Debug.Log(interact.CheckInteractiveObjectsNear());
+    }
+
+    private void OnClimb(int dir)
+    {
+        GameObject interactiveObject = interact.CheckInteractiveObjectsNear();
+        if (interactiveObject != null && interactiveObject.GetComponent<Ladder>() != null)
+        {
+            climb.HandleClimb(dir, interactiveObject.GetComponent<Ladder>());
+        }
     }
 }

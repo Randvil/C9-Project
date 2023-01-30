@@ -1,4 +1,5 @@
 using UnityEngine.Events;
+using UnityEngine;
 
 public interface IPlayerInput
 {
@@ -9,4 +10,6 @@ public interface IPlayerInput
     public UnityEvent RollEvent { get; }
     public UnityEvent<eAbilityType> AbilityEvent { get; }
     public UnityEvent ParryEvent { get; }
+    public UnityEvent InteractEvent { get; }
+    public UnityEvent<int> ClimbEvent { get; }
 }
