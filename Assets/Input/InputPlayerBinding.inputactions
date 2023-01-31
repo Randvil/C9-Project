@@ -1,5 +1,5 @@
 {
-    "name": "InputBinding",
+    "name": "InputBinding 1",
     "maps": [
         {
             "name": "Player",
@@ -42,9 +42,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "f94bf1a1-b485-43d8-ab62-6041a0e64a11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Climb",
+                    "type": "PassThrough",
+                    "id": "cc905d5d-965c-4bd5-968d-d9f5c435c996",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Parry",
                     "type": "Button",
-                    "id": "9d0d6274-4a2d-4e1d-b417-c324405473ce",
+                    "id": "f9fd6c87-126b-4919-a5f7-9da3f935639b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=0.3,pressPoint=0.3)",
@@ -264,7 +282,7 @@
                 {
                     "name": "",
                     "id": "49a2251e-45d8-4d23-ab01-6a225be28b57",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -318,33 +336,88 @@
                 },
                 {
                     "name": "",
-                    "id": "366a6107-eba0-447d-9a4d-7d4a89f4ad32",
-                    "path": "<Mouse>/rightButton",
+                    "id": "27777e91-a786-477e-aaf2-81082db22c1e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "SW and Arrows [Keyboard]",
+                    "id": "114e01bc-d2db-4f77-8d99-8f6bcfe8895b",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Climb",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f41ec28e-8b18-42e5-968b-65fc8b29047e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "5b8adf7a-0dfa-4b27-8b51-5f053a7d5808",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f4a3ab38-fffd-460a-986f-6c54d9821bdb",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9361d53b-fe25-4dad-933b-0745f35b531c",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bc4d915e-36bd-4611-af34-90e84ee30124",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "87441dcd-44d3-44cf-8dfc-c0322b5d15a4",
+                    "id": "b06c0664-fa92-49da-99c3-61b4e618b4c6",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Parry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d16496dc-79db-411b-b978-0c8055acb564",
-                    "path": "<HID::Logitech Logitech Dual Action>/button4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
                     "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false

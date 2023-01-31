@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b3322427ec9c5b34ebf45b3cfcf2ea0a, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -8198,14 +8198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10687b92834925643a7436d9055cb097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  dieEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
 --- !u!1 &6221809210922838633
 GameObject:
   m_ObjectHideFlags: 0
@@ -8905,10 +8897,6 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  damageMinus:
-    baseDamage: 0
-    damageType: 0
-    sourceObject: {fileID: 0}
 --- !u!50 &8318095624750873808
 Rigidbody2D:
   serializedVersion: 4
