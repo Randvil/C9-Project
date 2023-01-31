@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
+public class Arrow : MonoBehaviour, IReflectableProjectile
 {
     private eTeam ownerTeam;
     private Damage damage;
     private Vector2 velocityVector;
-
-    [SerializeField]
-    protected Damage damageMinus;
-    public Damage DamageMinus { get => damageMinus; }
 
     public UnityEvent SpawnEvent { get; } = new();
     public UnityEvent ExtinctionEvent { get; } = new();
@@ -21,21 +17,29 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
         transform.Translate(velocityVector * Time.deltaTime);
     }
 
-    public void Initialize(eDirection direction, float rotation, float speed, eTeam ownerTeam, Damage damage)
+    public void Initialize(eDirection direction, float zRotation, float speed, eTeam ownerTeam, Damage damage)
     {
-        this.ownerTeam = ownerTeam;
-        this.damage = damage;
-
         float directionalSpeed = speed;
-        float relativeRotation = rotation;
+        float relativeRotation = zRotation;
         if (direction == eDirection.Left)
         {
             directionalSpeed = -directionalSpeed;
             relativeRotation = -relativeRotation;
         }
 
-        velocityVector = new Vector2(directionalSpeed, 0f);
-        transform.rotation = Quaternion.Euler(0f, 0f, relativeRotation);
+        Vector3 velocityVector = new Vector2(directionalSpeed, 0f);
+        Quaternion rotation = Quaternion.Euler(0f, 0f, relativeRotation);
+
+        Initialize(velocityVector, rotation, ownerTeam, damage);
+    }
+
+    public void Initialize(Vector2 velocityVector, Quaternion rotation, eTeam ownerTeam, Damage damage)
+    {
+        this.ownerTeam = ownerTeam;
+        this.damage = damage;
+        this.damage.sourceObject = gameObject;
+        this.velocityVector = velocityVector;
+        transform.rotation = rotation;
 
         SpawnEvent.Invoke();
     }
@@ -45,6 +49,14 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
         ExtinctionEvent.Invoke();
 
         Destroy(gameObject);
+    }
+
+    public GameObject CreateReflectedProjectile(eTeam newTeam)
+    {
+        GameObject reflectedProjectile = Instantiate(gameObject);
+        reflectedProjectile.GetComponent<IReflectableProjectile>().Initialize(-velocityVector, transform.rotation, newTeam, damage);        
+
+        return reflectedProjectile;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +69,7 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
         if (damageableEnemy == null)
             return;
 
-        damageableEnemy.TakeDamage(damage, this);
+        damageableEnemy.TakeDamage(damage);
 
         Remove();
     }
@@ -66,4 +78,5 @@ public class Arrow : MonoBehaviour, IProjectile, IDamageReduced
     {
         Remove();
     }
+
 }

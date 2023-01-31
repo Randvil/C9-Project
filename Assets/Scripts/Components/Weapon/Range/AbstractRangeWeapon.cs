@@ -15,18 +15,8 @@ public abstract class AbstractRangeWeapon : AbstractWeapon
 
     protected eTeam weaponOwnerTeam;
 
-    private void Start()
+    protected virtual void Start()
     {
         weaponOwnerTeam = GetComponent<ITeam>().Team;
-    }
-
-    protected override void PrepareAttack()
-    {
-        base.PrepareAttack();
-    }
-
-    protected override void FinishAttack()
-    {
-        base.FinishAttack();
     }
 }

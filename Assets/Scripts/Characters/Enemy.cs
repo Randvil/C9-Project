@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour, ITeam
 
     private void OnAttack()
     {
-        weapon.StartAttack(turning.Direction);
+        weapon.StartAttack();
     }
 
     private void OnDie()

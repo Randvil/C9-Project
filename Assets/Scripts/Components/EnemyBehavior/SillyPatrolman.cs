@@ -227,7 +227,7 @@ public class SillyPatrolman : MonoBehaviour, IEnemyBehavior
         return wallIsAhead;
     }
 
-    private void OnTakeDamage(float incomingDamage)
+    private void OnTakeDamage(Damage incomingDamage, Damage effectedDamage)
     {
         if (player != null)
             return;

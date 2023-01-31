@@ -11,22 +11,22 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
 
     private UnityEvent<eDirection> moveEvent = new();
     private UnityEvent stopEvent = new();
-    private UnityEvent jumpEvent = new();
-    private UnityEvent attackEvent = new();
-    private UnityEvent rollEvent = new();
-    private UnityEvent<eAbilityType> abilityEvent = new();
-    private UnityEvent parryEvent = new();
-    private UnityEvent interactEvent = new();
+    private UnityEvent<eActionPhase> jumpEvent = new();
+    private UnityEvent<eActionPhase> attackEvent = new();
+    private UnityEvent<eActionPhase> rollEvent = new();
+    private UnityEvent<eActionPhase, eAbilityType> abilityEvent = new();
+    private UnityEvent<eActionPhase> parryEvent = new();
+    private UnityEvent<eActionPhase> interactEvent = new();
     private UnityEvent<int> climbEvent = new();
 
-    public UnityEvent<eDirection> MoveEvent { get => moveEvent;}
-    public UnityEvent StopEvent { get => stopEvent;}
-    public UnityEvent JumpEvent { get => jumpEvent; }
-    public UnityEvent AttackEvent { get => attackEvent; }
-    public UnityEvent RollEvent { get => rollEvent; }
-    public UnityEvent<eAbilityType> AbilityEvent { get => abilityEvent; }
-    public UnityEvent ParryEvent { get => parryEvent; }
-    public UnityEvent InteractEvent { get => interactEvent; }
+    public UnityEvent<eDirection> MoveEvent { get => moveEvent; }
+    public UnityEvent StopEvent { get => stopEvent; }
+    public UnityEvent<eActionPhase> JumpEvent { get => jumpEvent; }
+    public UnityEvent<eActionPhase> AttackEvent { get => attackEvent; }
+    public UnityEvent<eActionPhase> RollEvent { get => rollEvent; }
+    public UnityEvent<eActionPhase, eAbilityType> AbilityEvent { get => abilityEvent; }
+    public UnityEvent<eActionPhase> ParryEvent { get => parryEvent; }
+    public UnityEvent<eActionPhase> InteractEvent { get => interactEvent; }
     public UnityEvent<int> ClimbEvent { get => climbEvent; }
 
     private void Awake()
@@ -54,38 +54,45 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
             case "Jump":
 
                 if (context.action.phase == InputActionPhase.Started)
-                {
-                    jumpEvent.Invoke();
-                }
+                    jumpEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    jumpEvent.Invoke(eActionPhase.Canceled);
 
                 break;
 
             case "Attack":
 
                 if (context.action.phase == InputActionPhase.Started)
-                    attackEvent.Invoke();
+                    attackEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    attackEvent.Invoke(eActionPhase.Canceled);
 
                 break;
 
             case "Roll":
 
                 if (context.action.phase == InputActionPhase.Started)
-                    rollEvent.Invoke();
+                    rollEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    rollEvent.Invoke(eActionPhase.Canceled);
 
                 break;
 
             case "Parry":
 
-                if (context.action.phase == InputActionPhase.Performed)
-                    parryEvent.Invoke();
+                if (context.action.phase == InputActionPhase.Started)
+                    parryEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    parryEvent.Invoke(eActionPhase.Canceled);
 
                 break;
+
             case "Interact":
 
-                if (context.action.phase == InputActionPhase.Started)
-                {
-                    interactEvent.Invoke();
-                }
+                if (context.action.phase == InputActionPhase.Started) 
+                    interactEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    interactEvent.Invoke(eActionPhase.Canceled);
 
                 break;
             case "Climb":

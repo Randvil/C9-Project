@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(InputSystemListener))]
-[RequireComponent(typeof(RigidbodyMovement), typeof(Jump), typeof(Turning))]
-[RequireComponent(typeof(SingleTargetMeleeWeapon), typeof(Stats), typeof(DamageHandlerPlayer))]
-[RequireComponent(typeof(Roll), typeof(Parry), typeof(Gravity))]
-[RequireComponent(typeof(AnimationPlayerController), typeof(RigidbodyClimb), typeof(Interact))]
 public class Player : MonoBehaviour, ITeam
 {
     private eTeam team = eTeam.Player;
     public eTeam Team { get => team; }
 
-    private bool moveRight;
-    private bool moveLeft;
+    private bool intendToMove;
     private bool isAlive = true;
 
     private IPlayerInput playerInput;
     private IMovement movement;
-    private IJumping jumping;
+    private IJumping jump;
     private IRoll roll;
     private ITurning turning;
     private IWeapon weapon;
     private IStats stats;
     private IDamageHandler damageHandler;
     private IParry parry;
+    private IUIComponent ui;
     private IClimb climb;
     private IInteract interact;
 
@@ -33,13 +28,14 @@ public class Player : MonoBehaviour, ITeam
     {
         playerInput = GetComponent<IPlayerInput>();
         movement = GetComponent<IMovement>();
-        jumping = GetComponent<IJumping>();
+        jump = GetComponent<IJumping>();
         roll = GetComponent<IRoll>();
         turning = GetComponent<ITurning>();
         weapon = GetComponent<IWeapon>();
         stats = GetComponent<IStats>();
         damageHandler = GetComponent<IDamageHandler>();
         parry = GetComponent<IParry>();
+        ui = GetComponent<IUIComponent>();
         climb = GetComponent<IClimb>();
         interact = GetComponent<IInteract>();
 
@@ -50,7 +46,7 @@ public class Player : MonoBehaviour, ITeam
 
     private void Update()
     {
-        HandleMovement();
+        HandleMoveInput();
     }
 
     private void AddInputListeners()
@@ -65,80 +61,80 @@ public class Player : MonoBehaviour, ITeam
         playerInput.ClimbEvent.AddListener(OnClimb);
     }
 
-    private void OnMove(eDirection direction)
-    {
-        switch (direction)
-        {
-            case eDirection.Right:
-                moveRight = true;
-                moveLeft = false;
-                break;
-
-            case eDirection.Left:
-                moveRight = false;
-                moveLeft = true;
-                break;
-        }
-    }
-
-    private void OnStop()
-    {
-        moveRight = false;
-        moveLeft = false;
-    }
-
-    private void HandleMovement()
+    private void HandleMoveInput()
     {
         if (!isAlive || roll.IsRolling || weapon.IsAttacking || parry.IsParrying)
             return;
 
-        if (!moveRight && !moveLeft)
-        {
+        if (intendToMove)
+            movement.StartMove(turning.Direction);
+        else
             movement.StopMove();
-            return;
-        }
-
-        eDirection direction = eDirection.Right;
-        if (moveLeft)
-            direction = eDirection.Left;
-
-        movement.StartMove(direction);
-
-        if (direction != turning.Direction)
-        {
-            turning.Turn(direction);
-        }
     }
 
-    private void OnJump()
+    private void OnMove(eDirection direction)
     {
-        if (isAlive && !jumping.IsJumping)
+        intendToMove = true;
+        turning.Turn(direction);
+    }
+
+    private void OnStop()
+    {
+        intendToMove = false;
+    }
+
+    private void OnJump(eActionPhase actionPhase)
+    {
+        if (isAlive && !jump.IsJumping)
         {
             roll.StopRoll();
             weapon.StopAttack();
-            jumping.HandleJump();
+            jump.HandleJump();
         }
     }
 
-    private void OnAttack()
+    private void OnAttack(eActionPhase actionPhase)
     {
-        if (isAlive && !weapon.IsAttacking)
+        if (isAlive && actionPhase == eActionPhase.Started)
         {
             movement.StopMove();
             roll.StopRoll();
-            weapon.StartAttack(turning.Direction);
+            parry.StopParry();
+
+            weapon.StartAttack();
         }
     }
 
-    private void OnRoll()
+    private void OnRoll(eActionPhase actionPhase)
     {
-        if (isAlive && !roll.IsRolling)
+        if (isAlive && actionPhase == eActionPhase.Started && !roll.IsRolling)
         {
             movement.StopMove();
             weapon.StopAttack();
+            parry.StopParry();
+
             roll.StartRoll(turning.Direction);
         }
-            
+
+    }
+    private void OnParry(eActionPhase actionPhase)
+    {
+        if (!isAlive && parry.IsOnCooldown)
+            return;
+
+        switch (actionPhase)
+        {
+            case eActionPhase.Started:
+                movement.StopMove();
+                weapon.StopAttack();
+                roll.StopRoll();
+                parry.StartParry(turning.Direction);
+                break;
+
+            case eActionPhase.Canceled:
+                parry.StopParry();
+                break;
+        }
     }
 
     private void OnDie(eStatType stat, float value)
@@ -148,28 +144,15 @@ public class Player : MonoBehaviour, ITeam
 
         Destroy(gameObject, 1f);
 
-        weapon.StopAttack();
         movement.StopMove();
+        weapon.StopAttack();
         roll.StopRoll();
+        parry.StopParry();
 
         isAlive = false;
     }
 
-    private void OnParry()
-    {
-        switch (turning.Direction)
-        {
-            case eDirection.Right:
-                parry.StartParry(Vector3.right);
-                break;
-            case eDirection.Left:
-                parry.StartParry(Vector3.left);
-                break;
-        }
-        
-    }
-
-    private void OnInteract()
+    private void OnInteract(eActionPhase actionPhase)
     {
         Debug.Log(interact.CheckInteractiveObjectsNear());
     }

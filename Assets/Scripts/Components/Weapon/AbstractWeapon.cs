@@ -14,54 +14,56 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
     public float AttackRadius { get => attackRadius; }
 
     [SerializeField]
-    protected float attackDelay;
+    protected float[] preAttackDelays;
 
     [SerializeField]
-    protected float attackCooldown;
+    protected float postAttackDelay;
 
     public bool IsAttacking { get => attackCoroutine != null; }
     public UnityEvent StartAttackEvent { get; } = new();
     public UnityEvent ReleaseAttackEvent { get; } = new();
     public UnityEvent StopAttackEvent { get; } = new();
 
-    //delete previous events later
-    public UnityEvent<int> EntityAttackEvent { get; } = new();
-
     protected Coroutine attackCoroutine;
+    protected int attackSeries;
 
-    public void StartAttack(eDirection direction)
+    protected virtual void Awake()
     {
-        if (attackCoroutine != null)
-            return;
-
-        attackCoroutine = StartCoroutine(AttackCoroutine(direction));
+        damage.sourceObject = gameObject;
+        damage.sourceWeapon = this;
+        damage.modificators = new();
     }
 
-    public void StopAttack()
+    public virtual void StartAttack()
+    {
+        attackSeries++;
+
+        if (attackCoroutine == null)
+            attackCoroutine = StartCoroutine(AttackCoroutine());
+    }
+
+    public virtual void StopAttack()
     {
         if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
             FinishAttack();
-            attackCoroutine = null;
         }
     }
 
-    protected IEnumerator AttackCoroutine(eDirection direction)
+    protected virtual IEnumerator AttackCoroutine()
     {
         PrepareAttack();
 
-        if (attackDelay > 0f)
-            yield return new WaitForSeconds(attackDelay);
+        for (int attackNumber = 1; attackNumber <= Mathf.Min(attackSeries, preAttackDelays.Length); attackNumber++)
+        {
+            yield return new WaitForSeconds(preAttackDelays[attackNumber - 1]);
+            ReleaseAttack();
+            ReleaseAttackEvent.Invoke();
+        }
 
-        EntityAttackEvent.Invoke(1);
-        ReleaseAttack(direction);
-
-        float finishAttackDelay = attackCooldown - attackDelay;
-        if (finishAttackDelay > 0f)
-            yield return new WaitForSeconds(finishAttackDelay);
-
-        FinishAttack();        
+        yield return new WaitForSeconds(postAttackDelay);
+        FinishAttack();
     }
 
     protected virtual void PrepareAttack()
@@ -71,11 +73,10 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
 
     protected virtual void FinishAttack()
     {
-        EntityAttackEvent.Invoke(0);
         StopAttackEvent.Invoke();
-
+        attackSeries = 0;
         attackCoroutine = null;
     }
 
-    protected abstract void ReleaseAttack(eDirection direction);
+    protected abstract void ReleaseAttack();
 }

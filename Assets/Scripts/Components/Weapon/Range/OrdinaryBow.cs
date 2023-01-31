@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class OrdinaryBow : AbstractRangeWeapon
 {
-    protected override void ReleaseAttack(eDirection direction)
+    protected Turning turning;
+
+    protected override void Start()
     {
-        IProjectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(new Vector3(0f, (float)direction, 0f))).GetComponent<IProjectile>();
-        projectile.Initialize(direction, projectileRotation, projectileSpeed, weaponOwnerTeam, damage);
+        base.Start();
+
+        turning = GetComponent<Turning>();
+    }
+    protected override void ReleaseAttack()
+    {
+        IProjectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
+        projectile.Initialize(turning.Direction, projectileRotation, projectileSpeed, weaponOwnerTeam, damage);
     }
 
 }

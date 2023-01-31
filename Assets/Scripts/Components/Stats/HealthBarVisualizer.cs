@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarVisualizer : MonoBehaviour
+public class HealthBarVisualizer : MonoBehaviour, IUIComponent
 {
     [SerializeField]
     private Slider healthBarSlider;
@@ -21,16 +19,14 @@ public class HealthBarVisualizer : MonoBehaviour
         healthBarSlider.value = stats.GetStat(eStatType.CurrentHealth);
     }
 
-    private void OnHealthChange(eStatType stat, float value)
+    public void OnHealthChange(eStatType stat, float value)
     {
         switch (stat)
         {
             case eStatType.CurrentHealth:
                 healthBarSlider.value = value;
                 if (value == 0f)
-                {
-                    OnDie();
-                }                    
+                    OnDie();                   
                 break;
 
             case eStatType.MaxHealth:

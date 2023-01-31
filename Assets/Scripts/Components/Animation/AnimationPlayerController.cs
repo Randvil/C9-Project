@@ -24,7 +24,6 @@ public class AnimationPlayerController : MonoBehaviour
     {
         movement.EntityMoveEvent.AddListener(RunningAnimation);
         jump.EntityJumpEvent.AddListener(JumpingAnimation);
-        weapon.EntityAttackEvent.AddListener(SingleAttackAnimation);
         gravity.GravityFallEvent.AddListener(JumpingAnimation);
         climb.EntityClimbEvent.AddListener(ClimbingAnimation);
     }
