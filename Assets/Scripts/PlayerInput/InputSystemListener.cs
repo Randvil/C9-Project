@@ -16,14 +16,18 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
     private UnityEvent<eActionPhase> rollEvent = new();
     private UnityEvent<eActionPhase, eAbilityType> abilityEvent = new();
     private UnityEvent<eActionPhase> parryEvent = new();
+    private UnityEvent<eActionPhase> interactEvent = new();
+    private UnityEvent<int> climbEvent = new();
 
-    public UnityEvent<eDirection> MoveEvent { get => moveEvent;}
-    public UnityEvent StopEvent { get => stopEvent;}
+    public UnityEvent<eDirection> MoveEvent { get => moveEvent; }
+    public UnityEvent StopEvent { get => stopEvent; }
     public UnityEvent<eActionPhase> JumpEvent { get => jumpEvent; }
     public UnityEvent<eActionPhase> AttackEvent { get => attackEvent; }
     public UnityEvent<eActionPhase> RollEvent { get => rollEvent; }
     public UnityEvent<eActionPhase, eAbilityType> AbilityEvent { get => abilityEvent; }
     public UnityEvent<eActionPhase> ParryEvent { get => parryEvent; }
+    public UnityEvent<eActionPhase> InteractEvent { get => interactEvent; }
+    public UnityEvent<int> ClimbEvent { get => climbEvent; }
 
     private void Awake()
     {
@@ -81,6 +85,26 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
                 else if (context.action.phase == InputActionPhase.Canceled)
                     parryEvent.Invoke(eActionPhase.Canceled);
 
+                break;
+
+            case "Interact":
+
+                if (context.action.phase == InputActionPhase.Started) 
+                    interactEvent.Invoke(eActionPhase.Started);
+                else if (context.action.phase == InputActionPhase.Canceled)
+                    interactEvent.Invoke(eActionPhase.Canceled);
+
+                break;
+            case "Climb":
+
+                float climbCommand = context.action.ReadValue<float>();
+
+                if (climbCommand > 0)
+                    climbEvent.Invoke(1);
+                else if (climbCommand < 0)
+                    climbEvent.Invoke(-1);
+                else if (context.action.phase == InputActionPhase.Performed)
+                    climbEvent.Invoke(0);
                 break;
         }
     }

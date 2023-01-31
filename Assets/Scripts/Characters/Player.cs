@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour, ITeam
 {
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour, ITeam
 
     private IPlayerInput playerInput;
     private IMovement movement;
-    private IJump jump;
+    private IJumping jump;
     private IRoll roll;
     private ITurning turning;
     private IWeapon weapon;
@@ -20,12 +21,14 @@ public class Player : MonoBehaviour, ITeam
     private IDamageHandler damageHandler;
     private IParry parry;
     private IUIComponent ui;
+    private IClimb climb;
+    private IInteract interact;
 
     private void Start()
     {
         playerInput = GetComponent<IPlayerInput>();
         movement = GetComponent<IMovement>();
-        jump = GetComponent<IJump>();
+        jump = GetComponent<IJumping>();
         roll = GetComponent<IRoll>();
         turning = GetComponent<ITurning>();
         weapon = GetComponent<IWeapon>();
@@ -33,6 +36,8 @@ public class Player : MonoBehaviour, ITeam
         damageHandler = GetComponent<IDamageHandler>();
         parry = GetComponent<IParry>();
         ui = GetComponent<IUIComponent>();
+        climb = GetComponent<IClimb>();
+        interact = GetComponent<IInteract>();
 
         AddInputListeners();
 
@@ -52,6 +57,8 @@ public class Player : MonoBehaviour, ITeam
         playerInput.AttackEvent.AddListener(OnAttack);
         playerInput.RollEvent.AddListener(OnRoll);
         playerInput.ParryEvent.AddListener(OnParry);
+        playerInput.InteractEvent.AddListener(OnInteract);
+        playerInput.ClimbEvent.AddListener(OnClimb);
     }
 
     private void HandleMoveInput()
@@ -83,8 +90,7 @@ public class Player : MonoBehaviour, ITeam
             weapon.StopAttack();
             roll.StopRoll();
             parry.StopParry();
-
-            jump.StartJump();
+            jump.HandleJump();
         }
     }
 
@@ -110,7 +116,7 @@ public class Player : MonoBehaviour, ITeam
 
             roll.StartRoll(turning.Direction);
         }
-            
+
     }
     private void OnParry(eActionPhase actionPhase)
     {
@@ -146,4 +152,20 @@ public class Player : MonoBehaviour, ITeam
 
         isAlive = false;
     }
+
+    private void OnInteract(eActionPhase actionPhase)
+    {
+        Debug.Log(interact.CheckInteractiveObjectsNear());
+    }
+
+    private void OnClimb(int dir)
+    {
+        GameObject interactiveObject = interact.CheckInteractiveObjectsNear();
+        if (interactiveObject != null && interactiveObject.GetComponent<Ladder>() != null)
+        {
+            climb.HandleClimb(dir, interactiveObject.GetComponent<Ladder>());
+        }
+    }
+
+  
 }

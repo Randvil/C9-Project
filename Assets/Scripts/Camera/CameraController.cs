@@ -11,14 +11,12 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        offset = transform.position - player.position;
+        offset = new Vector3(0, 1.06f, -10.1f);
     }
 
     private void LateUpdate()
     {
-        if (player == null)
-            return;
-
-        transform.position = offset + new Vector3(player.position.x, player.position.y, 0f);
+        if(player != null)
+            transform.position = offset + new Vector3(player.position.x, player.position.y, 0f);
     }
 }

@@ -11,8 +11,7 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
     private bool isMoving;
     public bool IsMoving { get => isMoving; }
 
-    public UnityEvent StartMoveEvent { get; } = new();
-    public UnityEvent StopMoveEvent { get; } = new();
+    public UnityEvent<int> EntityMoveEvent { get; } = new();
 
     private new Rigidbody2D rigidbody;
 
@@ -23,11 +22,11 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
 
     public void StartMove(eDirection direction)
     {
+        EntityMoveEvent.Invoke(1);
         float directionalSpeed = direction == eDirection.Right ? speed : -speed;
         rigidbody.velocity = new Vector3(directionalSpeed, rigidbody.velocity.y);
 
-        isMoving = true;
-        StartMoveEvent.Invoke();
+        isMoving = true; 
     }
 
     public void StopMove()
@@ -35,6 +34,6 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
         rigidbody.velocity = new Vector3(0f, rigidbody.velocity.y);
 
         isMoving = false;
-        StopMoveEvent.Invoke();
+        EntityMoveEvent.Invoke(0);
     }    
 }
