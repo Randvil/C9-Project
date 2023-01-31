@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Components/Damage/Damage Effects/IDamageEffect.cs.meta
+guid: 8c94d9e4b7108fb4c84e083acb67b320
+=======
 guid: c4e42ce6286fabd46bf862dd5af075d4
+>>>>>>> dev_anna:Assets/Scripts/Components/Animation/AnimationPlayerController.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

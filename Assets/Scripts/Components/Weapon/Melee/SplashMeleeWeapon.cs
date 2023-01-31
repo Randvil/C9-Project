@@ -10,6 +10,7 @@ public class SplashMeleeWeapon : AbstractMeleeWeapon
     {
         turning = GetComponent<Turning>();
     }
+
     protected override void ReleaseAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayerMask);

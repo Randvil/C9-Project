@@ -12,6 +12,7 @@ public class OrdinaryBow : AbstractRangeWeapon
 
         turning = GetComponent<Turning>();
     }
+
     protected override void ReleaseAttack()
     {
         IProjectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();

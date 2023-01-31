@@ -282,7 +282,7 @@
                 {
                     "name": "",
                     "id": "49a2251e-45d8-4d23-ab01-6a225be28b57",
-                    "path": "<Gamepad>/dpad/down",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -347,16 +347,36 @@
                 },
                 {
                     "name": "",
+<<<<<<< HEAD
+                    "id": "87441dcd-44d3-44cf-8dfc-c0322b5d15a4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Parry",
+=======
                     "id": "27777e91-a786-477e-aaf2-81082db22c1e",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Interact",
+>>>>>>> dev_anna
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
+<<<<<<< HEAD
+                    "name": "",
+                    "id": "d16496dc-79db-411b-b978-0c8055acb564",
+                    "path": "<HID::Logitech Logitech Dual Action>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+=======
                     "name": "SW and Arrows [Keyboard]",
                     "id": "114e01bc-d2db-4f77-8d99-8f6bcfe8895b",
                     "path": "1DAxis",
@@ -410,6 +430,7 @@
                     "action": "Climb",
                     "isComposite": false,
                     "isPartOfComposite": true
+>>>>>>> dev_anna
                 }
             ]
         }

@@ -87,8 +87,9 @@ public class Player : MonoBehaviour, ITeam
     {
         if (isAlive && !jump.IsJumping)
         {
-            roll.StopRoll();
             weapon.StopAttack();
+            roll.StopRoll();
+            parry.StopParry();
             jump.HandleJump();
         }
     }
@@ -165,4 +166,6 @@ public class Player : MonoBehaviour, ITeam
             climb.HandleClimb(dir, interactiveObject.GetComponent<Ladder>());
         }
     }
+
+  
 }

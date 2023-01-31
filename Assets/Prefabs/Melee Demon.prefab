@@ -404,10 +404,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    value: 1
+    baseDamage: 1
+    damageType: 0
+    sourceObject: {fileID: 0}
   attackRadius: 5
-  attackDelay: 0.1
-  attackCooldown: 1
+  preAttackDelays:
+  - 0.5
+  postAttackDelay: 0.5
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -425,9 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b4da0ab01438346a57ac15183ba901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senseDelay: 0.25
-  thinkDelay: 0.25
-  actDelay: 0.25
+  senseDelay: 0.1
+  thinkDelay: 0.1
+  actDelay: 0.1
   searchPlayerDistance: 50
   loseSightOfPlayerDistance: 20
   checkPlatformAheadTransform: {fileID: 2722482571981383080}

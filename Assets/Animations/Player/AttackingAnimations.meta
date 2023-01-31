@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes/CityLocation.meta
+guid: dda5cd4da13c53746bcc157149ba0091
+=======
 guid: a9dec88e432bfe745be64153e4620e2f
+>>>>>>> dev_anna:Assets/Animations/Player/AttackingAnimations.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
