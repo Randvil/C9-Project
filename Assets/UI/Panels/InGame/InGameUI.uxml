@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Panels/InGame/InGameStyles.uss?fileID=7433441132597879392&amp;guid=c0442d01171f404418977d7baf0b01b8&amp;type=3#InGameStyles" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="playerStatsContainer" style="margin-left: 110px; margin-right: 0; margin-top: 66px; margin-bottom: 0; width: 35%; flex-direction: row;">
+            <NS.RomanLib.RadialFill name="manaBar" text="100" width="70" height="70" value="1" overlay-image-path="radialBack" overlay-image-scale="0.914" fill-color="#87878BFF" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(0, 0, 0);" />
+            <ui:VisualElement style="flex-grow: 1; justify-content: space-around; align-items: flex-start; margin-left: 11px; margin-top: 12px;">
+                <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; top: auto; flex-shrink: 1;">
+                    <ui:ProgressBar value="58" name="healthBar" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 3px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
+                    <ui:Label text="75%" display-tooltip-when-elided="true" name="hpLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-left: 13px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="powers" style="flex-grow: 0; flex-direction: row; justify-content: flex-start; height: 40%; bottom: 15%; width: auto; margin-left: 26px;">
+                    <Polygon poly-image-path="poly" text="1" icon-path="speedUp" class="poly_InGame" />
+                    <Polygon poly-image-path="poly" text="2" icon-path="redPoly" icon-scale="0.96" class="poly_InGame" />
+                    <Polygon poly-image-path="poly" text="3" icon-path="speedUp" class="poly_InGame" />
+                    <Polygon poly-image-path="poly" text="4" class="poly_InGame" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

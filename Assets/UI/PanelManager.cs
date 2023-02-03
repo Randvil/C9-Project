@@ -6,7 +6,7 @@ public class PanelManager : MonoBehaviour
 {
     public UIDocument[] docs;
 
-    private Stack<VisualElement> history;
+    private Stack<VisualElement> history = new();
 
     private VisualElement currentPanel;
     public VisualElement CurrentPanel
@@ -15,11 +15,10 @@ public class PanelManager : MonoBehaviour
         set
         {
             if (currentPanel != null)
-            {
                 currentPanel.style.display = DisplayStyle.None;
-                history.Push(currentPanel);
-            }                
+              
             currentPanel = value;
+
             if (currentPanel != null)
                 currentPanel.style.display = DisplayStyle.Flex;
         }
@@ -27,7 +26,11 @@ public class PanelManager : MonoBehaviour
 
     public void GoBack() => CurrentPanel = history.Pop();
 
-    public void SwitchTo(int index) => CurrentPanel = docs[index].rootVisualElement;
+    public void SwitchTo(int index)
+    {
+        history.Push(CurrentPanel);
+        CurrentPanel = docs[index].rootVisualElement;
+    }
 
     private void Start()
     {
