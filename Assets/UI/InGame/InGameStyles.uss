@@ -1,0 +1,17 @@
+.unity-progress-bar__background {
+    height: 100%;
+}
+
+.unity-progress-bar__container {
+    flex-grow: 0;
+    height: 100%;
+}
+
+#healthBar .unity-progress-bar__progress {
+    background-color: rgba(159, 29, 29, 255);
+    flex-grow: 0;
+}
+
+#manaBar .unity-progress-bar__progress {
+    background-color: rgba(71, 87, 197, 255);
+}
