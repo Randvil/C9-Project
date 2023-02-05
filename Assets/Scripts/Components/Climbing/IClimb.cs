@@ -9,6 +9,7 @@ public interface IClimb
     public void MoveToLadder(Ladder ladder);
     public void UpdateClimbingState();
     public bool IsClimbing { get; }
-    public UnityEvent<int> EntityClimbEvent { get; }
+    public UnityEvent<bool> EntityClimbEvent { get; }
+    public UnityEvent<float, float> EntityClimbStateEvent { get; }
 
 }

@@ -25,7 +25,7 @@ public abstract class AbstractWeapon : MonoBehaviour, IWeapon
     public UnityEvent StopAttackEvent { get; } = new();
 
     protected Coroutine attackCoroutine;
-    protected int attackSeries;
+    public int attackSeries;
 
     protected virtual void Awake()
     {

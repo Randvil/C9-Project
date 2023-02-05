@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a7a687deb964e8d4bb698e6e3a1caf2a
+guid: 2b0c676fc8ca7ab48b60bc70a5956895
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,12 +7,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 55c7985f852a89c4398ae8da6ad9f91b, type: 2}
+      name: Merged_PolySphere
+    second: {fileID: 2100000, guid: 6b2c42459280d4f428d54063477f5759, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -98,11 +98,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: e3fe4fdf95c16c44489e2339fc25f618, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

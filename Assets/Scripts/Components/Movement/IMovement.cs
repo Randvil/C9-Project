@@ -6,5 +6,5 @@ public interface IMovement
     public void StartMove(eDirection direction);
     public void StopMove();
     public bool IsMoving { get; }
-    public UnityEvent<int> EntityMoveEvent { get; }
+    public UnityEvent<bool> EntityMoveEvent { get; }
 }

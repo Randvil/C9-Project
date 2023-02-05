@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 27a4cb287570d224f89b3c3c5eae942a
+guid: 721278b73e69bdd4d87eac66912b853a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: splash attack
+      name: parry
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 55
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
