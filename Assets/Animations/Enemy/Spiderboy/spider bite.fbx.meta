@@ -3,12 +3,7 @@ guid: f39f47798eee50341a0a140b75c78f1c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Merged_PolySphere
-    second: {fileID: 2100000, guid: 6b2c42459280d4f428d54063477f5759, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
