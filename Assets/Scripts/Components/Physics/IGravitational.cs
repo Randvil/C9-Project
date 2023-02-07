@@ -8,6 +8,7 @@ public interface IGravitational
     public void DisableGravity();
     public void EnableGravity();
     public void HandleClimbGravity();
-    public UnityEvent<int> GravityFallEvent { get; }
+    public UnityEvent<bool> GravityFallEvent { get; }
+    public UnityEvent<float> GravityFallStateEvent { get; }
     public eJumpState FallState { get; }
 }

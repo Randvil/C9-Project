@@ -22,7 +22,8 @@ public class Gravity : MonoBehaviour, IGravitational
     [SerializeField]
     private float maxFallVelocity = -5f;
 
-    public UnityEvent<int> GravityFallEvent { get; } = new();
+    public UnityEvent<bool> GravityFallEvent { get; } = new();
+    public UnityEvent<float> GravityFallStateEvent { get; } = new();
 
     private eJumpState fallState = eJumpState.Grounded;
     public eJumpState FallState { get => fallState; }
@@ -40,13 +41,15 @@ public class Gravity : MonoBehaviour, IGravitational
 
     private void Update()
     {
-        HandleFallGravity();   
+        HandleFallGravity();    
         HandleJumpGravity();
         HandleClimbGravity();
     }
 
     public void HandleJumpGravity()
     {
+        if (jumping == null) return;
+
         float fallMultiplier = fallMultiplierStart; 
 
         //falling with increasing speed
@@ -76,6 +79,8 @@ public class Gravity : MonoBehaviour, IGravitational
 
     public void HandleClimbGravity()
     {
+        if (climb == null) return;
+
         float fallMultiplier = fallMultiplierStart;
 
         switch (climb.ClimbState)
@@ -109,26 +114,32 @@ public class Gravity : MonoBehaviour, IGravitational
 
     public void HandleFallGravity()
     {
-        if ((!IsGrounded() && jumping.jumpState == eJumpState.Grounded && climb.ClimbState == eClimbState.Grounded) || climb.ClimbState == eClimbState.JumpingOff)
+        if ((!IsGrounded() && jumping == null && climb == null) || 
+            (!IsGrounded() && jumping != null && jumping.jumpState == eJumpState.Grounded && climb == null) ||
+            (!IsGrounded() && climb != null && climb.ClimbState == eClimbState.Grounded && jumping == null) ||
+            (climb != null && climb.ClimbState == eClimbState.JumpingOff) ||
+            (!IsGrounded() && jumping.jumpState == eJumpState.Grounded && climb.ClimbState == eClimbState.Grounded && climb != null && jumping != null))
         {
             fallState = eJumpState.Falling;
             GravityWhileFalling(fallMultiplierStart);
         }
+
         switch (fallState)
         {
             case eJumpState.Falling:
-                GravityFallEvent.Invoke(2);
+                GravityFallEvent.Invoke(true);
+                GravityFallStateEvent.Invoke(0f);
                 if (IsGrounded())
                 {
                     fallState = eJumpState.Landed;
                 }
                 break;
             case eJumpState.Landed:
-                GravityFallEvent.Invoke(3);
+                GravityFallStateEvent.Invoke(1f);
                 StartCoroutine(GroundedCoroutine());
                 break;
             case eJumpState.Grounded:
-                GravityFallEvent.Invoke(0);
+                GravityFallEvent.Invoke(false);
                 break;
         }
     }

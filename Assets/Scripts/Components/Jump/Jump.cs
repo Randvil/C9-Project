@@ -11,7 +11,8 @@ public class Jump : MonoBehaviour, IJumping
     private bool isJumping;
     public bool IsJumping { get => isJumping; }
 
-    public UnityEvent<int> EntityJumpEvent { get; } = new();
+    public UnityEvent<bool> EntityJumpEvent { get; } = new();
+    public UnityEvent<float> EntityJumpStateEvent { get; } = new();
 
     private IGravitational gravityPhysics;
 
@@ -44,30 +45,32 @@ public class Jump : MonoBehaviour, IJumping
     {
         switch (JumpState)
         {
-            case eJumpState.PrepareToJump: 
+            case eJumpState.PrepareToJump:
+                EntityJumpEvent.Invoke(true);
                 JumpState = eJumpState.JumpingUp;
                 isJumping = true;
                 break;
             case eJumpState.JumpingUp:
-                EntityJumpEvent.Invoke(1);
+                EntityJumpStateEvent.Invoke(0f);
                 if (!gravityPhysics.IsGrounded() && rigidbody.velocity.y <= 0.0f)
                 {   
                     JumpState = eJumpState.Falling;
                 }
                 break;
             case eJumpState.Falling:
-                EntityJumpEvent.Invoke(2);
+                EntityJumpStateEvent.Invoke(0.5f);
                 if (gravityPhysics.IsGrounded())
                 {  
                     JumpState = eJumpState.Landed;
                 }
                 break;
             case eJumpState.Landed:
-                EntityJumpEvent.Invoke(3);
+                EntityJumpStateEvent.Invoke(1f);
                 StartCoroutine(GroundedCoroutine());
                 isJumping = false;
                 break;
             case eJumpState.Grounded:
+                EntityJumpEvent.Invoke(false);
                 break;
         }
     }
@@ -75,7 +78,6 @@ public class Jump : MonoBehaviour, IJumping
     public IEnumerator GroundedCoroutine()
     {
         yield return new WaitForSeconds(.04f);
-        EntityJumpEvent.Invoke(0);
         JumpState = eJumpState.Grounded;
     }
 }

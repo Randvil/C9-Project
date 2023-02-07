@@ -11,7 +11,7 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
     private bool isMoving;
     public bool IsMoving { get => isMoving; }
 
-    public UnityEvent<int> EntityMoveEvent { get; } = new();
+    public UnityEvent<bool> EntityMoveEvent { get; } = new();
 
     private new Rigidbody2D rigidbody;
 
@@ -22,7 +22,7 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
 
     public void StartMove(eDirection direction)
     {
-        EntityMoveEvent.Invoke(1);
+        EntityMoveEvent.Invoke(true);
         float directionalSpeed = direction == eDirection.Right ? speed : -speed;
         rigidbody.velocity = new Vector3(directionalSpeed, rigidbody.velocity.y);
 
@@ -34,6 +34,6 @@ public class RigidbodyMovement : MonoBehaviour, IMovement
         rigidbody.velocity = new Vector3(0f, rigidbody.velocity.y);
 
         isMoving = false;
-        EntityMoveEvent.Invoke(0);
+        EntityMoveEvent.Invoke(false);
     }    
 }

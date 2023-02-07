@@ -15,7 +15,8 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
     private eClimbState climbState = eClimbState.Grounded;
     public eClimbState ClimbState { get => climbState; }
 
-    public UnityEvent<int> EntityClimbEvent { get; } = new();
+    public UnityEvent<bool> EntityClimbEvent { get; } = new();
+    public UnityEvent<float, float> EntityClimbStateEvent { get; } = new();
 
     private new Rigidbody2D rigidbody;
     private IGravitational gravityPhysics;
@@ -62,6 +63,7 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
         {
             case eClimbState.JumpingOff:
                 isClimbing = false;
+                EntityClimbEvent.Invoke(false);
                 if (gravityPhysics.IsGrounded())
                 {
                     climbState = eClimbState.Landed;
@@ -71,15 +73,17 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
                 StartCoroutine(GroundedCoroutine());
                 break;
             case eClimbState.Grounded:
-                EntityClimbEvent.Invoke(0);
+                EntityClimbEvent.Invoke(false);
                 isClimbing = false;
                 break;
             case eClimbState.ClimbingUp:
-                EntityClimbEvent.Invoke(1);
+                EntityClimbEvent.Invoke(true);
+                EntityClimbStateEvent.Invoke(0f, 1f);
                 isClimbing = true;
                 break;
             case eClimbState.ClimbingDown:
-                EntityClimbEvent.Invoke(-1);
+                EntityClimbEvent.Invoke(true);
+                EntityClimbStateEvent.Invoke(0f, -1f);
                 isClimbing = true;
                 if (gravityPhysics.IsGrounded())
                 {
@@ -87,7 +91,8 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
                 }
                 break;
             case eClimbState.Hanging:
-                EntityClimbEvent.Invoke(2);
+                EntityClimbEvent.Invoke(true);
+                EntityClimbStateEvent.Invoke(0f, 0f);
                 isClimbing = true;
                 break;
         }
