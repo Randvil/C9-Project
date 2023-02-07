@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
+using NS.RomanLib;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +8,10 @@ public class PlayerInterface : MonoBehaviour, IUIComponent
     public UIDocument uiDocument;
 
     private ProgressBar healthBar;
-    private ProgressBar manaBar;
+    private Label hpLabel;
+    private RadialFill manaBar;
+
+    const float tweenDuration = 0.4f;
 
     private IStats stats;
 
@@ -20,15 +23,20 @@ public class PlayerInterface : MonoBehaviour, IUIComponent
         stats.ChangeStatEvent.AddListener(OnHealthChange);
 
         healthBar = root.Q<ProgressBar>("healthBar");
-        manaBar = root.Q<ProgressBar>("manaBar");
+        hpLabel = root.Q<Label>("hpLabel");
+        manaBar = root.Q<RadialFill>("manaBar");
 
         healthBar.value = healthBar.highValue = stats.GetStat(eStatType.MaxHealth);
-        manaBar.value = manaBar.highValue;
+        hpLabel.text = healthBar.value / healthBar.highValue * 100f + "%";
+        manaBar.value = 1f;
     }
 
     public void OnHealthChange(eStatType stat, float value)
     {
         if (stat == eStatType.CurrentHealth)
-            healthBar.value = Mathf.Clamp(value, 0f, healthBar.highValue);
+        {
+            DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue), healthBar.value, value, tweenDuration);          
+            DOTween.To(x => hpLabel.text = Mathf.Round(x / healthBar.highValue * 100f) + "%", healthBar.value, value, tweenDuration);
+        }
     }
 }
