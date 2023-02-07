@@ -14,13 +14,13 @@ public class AudioComponent : MonoBehaviour
     protected virtual void Awake()
     {
         damageHandler = GetComponent<IDamageHandler>();
-        damageHandler.TakeDamageEvent.AddListener(_ => HurtSound());
+        damageHandler.TakeDamageEvent.AddListener((_, _) => HurtSound());
 
         weapon = GetComponent<IWeapon>();
         weapon.StartAttackEvent.AddListener(SwordSwingSound);
 
         movement = GetComponent<IMovement>();
-        movement.StartMoveEvent.AddListener(MoveSound);
+        movement.EntityMoveEvent.AddListener(isMoving => { if (isMoving) MoveSound(); });
     }
 
     void HurtSound()

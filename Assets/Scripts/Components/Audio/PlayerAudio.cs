@@ -10,6 +10,6 @@ public class PlayerAudio : AudioComponent
         base.Awake();
 
         parry = GetComponent<IParry>();
-        parry.WeaponWasParriedEvent.AddListener(_ => parrySound.Play());
+        parry.StartParryEvent.AddListener(parrySound.Play);
     }
 }

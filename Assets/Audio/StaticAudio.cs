@@ -32,6 +32,11 @@ public class StaticAudio : MonoBehaviour
 
     void ChangeBackgroundTrack(int sceneIndex)
     {
+        if (sceneIndex >= backgroundTracks.Count)
+        {
+            Debug.Log("Add new background tracks!");
+            return;
+        }
         musicSource.clip = backgroundTracks[sceneIndex];
         musicSource.Play();
         //...
