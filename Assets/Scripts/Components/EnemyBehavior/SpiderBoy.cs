@@ -17,22 +17,14 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
     private GameObject SpiderPrefab;
 
     [SerializeField]
-    private float searchPlayerDistance;
-
-    [SerializeField]
     private float attackRadius;
 
     [SerializeField]
     private LayerMask enemyLayerMask;
 
-    [SerializeField]
-    private float senseDelay;
-
-    [SerializeField]
-    private float loseSightOfPlayerDistance;
-
     private float positionX;
     private GameObject player;
+    private bool playerInRadius = false;
 
     public UnityEvent<eDirection> DirectionalMoveEvent { get; } = new();
     public UnityEvent<eDirection> TurnEvent { get; } = new();
@@ -42,62 +34,76 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
     public UnityEvent AttackEvent { get; } = new();
     public UnityEvent<eAbilityType> AbilityEvent { get; } = new();
 
+    public UnityEvent SpawnEvent;
+
     private new BoxCollider2D collider;
     private ITurning turning;
     private IDamageHandler damageHandler;
+    private ITeam team;
 
     private void Start()
     {
-        positionX = transform.position.x;
-        positionX -= 1;
-
         collider = GetComponent<BoxCollider2D>();
         turning = GetComponent<ITurning>();
         damageHandler = GetComponent<IDamageHandler>();
 
         damageHandler.TakeDamageEvent.AddListener(OnTakeDamage);
-        InvokeRepeating("SpawnSpiders", .5f, SpawnGroupDelay);
     }
 
+    public void Update()
+    {
+        TurnToPlayer();
+        Act();
+    }
     public void Activate()
     {
-        
+
     }
 
     public void Deactivate()
     {
+
+    }
+
+    public void SpawnSpiders()
+    {
+        SpawnEvent.Invoke();
+        StartCoroutine(SpawnSpiderGroup());
         
     }
 
-    private IEnumerator SenseCoroutine()
+    public void Act()
     {
-        while (true)
-        {
-            SearchPlayer();
-
-            if (player != null && Vector2.Distance(player.transform.position, transform.position) > loseSightOfPlayerDistance)
-            {
-                player = null;
-            }
-
-            yield return new WaitForSeconds(senseDelay);
-        }
-    }
-
-    //add check if player is near
-    public void SpawnSpiders()
-    {
-        StartCoroutine(SpawnSpiderGroup());
+        if (playerInRadius == false) 
+            CancelInvoke("SpawnSpiders");
+        if (playerInRadius && !IsInvoking("SpawnSpiders"))
+            InvokeRepeating("SpawnSpiders", 0.1f, SpawnGroupDelay);
     }
 
     public IEnumerator SpawnSpiderGroup()
     {
+        positionX = transform.position.x;
+        
+        if (turning.Direction == eDirection.Left) 
+            positionX += 1;
+        else positionX -= 1;
+
         for (int i = 0; i < SpiderGroup; i++)
         {
             yield return new WaitForSeconds(SpawnSpiderDelay);
-            Instantiate(SpiderPrefab, new Vector3(positionX, 0, 0), Quaternion.identity);
+            Instantiate(SpiderPrefab, new Vector3(positionX, transform.position.y + 0.1f, 0), Quaternion.identity);
         }
 
+    }
+    private void TurnToPlayer()
+    {
+        if (PlayerPosX() != 0f)
+        {
+            if (transform.position.x > PlayerPosX() && turning.Direction != eDirection.Right)
+                ChangeDirection();
+            if (transform.position.x < PlayerPosX() && turning.Direction != eDirection.Left)
+                ChangeDirection();
+        }        
     }
 
     private void ChangeDirection()
@@ -105,26 +111,37 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
         switch (turning.Direction)
         {
             case eDirection.Right:
-                DirectionalMoveEvent.Invoke(eDirection.Left);
+                TurnEvent.Invoke(eDirection.Left);
                 break;
 
             case eDirection.Left:
-                DirectionalMoveEvent.Invoke(eDirection.Right);
+                TurnEvent.Invoke(eDirection.Right);
                 break;
         }
     }
 
-    private bool SearchPlayer()
+    //also checks if player in attackRadius
+    private float PlayerPosX()
     {
-        Vector2 viewDirection = turning.Direction == eDirection.Right ? Vector2.right : Vector2.left;
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, viewDirection, searchPlayerDistance, enemyLayerMask);
-        if (hitInfo.collider != null)
-        {
-            player = hitInfo.collider.gameObject;
-            return true;
-        }
+        Collider2D[] objectsNear = Physics2D.OverlapCircleAll(transform.position, attackRadius);
 
-        return false;
+        if (objectsNear.Length == 0)
+        {
+            playerInRadius = false;
+            return 0f;
+        }
+            
+        foreach (Collider2D obj in objectsNear)
+        {
+            obj.TryGetComponent(out team);
+            if (team != null && team.Team == eTeam.Player)
+            {
+                playerInRadius = true;
+                return obj.transform.position.x;
+            }
+        }
+        playerInRadius = false;
+        return 0f;
     }
 
     private void OnTakeDamage(Damage incomingDamage, Damage effectedDamage)

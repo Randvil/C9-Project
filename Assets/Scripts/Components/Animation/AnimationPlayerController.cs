@@ -125,7 +125,7 @@ public class AnimationPlayerController : MonoBehaviour
         {
             animator.SetBool("Hit3", true);
         }
-        else
+        else if (count != 0)
         {
             animator.SetBool("Hit1", true);
         }   
