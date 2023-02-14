@@ -10,17 +10,6 @@ public static class GameSettings
 
     public static float MusicVolume { get; set; }
 
-    private static bool fullScreen;
-    public static bool FullScreen
-    {
-        get => fullScreen;
-        set
-        {
-            fullScreen = value;
-            Screen.fullScreen = value;
-        }
-    }
-
     private static Resolution sR = Screen.currentResolution;
     public static Resolution ScreenResolution
     {
@@ -28,7 +17,7 @@ public static class GameSettings
         set
         {
             sR = value;
-            Screen.SetResolution(sR.width, sR.height, FullScreen, sR.refreshRate);
+            Screen.SetResolution(sR.width, sR.height, Screen.fullScreen, sR.refreshRate);
         }
     }
 }

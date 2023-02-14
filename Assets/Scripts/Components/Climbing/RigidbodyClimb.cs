@@ -117,7 +117,7 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (currentLadder != null && collision.gameObject.Equals(currentLadder.topLadder))
+        if (currentLadder != null && collision.gameObject.Equals(currentLadder.topLadder) && climbState == eClimbState.ClimbingUp)
         {
             if(GetComponent<ITurning>().Direction == eDirection.Right)
                 transform.position = new Vector3(transform.position.x + 1f, transform.position.y, 0f);
