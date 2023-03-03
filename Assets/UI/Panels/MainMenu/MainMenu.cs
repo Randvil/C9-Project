@@ -29,7 +29,6 @@ public class MainMenu : MonoBehaviour
 
     void OnStart()
     {
-        panelManager.CurrentPanel = null;
         SceneManager.LoadScene(1);
     }
 

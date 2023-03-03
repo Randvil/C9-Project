@@ -11,7 +11,7 @@ public class PlayerInterface : MonoBehaviour, IUIComponent
     private Label hpLabel;
     private RadialFill manaBar;
 
-    const float tweenDuration = 0.4f;
+    [SerializeField] private float tweenDuration = 0.4f;
 
     private IStats stats;
 

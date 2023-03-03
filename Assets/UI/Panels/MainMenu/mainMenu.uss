@@ -1,22 +1,161 @@
-.menu-button {
-    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
-    -unity-font-definition: none;
-    -unity-font-style: bold;
-    font-size: 40px;
-    width: 50%;
-    height: 10%;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: rgba(51, 0, 0, 255);
-    color: rgba(202, 202, 202, 255);
+.menu-b {
+    font-size: 32px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    transition-duration: 0.3s;
 }
 
-.menu-button:hover {
-    color: rgba(188, 159, 159, 255);
-    -unity-font-style: bold;
+.menu-b:hover {
     font-size: 40px;
-    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
-    background-color: rgba(106, 89, 89, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    transition-duration: 0.3s;
+    color: rgb(214, 214, 214);
+    transition-property: all;
+}
+
+.menu {
+    justify-content: center;
+    transition-duration: 0.5s, 0.3s, 0s;
+    transition-property: translate, opacity, display;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.37);
+    font-size: 32px;
+    translate: 0 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.hidden-menu {
+    transition-duration: 0.5s, 0.3s, 0s;
+    opacity: 0;
+    transition-property: translate, opacity, display;
+    translate: -100% 0;
+    transition-delay: 0s, 0s, 1s;
+    display: none;
+}
+
+.menu-b-active {
+    color: rgb(255, 255, 255);
+}
+
+#separator {
+    position: absolute;
+    left: 0;
+    height: 80%;
+    width: 4px;
+    background-color: rgba(255, 255, 255, 0.37);
+}
+
+#resolutions .unity-popup-field__input {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(70, 70, 70);
+}
+
+.third-menu {
+    position: absolute;
+    left: 60%;
+    width: 40%;
+}
+
+.second-menu {
+    position: absolute;
+    left: 30%;
+}
+
+#labels {
+    align-items: center;
+}
+
+#controls {
+    width: 50%;
+    justify-content: space-around;
+}
+
+.slider {
+    height: 37px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.slider .unity-base-slider__tracker {
+    background-color: rgb(70, 70, 70);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.slider .unity-base-slider__dragger {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 26px;
+    height: 26px;
+    background-color: rgb(38, 38, 38);
+}
+
+.toggle #unity-checkmark {
+    width: 32px;
+    height: 32px;
+    background-color: rgb(70, 70, 70);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.labels-controls-container {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-shrink: 0;
+}
+
+.controlLabels Label {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-text-align: upper-center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.xbox-button {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width: 50px;
 }
