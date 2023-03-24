@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/CustomControls/Polygon/Resources/PolygonStyles.uss?fileID=7433441132597879392&amp;guid=244aae9a5d60e5f4688dfaed29a3bfec&amp;type=3#PolygonStyles" />
+    <ui:VisualElement>
+        <Polygon poly-image-path="this1" text="R" icon-path="speedUp" style="width: 67px; height: 111px; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-style: bold; -unity-font-definition: none; -unity-text-align: lower-left; color: rgba(210, 210, 210, 0.29);" />
+        <NS.RomanLib.RadialFill text="100" overlay-image-path="radialBack" value="0.56" />
+    </ui:VisualElement>
+</ui:UXML>

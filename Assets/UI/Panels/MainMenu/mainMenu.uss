@@ -1,0 +1,22 @@
+.menu-button {
+    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
+    -unity-font-definition: none;
+    -unity-font-style: bold;
+    font-size: 40px;
+    width: 50%;
+    height: 10%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: rgba(51, 0, 0, 255);
+    color: rgba(202, 202, 202, 255);
+}
+
+.menu-button:hover {
+    color: rgba(188, 159, 159, 255);
+    -unity-font-style: bold;
+    font-size: 40px;
+    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
+    background-color: rgba(106, 89, 89, 255);
+}

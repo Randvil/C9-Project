@@ -1,0 +1,63 @@
+.unity-progress-bar__background {
+    height: 100%;
+    background-image: none;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(90, 91, 104);
+    flex-grow: 1;
+    -unity-background-scale-mode: stretch-to-fill;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    position: absolute;
+    flex-shrink: 1;
+    max-height: 100%;
+    width: 100%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.unity-progress-bar__container {
+    flex-grow: 1;
+    height: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+    font-size: 0;
+    position: relative;
+    visibility: visible;
+    display: flex;
+    overflow: visible;
+    max-height: none;
+    min-height: 0;
+}
+
+#healthBar .unity-progress-bar__progress {
+    background-color: rgb(160, 160, 163);
+    flex-grow: 0;
+    background-image: none;
+    overflow: visible;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-bottom: 0;
+}
+
+.poly_InGame {
+    height: 75px;
+    width: 40px;
+    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
+    -unity-font-style: bold;
+    font-size: 15px;
+    color: rgba(210, 210, 210, 0.5);
+    -unity-font-definition: none;
+    margin-right: 10px;
+}
