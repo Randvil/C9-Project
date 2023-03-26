@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2bff3f780b1e04e9f993483ffd260b, type: 3}
-  m_Name: PlayerEffectManagerData
+  m_Script: {fileID: 11500000, guid: 6967f6c6883558b4193c6a2f95a5a6b9, type: 3}
+  m_Name: SpiderBoyHealhtManagerData
   m_EditorClassIdentifier: 
-  checkEffectsPeriod: 0.25
+  initialHealth:
+    maxHealth: 100
+    currentHealth: 100

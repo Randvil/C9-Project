@@ -4,4 +4,5 @@ public interface IMovement
     public void StopMove();
     public bool IsMoving { get; }
     public float Speed { get; }
+    public float MaxSpeed { get; }
 }

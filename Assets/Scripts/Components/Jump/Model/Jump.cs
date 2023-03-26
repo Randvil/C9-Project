@@ -14,6 +14,7 @@ public class Jump : IJump
 
     public bool IsJumping { get; private set; }
     public bool CanJump => (gravity.IsGrounded || airJumpNumber < jumpData.maxJumpCount);
+    public float JumpTime => jumpData.jumpTime;
 
     public Jump(JumpData jumpData, Rigidbody2D rigidbody, IGravity gravity)
     {

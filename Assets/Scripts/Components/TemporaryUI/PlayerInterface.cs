@@ -1,3 +1,5 @@
+using DG.Tweening;
+using NS.RomanLib;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +12,10 @@ public class PlayerInterface : IPlayerInterface
     private IEnergyManager energyManager;
 
     private ProgressBar healthBar;
-    private ProgressBar energyBar;
+    private Label hpLabel;
+    private RadialFill energyBar;
+
+    const float tweenDuration = 0.4f;
 
     public PlayerInterface(UIDocument uiDocument, IHealthManager healthManager, IEnergyManager energyManager)
     {
@@ -36,15 +41,18 @@ public class PlayerInterface : IPlayerInterface
         VisualElement root = uiDocument.rootVisualElement;
 
         healthBar = root.Q<ProgressBar>("healthBar");
-        energyBar = root.Q<ProgressBar>("energyBar");
+        hpLabel = root.Q<Label>("hpLabel");
+        energyBar = root.Q<RadialFill>("energyBar");
 
         healthBar.value = healthBar.highValue = healthManager.Health.maxHealth;
-        energyBar.value = energyBar.highValue = energyManager.Energy.maxEnergy;
+        hpLabel.text = healthBar.value / healthBar.highValue * 100f + "%";
+        energyBar.value = energyManager.Energy.currentEnergy / energyManager.Energy.maxEnergy;
     }
 
     private void OnCurrentHealthChange(Health health)
     {
-        healthBar.value = Mathf.Clamp(health.currentHealth, 0f, healthBar.highValue);
+        DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue), healthBar.value, health.currentHealth, tweenDuration);
+        DOTween.To(x => hpLabel.text = Mathf.Round(x / healthBar.highValue * 100f) + "%", healthBar.value, health.currentHealth, tweenDuration);
     }
 
     private void OnMaxHealthChange(Health health)
@@ -54,12 +62,12 @@ public class PlayerInterface : IPlayerInterface
 
     private void OnCurrentEnergyChange(Energy energy)
     {
-        energyBar.value = Mathf.Clamp(energy.currentEnergy, 0f, healthBar.highValue);
+        DOTween.To(x => energyBar.value = x, energyBar.value, energy.currentEnergy / energy.maxEnergy, tweenDuration);
     }
 
     private void OnMaxEnergyChange(Energy energy)
     {
-        energyBar.highValue = energy.maxEnergy;
+        //energyBar.height = energy.maxEnergy;
     }
 
     public void ChangeUIDocument(UIDocument newDocument)

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AbstractWeapon : IWeapon, IAnimatedWeapon
+public abstract class AbstractWeapon : IWeapon
 {
     protected GameObject weaponOwner;
 

@@ -6,4 +6,5 @@ public interface IJump
     public void CheckGround();
     public bool IsJumping { get; }
     public bool CanJump { get; }
+    public float JumpTime { get; }
 }

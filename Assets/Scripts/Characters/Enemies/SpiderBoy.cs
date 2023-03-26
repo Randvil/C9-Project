@@ -1,9 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class SpiderBoy : MonoBehaviour, IEnemyBehavior
+public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEffectable
 {
+    [SerializeField] private HealthManagerData healthManagerData;
+    [SerializeField] private EffectManagerData effectManagerData;
+
     [SerializeField]
     private float SpawnGroupDelay;
 
@@ -22,9 +26,14 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
     [SerializeField]
     private LayerMask enemyLayerMask;
 
+    [SerializeField]
+    private Slider healthBarSlider;
+
     private float positionX;
     private GameObject player;
     private bool playerInRadius = false;
+
+    public eTeam Team { get; private set; } = eTeam.Enemies;
 
     public UnityEvent<eDirection> DirectionalMoveEvent { get; } = new();
     public UnityEvent<eDirection> TurnEvent { get; } = new();
@@ -36,18 +45,33 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
 
     public UnityEvent SpawnEvent;
 
-    private new BoxCollider2D collider;
-    private ITurning turning;
-    private IDamageHandler damageHandler;
-    private ITeam team;
+    public BoxCollider2D Collider { get; private set;}
+    public Rigidbody2D Rigidbody { get; private set; }
+    public ITurning Turning { get; private set; }
+    public IHealthManager HealthManager { get; private set; }
+    public IModifierManager DefenceModifierManager { get; private set; }
+    public IEffectManager EffectManager { get; private set; }
+    public IDamageHandler DamageHandler { get; private set; }
+    public IDeathManager DeathManager { get; private set; }
+
+    private HealthBarView healthBarView;
 
     private void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
-        turning = GetComponent<ITurning>();
-        damageHandler = GetComponent<IDamageHandler>();
+        Collider = GetComponent<BoxCollider2D>();
+        Rigidbody = GetComponent<Rigidbody2D>();
 
-        damageHandler.TakeDamageEvent.AddListener(OnTakeDamage);
+        Turning = new Turning();
+        HealthManager = new HealthManager(healthManagerData);
+        DefenceModifierManager = new ModifierManager();
+        EffectManager = new EffectManager(effectManagerData);
+        DamageHandler = new DamageHandler(HealthManager, DefenceModifierManager, EffectManager);
+        DeathManager = new DeathManager(HealthManager);
+
+        healthBarView = new(healthBarSlider, HealthManager, DeathManager);
+
+        DamageHandler.TakeDamageEvent.AddListener(OnTakeDamage);
+        DeathManager.DeathEvent.AddListener(OnDeath);
     }
 
     public void Update()
@@ -84,7 +108,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
     {
         positionX = transform.position.x;
         
-        if (turning.Direction == eDirection.Left) 
+        if (Turning.Direction == eDirection.Left) 
             positionX += 1;
         else positionX -= 1;
 
@@ -99,16 +123,16 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
     {
         if (PlayerPosX() != 0f)
         {
-            if (transform.position.x > PlayerPosX() && turning.Direction != eDirection.Right)
+            if (transform.position.x > PlayerPosX() && Turning.Direction != eDirection.Right)
                 ChangeDirection();
-            if (transform.position.x < PlayerPosX() && turning.Direction != eDirection.Left)
+            if (transform.position.x < PlayerPosX() && Turning.Direction != eDirection.Left)
                 ChangeDirection();
         }        
     }
 
     private void ChangeDirection()
     {
-        switch (turning.Direction)
+        switch (Turning.Direction)
         {
             case eDirection.Right:
                 TurnEvent.Invoke(eDirection.Left);
@@ -133,8 +157,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
             
         foreach (Collider2D obj in objectsNear)
         {
-            obj.TryGetComponent(out team);
-            if (team != null && team.Team == eTeam.Player)
+            if (obj.TryGetComponent(out ITeam team) && team.Team == Team)
             {
                 playerInRadius = true;
                 return obj.transform.position.x;
@@ -144,7 +167,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
         return 0f;
     }
 
-    private void OnTakeDamage(Damage incomingDamage, Damage effectedDamage)
+    private void OnTakeDamage(DamageInfo damageInfo)
     {
         if (player != null)
             return;
@@ -152,5 +175,10 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior
         Collider2D attacker = Physics2D.OverlapCircle(transform.position, attackRadius, enemyLayerMask);
         if (attacker != null)
             player = attacker.gameObject;
+    }
+
+    private void OnDeath()
+    {
+        Destroy(gameObject);
     }
 }

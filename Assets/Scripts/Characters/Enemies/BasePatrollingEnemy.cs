@@ -5,31 +5,37 @@ using UnityEngine.UI;
 
 public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, IEffectable
 {
-    [SerializeField] private GameObject avatar;
-    [SerializeField] private Transform checkPlatformAheadTransform;
-    [SerializeField] private Slider healthBarSlider;
+    [SerializeField] protected GameObject avatar;
+    [SerializeField] protected Transform checkPlatformAheadTransform;
+    [SerializeField] protected Slider healthBarSlider;
+    [SerializeField] protected AudioSource movementAudioSource;
+    [SerializeField] protected AudioSource attackAudioSource;
 
-    [SerializeField] private TurningViewData turningViewData;
-    [SerializeField] private MovementData movementData;
-    [SerializeField] private HealthManagerData healthManagerData;
-    [SerializeField] private EffectManagerData effectManagerData;
-    [SerializeField] private SillyPatrolmanData sillyPatrolmanData;
+    [SerializeField] protected TurningViewData turningViewData;
+    [SerializeField] protected MovementData movementData;
+    [SerializeField] protected HealthManagerData healthManagerData;
+    [SerializeField] protected EffectManagerData effectManagerData;
+    [SerializeField] protected SillyPatrolmanData sillyPatrolmanData;
 
-    public BoxCollider2D Collider { get; private set; }
-    public Rigidbody2D Rigidbody { get; private set; }
-    public Gravity Gravity { get; private set; }
-    public ITurning Turning { get; private set; }
-    public ITurningView TurningView { get; private set; }
-    public IMovement Movement { get; private set; }
-    public abstract IWeapon Weapon { get; protected set; }
-    public IHealthManager HealthManager { get; private set; }
-    public IModifierManager WeaponModifierManager { get; private set; }
-    public IModifierManager DefenceModifierManager { get; private set; }
-    public IEffectManager EffectManager { get; private set; }
-    public IDamageHandler DamageHandler { get; private set; }
-    public IDeathManager DeathManager { get; private set; }
-    public IEnemyBehavior EnemyBehavior { get; private set; }
-    public HealthBarView HealthBarView { get; private set; }
+    public BoxCollider2D Collider { get; protected set; }
+    public Rigidbody2D Rigidbody { get; protected set; }
+    public Gravity Gravity { get; protected set; }
+    public Animator Animator { get; protected set; }
+    public ITurning Turning { get; protected set; }
+    public IMovement Movement { get; protected set; }
+    public IWeapon Weapon { get; protected set; }
+    public IHealthManager HealthManager { get; protected set; }
+    public IModifierManager WeaponModifierManager { get; protected set; }
+    public IModifierManager DefenceModifierManager { get; protected set; }
+    public IEffectManager EffectManager { get; protected set; }
+    public IDamageHandler DamageHandler { get; protected set; }
+    public IDeathManager DeathManager { get; protected set; }
+    public IEnemyBehavior EnemyBehavior { get; protected set; }
+
+    public ITurningView TurningView { get; protected set; }
+    public IMovementView MovementView { get; protected set; }
+    public IWeaponView WeaponView { get; protected set; }
+    public HealthBarView HealthBarView { get; protected set; }
 
     public eTeam Team { get; } = eTeam.Enemies;
 
@@ -40,6 +46,8 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Gravity = GetComponent<Gravity>();
+        Animator = GetComponent<Animator>();
+
 
         HealthManager = new HealthManager(healthManagerData);
         WeaponModifierManager = new ModifierManager();
@@ -52,7 +60,10 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         EnemyBehavior = new SillyPatrolman(gameObject, checkPlatformAheadTransform, sillyPatrolmanData, Collider, Turning, DamageHandler);
 
         TurningView = new TurningView(avatar, turningViewData, Turning);
+        MovementView = new MovementView(Movement, Gravity, Animator, movementAudioSource);
         HealthBarView = new(healthBarSlider, HealthManager, DeathManager);
+
+        CreateWeaponWithView();
 
         EffectManager.EffectEvent.AddListener(OnStun);
         DeathManager.DeathEvent.AddListener(OnDie);
@@ -65,12 +76,15 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         EnemyBehavior.Activate();
     }
 
-    private void Update()
+    protected abstract void CreateWeaponWithView();
+
+    protected virtual void Update()
     {
         TurningView.Turn();
+        MovementView.SetMovementParams();
     }
 
-    private void OnDirectionalMove(eDirection direction)
+    protected virtual void OnDirectionalMove(eDirection direction)
     {
         if (stunned)
         {
@@ -81,10 +95,11 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         {
             Turning.Turn(direction);
             Movement.StartMove();
+            WeaponView.BreakAttack();
         }
     }
 
-    private void OnTurn(eDirection direction)
+    protected virtual void OnTurn(eDirection direction)
     {
         if (stunned)
         {
@@ -94,7 +109,7 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Turning.Turn(direction);
     }
 
-    private void OnStop()
+    protected virtual void OnStop()
     {
         if (stunned)
         {
@@ -107,7 +122,7 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         }
     }
 
-    private void OnAttack()
+    protected virtual void OnAttack()
     {
         if (stunned)
         {
@@ -115,9 +130,10 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         }
 
         Weapon.StartAttack();
+        WeaponView.StartAttack();
     }
 
-    private void OnStun(eEffectType effectType, eEffectStatus effectStatus)
+    protected virtual void OnStun(eEffectType effectType, eEffectStatus effectStatus)
     {
         if (effectType != eEffectType.Stun)
         {
@@ -129,6 +145,7 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
             stunned = true;
             Movement.StopMove();
             Weapon.BreakAttack();
+            WeaponView.BreakAttack();
         }
         else if (effectStatus == eEffectStatus.Cleared)
         {
@@ -137,12 +154,13 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         }
     }
 
-    private void OnDie()
+    protected virtual void OnDie()
     {
         EnemyBehavior.Deactivate();
 
         Movement.StopMove();
         Weapon.BreakAttack();
+        WeaponView.BreakAttack();
 
         Destroy(gameObject, 1.5f);
     }

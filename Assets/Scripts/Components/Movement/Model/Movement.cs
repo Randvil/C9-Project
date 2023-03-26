@@ -10,8 +10,9 @@ public class Movement : IMovement
 
     private float CurrentSpeed => movementData.speed * (1f - effectManager.GetCumulativeSlowEffect());
 
-    public float Speed => rigidbody.velocity.x;
     public bool IsMoving { get; private set; }
+    public float Speed => rigidbody.velocity.x;
+    public float MaxSpeed => movementData.speed;
 
     public Movement(MovementData movementData, Rigidbody2D rigidbody, ITurning turning, IEffectManager effectManager)
     {

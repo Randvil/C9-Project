@@ -18,6 +18,7 @@ public class Roll : IRoll
     public bool IsRolling => rollCoroutine != null;
     public bool IsOnCooldown => Time.time < finishCooldownTime;
     public bool CanRoll => IsRolling == false && IsOnCooldown == false;
+    public float RollDuration => rollData.duration;
 
     public Roll(RollData rollData, BoxCollider2D collider, Rigidbody2D rigidbody, ITurning turning, IModifierManager defenceModifierManager)
     {

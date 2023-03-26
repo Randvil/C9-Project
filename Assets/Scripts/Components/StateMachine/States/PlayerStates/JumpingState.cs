@@ -29,6 +29,7 @@ public class JumpingState : MovableState
         base.PhysicsUpdate();
 
         player.Jump.UpdateJumpSpeed();
+        player.JumpView.UpdateJumpParams();
 
         if (player.Rigidbody.velocity.y <= 0f)
         {

@@ -1,21 +1,23 @@
 using UnityEngine;
 using System.Collections;
 
-public class MeleeWeaponView : IWeaponView
+public class PlayerWeaponView : IWeaponView
 {
     private GameObject weaponObject;
     private Transform weaponContainer;
     private Transform rightHand;
-    private IAnimatedWeapon weapon;
+    private IWeapon weapon;
     private Animator animator;
+    private AudioSource audioSource;
 
-    public MeleeWeaponView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, IAnimatedWeapon weapon, Animator animator)
+    public PlayerWeaponView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, IWeapon weapon, Animator animator, AudioSource audioSource)
     {
         this.weaponObject = weaponObject;
         this.weaponContainer = weaponContainer;
         this.rightHand = rightHand;
         this.weapon = weapon;
         this.animator = animator;
+        this.audioSource = audioSource;
 
         weapon.ReleaseAttackEvent.AddListener(ReleaseAttack);
     }
@@ -28,6 +30,9 @@ public class MeleeWeaponView : IWeaponView
 
         animator.SetBool("IsAttacking", true);
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
+
+        audioSource.Play();
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
     }
 
     public void BreakAttack()

@@ -12,6 +12,10 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private Transform rightHand;
     [SerializeField] private UIDocument uIDocument;
     [SerializeField] private PlayerInput unityPlayerInput;
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource hurtSound;
+    [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource parrySound;
 
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EnergyManagerData energyManagerData;
@@ -119,11 +123,11 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
 
         GravityView = new GravityView(Gravity, Animator);
         TurningView = new TurningView(avatar, turningViewData, Turning);
-        MovementView = new MovementView(Movement, Animator);
+        MovementView = new MovementView(Movement, Gravity, Animator, walkSound);
         CrouchView = new CrouchView(Animator);
-        JumpView = new JumpView(Animator);
-        RollView = new RollView(Animator);
-        WeaponView = new MeleeWeaponView(weaponObject, weaponContainer, rightHand, Weapon as IAnimatedWeapon, Animator);
+        JumpView = new JumpView(Jump, Animator);
+        RollView = new RollView(Roll, Animator);
+        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, rightHand, Weapon, Animator, attackSound);
         ParryView = new ParryView(Parry, Animator);
         ClimbView = new ClimbView(Animator, Rigidbody);
         StunVeiw = new StunView(Animator);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e13727c7dd9574d98b7a27afc14702, type: 3}
   m_Name: MeleeDemonSillyPatrolmanData
   m_EditorClassIdentifier: 
-  senseDelay: 0.1
+  senseDelay: 0.25
   thinkDelay: 0.25
   actDelay: 0.25
   searchPlayerDistance: 10

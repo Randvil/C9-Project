@@ -7,12 +7,9 @@ public class RangedPatrollinEnemy : BasePatrollingEnemy
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private RangedWeaponData rangeWeaponData;
 
-    public override IWeapon Weapon { get; protected set; }
-
-    protected override void Start()
+    protected override void CreateWeaponWithView()
     {
-        base.Start();
-
         Weapon = new OrdinaryBow(gameObject, projectileSpawnPoint, rangeWeaponData, WeaponModifierManager, this, Turning);
+        WeaponView = new NoArmsWeaponView(Weapon, Animator, attackAudioSource);
     }
 }
