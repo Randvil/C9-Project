@@ -8,6 +8,19 @@
     transition-duration: 0.3s;
 }
 
+.menu {
+    justify-content: center;
+    transition-duration: 0.5s, 0.3s, 0s;
+    transition-property: translate, opacity, display;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.65);
+    font-size: 32px;
+    translate: 0 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .menu-b:hover {
     font-size: 40px;
     background-color: rgba(0, 0, 0, 0);
@@ -15,29 +28,16 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
     color: rgb(214, 214, 214);
     transition-property: all;
 }
 
-.menu {
-    justify-content: center;
-    transition-duration: 0.5s, 0.3s, 0s;
-    transition-property: translate, opacity, display;
-    height: 100%;
-    width: 30%;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.37);
-    font-size: 32px;
-    translate: 0 0;
-    color: rgba(255, 255, 255, 0.7);
-}
-
 .hidden-menu {
-    transition-duration: 0.5s, 0.3s, 0s;
+    transition-duration: 0.3s, 0.3s, 0s;
     opacity: 0;
     transition-property: translate, opacity, display;
-    translate: -100% 0;
+    translate: -400px 0;
     transition-delay: 0s, 0s, 1s;
     display: none;
 }
@@ -64,13 +64,13 @@
 
 .third-menu {
     position: absolute;
-    left: 60%;
-    width: 40%;
+    left: 40%;
+    width: 60%;
 }
 
 .second-menu {
     position: absolute;
-    left: 30%;
+    left: 20%;
 }
 
 #labels {
@@ -141,15 +141,16 @@
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
     -unity-text-align: upper-center;
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 7px;
     padding-right: 7px;
+    color: rgb(255, 255, 255);
 }
 
 .xbox-button {
@@ -157,5 +158,24 @@
     border-bottom-left-radius: 25px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-    width: 50px;
+    width: 48px;
+}
+
+.label-borderless {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    width: 45px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.inactive-menu-b {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    color: rgba(255, 255, 255, 0.24);
 }

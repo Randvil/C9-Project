@@ -1,18 +1,17 @@
-using System.Collections.Generic;
-using UnityEditor.Search;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Menu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     private VisualElement root;
 
     private PanelManager panelManager;
 
-    private const string hiddenClass = "hidden-menu";
-    private const string activeB = "menu-b-active";
+    [SerializeField] private PlayerInput input;
 
-    private void OnEnable()
+    private void Awake()
     {
         panelManager = GetComponentInParent<PanelManager>();
 
@@ -32,13 +31,21 @@ public class Menu : MonoBehaviour
         MenuNode controls = new("controlsMenu", root, false);
         settings.AddChild(controls);
 
-        root.RegisterCallback<ChangeEvent<DisplayStyle>>((evt) => {; });
 
-        main.Panel.Q<Button>("continueB").clicked += () =>
+        main.Panel.Q<Button>("continueB").clicked += () => ReturnToGame(main);
+
+        input.onActionTriggered += context =>
         {
-            main.Active = false;
-            Time.timeScale = 1f;
-            panelManager.GoBack();
+            if (context.action.name == "Return")
+                ReturnToGame(main);
         };
+    }
+
+    private void ReturnToGame(MenuNode main)
+    {
+        main.DeactivateChildren();
+        DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);
+        panelManager.GoBack();
+        input.SwitchCurrentActionMap("Player");
     }
 }

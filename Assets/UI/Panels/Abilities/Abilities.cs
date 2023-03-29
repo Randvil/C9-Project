@@ -1,14 +1,16 @@
 using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
-public class MainMenu : MonoBehaviour
+public class Abilities : MonoBehaviour
 {
-    private VisualElement root;
-
     private PanelManager panelManager;
+
+    private VisualElement root;
 
     [SerializeField] private PlayerInput input;
 
@@ -20,20 +22,15 @@ public class MainMenu : MonoBehaviour
 
         MenuNode main = new("main", root, true);
 
-        MenuNode settings = new("settings", root, false);
-        main.AddChild(settings);
+        MenuNode abilities = new("abilities", root, false);
+        main.AddChild(abilities);
 
-        MenuNode video = new("video", root, false);
-        settings.AddChild(video);
+        MenuNode collection = new("collection", root, false);
+        main.AddChild(collection);
 
-        MenuNode audio = new("audio", root, false);
-        settings.AddChild(audio);
+        MenuNode description = new("descriptionCont", root, false);
+        abilities.AddChild(description);
 
-        MenuNode controls = new("controlsMenu", root, false);
-        settings.AddChild(controls);
-
-
-        main.Panel.Q<Button>("continueB").clicked += () => ReturnToGame(main);
 
         input.onActionTriggered += context =>
         {

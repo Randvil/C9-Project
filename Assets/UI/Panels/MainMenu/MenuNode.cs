@@ -45,18 +45,20 @@ public class MenuNode
     public void AddChild(MenuNode child)
     {
         Button button = Panel.Q<Button>(child.Name + "B");
-        button.clicked += () =>
-        {
-            foreach (MenuNode child in children.Values)
-                if (child != children[button])
-                    child.Active = false;
 
-            child.Active = !child.Active;
-        };
+        if (button != null) // TODO: Подумать как организовать вызов описания абилок, если сот - не кнопка
+        { 
+            button.clicked += () =>
+            {
+                foreach (MenuNode child in children.Values)
+                    if (child != children[button])
+                        child.Active = false;
 
-        child.Panel.SendToBack();
-
-        children.Add(button, child);
+                child.Active = !child.Active;
+            };
+            children.Add(button, child);
+        }
+        child.Panel.SendToBack();       
     }
 
     /// <summary>
@@ -64,13 +66,18 @@ public class MenuNode
     /// </summary>
     private void Deactivate()
     {
-        foreach (var child in children.Values)
-            child.Deactivate();
+        DeactivateChildren();
 
         parentButton?.RemoveFromClassList(activeB);
         Panel.AddToClassList(hiddenClass);
 
         active = false;
+    }
+
+    public void DeactivateChildren()
+    {
+        foreach (var child in children.Values)
+            child.Deactivate();
     }
 
     /// <summary>
