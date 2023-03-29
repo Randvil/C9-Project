@@ -11,6 +11,7 @@ public class JumpingState : MovableState
         player.Jump.StartJump();
         player.JumpView.StartJump();
 
+        player.Gravity.SetFallingState();
         player.GravityView.SetFallingParams();
     }
 
@@ -21,6 +22,7 @@ public class JumpingState : MovableState
         player.Jump.BreakJump();
         player.JumpView.BreakJump();
 
+        player.Gravity.SetFallingState();
         player.GravityView.SetFallingParams();
     }
 
@@ -29,7 +31,6 @@ public class JumpingState : MovableState
         base.PhysicsUpdate();
 
         player.Jump.UpdateJumpSpeed();
-        player.JumpView.UpdateJumpParams();
 
         if (player.Rigidbody.velocity.y <= 0f)
         {

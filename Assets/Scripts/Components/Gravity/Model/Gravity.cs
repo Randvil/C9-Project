@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Gravity : MonoBehaviour, IGravity
 {
     [SerializeField]
@@ -35,12 +35,11 @@ public class Gravity : MonoBehaviour, IGravity
 
     private void FixedUpdate()
     {
-        IsGrounded = checkGroundCollider.IsTouchingLayers(groundLayer);
         SetFallingState();
         HandleGravity();
     }
 
-    private void SetFallingState()
+    public void SetFallingState()
     {
         if (IsDisabled == true)
         {
@@ -48,6 +47,7 @@ public class Gravity : MonoBehaviour, IGravity
             return;
         }
 
+        IsGrounded = checkGroundCollider.IsTouchingLayers(groundLayer);
         if (IsGrounded == true)
         {
             IsFalling = false;

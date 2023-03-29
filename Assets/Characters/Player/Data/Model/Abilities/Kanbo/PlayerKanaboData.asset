@@ -17,5 +17,5 @@ MonoBehaviour:
   postCastDelay: 1
   cost: 10
   damageData: {fileID: 11400000, guid: 23499bd354a0960478d2dbe1e4fdc115, type: 2}
-  attackRadius: 3
+  attackRadius: 1.5
   stunDuration: 5

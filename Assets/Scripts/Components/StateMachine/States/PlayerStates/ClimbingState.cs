@@ -17,6 +17,9 @@ public class ClimbingState : BasePlayerState
         }
 
         player.ClimbView.StartClimb();
+
+        player.Gravity.SetFallingState();
+        player.GravityView.SetFallingParams();
     }
 
     public override void Exit()
@@ -24,8 +27,10 @@ public class ClimbingState : BasePlayerState
         base.Exit();
 
         player.Climb.BreakClimb();
-
         player.ClimbView.BreakClimb();
+
+        player.Gravity.SetFallingState();
+        player.GravityView.SetFallingParams();
     }
 
     public override void LogicUpdate()
@@ -79,7 +84,10 @@ public class ClimbingState : BasePlayerState
 
     protected override void OnRoll(eActionPhase actionPhase)
     {
-
+        if (actionPhase == eActionPhase.Started)
+        {
+            stateMachine.ChangeState(player.Standing);
+        }
     }
 
     protected override void OnClimbUp(eActionPhase actionPhase)

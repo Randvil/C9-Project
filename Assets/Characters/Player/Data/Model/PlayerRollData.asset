@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerRollData
   m_EditorClassIdentifier: 
   speed: 5
-  duration: 0.6
-  cooldown: 0.6
+  duration: 1.2
+  cooldown: 1.2
   colliderSizeMultiplier: 0.25
   damageAbsorption: 1

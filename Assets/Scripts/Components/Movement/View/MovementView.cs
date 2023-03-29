@@ -19,8 +19,19 @@ public class MovementView : IMovementView
     {
         float speed = Mathf.Abs(movement.Speed);
         float relativeSpeed = Mathf.Abs(movement.Speed) / movement.MaxSpeed;
+        float animationSpeed = speed;
 
-        animator.SetFloat("HorizontalSpeed", speed);
+        if (speed == 0f)
+        {
+            animationSpeed = 1f;
+            animator.SetFloat("IdleRunSpeed", animationSpeed);
+            animator.SetFloat("IdleRunBlend", 0f, 0.5f, 5f * Time.deltaTime);
+        }
+        else
+        {
+            animator.SetFloat("IdleRunSpeed", animationSpeed);
+            animator.SetFloat("IdleRunBlend", 1f, 0.5f, 5f * Time.deltaTime);
+        }        
 
         if (gravity.IsGrounded == false || speed == 0f)
         {

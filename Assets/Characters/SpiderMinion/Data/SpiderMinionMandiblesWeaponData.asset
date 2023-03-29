@@ -15,6 +15,6 @@ MonoBehaviour:
   damageData: {fileID: 11400000, guid: 9f00a6af83404ea4ca169f3cc2255401, type: 2}
   attackRadius: 2
   preAttackDelays:
-  - 0.2
-  postAttackDelay: 0.2
+  - 0.5
+  postAttackDelay: 0.5
   attackSpeed: 1
