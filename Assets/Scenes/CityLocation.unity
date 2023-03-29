@@ -130,9 +130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 576038449183618851, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 451316264}
+    - target: {fileID: 2197631584855906706, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 451316264}
     - target: {fileID: 7951657493376032355, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
       propertyPath: m_Name
       value: StaticUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951657493376032355, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7951657493376032356, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
       propertyPath: m_RootOrder

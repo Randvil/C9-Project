@@ -12,12 +12,12 @@ public class Hints : MonoBehaviour
 
 	private readonly Dictionary<string, Label> hints = new();
 	
-	[SerializeField] private List<InteractiveObject> interactiveObjects = new();
+	//[SerializeField] private List<InteractiveObject> interactiveObjects = new();
 
 	private void Awake()
 	{
-		interactiveObjects.ForEach
-			(obj => obj.CanInteract.AddListener(CanInteractHint));
+		//interactiveObjects.ForEach
+		//	(obj => obj.CanInteract.AddListener(CanInteractHint));
 
 		hintContainer = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("hints");
 
