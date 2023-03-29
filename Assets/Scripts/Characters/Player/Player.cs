@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Transform weaponContainer;
-    [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform weaponGrip;
     [SerializeField] private UIDocument uIDocument;
     [SerializeField] private PlayerInput unityPlayerInput;
     [SerializeField] private AudioSource attackSound;
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         AbilityManager = new AbilityManager();
         IAbility kanabo = new Kanabo(gameObject, kanaboData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
         IAbility daikyu = new Daikyu(gameObject, daikyuData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
-        IAbility tessen = new Tessen(gameObject, tessenData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
+        IAbility tessen = new Tessen(gameObject, tessenData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this, Collider);
         AbilityManager.AddAbility(eAbilityType.Kanabo, kanabo);
         AbilityManager.AddAbility(eAbilityType.Daikyu, daikyu);
         AbilityManager.AddAbility(eAbilityType.Tessen, tessen);
@@ -127,8 +127,8 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         CrouchView = new CrouchView(Animator);
         JumpView = new JumpView(Jump, Animator);
         RollView = new RollView(Roll, Animator);
-        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, rightHand, Weapon, Animator, attackSound);
-        ParryView = new ParryView(Parry, Animator);
+        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, Weapon, Animator, attackSound);
+        ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
         ClimbView = new ClimbView(Animator, Rigidbody);
         StunVeiw = new StunView(Animator);
         DeathView = new DeathView(Animator);

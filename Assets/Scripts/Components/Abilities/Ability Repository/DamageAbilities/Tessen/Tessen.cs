@@ -6,15 +6,19 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 {
     protected TessenData tessenData;
 
+    protected BoxCollider2D collider;
+
     protected Damage damage;
     protected float endCastTime;
 
     protected Dictionary<GameObject,IDamageHandler> damagedEnemies = new();
     protected Dictionary<IEffectManager, IEffect> stunnedEnemies = new();
 
-    public Tessen(GameObject caster, TessenData tessenData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(caster, tessenData, abilityManager, energyManager, modifierManager, turning, team)
+    public Tessen(GameObject caster, TessenData tessenData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(caster, tessenData, abilityManager, energyManager, modifierManager, turning, team)
     {
         this.tessenData = tessenData;
+
+        this.collider = collider;
 
         damage = new Damage(caster, caster, tessenData.damageData, modifierManager);
     }
@@ -29,15 +33,20 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
         while (Time.time < endCastTime && energyManager.Energy.currentEnergy > tessenData.cost * tessenData.impactPeriod)
         {
             Vector2 direction = turning.Direction == eDirection.Right ? Vector2.right : Vector2.left;
-            RaycastHit2D[] enemies = Physics2D.RaycastAll(caster.transform.position, direction, tessenData.attackRadius);
+            RaycastHit2D[] enemies = Physics2D.CircleCastAll(collider.transform.position, collider.size.y/2 * caster.transform.lossyScale.y, direction, tessenData.attackRadius);
 
             foreach (RaycastHit2D enemy in enemies)
             {
-                if (enemy.collider.TryGetComponent(out ITeam enemyTeam) == false|| enemyTeam.Team == team.Team)
+                if (enemy.collider == null)
                 {
                     continue;
                 }
-                
+
+                if (enemy.collider.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
+                {
+                    continue;
+                }
+
                 if (enemy.collider.TryGetComponent(out IDamageable damageableEnemy) == true
                     && damagedEnemies.ContainsKey(enemy.collider.gameObject) == false)
                 {

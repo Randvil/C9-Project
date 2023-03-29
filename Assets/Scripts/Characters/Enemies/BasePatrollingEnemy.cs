@@ -60,7 +60,7 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         EnemyBehavior = new SillyPatrolman(gameObject, checkPlatformAheadTransform, sillyPatrolmanData, Collider, Turning, DamageHandler);
 
         TurningView = new TurningView(avatar, turningViewData, Turning);
-        MovementView = new MovementView(Movement, Gravity, Animator, movementAudioSource);
+        MovementView = new PatrollingCreatureMovementView(Movement, Animator, movementAudioSource);
         HealthBarView = new(healthBarSlider, HealthManager, DeathManager);
 
         CreateWeaponWithView();

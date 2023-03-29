@@ -25,7 +25,7 @@ public class ClimbView : IClimbView
 
     public void UpdateParameters()
     {
-        animator.SetFloat("VerticalSpeed", rigidbody.velocity.y);
+        animator.SetFloat("ClimbSpeed", rigidbody.velocity.y);
     }
 
 }

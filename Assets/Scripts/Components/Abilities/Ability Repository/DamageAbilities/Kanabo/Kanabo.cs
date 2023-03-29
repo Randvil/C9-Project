@@ -20,22 +20,28 @@ public class Kanabo : AbstractDamageAbility, IAbility
     {
         yield return new WaitForSeconds(kanaboData.preCastDelay);
 
-        Vector2 direction = turning.Direction == eDirection.Right ? Vector2.right : Vector2.left;
-        RaycastHit2D[] enemies = Physics2D.RaycastAll(caster.transform.position, direction, kanaboData.attackRadius);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(caster.transform.position, kanaboData.attackRadius);
 
-        foreach (RaycastHit2D enemy in enemies)
+        foreach (Collider2D enemy in enemies)
         {
-            if (enemy.collider.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
+            if (enemy.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
             {
                 continue;
             }
-            
-            if (enemy.collider.TryGetComponent(out IDamageable damageableEnemy) == true)
+
+            float enemyRealtivePosition = enemy.transform.position.x - caster.transform.position.x;
+            if ((turning.Direction == eDirection.Right && enemyRealtivePosition < 0f)
+                || (turning.Direction == eDirection.Left && enemyRealtivePosition > 0f))
+            {
+                continue;
+            }
+
+            if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true)
             {
                 damageableEnemy.DamageHandler.TakeDamage(damage);
             }
 
-            if (enemy.collider.TryGetComponent(out IEffectable effectableEnemy) == true)
+            if (enemy.TryGetComponent(out IEffectable effectableEnemy) == true)
             {
                 effectableEnemy.EffectManager.AddEffect(new StunEffect(Time.time + kanaboData.stunDuration));
             }
