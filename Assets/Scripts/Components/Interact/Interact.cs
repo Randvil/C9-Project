@@ -1,31 +1,76 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Interact : MonoBehaviour, IInteract
+public class Interact : IInteract
 {
-    [SerializeField]
-    private float interactRadius;
-    public float InteractRadius { get => interactRadius; }
+    private GameObject character;
+    private InteractData interactData;
 
-    private ITeam team;
-    public GameObject CheckInteractiveObjectsNear()
+    private IInteractive interactive;
+    private Coroutine searchCoroutine;
+
+    public bool IsInteracting => interactive.IsInteracting;
+    public bool CanInteract => interactive != null;
+
+    public Interact(GameObject character, InteractData interactData)
     {
-        Collider2D[] objectsNear = Physics2D.OverlapCircleAll(transform.position, interactRadius);
+        this.character = character;
+        this.interactData = interactData;
 
-        if (objectsNear.Length == 0)
-            return null;
+        searchCoroutine = Coroutines.StartCoroutine(SearchInteractiveObject());
+    }
 
-        foreach (Collider2D obj in objectsNear)
+    private IEnumerator SearchInteractiveObject()
+    {
+        while (true)
         {
-            obj.TryGetComponent(out team);
-            if (!(team != null && team.Team == eTeam.Player))
+            yield return new WaitForSeconds(interactData.searchPeriod);
+
+            if (interactive != null)
             {
-                if (obj.gameObject.GetComponent<IInteractive>() != null)
+                interactive.HideTooltip();
+                interactive = null;
+            }
+
+            Collider2D[] colliders = Physics2D.OverlapPointAll(character.transform.position);
+            if (colliders.Length == 0)
+            {
+                continue;
+            }
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.TryGetComponent(out interactive) == true)
                 {
-                    return obj.gameObject;
+                    interactive.ShowTooltip();
+                    break;
                 }
             }
         }
-        return null;
+    }
+
+    public void StartInteraction()
+    {
+        interactive.StartInteraction();
+
+        if (searchCoroutine != null)
+        {
+            Coroutines.StopCoroutine(ref searchCoroutine);
+        }
+    }
+
+    public void BreakInteraction()
+    {
+        interactive.StopInteraction();
+
+        if (searchCoroutine == null)
+        {
+            searchCoroutine = Coroutines.StartCoroutine(SearchInteractiveObject());
+        }
+    }
+
+    public void NextStep()
+    {
+        interactive.NextStep();
     }
 }
