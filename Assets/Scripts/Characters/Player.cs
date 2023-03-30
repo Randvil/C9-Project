@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour, ITeam
+public class Player : MonoBehaviour, ITeam, IDataSavable
 {
     private eTeam team = eTeam.Player;
     public eTeam Team { get => team; }
@@ -24,6 +25,11 @@ public class Player : MonoBehaviour, ITeam
     private IClimb climb;
     private IInteract interact;
 
+    private void Awake()
+    {
+        stats = GetComponent<IStats>();
+    }
+
     private void Start()
     {
         playerInput = GetComponent<IPlayerInput>();
@@ -32,7 +38,7 @@ public class Player : MonoBehaviour, ITeam
         roll = GetComponent<IRoll>();
         turning = GetComponent<ITurning>();
         weapon = GetComponent<IWeapon>();
-        stats = GetComponent<IStats>();
+        
         damageHandler = GetComponent<IDamageHandler>();
         parry = GetComponent<IParry>();
         ui = GetComponent<IUIComponent>();
@@ -143,14 +149,16 @@ public class Player : MonoBehaviour, ITeam
         if (stat != eStatType.CurrentHealth || value != 0f)
             return;
 
-        Destroy(gameObject, 1f);
+        DeathLoad deathData = new();
+        deathData.RewriteData();
+        deathData.LoadCheckpoint();
 
-        movement.StopMove();
+        /*movement.StopMove();
         weapon.StopAttack();
         roll.StopRoll();
         parry.StopParry();
 
-        isAlive = false;
+        isAlive = false;*/
     }
 
     private void OnInteract(eActionPhase actionPhase)
@@ -167,5 +175,10 @@ public class Player : MonoBehaviour, ITeam
         }
     }
 
-  
+    public void SaveData(Data data)
+    {
+        data.playerHealth = stats.GetStat(eStatType.CurrentHealth);
+        data.position = transform.position;
+    }
+
 }

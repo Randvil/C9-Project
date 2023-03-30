@@ -12,7 +12,7 @@ public class Stats : MonoBehaviour, IStats
 
     public UnityEvent<eStatType, float> ChangeStatEvent { get; } = new();
 
-    private void Awake()
+    public void Awake()
     {
         stats.Add(eStatType.MaxHealth, initialHealth);
         stats.Add(eStatType.CurrentHealth, initialHealth);

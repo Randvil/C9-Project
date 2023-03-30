@@ -66,7 +66,7 @@ public class Jump : MonoBehaviour, IJumping
                 break;
             case eJumpState.Landed:
                 EntityJumpStateEvent.Invoke(1f);
-                StartCoroutine(GroundedCoroutine());
+                JumpState = eJumpState.Grounded;
                 isJumping = false;
                 break;
             case eJumpState.Grounded:
@@ -75,9 +75,4 @@ public class Jump : MonoBehaviour, IJumping
         }
     }
 
-    public IEnumerator GroundedCoroutine()
-    {
-        yield return new WaitForSeconds(.04f);
-        JumpState = eJumpState.Grounded;
-    }
 }

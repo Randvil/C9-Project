@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour, ITeam
     private eTeam team = eTeam.Enemies;
     public eTeam Team { get => team; }
 
-
     private IMovement movement;
     private ITurning turning;
     private IWeapon weapon;

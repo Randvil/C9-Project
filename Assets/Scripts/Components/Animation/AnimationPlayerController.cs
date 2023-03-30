@@ -15,6 +15,11 @@ public class AnimationPlayerController : MonoBehaviour
     private IParry parry;
     private IRoll roll;
 
+    private string currentAnimaton;
+    const string ATTACK_KATANA_1 = "Katana Attack 1";
+    const string ATTACK_KATANA_2 = "Katana Attack 2";
+    const string ATTACK_KATANA_3 = "Katana Attack 3";
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -113,22 +118,19 @@ public class AnimationPlayerController : MonoBehaviour
     private void AttackSeriesAnimation()
     {
         int count = abstractWeapon.attackSeries;
-        if (count == 1)
+        if (count == 2)
         {
-            animator.SetBool("Hit1", true);
-        }    
-        else if (count == 2 && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
-        { 
-            animator.SetBool("Hit2", true); 
+            animator.SetBool("Hit1", false);
+            animator.SetBool("Hit2", true);
         }   
-        else if (count == 3 && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        else if (count == 3)
         {
             animator.SetBool("Hit3", true);
         }
-        else if (count != 0)
+        else if (count != 2 && count != 3 && count != 0)
         {
             animator.SetBool("Hit1", true);
-        }   
+        }
     }
 
     private void ClimbingAnimation(bool isClimbing)
@@ -145,4 +147,5 @@ public class AnimationPlayerController : MonoBehaviour
     {
         animator.SetBool("IsParrying", false);
     }
+
 }

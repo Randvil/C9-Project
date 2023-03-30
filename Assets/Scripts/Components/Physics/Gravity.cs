@@ -118,7 +118,8 @@ public class Gravity : MonoBehaviour, IGravitational
             (!IsGrounded() && jumping != null && jumping.jumpState == eJumpState.Grounded && climb == null) ||
             (!IsGrounded() && climb != null && climb.ClimbState == eClimbState.Grounded && jumping == null) ||
             (climb != null && climb.ClimbState == eClimbState.JumpingOff) ||
-            (!IsGrounded() && jumping.jumpState == eJumpState.Grounded && climb.ClimbState == eClimbState.Grounded && climb != null && jumping != null))
+            (!IsGrounded() && climb != null && jumping != null && jumping.jumpState == eJumpState.Grounded
+            && climb.ClimbState == eClimbState.Grounded))
         {
             fallState = eJumpState.Falling;
             GravityWhileFalling(fallMultiplierStart);
@@ -136,7 +137,7 @@ public class Gravity : MonoBehaviour, IGravitational
                 break;
             case eJumpState.Landed:
                 GravityFallStateEvent.Invoke(1f);
-                StartCoroutine(GroundedCoroutine());
+                fallState = eJumpState.Grounded;
                 break;
             case eJumpState.Grounded:
                 GravityFallEvent.Invoke(false);
@@ -152,10 +153,5 @@ public class Gravity : MonoBehaviour, IGravitational
     public void EnableGravity()
     {
         rigidbody.gravityScale = 1;
-    }
-    public IEnumerator GroundedCoroutine()
-    {
-        yield return new WaitForSeconds(.04f);
-        fallState = eJumpState.Grounded;
     }
 }

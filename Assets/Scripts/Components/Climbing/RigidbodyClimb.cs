@@ -101,7 +101,7 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
     public void MoveToLadder(Ladder ladder)
     {
         currentLadder = ladder;
-        transform.position = new Vector3(ladder.transform.position.x + 0.2f, transform.position.y, 0f);
+        transform.position = new Vector3(ladder.transform.position.x + 0.4f, transform.position.y, 0f);
         if (ladder.climbingSide == eDirection.Left) 
             GetComponent<ITurning>().Turn(eDirection.Right); 
         else GetComponent<ITurning>().Turn(eDirection.Left);
@@ -120,8 +120,8 @@ public class RigidbodyClimb : MonoBehaviour, IClimb
         if (currentLadder != null && collision.gameObject.Equals(currentLadder.topLadder) && climbState == eClimbState.ClimbingUp)
         {
             if(GetComponent<ITurning>().Direction == eDirection.Right)
-                transform.position = new Vector3(transform.position.x + 1f, transform.position.y, 0f);
-            else transform.position = new Vector3(transform.position.x - 1f, transform.position.y, 0f);
+                transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y, 0f);
+            else transform.position = new Vector3(transform.position.x - 1.5f, transform.position.y, 0f);
             climbState = eClimbState.Grounded;
         }
     }

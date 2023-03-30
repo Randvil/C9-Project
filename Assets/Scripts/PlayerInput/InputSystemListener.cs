@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class InputSystemListener : MonoBehaviour, IPlayerInput
 {
-    [SerializeField]
     private PlayerInput unityInputSystem;
 
     private UnityEvent<eDirection> moveEvent = new();
@@ -31,6 +30,7 @@ public class InputSystemListener : MonoBehaviour, IPlayerInput
 
     private void Awake()
     {
+        unityInputSystem = gameObject.GetComponent<PlayerInput>();
         unityInputSystem.onActionTriggered += OnPlayerInputActionTriggered;
     }
 
