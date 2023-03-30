@@ -449,6 +449,38 @@ Transform:
   m_Father: {fileID: 3825287162076471744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1250361507963950103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250361507963950100}
+  m_Layer: 8
+  m_Name: handle_katana
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1250361507963950100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250361507963950103}
+  m_LocalRotation: {x: -0.0000000335276, y: -0.000000093132215, z: -0.00000002607702, w: 1}
+  m_LocalPosition: {x: 0.00129, y: 0.0004, z: 0.00362}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5579988906664476823}
+  m_Father: {fileID: 5272623321120983526}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1428292801819697722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1437,103 @@ Transform:
   m_Father: {fileID: 3307076001577963476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4377024247781500434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4377024247781500462}
+  - component: {fileID: 4377024247781500433}
+  - component: {fileID: 4377024247781500432}
+  - component: {fileID: 4377024247781500435}
+  m_Layer: 0
+  m_Name: MainCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4377024247781500462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377024247781500434}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -39.089687, y: 6.065323, z: -4.6451616}
+  m_LocalScale: {x: 0.8064517, y: 0.8064517, z: 0.8064517}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7424270657889207451}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &4377024247781500433
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377024247781500434}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &4377024247781500432
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377024247781500434}
+  m_Enabled: 1
+--- !u!114 &4377024247781500435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377024247781500434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeeee8e34ff27894aa8b97e5db963cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4415640975097284933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,6 +1790,89 @@ Transform:
   m_Father: {fileID: 3391452653653380176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5060861756187548205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5579988906664476823}
+  - component: {fileID: 8854008482913079090}
+  - component: {fileID: 6718023210056858616}
+  m_Layer: 0
+  m_Name: katana_low
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5579988906664476823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060861756187548205}
+  m_LocalRotation: {x: -0.00000001490114, y: -1, z: 0.000000111293, w: 0.000000093132215}
+  m_LocalPosition: {x: -0.03629, y: 0.0019, z: 0.00398}
+  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1250361507963950100}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!33 &8854008482913079090
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060861756187548205}
+  m_Mesh: {fileID: 6627345457638550780, guid: 1368994552ae0bc4faadef0e68af162e, type: 3}
+--- !u!23 &6718023210056858616
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060861756187548205}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 33408cd92b247314e8404b935afdd74f, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5084593674645338179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1969,11 @@ Transform:
   m_Father: {fileID: 8171162262039071078}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+--- !u!1 &5272623321120983527
+=======
 --- !u!1 &5388190774548263883
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1765,21 +1981,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+  - component: {fileID: 5272623321120983526}
+  m_Layer: 8
+  m_Name: Katana
+=======
   - component: {fileID: 6730935728949001865}
   - component: {fileID: 6256388573956172664}
   m_Layer: 8
   m_Name: GroundChecker
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+--- !u!4 &5272623321120983526
+=======
 --- !u!4 &6730935728949001865
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+  m_GameObject: {fileID: 5272623321120983527}
+  m_LocalRotation: {x: 0.06803213, y: -0.6907955, z: 0.7160289, w: 0.073999606}
+  m_LocalPosition: {x: -0.012105135, y: 0.16552046, z: -0.34969613}
+  m_LocalScale: {x: 5.9454436, y: 5.9454446, z: 5.945442}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1250361507963950100}
+  m_Father: {fileID: 3569189177069025445}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
   m_GameObject: {fileID: 5388190774548263883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1815,6 +2053,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24, y: 0.01}
   m_EdgeRadius: 0
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
 --- !u!1 &5859610920088266806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,9 +2540,15 @@ GameObject:
   - component: {fileID: 7004247438024755329}
   - component: {fileID: 4187729149772444662}
   - component: {fileID: 1577815672559820406}
+  - component: {fileID: 8098052056777782653}
   m_Layer: 8
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+  m_Name: Player
+  m_TagString: Untagged
+=======
   m_Name: Player with model
   m_TagString: Player
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2316,13 +2561,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7424270657889207455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.323, y: 0, z: 0}
-  m_LocalScale: {x: 0.516482, y: 0.516482, z: 0.1291205}
+  m_LocalPosition: {x: 47.97121, y: 0.556, z: 0}
+  m_LocalScale: {x: 1.24, y: 1.24, z: 1.24}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7424270657243603663}
   - {fileID: 3569189177069025445}
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+  - {fileID: 4377024247781500462}
+=======
   - {fileID: 6730935728949001865}
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2393,7 +2642,63 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+--- !u!114 &7424270657889207448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36f67459926f2f439e00d0a4461c84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &819742154193762397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09944812bee6d924aa904d11d9449ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7424270657889207449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe28d8825e2c954b8e719c634507f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+--- !u!114 &6530382482931399759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a8d96d58cf04949b3dec836606744c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7424270657889207431
+=======
 --- !u!114 &7550347898261968866
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2405,12 +2710,141 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0ee4477dff58643ba180b3e2a8766e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+  turnGameObject: {fileID: 7424270657243603662}
+  turnSpeed: 1000
+--- !u!114 &5205758369221506449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d38d0e793d4e141887b3a62398bfe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  duration: 1.5
+--- !u!114 &7424270657889207429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e617e4305aa9358479bff8b4f60246fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHealth: 100
+--- !u!114 &2827568593055729654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc754da585569b44a0771e8a78ef4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.5
+  cooldown: 2
+  parryType: 1
+  damageAbsorption: 1
+  reflectMeleeDamage: 0
+  reflectProjectiles: 0
+  reflectionDamageMultiplier: 1
+  meleeParryAmplifyDamage: 1
+  rangeParryAmplifyDamage: 0
+  extraDamage: 1
+  attackNumber: 1
+  amplifyDuration: 3
+--- !u!114 &8807600635767033918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bc3efb478fbef47af0ad60727faffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 5.7
+--- !u!114 &8726184065493442880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3709e6ce0d89ad488b9d390ace2de39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topLeftCorner: {fileID: 4424530462329312202}
+  bottomRightCorner: {fileID: 4424530461093290477}
+  groundLayerMask:
+=======
   checkGroundCollider: {fileID: 6256388573956172664}
   groundLayer:
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
     serializedVersion: 2
     m_Bits: 64
   fallSpeedCurve:
     serializedVersion: 2
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+    m_Bits: 128
+--- !u!114 &9172628974580093448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c650346becc9354a8f9b8cfbd8631fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9172628974580093449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47dd9cdced36cf48a74ae7e4c54b380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 0}
+--- !u!114 &8056623023388271701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb30a3ae4ec7e44dbcdb980f8b6af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightArm: {fileID: 1785877649302399677}
+  weaponContainer: {fileID: 637572297884247728}
+  weapon: {fileID: 5272623321120983527}
+  weaponHandler: {fileID: 1250361507963950103}
+--- !u!114 &6200381098253466924
+=======
     m_Curve:
     - serializedVersion: 3
       time: 0
@@ -2436,6 +2870,7 @@ MonoBehaviour:
   maxFallSpeed: 15
   maxSpeedTime: 0.5
 --- !u!114 &7424270657889207448
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2856,6 +3291,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8098052056777782653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424270657889207455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ddd3d6831ec49bc4d97dabe1024964f0, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &7515893990525481783
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3639,8 @@ Transform:
   m_Father: {fileID: 5492260059685337084}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD:Assets/Characters/Player/Data/Model/Abilities/Daikyu/Player.prefab
+=======
 --- !u!1001 &1957194480184060840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3241,3 +3708,4 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5910205930995360335, guid: 60bfa39abae8aa140a84b492f64b0659, type: 3}
   m_PrefabInstance: {fileID: 1957194480184060840}
   m_PrefabAsset: {fileID: 0}
+>>>>>>> development:Assets/Characters/Player/Player with model.prefab

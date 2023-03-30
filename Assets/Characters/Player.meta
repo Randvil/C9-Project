@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Enemies/Boss.meta
+guid: 43d6d48268c08b54ca7e2855370d13d4
+=======
 guid: 20f664733050fe94d8771861944e7bfd
+>>>>>>> development:Assets/Characters/Player.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

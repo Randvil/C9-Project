@@ -123,11 +123,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 303018933475645846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfe8dc72dbd21844d8b4c6c55e2e63b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5215cba140539a14cb3b3d5159ef31d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climbingSide: 0
-  topLadder: {fileID: 303018934186790666}
+  playerDirection: 0
+  relativeXPosition: 0
 --- !u!1 &303018933517877475
 GameObject:
   m_ObjectHideFlags: 0
