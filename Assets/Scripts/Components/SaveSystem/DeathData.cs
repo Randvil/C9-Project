@@ -1,7 +1,15 @@
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using System.Collections;
 
-public class DeathLoad
+public class DeathLoad: IDeathLoad
 {
+    public DeathLoad(IDeathManager deathManager)
+    {
+        deathManager.DeathEvent.AddListener(RewriteData);
+        deathManager.DeathEvent.AddListener(LoadCheckpoint);
+    }
+
     public void RewriteData()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
@@ -14,8 +22,14 @@ public class DeathLoad
 
     public void LoadCheckpoint()
     {
+        Coroutines.StartCoroutine(LoadSceneCoroutine());
+    }
+
+    public IEnumerator LoadSceneCoroutine()
+    {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(gameData.CheckpointData.scene);
     }
 }

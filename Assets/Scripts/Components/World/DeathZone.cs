@@ -9,7 +9,7 @@ public class DeathZone : MonoBehaviour
 
 		if (team != null && team.Team == eTeam.Player)
 		{
-			other.GetComponent<IStats>().SetStat(eStatType.CurrentHealth, 0f);
+			other.GetComponent<Player>().HealthManager.ChangeCurrentHealth(-other.GetComponent<Player>().HealthManager.Health.currentHealth);
 		}
 	}
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e13727c7dd9574d98b7a27afc14702, type: 3}
+  m_Name: RangedDemonSillyPatrolmanData
+  m_EditorClassIdentifier: 
+  senseDelay: 0.25
+  thinkDelay: 0.25
+  actDelay: 0.25
+  searchPlayerDistance: 10
+  loseSightOfPlayerDistance: 10
+  checkPlatformAheadRadius: 0.1
+  checkWallDistance: 0.5
+  attackRadius: 7.5
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
