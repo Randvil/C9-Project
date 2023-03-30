@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 
 public class HealthManager : IHealthManager
@@ -15,13 +16,15 @@ public class HealthManager : IHealthManager
 
     public void ChangeMaxHealth(float value)
     {
-        health.maxHealth += value;
+        health.maxHealth = Mathf.Clamp(health.maxHealth + value, 0f, float.MaxValue);
         MaxHealthChangedEvent.Invoke(health);
+
+        ChangeCurrentHealth(0f);
     }
 
     public void ChangeCurrentHealth(float value)
     {
-        health.currentHealth += value;
+        health.currentHealth = Mathf.Clamp(health.currentHealth + value, 0f, health.maxHealth);
         CurrentHealthChangedEvent.Invoke(health);
     }
 

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
 
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EnergyManagerData energyManagerData;
+    [SerializeField] private HorrorManagerData horrorManagerData;
     [SerializeField] private EffectManagerData effectManagerData;
     [SerializeField] private InteractData interactData;
     [SerializeField] private TurningViewData turningViewData;
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IWeapon Weapon { get; private set; }
     public IHealthManager HealthManager { get; private set; }
     public IEnergyManager EnergyManager { get; private set; }
+    public IHorrorManager HorrorManager { get; private set; }
     public IAbilityManager AbilityManager { get; private set; }
     public IEffectManager EffectManager { get; private set; }
     public IDeathManager DeathManager { get; private set; }
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         PlayerInput = new InputSystemListener(unityPlayerInput);
         HealthManager = new HealthManager(healthManagerData);
         EnergyManager = new EnergyManager(energyManagerData);
+        HorrorManager = new HorrorManager(horrorManagerData);
         EffectManager = new EffectManager(effectManagerData);
         DeathManager = new DeathManager(HealthManager);
         WeaponModifierManager = new ModifierManager();
