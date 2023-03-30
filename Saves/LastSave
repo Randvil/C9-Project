@@ -3,7 +3,7 @@
         "playerHealth": 1000.0,
         "position": {
             "x": -9.144000053405762,
-            "y": 10.235420227050782,
+            "y": 10.235422134399414,
             "z": 0.0
         },
         "scene": "CityLocation",
@@ -73,7 +73,7 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 10000.0,
+        "playerHealth": 1000.0,
         "position": {
             "x": 56.355712890625,
             "y": 0.2590000033378601,
