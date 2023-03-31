@@ -55,7 +55,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="separator" class="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="controlsMenu" class="menu third-menu hidden-menu">
+        <ui:VisualElement name="controlsMenu" class="menu third-menu">
             <ui:VisualElement name="separator" />
             <ui:VisualElement class="labels-controls-container">
                 <ui:VisualElement name="labels">
@@ -66,10 +66,13 @@
                     <ui:Label text="ATTACK" display-tooltip-when-elided="true" />
                     <ui:Label text="ROLL" display-tooltip-when-elided="true" />
                     <ui:Label text="PARRY" display-tooltip-when-elided="true" />
+                    <ui:Label text="ABILITY 1" />
+                    <ui:Label text="ABILITY 2" display-tooltip-when-elided="true" />
                     <ui:Label text="INTERACT" display-tooltip-when-elided="true" />
                     <ui:Label text="CLIMB UP" display-tooltip-when-elided="true" />
                     <ui:Label text="CLIMB DOWN" display-tooltip-when-elided="true" />
                     <ui:Label text="PAUSE" display-tooltip-when-elided="true" />
+                    <ui:Label text="COLLECTION" display-tooltip-when-elided="true" />
                 </ui:VisualElement>
                 <ui:VisualElement name="controls" class="controlLabels" style="width: auto; align-items: center;">
                     <ui:Label display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/128/awsd.png?fileID=2800000&amp;guid=bbd17523f98795143b64dd88b176e116&amp;type=3#awsd&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: 128px; margin-top: 5px; margin-bottom: 3px; height: 128px;" />
@@ -79,23 +82,29 @@
                     <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/mouse_left.png?fileID=2800000&amp;guid=2e40507295e152e4b85abcd5b56fcb02&amp;type=3#mouse_left&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
                     <ui:Label text="SHIFT" display-tooltip-when-elided="true" />
                     <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/mouse_right.png?fileID=2800000&amp;guid=1296ca2fab8d6c547aab0df4899f5830&amp;type=3#mouse_right&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+                    <ui:Label text="Q" display-tooltip-when-elided="true" />
                     <ui:Label text="E" display-tooltip-when-elided="true" />
+                    <ui:Label text="F" display-tooltip-when-elided="true" />
                     <ui:Label text="W" display-tooltip-when-elided="true" />
                     <ui:Label text="S" display-tooltip-when-elided="true" />
                     <ui:Label text="ESC" display-tooltip-when-elided="true" />
+                    <ui:Label text="TAB" display-tooltip-when-elided="true" />
                 </ui:VisualElement>
                 <ui:VisualElement class="controlLabels" style="align-items: center;">
                     <ui:Label display-tooltip-when-elided="true" style="width: 128px; height: 128px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/128/controller_xbox.png?fileID=2800000&amp;guid=2102fb003f0cd924fb695eebe3a9cc84&amp;type=3#controller_xbox&apos;);" />
-                    <ui:Label display-tooltip-when-elided="true" enable-rich-text="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Filled/64/dpad3_left.png?fileID=2800000&amp;guid=7e63f6eb418c0ae4cabe9113b4b95e9c&amp;type=3#dpad3_left&apos;); width: 45px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; margin-top: 5px; margin-bottom: 3px;" />
-                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Filled/64/dpad3_right.png?fileID=2800000&amp;guid=279a943769fb2064cb25d2016c072d04&amp;type=3#dpad3_right&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+                    <ui:Label display-tooltip-when-elided="true" enable-rich-text="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/dpad1_left.png?fileID=2800000&amp;guid=f56649a9166644744b43a031d656d941&amp;type=3#dpad1_left&apos;); width: 45px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; margin-top: 5px; margin-bottom: 3px;" />
+                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/dpad1_right.png?fileID=2800000&amp;guid=42102f94b4068954dbba53faf8a886bb&amp;type=3#dpad1_right&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
                     <ui:Label text="A" display-tooltip-when-elided="true" class="xbox-button" style="color: rgb(1, 219, 0); -unity-font-style: bold; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
                     <ui:Label text="X" display-tooltip-when-elided="true" class="xbox-button" style="color: rgb(0, 183, 255); -unity-font-style: bold; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
-                    <ui:Label text="B" display-tooltip-when-elided="true" class="xbox-button" style="-unity-font-style: bold; color: rgb(214, 0, 0); border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
-                    <ui:Label text="Y" display-tooltip-when-elided="true" class="xbox-button" style="-unity-font-style: bold; color: rgb(255, 214, 0); border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
-                    <ui:Label display-tooltip-when-elided="true" />
-                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Filled/64/dpad3_up.png?fileID=2800000&amp;guid=ec763a7fb84b011479c6a3a44606ab38&amp;type=3#dpad3_up&apos;);" />
-                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Filled/64/dpad3_down.png?fileID=2800000&amp;guid=a09cc64f83b892f4395c304ebfab32c8&amp;type=3#dpad3_down&apos;);" />
+                    <ui:Label class="label-borderless" style="background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/rb.png?fileID=2800000&amp;guid=bd6110c0f955a234c917fa340460347e&amp;type=3#rb&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+                    <ui:Label class="xbox-button label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/rt.png?fileID=2800000&amp;guid=958c29d9898369849a5c75799bbf7d3a&amp;type=3#rt&apos;);" />
+                    <ui:Label text="Y" display-tooltip-when-elided="true" class="xbox-button" style="color: rgb(255, 227, 0); border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
+                    <ui:Label text="B" display-tooltip-when-elided="true" class="xbox-button" style="color: rgb(229, 0, 0); border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
+                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/lb.png?fileID=2800000&amp;guid=ff191da55e04b1649965be886f3e5ccc&amp;type=3#lb&apos;);" />
+                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/dpad1_up.png?fileID=2800000&amp;guid=ed7ec81c964d4c2479da36663831998e&amp;type=3#dpad1_up&apos;);" />
+                    <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/dpad1_down.png?fileID=2800000&amp;guid=dc09a7d6884a87a41a690c2a8b6630af&amp;type=3#dpad1_down&apos;);" />
                     <ui:Label display-tooltip-when-elided="true" class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/button_menu.png?fileID=2800000&amp;guid=e2efb445a307dcb42bfd451c281b747f&amp;type=3#button_menu&apos;);" />
+                    <ui:Label class="label-borderless" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Controller%20Icons%20Pack%20(by%20NullSave)/Textures/Outlined/64/button_view.png?fileID=2800000&amp;guid=feece0f605aa99f44acd9e29bccd832f&amp;type=3#button_view&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

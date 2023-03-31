@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class PanelManager : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private float panelTweenDuration = 0.5f;
     public float PanelTweenDuration => panelTweenDuration;
 
+    public PlayerInput Input { get; set; }
+
     public void GoBack()
     {
         if (history.Count > 0 && history.Peek() != CurrentPanel)
@@ -74,8 +77,13 @@ public class PanelManager : MonoBehaviour
 
     private void Awake()
     {
+        //Remove then load system is finished!
+        Input = FindObjectOfType<PlayerInput>(); //~0.001s
+
         foreach (var doc in docs)
         {
+            if (Input != null)
+                doc.GetComponent<IPanel>().SetInput(Input);
             panels.Add(doc.rootVisualElement);
             DisablePanel(doc.rootVisualElement);
         }   

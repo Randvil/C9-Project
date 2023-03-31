@@ -154,11 +154,12 @@
 }
 
 .xbox-button {
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
     width: 48px;
+    -unity-font-style: bold;
 }
 
 .label-borderless {

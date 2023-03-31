@@ -1,21 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
-public class HintByCollision : MonoBehaviour, IHintable
+public class HintByCollision : Hintable
 {
     private ITeam team;
-
-    public UnityEvent ShowHint { get; } = new();
-
-    public string HintType { get; set; }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.TryGetComponent(out team);
 
         if (team != null && team.Team == eTeam.Player)
-        {
-            ShowHint.Invoke();
+        {               
+            ShowHint.Invoke(LabelName);
         }
     }
 }

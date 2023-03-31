@@ -20,8 +20,14 @@ public class MainMenu : MonoBehaviour
 
         MenuNode main = new("main", root, true);
 
+        MenuNode play = new("play", root, false);
+        main.AddChild(play);
+
         MenuNode settings = new("settings", root, false);
         main.AddChild(settings);
+
+        MenuNode load = new("load", root, false);
+        play.AddChild(load);
 
         MenuNode video = new("video", root, false);
         settings.AddChild(video);
@@ -32,21 +38,10 @@ public class MainMenu : MonoBehaviour
         MenuNode controls = new("controlsMenu", root, false);
         settings.AddChild(controls);
 
-
-        main.Panel.Q<Button>("continueB").clicked += () => ReturnToGame(main);
-
-        input.onActionTriggered += context =>
-        {
-            if (context.action.name == "Return")
-                ReturnToGame(main);
-        };
-    }
-
-    private void ReturnToGame(MenuNode main)
-    {
-        main.DeactivateChildren();
-        DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);
-        panelManager.GoBack();
-        input.SwitchCurrentActionMap("Player");
+        //input.onActionTriggered += context =>
+        //{
+        //    if (context.action.name == "Return")
+        //        ReturnToGame(main);
+        //};
     }
 }

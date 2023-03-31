@@ -3,13 +3,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour, IPanel
 {
     private VisualElement root;
 
     private PanelManager panelManager;
 
-    [SerializeField] private PlayerInput input;
+    private PlayerInput input;
+
+    private MenuNode main;
 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        MenuNode main = new("main", root, true);
+        main = new("main", root, true);
 
         MenuNode settings = new("settings", root, false);
         main.AddChild(settings);
@@ -31,17 +33,20 @@ public class PauseMenu : MonoBehaviour
         MenuNode controls = new("controlsMenu", root, false);
         settings.AddChild(controls);
 
+        main.Panel.Q<Button>("continueB").clicked += ReturnToGame;
+    }
 
-        main.Panel.Q<Button>("continueB").clicked += () => ReturnToGame(main);
-
+    public void SetInput(PlayerInput _input)
+    {
+        input = _input;
         input.onActionTriggered += context =>
         {
             if (context.action.name == "Return")
-                ReturnToGame(main);
+                ReturnToGame();
         };
     }
 
-    private void ReturnToGame(MenuNode main)
+    private void ReturnToGame()
     {
         main.DeactivateChildren();
         DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5151684572828989696}
   - component: {fileID: 4626682754200674181}
   - component: {fileID: 2197631584855906706}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Abilities
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 6237628798187802078}
   - component: {fileID: 1313019061917958466}
   - component: {fileID: 576038449183618851}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c0435c087780b4c9e11c3c30ac0903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 0}
 --- !u!1 &7951657492230771364
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +160,8 @@ GameObject:
   - component: {fileID: 7951657492230771365}
   - component: {fileID: 7951657492230771366}
   - component: {fileID: 7951657492230771367}
-  m_Layer: 0
+  - component: {fileID: 4097795013963528762}
+  m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelManager: {fileID: 5087960839091467473}
   audioMixer: {fileID: 24100000, guid: 641ce8892fb30864a973a4d9b5daae0c, type: 2}
-  input: {fileID: 0}
+--- !u!114 &4097795013963528762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951657492230771364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbcd7d0341dadb42afbbc2bd9233f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7951657493376032355
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,10 +235,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7951657493376032356}
   - component: {fileID: 5087960839091467473}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StaticUI
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 5163a71129518fc47a12bd6106215b67, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

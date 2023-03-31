@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,25 +13,27 @@ public class Hints : MonoBehaviour
 
 	private readonly Dictionary<string, Label> hints = new();
 	
-	//[SerializeField] private List<InteractiveObject> interactiveObjects = new();
+	private List<Hintable> interactiveObjects;
 
 	private void Awake()
 	{
-		//interactiveObjects.ForEach
-		//	(obj => obj.CanInteract.AddListener(CanInteractHint));
+		interactiveObjects = FindObjectsOfType<Hintable>().ToList(); //~0.0015s
+        interactiveObjects.ForEach
+			(obj => obj.ShowHint.AddListener(ShowHint));
 
 		hintContainer = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("hints");
-
 		hintContainer.Query<Label>().ForEach(label =>
-		{
+		{			
 			label.AddToClassList(hiddenClass);
 			hints.Add(label.name, label);
 		});
 	}
 
-	private void CanInteractHint()
+	public void AddHintable(Hintable hintable) => interactiveObjects.Add(hintable);
+
+	private void ShowHint(string labelName)
 	{
-		Label hint = hints["ladder"];
+		Label hint = hints[labelName];
 		if (!hint.ClassListContains(hiddenClass))
 			return;
 

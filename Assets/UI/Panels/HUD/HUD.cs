@@ -3,22 +3,23 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
-public class HUD : MonoBehaviour
+public class HUD : MonoBehaviour, IPanel
 {
     public PanelManager panelManager;
 
     public AudioMixer audioMixer;
 
-    [SerializeField] private PlayerInput input;
+    private PlayerInput input;
 
-    private void Awake()
+    public void SetInput(PlayerInput _input)
     {
+        input = _input;
         input.onActionTriggered += context =>
         {
             switch (context.action.name)
             {
                 case "Pause":
-                    input.SwitchCurrentActionMap("Menu");
+                    input.SwitchCurrentActionMap("UI");
 
                     //Плавно замедляем время до полной остановки за время анимации смены панелей
                     DOTween.To(t => Time.timeScale = t, 1f, 0f, panelManager.PanelTweenDuration).SetUpdate(true);
@@ -29,7 +30,7 @@ public class HUD : MonoBehaviour
                     break;
 
                 case "Collection":
-                    input.SwitchCurrentActionMap("Menu");
+                    input.SwitchCurrentActionMap("UI");
 
                     DOTween.To(t => Time.timeScale = t, 1f, 0f, panelManager.PanelTweenDuration).SetUpdate(true);
 
