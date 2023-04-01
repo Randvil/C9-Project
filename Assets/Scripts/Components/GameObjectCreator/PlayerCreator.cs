@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerCreator : Creator
 {
@@ -12,9 +13,13 @@ public class PlayerCreator : Creator
         Creator managers = new ManagersCreator();
         managers.CreateObject("Managers", data);
 
+        Creator staticUI = new ManagersCreator();
+        staticUI.CreateObject("StaticUI", data);
+
         Player player = newGameObject.GetComponent<Player>();
-        player.unityPlayerInput = managers.newGameObject.GetComponent<PlayerInput>();
+        staticUI.newGameObject.GetComponent<PanelManager>().Input = player.unityPlayerInput = managers.newGameObject.GetComponent<PlayerInput>();
         player.Initialize();
+        player.Document = staticUI.newGameObject.GetComponentInChildren<UIDocument>();
         player.gameObject.transform.position = data.CheckpointData.position;
         player.HealthManager.ChangeCurrentHealth(- (player.HealthManager.Health.currentHealth - data.CheckpointData.playerHealth));
 

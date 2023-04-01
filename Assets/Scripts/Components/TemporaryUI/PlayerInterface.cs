@@ -49,6 +49,9 @@ public class PlayerInterface : IPlayerInterface
 
     private void OnCurrentHealthChange(Health health)
     {
+        if (health.currentHealth < 0)
+            return;
+
         DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue),
             healthBar.value, health.currentHealth, tweenDuration);
         DOTween.To(x => hpLabel.text = Mathf.Round(x / healthBar.highValue * 100f) + "%",

@@ -45,7 +45,20 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private float panelTweenDuration = 0.5f;
     public float PanelTweenDuration => panelTweenDuration;
 
-    public PlayerInput Input { get; set; }
+    private PlayerInput _input;
+    public PlayerInput Input
+    { 
+        get => _input;
+        set
+        {
+            _input = value;
+            foreach (var doc in docs)
+                if (Input != null)
+                    doc.GetComponent<IPanel>().SetInput(Input);
+        }
+    }
+
+    public AbilityManager Abilities { get; set; }
 
     public void GoBack()
     {
@@ -78,12 +91,10 @@ public class PanelManager : MonoBehaviour
     private void Awake()
     {
         //Remove then load system is finished!
-        Input = FindObjectOfType<PlayerInput>(); //~0.001s
+        //Input = FindObjectOfType<PlayerInput>(); //~0.001s
 
         foreach (var doc in docs)
         {
-            if (Input != null)
-                doc.GetComponent<IPanel>().SetInput(Input);
             panels.Add(doc.rootVisualElement);
             DisablePanel(doc.rootVisualElement);
         }   
