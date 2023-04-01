@@ -11,7 +11,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
     //[SerializeField] private UIDocument uIDocument;
-    [SerializeField] public PlayerInput unityPlayerInput;
+    //[SerializeField] public PlayerInput unityPlayerInput;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private AudioSource hurtSound;
     [SerializeField] private AudioSource walkSound;
@@ -29,12 +29,14 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private ClimbData climbData;
     [SerializeField] private RollData rollData;
     [SerializeField] private WeaponData weaponData;
+    [SerializeField] private EnergyRegeneratorData weaponEnergyRegeneratorData;
     [SerializeField] private ParryData parryData;
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
     [SerializeField] private TessenData tessenData;
 
     public eTeam Team { get; private set; } = eTeam.Player;
+    public Transform CameraFollowPoint => avatar.transform;
 
     public BoxCollider2D Collider { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IModifierManager DefenceModifierManager { get; private set; }
     public IInteract Interact { get; private set; }
     public IWeapon Weapon { get; private set; }
+    public IEnergyRegenerator EnergyRegenerator { get; private set; }
     public IHealthManager HealthManager { get; private set; }
     public IEnergyManager EnergyManager { get; private set; }
     public IHorrorManager HorrorManager { get; private set; }
@@ -90,7 +93,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     //Should be removed from here
     public IPlayerInterface PlayerInterface { get; private set; }
 
-    public void Initialize()
+    public void Initialize(PlayerInput unityPlayerInput)
     {
         PlayerInput = new InputSystemListener(unityPlayerInput);
         
@@ -114,6 +117,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Jump = new Jump(jumpData, Rigidbody, Gravity);
         Roll = new Roll(rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
         Weapon = new CleaveMeleeWeapon(gameObject, weaponData, WeaponModifierManager, this, Turning);
+        EnergyRegenerator = new EnergyRegenerator(weaponEnergyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
         Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(gameObject, interactData);

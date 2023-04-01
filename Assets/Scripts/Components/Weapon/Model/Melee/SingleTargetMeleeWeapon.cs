@@ -41,7 +41,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 
         if (nearestDamageableEnemy != null)
         {
-            nearestDamageableEnemy.DamageHandler.TakeDamage(damage);
+            nearestDamageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
         }            
     }
 }

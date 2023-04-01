@@ -70,7 +70,7 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
             {
                 if (damagedEnemy.Key != null)
                 {
-                    damagedEnemy.Value.TakeDamage(damage);
+                    damagedEnemy.Value.TakeDamage(damage, DealDamageEvent);
                 }
             }
 

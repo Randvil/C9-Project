@@ -1314,7 +1314,6 @@ GameObject:
   - component: {fileID: 3695995159119896902}
   - component: {fileID: 3066035496328934951}
   - component: {fileID: -1514680825330593056}
-  - component: {fileID: 7545546726366937815}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1482,6 +1481,7 @@ MonoBehaviour:
   climbData: {fileID: 11400000, guid: 0e65c293313b3c4458bbd66b43c712d8, type: 2}
   rollData: {fileID: 11400000, guid: 0c22dd40f0ef60343999917fbf7cf60e, type: 2}
   weaponData: {fileID: 11400000, guid: 2b6c473b53226394ba58652880e2c3e5, type: 2}
+  weaponEnergyRegeneratorData: {fileID: 11400000, guid: d74c969c5496c884e8d098fc2d7754d0, type: 2}
   parryData: {fileID: 11400000, guid: 4bb7df67b3ec5454baa060afb2e92d05, type: 2}
   kanaboData: {fileID: 11400000, guid: b51628169ebd0e1468dc896043bfa7eb, type: 2}
   daikyuData: {fileID: 11400000, guid: a2f65e9b195517640b5efe219405527d, type: 2}
@@ -1870,36 +1870,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7545546726366937815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5242086771253099540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b3322427ec9c5b34ebf45b3cfcf2ea0a, type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &5242086771832609349
 GameObject:
   m_ObjectHideFlags: 0

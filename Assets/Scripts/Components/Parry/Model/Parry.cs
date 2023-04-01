@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Parry : IParry
+public class Parry : IParry, IDamageDealer
 {
     private GameObject character;
 
@@ -31,7 +31,7 @@ public class Parry : IParry
     public bool CanParry => IsParrying == false && IsOnCooldown == false;
 
     public UnityEvent ParryEvent { get; } = new();
-
+    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
     public Parry(GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {
@@ -93,7 +93,7 @@ public class Parry : IParry
         meleeDamageReflection = null;
         if (parryData.reflectMeleeDamage)
         {
-            meleeDamageReflection = new ParryMeleeDamageReflection(float.MaxValue, character, turning);
+            meleeDamageReflection = new ParryMeleeDamageReflection(float.MaxValue, character, turning, this);
             effectManager.AddEffect(meleeDamageReflection);
         }
 

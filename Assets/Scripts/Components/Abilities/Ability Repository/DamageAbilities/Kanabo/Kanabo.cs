@@ -38,7 +38,7 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
             if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true)
             {
-                damageableEnemy.DamageHandler.TakeDamage(damage);
+                damageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
             }
 
             if (enemy.TryGetComponent(out IEffectable effectableEnemy) == true)

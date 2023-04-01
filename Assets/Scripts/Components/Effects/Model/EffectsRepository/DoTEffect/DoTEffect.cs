@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DoTEffect : IDoTEffect
 {
-    IDamageHandler damageHandler;
+    private IDamageHandler damageHandler;
+    private IDamageDealer damageDealer;
 
     public Damage Damage { get; private set; }
     public float DamagePeriod { get; private set; }
@@ -12,16 +13,17 @@ public class DoTEffect : IDoTEffect
     public float EndEffectTime { get; private set; }
 
 
-    public DoTEffect(Damage damage, float damagePeriod, float endEffectTime, IDamageHandler damageHandler)
+    public DoTEffect(Damage damage, float damagePeriod, float endEffectTime, IDamageHandler damageHandler, IDamageDealer damageDealer)
     {
         Damage = damage;
         DamagePeriod = damagePeriod;
         EndEffectTime = endEffectTime;
         this.damageHandler = damageHandler;
+        this.damageDealer = damageDealer;
     }
 
     public void DealDamage()
     {
-        damageHandler.TakeDamage(Damage);
+        damageHandler.TakeDamage(Damage, damageDealer.DealDamageEvent);
     }
 }

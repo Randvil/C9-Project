@@ -33,12 +33,12 @@ public class DaikyuArrow : Projectile
         
         if (other.TryGetComponent(out IDamageable damageableEnemy) == true)
         {
-            damageableEnemy.DamageHandler.TakeDamage(damage);
+            damageableEnemy.DamageHandler.TakeDamage(damage, damageDealer.DealDamageEvent);
         }
         
         if (other.TryGetComponent(out IEffectable effectableEnemy) == true)
         {
-            effectableEnemy.EffectManager.AddEffect(new DoTEffect(doTDamage, daikyuEffectsData.damagePeriod, Time.time + daikyuEffectsData.doTDuration, damageableEnemy.DamageHandler));
+            effectableEnemy.EffectManager.AddEffect(new DoTEffect(doTDamage, daikyuEffectsData.damagePeriod, Time.time + daikyuEffectsData.doTDuration, damageableEnemy.DamageHandler, damageDealer));
             effectableEnemy.EffectManager.AddEffect(new SlowEffect(daikyuEffectsData.movementSlow, Time.time + daikyuEffectsData.slowDuration));
         }
     }

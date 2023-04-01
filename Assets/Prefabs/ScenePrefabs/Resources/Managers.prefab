@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585390692687979368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.1980004, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ddd3d6831ec49bc4d97dabe1024964f0, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b3322427ec9c5b34ebf45b3cfcf2ea0a, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -56,9 +56,100 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87320e31-897f-4557-a308-94cf893dc72b
+    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/Logitech
+      Logitech Dual Action/stick/left,/Logitech Logitech Dual Action/hat/left,/Logitech
+      Logitech Dual Action/stick/right,/Logitech Logitech Dual Action/hat/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7eddd4e0-b9a8-4faf-81a4-3c86b25715e5
+    m_ActionName: Player/Crouch[/Keyboard/s,/Logitech Logitech Dual Action/stick/down,/Logitech
+      Logitech Dual Action/hat/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 34c4ce3c-98ce-4811-baeb-5a25acbd95af
+    m_ActionName: Player/Attack[/Mouse/leftButton,/Logitech Logitech Dual Action/trigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be0e21b0-20e0-4dcd-ad15-bb45479f26bc
+    m_ActionName: Player/Jump[/Keyboard/space,/Logitech Logitech Dual Action/button2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: df238150-e48d-481c-b0a3-f3939fcb3515
+    m_ActionName: Player/Roll[/Keyboard/leftShift,/Logitech Logitech Dual Action/button3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9d0d6274-4a2d-4e1d-b417-c324405473ce
+    m_ActionName: Player/Parry[/Mouse/rightButton,/Logitech Logitech Dual Action/button4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29280e7c-8fe4-435b-8b2a-82950367d8d6
+    m_ActionName: Player/Interact[/Keyboard/f,/Logitech Logitech Dual Action/button6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0cf45057-0564-492d-bee9-999e3cdb5525
+    m_ActionName: Player/ClimbUp[/Keyboard/w,/Logitech Logitech Dual Action/stick/up,/Logitech
+      Logitech Dual Action/hat/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bdf888ee-d04e-4035-98d9-c4ae3fc3404a
+    m_ActionName: Player/Ability1[/Keyboard/q,/Logitech Logitech Dual Action/button8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3e907750-db06-4956-96e5-30fa3b482d0b
+    m_ActionName: Player/Ability2[/Keyboard/e,/Logitech Logitech Dual Action/button7]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c890c349-de3b-482e-8c88-7113c453ee29
+    m_ActionName: Player/ChangeAbilityLayout[/Keyboard/r,/Logitech Logitech Dual
+      Action/button5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e82a90f-523d-4eaf-a76f-8de39b22830c
+    m_ActionName: UI/Navigate[/Logitech Logitech Dual Action/stick/up,/Logitech Logitech
+      Dual Action/stick/down,/Logitech Logitech Dual Action/stick/left,/Logitech
+      Logitech Dual Action/stick/right,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3d7d533-00b9-4105-b80d-724c8c41deb4
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69d4a449-4f5d-4a13-9f19-11a37db920c6
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7ea923d8-53fd-4de3-88fc-15ae7038bcbf
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66338e7a-384c-441b-a95f-c25a9f9d71cb
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 22836af6-799a-4e34-8822-6db629407ba5
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 388be6ca-78fd-4fe9-b2cd-a161f522e890
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 270ac7cd-43b3-4952-a59e-70831aab5e64
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a243e7f-d116-4c4a-a630-d25b50145467
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7299467c-f603-4c42-a647-9a7e6b1bed73
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: 173e728e-ed00-461a-8469-8e5f410cd378
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
