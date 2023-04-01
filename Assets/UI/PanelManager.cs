@@ -58,7 +58,7 @@ public class PanelManager : MonoBehaviour
         }
     }
 
-    public AbilityManager Abilities { get; set; }
+    public IAbilityManager Abilities { get; set; }
 
     public void GoBack()
     {

@@ -23,6 +23,8 @@ public class PlayerCreator : Creator
         player.gameObject.transform.position = data.CheckpointData.position;
         player.HealthManager.ChangeCurrentHealth(- (player.HealthManager.Health.currentHealth - data.CheckpointData.playerHealth));
 
+        staticUI.newGameObject.GetComponent<PanelManager>().Abilities = player.AbilityManager;
+
         cameraController.player = player.gameObject.transform;
     }
 }

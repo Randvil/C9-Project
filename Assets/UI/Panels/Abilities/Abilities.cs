@@ -30,6 +30,19 @@ public class Abilities : MonoBehaviour, IPanel
 
         MenuNode description = new("descriptionCont", root, false);
         abilities.AddChild(description);
+
+        RegisterClicks(abilities.Panel);
+    }
+
+    private void RegisterClicks(VisualElement abilities)
+    {
+        VisualElement p1 = abilities.Q<VisualElement>("1");
+        VisualElement p2 = abilities.Q<VisualElement>("2");
+        VisualElement p3 = abilities.Q<VisualElement>("3");
+
+        p1.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Kanabo));
+        p2.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Tessen));
+        p3.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Daikyu));
     }
 
     public void SetInput(PlayerInput _input)
