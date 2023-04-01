@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCaster, IMortal, IClimbable
+public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCaster, IMortal, IClimbable, IDataSavable
 {
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
-    [SerializeField] private UIDocument uIDocument;
-    [SerializeField] private PlayerInput unityPlayerInput;
+    //[SerializeField] private UIDocument uIDocument;
+    [SerializeField] public PlayerInput unityPlayerInput;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private AudioSource hurtSound;
     [SerializeField] private AudioSource walkSound;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public BoxCollider2D Collider { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-    public IPlayerInput PlayerInput { get; private set; }
+    public IPlayerInput PlayerInput { get; set; }
     public IGravity Gravity { get; private set; }
     public IGravityView GravityView { get; private set; }
     public IMovement Movement { get; private set; }
@@ -59,6 +59,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IDamageHandler DamageHandler { get; private set; }
     public IParry Parry { get; private set; }
     public IClimb Climb { get; private set; }
+    public IDeathLoad DeathLoad { get; private set; }
 
     public ITurningView TurningView { get; private set; }
     public IMovementView MovementView { get; private set; }
@@ -87,14 +88,15 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     //Should be removed from here
     public IPlayerInterface PlayerInterface { get; private set; }
 
-    private void Awake()
+    public void Initialize()
     {
+        PlayerInput = new InputSystemListener(unityPlayerInput);
+        
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         Gravity = GetComponent<IGravity>();
 
-        PlayerInput = new InputSystemListener(unityPlayerInput);
         HealthManager = new HealthManager(healthManagerData);
         EnergyManager = new EnergyManager(energyManagerData);
         EffectManager = new EffectManager(effectManagerData);
@@ -112,6 +114,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(gameObject, interactData);
+        DeathLoad = new DeathLoad(DeathManager);
 
         AbilityManager = new AbilityManager();
         IAbility kanabo = new Kanabo(gameObject, kanaboData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
@@ -134,9 +137,14 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         DeathView = new DeathView(Animator);
 
         //Should be removed from here
-        PlayerInterface = new PlayerInterface(uIDocument, HealthManager, EnergyManager);
+        //PlayerInterface = new PlayerInterface(uIDocument, HealthManager, EnergyManager);
 
         CreateStateMachine();
+    }
+
+    private void Start()
+    {
+        //Initialize();
     }
 
     private void CreateStateMachine()
@@ -168,4 +176,9 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         StateMachine.CurrentState.PhysicsUpdate();
     }
 
+    public void SaveData(Data data)
+    {
+        data.playerHealth = HealthManager.Health.currentHealth;
+        data.position = transform.position;
+    }
 }

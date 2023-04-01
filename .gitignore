@@ -116,3 +116,5 @@ ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
 ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
 ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
 UserSettings/Search.settings
+ProjectSettings/QualitySettings.asset
+ProjectSettings/EditorBuildSettings.asset
