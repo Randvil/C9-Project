@@ -8,14 +8,10 @@ public class MainMenu : MonoBehaviour
 {
     private VisualElement root;
 
-    private PanelManager panelManager;
-
     [SerializeField] private PlayerInput input;
 
     private void Awake()
     {
-        panelManager = GetComponentInParent<PanelManager>();
-
         root = GetComponent<UIDocument>().rootVisualElement;
 
         MenuNode main = new("main", root, true);
@@ -40,8 +36,7 @@ public class MainMenu : MonoBehaviour
 
         //input.onActionTriggered += context =>
         //{
-        //    if (context.action.name == "Return")
-        //        ReturnToGame(main);
+        //    
         //};
     }
 }

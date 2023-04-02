@@ -25,13 +25,15 @@ public class StaticAudio : MonoBehaviour
 
             ChangeBackgroundTrack(SceneManager.GetActiveScene().buildIndex);
 
-            SceneManager.activeSceneChanged += (_, nextScene) => ChangeBackgroundTrack(nextScene.buildIndex);
+            SceneManager.activeSceneChanged += (prevScene, nextScene) => ChangeBackgroundTrack(nextScene.buildIndex);
             SubscribeButtonsOnSound();
         }
     }
 
     void ChangeBackgroundTrack(int sceneIndex)
     {
+        musicSource.Stop();
+
         if (sceneIndex >= backgroundTracks.Count)
         {
             Debug.Log("Add new background tracks!");

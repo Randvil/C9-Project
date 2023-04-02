@@ -13,9 +13,18 @@
             <ui:Button text="NEW GAME" display-tooltip-when-elided="true" name="newGameB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="load" class="third-menu menu hidden-menu">
-            <ui:ListView focusable="true" name="saves" />
+        <ui:VisualElement name="load" class="third-menu menu">
             <ui:VisualElement name="separator" />
+            <ui:VisualElement name="saves">
+                <ui:VisualElement class="save-slot">
+                    <ui:Label text="LastSave" display-tooltip-when-elided="true" name="saveName" class="save-label" />
+                    <ui:Label text="12/01/2003 4:03" display-tooltip-when-elided="true" name="saveDate" class="save-label" />
+                </ui:VisualElement>
+                <ui:VisualElement class="save-slot">
+                    <ui:Label text="Save1" display-tooltip-when-elided="true" class="save-label" />
+                    <ui:Label text="01/11/2023 17:44" display-tooltip-when-elided="true" class="save-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="settings" class="menu second-menu hidden-menu">
             <ui:Button text="VIDEO" display-tooltip-when-elided="true" focusable="false" name="videoB" class="menu-b" />
@@ -55,7 +64,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="separator" class="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="controlsMenu" class="menu third-menu">
+        <ui:VisualElement name="controlsMenu" class="menu third-menu hidden-menu">
             <ui:VisualElement name="separator" />
             <ui:VisualElement class="labels-controls-container">
                 <ui:VisualElement name="labels">

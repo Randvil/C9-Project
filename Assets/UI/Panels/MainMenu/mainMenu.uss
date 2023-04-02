@@ -180,3 +180,28 @@
     border-bottom-width: 0;
     color: rgba(255, 255, 255, 0.24);
 }
+
+.save-slot {
+    flex-direction: row;
+    justify-content: space-around;
+    transition-duration: 0.3s;
+    height: 80px;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.16);
+}
+
+.save-slot:hover {
+    background-color: rgba(255, 255, 255, 0.76);
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 36px;
+    transition-duration: 0.3s;
+}
+
+.save-label {
+    -unity-text-align: upper-center;
+    width: 50%;
+}
