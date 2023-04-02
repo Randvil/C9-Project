@@ -65,13 +65,13 @@ public class PlayerInterface : IPlayerInterface
 
     private void OnCurrentEnergyChange(Energy energy)
     {
-        DOTween.To(x => energyBar.value = Mathf.Round(x),
+        DOTween.To(x => energyBar.value = (float)System.Math.Round(x, 2),
             energyBar.value, energy.currentEnergy / energy.maxEnergy, tweenDuration);
     }
 
     private void OnMaxEnergyChange(Energy energy)
     {
-        //energyBar.height = energy.maxEnergy;
+        //energyBar.height = energy.maxEnergy; хаха а там такого нету)
     }
 
     public void ChangeUIDocument(UIDocument newDocument)
