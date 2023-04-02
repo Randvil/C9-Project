@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="honeycombs" src="project://database/Assets/UI/Panels/Abilities/honeycombs.uxml?fileID=9197481963319205126&amp;guid=7ada0615f631d6844bd3b6c8b91753a1&amp;type=3#honeycombs" />
+    <Style src="project://database/Assets/UI/Panels/Abilities/Abilities.uss?fileID=7433441132597879392&amp;guid=e047b53d0d51cef49a3d5bce126c854d&amp;type=3#Abilities" />
+    <Style src="project://database/Assets/UI/Panels/MainMenu/mainMenu.uss?fileID=7433441132597879392&amp;guid=b230ee4403d5de44ebcc4831f33f5349&amp;type=3#mainMenu" />
+    <ui:VisualElement name="screen" style="flex-grow: 1; color: rgba(255, 255, 255, 0.7); background-color: rgba(0, 0, 0, 0.51); flex-direction: row;">
+        <ui:VisualElement name="main" class="menu">
+            <ui:Button text="ABILITIES" display-tooltip-when-elided="true" name="abilitiesB" class="menu-b" />
+            <ui:Button text="COLLECTION" display-tooltip-when-elided="true" name="collectionB" class="menu-b" />
+        </ui:VisualElement>
+        <ui:VisualElement name="abilities" class="menu second-menu" style="align-items: center; justify-content: center; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
+            <ui:Instance template="honeycombs" name="honeycombs" />
+            <ui:VisualElement style="position: absolute; top: 0; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; flex-direction: row;">
+                <Polygon poly-image-path="poly512h" text="1" class="poly_InGame" />
+                <Polygon poly-image-path="poly512h" text="2" class="poly_InGame" />
+                <Polygon poly-image-path="poly512h" text="3" class="poly_InGame" />
+                <Polygon poly-image-path="poly512h" text="4" class="poly_InGame" />
+            </ui:VisualElement>
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="collection" class="menu second-menu" style="flex-grow: 1; align-items: center; justify-content: center; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
+            <ui:Label text="/^_^\" display-tooltip-when-elided="true" />
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="descriptionCont" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+            <ui:VisualElement style="align-items: center; justify-content: center;">
+                <Polygon poly-image-path="poly512h" icon-path="redPoly" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; border-top-left-radius: 40px; border-bottom-left-radius: 40px; border-top-right-radius: 40px; border-bottom-right-radius: 40px; border-left-color: rgba(255, 255, 255, 0.7); border-right-color: rgba(255, 255, 255, 0.7); border-top-color: rgba(255, 255, 255, 0.7); border-bottom-color: rgba(255, 255, 255, 0.7);">
+                <ui:Label text="ABILITY" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
+                <ui:Label display-tooltip-when-elided="true" text="LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT LMAO BOTTOM TEXT" style="white-space: normal; -unity-text-align: upper-center; font-size: 20px; -unity-font-style: normal;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

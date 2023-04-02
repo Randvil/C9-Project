@@ -1,7 +1,5 @@
 using DG.Tweening;
 using NS.RomanLib;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -51,8 +49,13 @@ public class PlayerInterface : IPlayerInterface
 
     private void OnCurrentHealthChange(Health health)
     {
-        DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue), healthBar.value, health.currentHealth, tweenDuration);
-        DOTween.To(x => hpLabel.text = Mathf.Round(x / healthBar.highValue * 100f) + "%", healthBar.value, health.currentHealth, tweenDuration);
+        if (health.currentHealth < 0)
+            return;
+
+        DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue),
+            healthBar.value, health.currentHealth, tweenDuration);
+        DOTween.To(x => hpLabel.text = Mathf.Round(x / healthBar.highValue * 100f) + "%",
+            healthBar.value, health.currentHealth, tweenDuration);
     }
 
     private void OnMaxHealthChange(Health health)
@@ -62,7 +65,8 @@ public class PlayerInterface : IPlayerInterface
 
     private void OnCurrentEnergyChange(Energy energy)
     {
-        DOTween.To(x => energyBar.value = x, energyBar.value, energy.currentEnergy / energy.maxEnergy, tweenDuration);
+        DOTween.To(x => energyBar.value = Mathf.Round(x),
+            energyBar.value, energy.currentEnergy / energy.maxEnergy, tweenDuration);
     }
 
     private void OnMaxEnergyChange(Energy energy)

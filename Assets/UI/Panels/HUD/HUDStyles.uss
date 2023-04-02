@@ -1,0 +1,103 @@
+.unity-progress-bar__background {
+    height: 100%;
+    background-image: none;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(90, 91, 104);
+    flex-grow: 1;
+    -unity-background-scale-mode: stretch-to-fill;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    position: absolute;
+    flex-shrink: 1;
+    max-height: 100%;
+    width: 100%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.unity-progress-bar__container {
+    flex-grow: 1;
+    height: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+    font-size: 0;
+    position: relative;
+    visibility: visible;
+    display: flex;
+    overflow: visible;
+    max-height: none;
+    min-height: 0;
+}
+
+#healthBar .unity-progress-bar__progress {
+    background-color: rgba(255, 255, 255, 0.75);
+    flex-grow: 0;
+    background-image: none;
+    overflow: visible;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-bottom: 0;
+}
+
+.poly_InGame {
+    height: 75px;
+    width: 40px;
+    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
+    -unity-font-style: bold;
+    font-size: 15px;
+    color: rgba(210, 210, 210, 0.5);
+    -unity-font-definition: none;
+    margin-right: 10px;
+}
+
+.hint {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left-color: rgba(0, 0, 0, 0.49);
+    border-right-color: rgba(0, 0, 0, 0.49);
+    border-top-color: rgba(0, 0, 0, 0.49);
+    border-bottom-color: rgba(0, 0, 0, 0.49);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(67, 67, 67, 0.47);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.66);
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transition-property: opacity, translate, display;
+    transition-duration: 0.8s, 0.8s, 0s;
+    -unity-text-align: middle-center;
+    display: flex;
+    opacity: 1;
+}
+
+.hidden-hint {
+    translate: 300px 0;
+    opacity: 0;
+    display: none;
+    transition-property: opacity, translate, display;
+    transition-duration: 1s, 1s, 0s;
+    transition-delay: 0s, 0s, 1s;
+}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -10,7 +11,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
-    //[SerializeField] private UIDocument uIDocument;
     [SerializeField] public PlayerInput unityPlayerInput;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private AudioSource hurtSound;
@@ -88,6 +88,17 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     //Should be removed from here
     public IPlayerInterface PlayerInterface { get; private set; }
 
+    private UIDocument doc;
+    public UIDocument Document
+    {
+        get => doc;
+        set
+        {
+            doc = value;
+            PlayerInterface = new PlayerInterface(doc, HealthManager, EnergyManager);
+        }
+    }
+
     public void Initialize()
     {
         PlayerInput = new InputSystemListener(unityPlayerInput);
@@ -135,9 +146,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         ClimbView = new ClimbView(Animator, Rigidbody);
         StunVeiw = new StunView(Animator);
         DeathView = new DeathView(Animator);
-
-        //Should be removed from here
-        //PlayerInterface = new PlayerInterface(uIDocument, HealthManager, EnergyManager);
 
         CreateStateMachine();
     }
