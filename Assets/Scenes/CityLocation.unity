@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &176894807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: ArcadeCenter
-  nextScenePosition: {x: -2.319, y: 1.16, z: 0}
+  nextScenePosition: {x: 30.53, y: 0.766, z: 0}
 --- !u!4 &176894808
 Transform:
   m_ObjectHideFlags: 0
