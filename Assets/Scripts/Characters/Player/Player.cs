@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private ClimbData climbData;
     [SerializeField] private RollData rollData;
     [SerializeField] private WeaponData weaponData;
+    [SerializeField] private EnergyRegeneratorData energyRegeneratorData;
     [SerializeField] private ParryData parryData;
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IWeapon Weapon { get; private set; }
     public IHealthManager HealthManager { get; private set; }
     public IEnergyManager EnergyManager { get; private set; }
+    public IEnergyRegenerator WeaponEnergyRegenerator { get; private set; }
     public IAbilityManager AbilityManager { get; private set; }
     public IEffectManager EffectManager { get; private set; }
     public IDeathManager DeathManager { get; private set; }
@@ -123,6 +125,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Jump = new Jump(jumpData, Rigidbody, Gravity);
         Roll = new Roll(rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
         Weapon = new CleaveMeleeWeapon(gameObject, weaponData, WeaponModifierManager, this, Turning);
+        WeaponEnergyRegenerator = new EnergyRegenerator(energyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
         Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(gameObject, interactData);

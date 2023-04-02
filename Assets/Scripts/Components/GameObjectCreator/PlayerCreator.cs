@@ -18,8 +18,9 @@ public class PlayerCreator : Creator
         staticUI.CreateObject("StaticUI", data);
 
         Player player = newGameObject.GetComponent<Player>();
-        staticUI.newGameObject.GetComponent<PanelManager>().Input = player.unityPlayerInput = managers.newGameObject.GetComponent<PlayerInput>();
-        player.Initialize(managers.newGameObject.GetComponent<PlayerInput>());
+        PlayerInput playerInput = managers.newGameObject.GetComponent<PlayerInput>();
+        staticUI.newGameObject.GetComponent<PanelManager>().Input = playerInput;
+        player.Initialize(playerInput);
         player.Document = staticUI.newGameObject.GetComponentInChildren<UIDocument>();
         player.gameObject.transform.position = data.CheckpointData.position;
         player.HealthManager.ChangeCurrentHealth(-(player.HealthManager.Health.currentHealth - data.CheckpointData.playerHealth));

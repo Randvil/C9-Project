@@ -1472,7 +1472,6 @@ MonoBehaviour:
   parrySound: {fileID: -1514680825330593056}
   healthManagerData: {fileID: 11400000, guid: ea445498983c758458fc1dee4551fd60, type: 2}
   energyManagerData: {fileID: 11400000, guid: bd47de99132d74947be0aab2d0daca6f, type: 2}
-  horrorManagerData: {fileID: 11400000, guid: ef7a1737342fc7548bf183defe8d6cb0, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
   interactData: {fileID: 11400000, guid: b3933f27dccf32b4daaf89b9474f1728, type: 2}
   turningViewData: {fileID: 11400000, guid: 56988a899d1ba3741afac0039dda3e6e, type: 2}
@@ -1482,7 +1481,7 @@ MonoBehaviour:
   climbData: {fileID: 11400000, guid: 0e65c293313b3c4458bbd66b43c712d8, type: 2}
   rollData: {fileID: 11400000, guid: 0c22dd40f0ef60343999917fbf7cf60e, type: 2}
   weaponData: {fileID: 11400000, guid: 2b6c473b53226394ba58652880e2c3e5, type: 2}
-  weaponEnergyRegeneratorData: {fileID: 11400000, guid: d74c969c5496c884e8d098fc2d7754d0, type: 2}
+  energyRegeneratorData: {fileID: 11400000, guid: d74c969c5496c884e8d098fc2d7754d0, type: 2}
   parryData: {fileID: 11400000, guid: 4bb7df67b3ec5454baa060afb2e92d05, type: 2}
   kanaboData: {fileID: 11400000, guid: b51628169ebd0e1468dc896043bfa7eb, type: 2}
   daikyuData: {fileID: 11400000, guid: a2f65e9b195517640b5efe219405527d, type: 2}

@@ -708,8 +708,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f691a1223141824fb05ac5dc3276131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 689219592}
   healthManagerData: {fileID: 11400000, guid: dca38918573e4ac4f8346617f153291b, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
+  turningViewData: {fileID: 11400000, guid: 56988a899d1ba3741afac0039dda3e6e, type: 2}
   SpawnGroupDelay: 20
   SpawnSpiderDelay: 0.2
   SpiderGroup: 3
