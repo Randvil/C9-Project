@@ -165,4 +165,12 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Destroy(gameObject, 0f);
     }
 
+    private void OnDestroy()
+    {
+        EnemyBehavior.Deactivate();
+
+        Movement.StopMove();
+        Weapon.BreakAttack();
+        WeaponView.BreakAttack();
+    }
 }

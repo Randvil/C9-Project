@@ -23,13 +23,14 @@ public class DeathManager : IDeathManager, IForbiddableDeath
 
     private void OnHealthChange(Health health)
     {
-        if (IsForbidden == true)
+        if (IsAlive == false || IsForbidden == true)
         {
             return;
         }
 
         if (health.currentHealth <= 0f)
         {
+            IsAlive = false;
             DeathEvent.Invoke();
         }
     }
