@@ -26,6 +26,12 @@ public class Interact : IInteract
         {
             yield return new WaitForSeconds(interactData.searchPeriod);
 
+            if (character == null)
+            {
+                Coroutines.StopCoroutine(ref searchCoroutine);
+                break;
+            }
+
             if (interactive != null)
             {
                 interactive.HideTooltip();

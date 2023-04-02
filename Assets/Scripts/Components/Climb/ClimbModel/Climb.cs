@@ -34,6 +34,12 @@ public class Climb : IClimb
         {
             yield return new WaitForSeconds(climbData.searchPeriod);
 
+            if (rigidbody == null)
+            {
+                Coroutines.StopCoroutine(ref searchCoroutine);
+                break;
+            }
+
             Collider2D[] colliders = Physics2D.OverlapCircleAll(rigidbody.position, climbData.searchRadius, climbData.climbableObjectLayer);
             if (colliders.Length == 0)
             {
@@ -54,7 +60,6 @@ public class Climb : IClimb
 
     public void StartClimb()
     {
-        //IsClimbing = true;
         gravity.Disable(this);
         rigidbody.MovePosition(new(climbableObject.XPosition, rigidbody.position.y));
         rigidbody.velocity = new(0f, 0f);
