@@ -45,7 +45,7 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
         modifierManager.AddModifier(damageModifier);
 
         IProjectile projectile = Object.Instantiate(daikyuData.projectileData.prefab, caster.transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
-        projectile.Initialize(caster, daikyuData.damageData, daikyuData.projectileData, turning.Direction, team, modifierManager);
+        projectile.Initialize(caster, daikyuData.damageData, daikyuData.projectileData, turning.Direction, team, modifierManager, this);
 
         energyManager.ChangeCurrentEnergy(-daikyuData.cost);
 

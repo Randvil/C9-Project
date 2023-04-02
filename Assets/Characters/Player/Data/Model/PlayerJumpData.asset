@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a265deeac8c68428267030bb4cd51c, type: 3}
   m_Name: PlayerJumpData
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 6
   speedCurve:
     serializedVersion: 2
     m_Curve:

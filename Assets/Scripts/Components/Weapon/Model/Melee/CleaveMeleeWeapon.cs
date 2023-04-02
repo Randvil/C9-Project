@@ -27,7 +27,7 @@ public class CleaveMeleeWeapon : AbstractMeleeWeapon
                 if ((turning.Direction == eDirection.Right && enemy.transform.position.x >= weaponOwner.transform.position.x)
                     || (turning.Direction == eDirection.Left && enemy.transform.position.x <= weaponOwner.transform.position.x))
                 {
-                    damageableEnemy.DamageHandler.TakeDamage(damage);
+                    damageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
                 }
             }
         }

@@ -18,7 +18,7 @@ public class DamageHandler : IDamageHandler
         this.effectManager = effectManager;
     }
 
-    public void TakeDamage(Damage incomingDamage)
+    public void TakeDamage(Damage incomingDamage, UnityEvent<DamageInfo> dealDamageEvent)
     {
         effectManager.ApplyDamageEffects(incomingDamage);
 
@@ -26,10 +26,10 @@ public class DamageHandler : IDamageHandler
 
         healthManager.ChangeCurrentHealth(-effectiveDamage);
 
-        InvokeDamageEvent(incomingDamage, effectiveDamage);
+        InvokeEvents(incomingDamage, effectiveDamage, dealDamageEvent);
     }
 
-    private void InvokeDamageEvent(Damage incomingDamage, float effectiveDamage)
+    private void InvokeEvents(Damage incomingDamage, float effectiveDamage, UnityEvent<DamageInfo> dealDamageEvent)
     {
         DamageInfo damageInfo = new DamageInfo
         {
@@ -41,6 +41,7 @@ public class DamageHandler : IDamageHandler
             effectiveDamageValue = effectiveDamage,
         };
 
+        dealDamageEvent.Invoke(damageInfo);
         TakeDamageEvent.Invoke(damageInfo);
     }
 }

@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AbstractWeapon : IWeapon
+public abstract class AbstractWeapon : IWeapon, IDamageDealer
 {
     protected GameObject weaponOwner;
 
@@ -19,6 +20,7 @@ public abstract class AbstractWeapon : IWeapon
     public bool IsAttacking => attackCoroutine != null;
 
     public UnityEvent ReleaseAttackEvent { get; } = new();
+    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
     public AbstractWeapon(GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning)
     {

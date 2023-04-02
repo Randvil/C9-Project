@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6706464320810894248
 Transform:
   m_ObjectHideFlags: 0
@@ -1481,6 +1481,7 @@ MonoBehaviour:
   climbData: {fileID: 11400000, guid: 0e65c293313b3c4458bbd66b43c712d8, type: 2}
   rollData: {fileID: 11400000, guid: 0c22dd40f0ef60343999917fbf7cf60e, type: 2}
   weaponData: {fileID: 11400000, guid: 2b6c473b53226394ba58652880e2c3e5, type: 2}
+  energyRegeneratorData: {fileID: 11400000, guid: d74c969c5496c884e8d098fc2d7754d0, type: 2}
   parryData: {fileID: 11400000, guid: 4bb7df67b3ec5454baa060afb2e92d05, type: 2}
   kanaboData: {fileID: 11400000, guid: b51628169ebd0e1468dc896043bfa7eb, type: 2}
   daikyuData: {fileID: 11400000, guid: a2f65e9b195517640b5efe219405527d, type: 2}

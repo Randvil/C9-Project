@@ -162,7 +162,7 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Weapon.BreakAttack();
         WeaponView.BreakAttack();
 
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 0f);
     }
 
 }

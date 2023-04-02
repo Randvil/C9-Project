@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class LocationEntry : SavePoint
+public class LocationEntry : SavePoint, IInteractive
 {
     GameData gameData = new GameData();
 
@@ -11,19 +12,16 @@ public class LocationEntry : SavePoint
     private string sceneName;
 
     [SerializeField]
+    private string tip;
+
+    [SerializeField]
     private Vector3 nextScenePosition;
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        SaveGame();
-        Debug.Log("to arcade center");
-        SceneManager.LoadScene(sceneName);
-    }
+    public bool IsInteracting { get; private set; }
 
     public override GameData GetData(List<IDataSavable> savableObjects)
     {
         gameData = LoadDataFromFile();
-        gameData.CurrentGameData.position = nextScenePosition;
         try
         {
             foreach (IDataSavable savableObject in savableObjects)
@@ -35,9 +33,38 @@ public class LocationEntry : SavePoint
         {
             Debug.LogError("Couldn't save \n" + e);
         }
+        gameData.CurrentGameData.position = nextScenePosition;
         return gameData;
     }
 
-    
+    public void ShowTooltip()
+    {
+        Debug.Log(tip);
+    }
 
+    public void HideTooltip()
+    {
+        
+    }
+
+    public void StartInteraction()
+    {
+        HideTooltip();
+
+        IsInteracting = true;
+
+        SaveGame();
+
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void StopInteraction()
+    {
+
+    }
+
+    public void NextStep()
+    {
+
+    }
 }

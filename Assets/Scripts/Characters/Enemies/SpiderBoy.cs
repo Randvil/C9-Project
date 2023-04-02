@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEffectable
 {
+    [SerializeField] private GameObject avatar;
+
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EffectManagerData effectManagerData;
+
+    [SerializeField] private TurningViewData turningViewData;
 
     [SerializeField]
     private float SpawnGroupDelay;
@@ -55,6 +59,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
     public IDeathManager DeathManager { get; private set; }
 
     private HealthBarView healthBarView;
+    private ITurningView turningView;
 
     private void Start()
     {
@@ -69,6 +74,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
         DeathManager = new DeathManager(HealthManager);
 
         healthBarView = new(healthBarSlider, HealthManager, DeathManager);
+        turningView = new TurningView(avatar, turningViewData, Turning);
 
         DamageHandler.TakeDamageEvent.AddListener(OnTakeDamage);
         DeathManager.DeathEvent.AddListener(OnDeath);
@@ -123,11 +129,14 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
     {
         if (PlayerPosX() != 0f)
         {
-            if (transform.position.x > PlayerPosX() && Turning.Direction != eDirection.Right)
+            if (transform.position.x > PlayerPosX() && Turning.Direction != eDirection.Left)
                 ChangeDirection();
-            if (transform.position.x < PlayerPosX() && Turning.Direction != eDirection.Left)
+                
+            if (transform.position.x < PlayerPosX() && Turning.Direction != eDirection.Right)
                 ChangeDirection();
-        }        
+        }
+
+        turningView.Turn();
     }
 
     private void ChangeDirection()
@@ -135,10 +144,12 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
         switch (Turning.Direction)
         {
             case eDirection.Right:
+                Turning.Turn(eDirection.Left);
                 TurnEvent.Invoke(eDirection.Left);
                 break;
 
             case eDirection.Left:
+                Turning.Turn(eDirection.Right);
                 TurnEvent.Invoke(eDirection.Right);
                 break;
         }
@@ -157,7 +168,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
             
         foreach (Collider2D obj in objectsNear)
         {
-            if (obj.TryGetComponent(out ITeam team) && team.Team == Team)
+            if (obj.TryGetComponent(out ITeam team) && team.Team != Team)
             {
                 playerInRadius = true;
                 return obj.transform.position.x;

@@ -9,6 +9,6 @@ public class OrdinaryBow : AbstractRangedWeapon
     protected override void ReleaseAttack()
     {
         IProjectile projectile = Object.Instantiate(rangedWeaponData.projectileData.prefab, new(projectileSpawnPoint.position.x, projectileSpawnPoint.position.y, 0f), Quaternion.identity).GetComponent<IProjectile>();
-        projectile.Initialize(weaponOwner, rangedWeaponData.weaponData.damageData, rangedWeaponData.projectileData, turning.Direction, team, weaponModifierManager);
+        projectile.Initialize(weaponOwner, rangedWeaponData.weaponData.damageData, rangedWeaponData.projectileData, turning.Direction, team, weaponModifierManager, this);
     }
 }

@@ -15,7 +15,7 @@ public class CastingAbilityState : BasePlayerState
     {
         base.Exit();
 
-        player.AbilityManager.BreakCastAbility(abilityNumberToCast);
+        player.AbilityManager.BreakCastAbility(previousAbilityNumber);
     }
 
     public override void LogicUpdate()

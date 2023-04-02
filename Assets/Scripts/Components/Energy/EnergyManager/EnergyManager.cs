@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 
 public class EnergyManager : IEnergyManager
@@ -15,13 +16,15 @@ public class EnergyManager : IEnergyManager
 
     public void ChangeMaxEnergy(float value)
     {
-        energy.maxEnergy += value;
+        energy.maxEnergy = Mathf.Clamp(energy.maxEnergy + value, 0f, float.MaxValue);
         MaxEnergyChangedEvent.Invoke(energy);
+
+        ChangeCurrentEnergy(0f);
     }
 
     public void ChangeCurrentEnergy(float value)
     {
-        energy.currentEnergy += value;
+        energy.currentEnergy = Mathf.Clamp(energy.currentEnergy + value, 0f, energy.maxEnergy);
         CurrentEnergyChangedEvent.Invoke(energy);
     }
 

@@ -9,6 +9,7 @@ public abstract class BasePlayerState : IState
     protected static bool haveToTurn;
     protected static bool isMoving;
     protected static int abilityNumberToCast;
+    protected static int previousAbilityNumber;
 
     public BasePlayerState(Player player, IStateMachine stateMachine, IPlayerInput playerInput)
     {
@@ -139,6 +140,7 @@ public abstract class BasePlayerState : IState
     {
         if (actionPhase == eActionPhase.Started && player.AbilityManager.CanCastAbility(abilityNumber))
         {
+            previousAbilityNumber = abilityNumberToCast;
             abilityNumberToCast = abilityNumber;
             stateMachine.ChangeState(player.CastingAbility);
         }

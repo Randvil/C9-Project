@@ -20,9 +20,9 @@ public class InputSystemListener : IPlayerInput
     public UnityEvent<eActionPhase, int> AbilityEvent { get; } = new();
     public UnityEvent<eActionPhase> ChangeAbilityLayoutEvent { get; } = new();
         
-    public InputSystemListener(PlayerInput unityUnputSystem)
+    public InputSystemListener(PlayerInput unityInputSystem)
     {
-        this.unityInputSystem = unityUnputSystem;
+        this.unityInputSystem = unityInputSystem;
 
         Initialize();
     }

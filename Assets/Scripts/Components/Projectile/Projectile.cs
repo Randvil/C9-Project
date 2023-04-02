@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
 
     protected ITeam ownerTeam;
     protected IModifierManager modifierManager;
+    protected IDamageDealer damageDealer;
 
     protected Damage damage;
 
@@ -31,7 +32,7 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
         transform.Translate(new Vector2(projectileData.speed, 0f) * Time.deltaTime);
     }
 
-    public void Initialize(GameObject projectileOwner, DamageData damageData, ProjectileData projectileData, eDirection direction, ITeam ownerTeam, IModifierManager modifierManager)
+    public void Initialize(GameObject projectileOwner, DamageData damageData, ProjectileData projectileData, eDirection direction, ITeam ownerTeam, IModifierManager modifierManager, IDamageDealer damageDealer)
     {
         this.projectileOwner = projectileOwner;
         this.damageData = damageData;
@@ -39,6 +40,7 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
         this.direction = direction;
         this.ownerTeam = ownerTeam;
         this.modifierManager = modifierManager;
+        this.damageDealer = damageDealer;
     }
 
     public void Remove()
@@ -53,7 +55,7 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
         eDirection newDirection = direction == eDirection.Left ? eDirection.Right : eDirection.Left;
 
         GameObject reflectedProjectile = Instantiate(gameObject);
-        reflectedProjectile.GetComponent<IReflectableProjectile>().Initialize(projectileOwner, damageData, projectileData, newDirection, newTeam, modifierManager);
+        reflectedProjectile.GetComponent<IReflectableProjectile>().Initialize(projectileOwner, damageData, projectileData, newDirection, newTeam, modifierManager, damageDealer);
 
         return reflectedProjectile;
     }
@@ -70,7 +72,7 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
             return;
         }            
 
-        damageableEnemy.DamageHandler.TakeDamage(damage);
+        damageableEnemy.DamageHandler.TakeDamage(damage, damageDealer.DealDamageEvent);
 
         Remove();
     }
