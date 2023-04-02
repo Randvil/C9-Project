@@ -1,4 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -6,40 +8,40 @@ public class MainMenu : MonoBehaviour
 {
     private VisualElement root;
 
-    public PanelManager panelManager;
+    private PanelManager panelManager;
 
-    private Button startButton;
-    private Button quitButton;
-    private Button settingsButton;
+    [SerializeField] private PlayerInput input;
 
     private void Awake()
     {
+        panelManager = GetComponentInParent<PanelManager>();
+
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        panelManager = panelManager.GetComponent<PanelManager>();
+        MenuNode main = new("main", root, true);
 
-        startButton = root.Q<Button>("startButton");
-        quitButton = root.Q<Button>("quitButton");
-        settingsButton = root.Q<Button>("settingsButton");
+        MenuNode play = new("play", root, false);
+        main.AddChild(play);
 
-        startButton.clicked += OnStart;
-        settingsButton.clicked += OnSettings;
-        quitButton.clicked += OnQuit;
-    }
+        MenuNode settings = new("settings", root, false);
+        main.AddChild(settings);
 
-    void OnStart()
-    {
-        panelManager.CurrentPanel = null;
-        SceneManager.LoadScene(1);
-    }
+        MenuNode load = new("load", root, false);
+        play.AddChild(load);
 
-    void OnSettings()
-    {       
-        panelManager.SwitchTo(1);
-    }
+        MenuNode video = new("video", root, false);
+        settings.AddChild(video);
 
-    void OnQuit()
-    {
-        Application.Quit();
+        MenuNode audio = new("audio", root, false);
+        settings.AddChild(audio);
+
+        MenuNode controls = new("controlsMenu", root, false);
+        settings.AddChild(controls);
+
+        //input.onActionTriggered += context =>
+        //{
+        //    if (context.action.name == "Return")
+        //        ReturnToGame(main);
+        //};
     }
 }

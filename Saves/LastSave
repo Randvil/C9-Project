@@ -1,22 +1,278 @@
 {
     "CheckpointData": {
-        "playerHealth": 1000.0,
+        "playerHealth": 980.0,
         "position": {
-            "x": -13.100000381469727,
-            "y": -5.0696001052856449,
+            "x": -9.144000053405762,
+            "y": 10.23542308807373,
             "z": 0.0
         },
-        "scene": "TestScene",
-        "locations": []
+        "scene": "CityLocation",
+        "locations": [
+            {
+                "sceneName": "CityLocation",
+                "spawnpoints": [
+                    {
+                        "id": 1,
+                        "position": {
+                            "x": 66.37000274658203,
+                            "y": -0.28999999165534975,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 3,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 15.0,
+                        "condition": "killTime"
+                    },
+                    {
+                        "id": 2,
+                        "position": {
+                            "x": 36.0,
+                            "y": -0.28999999165534975,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 3,
+                        "position": {
+                            "x": 6.775990009307861,
+                            "y": 11.17240047454834,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    }
+                ]
+            },
+            {
+                "sceneName": "ArcadeCenter",
+                "spawnpoints": [
+                    {
+                        "id": 1,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 0.6919935941696167,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 2,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 0.6919935941696167,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 3,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 7.510000228881836,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 4,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 7.510000228881836,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 5,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 13.729999542236329,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 6,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 13.729999542236329,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    }
+                ]
+            }
+        ]
     },
     "CurrentGameData": {
-        "playerHealth": 0.0,
+        "playerHealth": 980.0,
         "position": {
-            "x": 0.0,
-            "y": 0.0,
+            "x": -9.144000053405762,
+            "y": 10.225226402282715,
             "z": 0.0
         },
-        "scene": "",
-        "locations": []
+        "scene": "CityLocation",
+        "locations": [
+            {
+                "sceneName": "CityLocation",
+                "spawnpoints": [
+                    {
+                        "id": 1,
+                        "position": {
+                            "x": 66.37000274658203,
+                            "y": -0.28999999165534975,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 3,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 15.0,
+                        "condition": "killTime"
+                    },
+                    {
+                        "id": 2,
+                        "position": {
+                            "x": 36.0,
+                            "y": -0.28999999165534975,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 3,
+                        "position": {
+                            "x": 6.775990009307861,
+                            "y": 11.17240047454834,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    }
+                ]
+            },
+            {
+                "sceneName": "ArcadeCenter",
+                "spawnpoints": [
+                    {
+                        "id": 1,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 0.6919935941696167,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 2,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 0.6919935941696167,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 3,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 7.510000228881836,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 4,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 7.510000228881836,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 5,
+                        "position": {
+                            "x": 49.155818939208987,
+                            "y": 13.729999542236329,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    },
+                    {
+                        "id": 6,
+                        "position": {
+                            "x": 61.855628967285159,
+                            "y": 13.729999542236329,
+                            "z": 0.0
+                        },
+                        "enemyNumber": 1,
+                        "enemyPrefabName": "SpiderBoy",
+                        "spawnRadius": 10.0,
+                        "killTime": 0.0,
+                        "condition": "once"
+                    }
+                ]
+            }
+        ]
     }
 }

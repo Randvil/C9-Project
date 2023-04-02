@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -10,8 +11,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
-    //[SerializeField] private UIDocument uIDocument;
-    //[SerializeField] public PlayerInput unityPlayerInput;
+    [SerializeField] public PlayerInput unityPlayerInput;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private AudioSource hurtSound;
     [SerializeField] private AudioSource walkSound;
@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
 
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EnergyManagerData energyManagerData;
-    [SerializeField] private HorrorManagerData horrorManagerData;
     [SerializeField] private EffectManagerData effectManagerData;
     [SerializeField] private InteractData interactData;
     [SerializeField] private TurningViewData turningViewData;
@@ -29,7 +28,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private ClimbData climbData;
     [SerializeField] private RollData rollData;
     [SerializeField] private WeaponData weaponData;
-    [SerializeField] private EnergyRegeneratorData weaponEnergyRegeneratorData;
     [SerializeField] private ParryData parryData;
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
@@ -54,10 +52,8 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IModifierManager DefenceModifierManager { get; private set; }
     public IInteract Interact { get; private set; }
     public IWeapon Weapon { get; private set; }
-    public IEnergyRegenerator EnergyRegenerator { get; private set; }
     public IHealthManager HealthManager { get; private set; }
     public IEnergyManager EnergyManager { get; private set; }
-    public IHorrorManager HorrorManager { get; private set; }
     public IAbilityManager AbilityManager { get; private set; }
     public IEffectManager EffectManager { get; private set; }
     public IDeathManager DeathManager { get; private set; }
@@ -93,6 +89,17 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     //Should be removed from here
     public IPlayerInterface PlayerInterface { get; private set; }
 
+    private UIDocument doc;
+    public UIDocument Document
+    {
+        get => doc;
+        set
+        {
+            doc = value;
+            PlayerInterface = new PlayerInterface(doc, HealthManager, EnergyManager);
+        }
+    }
+
     public void Initialize(PlayerInput unityPlayerInput)
     {
         PlayerInput = new InputSystemListener(unityPlayerInput);
@@ -104,7 +111,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
 
         HealthManager = new HealthManager(healthManagerData);
         EnergyManager = new EnergyManager(energyManagerData);
-        HorrorManager = new HorrorManager(horrorManagerData);
         EffectManager = new EffectManager(effectManagerData);
         DeathManager = new DeathManager(HealthManager);
         WeaponModifierManager = new ModifierManager();
@@ -117,7 +123,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Jump = new Jump(jumpData, Rigidbody, Gravity);
         Roll = new Roll(rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
         Weapon = new CleaveMeleeWeapon(gameObject, weaponData, WeaponModifierManager, this, Turning);
-        EnergyRegenerator = new EnergyRegenerator(weaponEnergyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
         Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(gameObject, interactData);
@@ -143,15 +148,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         StunVeiw = new StunView(Animator);
         DeathView = new DeathView(Animator);
 
-        //Should be removed from here
-        //PlayerInterface = new PlayerInterface(uIDocument, HealthManager, EnergyManager);
-
         CreateStateMachine();
-    }
-
-    private void Start()
-    {
-        //Initialize();
     }
 
     private void CreateStateMachine()

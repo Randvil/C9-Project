@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5767102198445293308}
   - component: {fileID: 9082595682166824645}
   - component: {fileID: 9189432943315965457}
+  - component: {fileID: -1634192876164679402}
   m_Layer: 11
   m_Name: Right Ladder
   m_TagString: Untagged
@@ -74,6 +75,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDirection: 180
   relativeXPosition: 0.3
+--- !u!114 &-1634192876164679402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939622602927101544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LabelName>k__BackingField: ladder
 --- !u!1 &5846131658456165208
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,29 @@
+:root {
+    --fontDD: 32px;
+}
+
+.unity-base-dropdown__item {
+    font-size: var(--fontDD);
+}
+
+.unity-base-dropdown__item:hover {
+    background-color: rgba(70, 70, 70, 255);
+}
+
+.unity-base-dropdown__item:hover > .unity-base-dropdown__label {
+    transition-duration: 0.3s;
+    font-size: 40px;
+    color: rgb(214, 214, 214);
+}
+
+.unity-base-dropdown__item > .unity-base-dropdown__label {
+    transition-duration: 0.3s;
+}
+
+.unity-scroll-view {
+    background-color: rgb(70, 70, 70);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

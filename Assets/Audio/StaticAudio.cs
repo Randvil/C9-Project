@@ -44,7 +44,10 @@ public class StaticAudio : MonoBehaviour
 
     void SubscribeButtonsOnSound()
     {
-        foreach (var doc in FindObjectOfType<PanelManager>().docs)
-            doc.rootVisualElement.Query<Button>().ForEach(b => b.clicked += buttonClickSource.Play);
+        foreach (var panelManager in FindObjectsOfType<PanelManager>())
+            foreach (var panel in panelManager.panels)
+            {
+                panel.Query<Button>().ForEach(b => b.clicked += buttonClickSource.Play);
+            }
     }
 }

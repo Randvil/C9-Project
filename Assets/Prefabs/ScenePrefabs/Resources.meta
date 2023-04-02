@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Controller Icons Pack (by NullSave).meta
+guid: e543f53f6c8fcd04fb36913a53c46f49
+========
 guid: 6cb63bcf9083a0a43b87ea8a42bc7996
+>>>>>>>> origin/dev_anna:Assets/Prefabs/ScenePrefabs/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

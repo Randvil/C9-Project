@@ -1465,6 +1465,7 @@ MonoBehaviour:
   weaponObject: {fileID: 7219848578104188544}
   weaponContainer: {fileID: 6706464320810894248}
   weaponGrip: {fileID: 6800646005044063577}
+  unityPlayerInput: {fileID: 0}
   attackSound: {fileID: -9057402902523515926}
   hurtSound: {fileID: 3695995159119896902}
   walkSound: {fileID: 3066035496328934951}
