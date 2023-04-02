@@ -142,11 +142,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         CreateStateMachine();
     }
 
-    private void Start()
-    {
-        //Initialize();
-    }
-
     private void CreateStateMachine()
     {
         StateMachine = new StateMachine();

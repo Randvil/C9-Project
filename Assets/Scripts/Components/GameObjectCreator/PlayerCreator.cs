@@ -15,8 +15,8 @@ public class PlayerCreator : Creator
         Player player = newGameObject.GetComponent<Player>();
         player.unityPlayerInput = managers.newGameObject.GetComponent<PlayerInput>();
         player.Initialize();
-        player.gameObject.transform.position = data.CheckpointData.position;
-        player.HealthManager.ChangeCurrentHealth(- (player.HealthManager.Health.currentHealth - data.CheckpointData.playerHealth));
+        player.gameObject.transform.position = data.CurrentGameData.position;
+        player.HealthManager.ChangeCurrentHealth(- (player.HealthManager.Health.currentHealth - data.CurrentGameData.playerHealth));
 
         cameraController.player = player.gameObject.transform;
     }

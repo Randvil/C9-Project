@@ -13,7 +13,7 @@ public class SceneLoader : MonoBehaviour
         gameData = dataHandler.Load();
 
         player.CreateObject("Player", gameData);
-        //spawnpoint.CreateAllObjects(gameData);
+        spawnpoint.CreateAllObjects(gameData);
     }
 
 }
