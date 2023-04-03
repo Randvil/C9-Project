@@ -22,8 +22,8 @@ public class PlayerCreator : Creator
         staticUI.newGameObject.GetComponent<PanelManager>().Input = playerInput;
         player.Initialize(playerInput);
         player.Document = staticUI.newGameObject.GetComponentInChildren<UIDocument>();
-        player.gameObject.transform.position = data.CheckpointData.position;
-        player.HealthManager.ChangeCurrentHealth(-(player.HealthManager.Health.currentHealth - data.CheckpointData.playerHealth));
+        player.gameObject.transform.position = data.CurrentGameData.position;
+        player.HealthManager.ChangeCurrentHealth(-(player.HealthManager.Health.currentHealth - data.CurrentGameData.playerHealth));
 
         staticUI.newGameObject.GetComponent<PanelManager>().Abilities = player.AbilityManager;
 

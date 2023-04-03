@@ -4,7 +4,7 @@ public class SpawnpointCreator : Creator
 {
     public override void CreateAllObjects(GameData data)
     {
-        foreach (LocationData ld in data.CheckpointData.locations)
+        foreach (LocationData ld in data.CurrentGameData.locations)
         {
             if (ld.sceneName == SceneManager.GetActiveScene().name)
             {
