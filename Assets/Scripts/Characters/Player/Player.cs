@@ -62,7 +62,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IDamageHandler DamageHandler { get; private set; }
     public IParry Parry { get; private set; }
     public IClimb Climb { get; private set; }
-    public IDeathLoad DeathLoad { get; private set; }
 
     public ITurningView TurningView { get; private set; }
     public IMovementView MovementView { get; private set; }
@@ -129,7 +128,6 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(gameObject, interactData);
-        DeathLoad = new DeathLoad(DeathManager);
 
         AbilityManager = new AbilityManager();
         IAbility kanabo = new Kanabo(gameObject, kanaboData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);

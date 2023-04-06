@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.649
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.27332962, g: 0.27475688, b: 0.32960466, a: 0.649}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.649}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 176894812}
   - component: {fileID: 176894807}
   - component: {fileID: 176894809}
+  - component: {fileID: 176894813}
   m_Layer: 10
   m_Name: ToArcade
   m_TagString: Untagged
@@ -365,6 +366,19 @@ RectTransform:
   m_AnchoredPosition: {x: 56.73, y: 0.556}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &176894813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176894806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LabelName>k__BackingField: interact
 --- !u!1 &180074186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,7 +3854,7 @@ GameObject:
   - component: {fileID: 2015189164}
   - component: {fileID: 2015189163}
   m_Layer: 0
-  m_Name: SceneLoader
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3858,6 +3872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174453c8914edf947835e042e8b63b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabsData: {fileID: 11400000, guid: 43570bb5714633c498f4021654e1511d, type: 2}
 --- !u!4 &2015189164
 Transform:
   m_ObjectHideFlags: 0
