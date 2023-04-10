@@ -5,12 +5,10 @@ using UnityEngine;
 public abstract class Creator
 {
     public GameObject newGameObject;
-    public GameObject CreateObject(string prefabName, GameData data)
+    public GameObject CreateObject(GameObject prefab, GameData data)
     {
-        GameObject prefab = Resources.Load<GameObject>(prefabName);
         newGameObject = Object.Instantiate(prefab);
-        newGameObject.name = prefabName;
-        LoadDataToObject(data);
+        newGameObject.name = prefab.name;
         return newGameObject;
     }
 

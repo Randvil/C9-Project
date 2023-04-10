@@ -1,9 +1,9 @@
 {
     "CheckpointData": {
-        "playerHealth": 980.0,
+        "playerHealth": 1000.0,
         "position": {
             "x": -9.144000053405762,
-            "y": 10.23542308807373,
+            "y": 10.196516990661621,
             "z": 0.0
         },
         "scene": "CityLocation",
@@ -138,10 +138,10 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 980.0,
+        "playerHealth": 1000.0,
         "position": {
             "x": -9.144000053405762,
-            "y": 10.225226402282715,
+            "y": 10.196516990661621,
             "z": 0.0
         },
         "scene": "CityLocation",
