@@ -11,6 +11,8 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
     public Kanabo(GameObject caster, KanaboData kanaboData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(caster, kanaboData, abilityManager, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Kanabo;
+
         this.kanaboData = kanaboData;
 
         damage = new(caster, caster, damageAbilityData.damageData, modifierManager);

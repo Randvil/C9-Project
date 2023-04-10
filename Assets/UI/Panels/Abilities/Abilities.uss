@@ -10,14 +10,30 @@
     background-image: url('project://database/Assets/UI/Panels/Abilities/poly512h.png?fileID=2800000&guid=3787027fcb34dee47a8a5a1e05d182c2&type=3#poly512h');
     transition-duration: 0.3s;
     position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-.redPoly {
-    transition-duration: 0.3s;
-}
-
-.redPoly:hover {
-    transition-duration: 0.3s;
+.poly_like-hud {
+    height: 210px;
+    width: 120px;
+    -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
+    -unity-font-style: bold;
+    font-size: 15px;
+    color: rgba(210, 210, 210, 0.5);
+    -unity-font-definition: none;
+    margin-right: 30px;
 }
 
 .disabledPoly {
@@ -44,16 +60,6 @@
     color: rgb(255, 255, 255);
 }
 
-.poly_InGame {
-    height: 192px;
-    width: 112px;
-    -unity-font-style: bold;
-    font-size: 20px;
-    color: rgba(210, 210, 210, 0.5);
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
 .activePoly {
     transition-duration: 0.3s;
 }
@@ -61,4 +67,23 @@
 .activePoly:hover {
     scale: 1.2 1.2;
     transition-duration: 0.3s;
+}
+
+.Kanabo .polygon_icon {
+    background-image: resource('KanaboIcon512h');
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    opacity: 1;
+}
+
+.Daikyu .polygon_icon {
+    background-image: resource('DaikyuIcon512h');
+    transition-duration: 0.4s;
+    opacity: 1;
+}
+
+.Tessen .polygon_icon {
+    background-image: resource('TessenIcon512h');
+    transition-duration: 0.4s;
+    opacity: 1;
 }

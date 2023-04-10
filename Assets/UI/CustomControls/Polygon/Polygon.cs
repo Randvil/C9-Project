@@ -75,6 +75,7 @@ public class Polygon : VisualElement
             Texture2D icon = Resources.Load<Texture2D>(p.IconPath);
             if (icon)
             {
+                p.icon.style.opacity = 1f;
                 p.icon.style.scale = new Scale(new Vector2(p.IconScale, p.IconScale));
                 p.icon.style.backgroundImage = icon;
             }               

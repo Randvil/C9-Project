@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -14,7 +13,9 @@ public class Abilities : MonoBehaviour, IPanel
 
     private MenuNode main;
 
-    private void Awake()
+    private MenuNode[] abilityDescriptions;
+
+    private void Start()
     {
         panelManager = GetComponentInParent<PanelManager>();
 
@@ -22,27 +23,61 @@ public class Abilities : MonoBehaviour, IPanel
 
         main = new("main", root, true);
 
-        MenuNode abilities = new("abilities", root, false);
+        MenuNode abilities = new("abilities", root, true);
         main.AddChild(abilities);
 
-        MenuNode collection = new("collection", root, false);
-        main.AddChild(collection);
-
-        MenuNode description = new("descriptionCont", root, false);
-        abilities.AddChild(description);
-
-        RegisterClicks(abilities.Panel);
+        RegisterDescriptions(abilities);
     }
 
-    private void RegisterClicks(VisualElement abilities)
+    private void RegisterDescriptions(MenuNode abilities)
     {
-        VisualElement p1 = abilities.Q<VisualElement>("1");
-        VisualElement p2 = abilities.Q<VisualElement>("2");
-        VisualElement p3 = abilities.Q<VisualElement>("3");
+        abilityDescriptions = new MenuNode[3];
 
-        p1.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Kanabo));
-        p2.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Tessen));
-        p3.RegisterCallback<ClickEvent>(e => panelManager.Abilities.LearnAbility(eAbilityType.Daikyu));
+        for (int i = 1; i <= 3; i++)
+        {
+            eAbilityType type = (eAbilityType)i;
+
+            MenuNode description = new(type + "Description", root, false);
+
+            abilities.AddChild(description);
+            abilityDescriptions[i - 1] = description;
+            description.ParentButton.RegisterCallback<MouseEnterEvent>(ZIndexFix);
+
+            Button learnB = description.Panel.Q<Button>("learn" + type + "B");
+
+            if (IsAbilityLearned(type))
+                ToggleLearnButton(learnB);
+            else
+                learnB.clicked += () =>
+                {
+                    ToggleAbilityLearning(type);
+                    ToggleLearnButton(learnB);
+                };
+        }
+    }
+
+    private void ToggleLearnButton(Button button)
+    {
+        button.ToggleInClassList("inactive-menu-b");
+        button.text = button.text == "LEARN" ? "LEARNED" : "LEARN";
+    }
+
+    private void ToggleAbilityLearning(eAbilityType type)
+    {
+        if (IsAbilityLearned(type))
+            panelManager.Abilities.ForgetAbility(type);
+        else
+            panelManager.Abilities.LearnAbility(type);
+    }
+
+    // Just a wrapper
+    private bool IsAbilityLearned(eAbilityType type) =>
+        panelManager.Abilities.LearnedAbilities.ContainsValue(panelManager.Abilities.GetAbilityByType(type));
+
+    private void ZIndexFix(MouseEnterEvent runEvent)
+    {
+        VisualElement target = (VisualElement)runEvent.target;
+        target.BringToFront();
     }
 
     public void SetInput(PlayerInput _input)

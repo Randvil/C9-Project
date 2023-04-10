@@ -7,6 +7,9 @@
 
 .polygon_icon {
     flex-grow: 1;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    opacity: 0;
 }
 
 .polygon_label {

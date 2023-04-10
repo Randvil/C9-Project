@@ -22,9 +22,6 @@ public class MainMenu : MonoBehaviour
         MenuNode settings = new("settings", root, false);
         main.AddChild(settings);
 
-        MenuNode load = new("load", root, false);
-        play.AddChild(load);
-
         MenuNode video = new("video", root, false);
         settings.AddChild(video);
 

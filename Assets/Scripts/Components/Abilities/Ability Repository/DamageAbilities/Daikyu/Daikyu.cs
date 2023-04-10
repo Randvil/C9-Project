@@ -11,6 +11,8 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
     public Daikyu(GameObject caster, DaikyuData daikyuData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(caster, daikyuData, abilityManager, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Daikyu;
+
         this.daikyuData = daikyuData;
     }
 

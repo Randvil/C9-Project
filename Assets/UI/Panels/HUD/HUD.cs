@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour, IPanel
 {
@@ -38,7 +39,16 @@ public class HUD : MonoBehaviour, IPanel
 
                     panelManager.SwitchTo(2);
                     break;
+
+                case "ChangeAbilityLayout":
+                    ChangeLayout();
+                    break;
             }
         };
+    }
+
+    private void ChangeLayout()
+    {
+
     }
 }

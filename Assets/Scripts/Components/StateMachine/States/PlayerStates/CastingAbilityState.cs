@@ -1,5 +1,3 @@
-using UnityEditorInternal;
-
 public class CastingAbilityState : BasePlayerState
 {
     public CastingAbilityState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }

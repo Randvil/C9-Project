@@ -27,13 +27,13 @@ public class MenuNode
 
     public VisualElement Panel { get; }
 
-    Button parentButton;
+    public Button ParentButton { get; private set; }
     
     public MenuNode(string name, VisualElement root, bool active)
 	{
         Name = name;
         Panel = root.Q<VisualElement>(Name);
-        parentButton = root.Q<Button>(Name + "B");
+        ParentButton = root.Q<Button>(Name + "B");
 
         Deactivate(); //вдруг в ui-билдере что-то включено уже
         Active = active;
@@ -68,7 +68,7 @@ public class MenuNode
     {
         DeactivateChildren();
 
-        parentButton?.RemoveFromClassList(activeB);
+        ParentButton?.RemoveFromClassList(activeB);
         Panel.AddToClassList(hiddenClass);
 
         active = false;
@@ -85,7 +85,7 @@ public class MenuNode
     /// </summary>
     private void Activate()
     {
-        parentButton?.AddToClassList(activeB);
+        ParentButton?.AddToClassList(activeB);
         Panel.RemoveFromClassList(hiddenClass);
 
         active = true;

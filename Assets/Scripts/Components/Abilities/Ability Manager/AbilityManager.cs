@@ -7,12 +7,19 @@ public class AbilityManager : IAbilityManager
 {
     private Dictionary<eAbilityType, IAbility> abilities = new();
     private Dictionary<int, IAbility> learnedAbilities = new();
+    public Dictionary<int, IAbility> LearnedAbilities => learnedAbilities;
 
     public int CurrentLayoutNumber { get; private set; } = 1;
     public int LayoutCount { get; set; } = 2;
     public int AbilityCountInLayout { get; set; } = 2;
+    public int AbilityCount => abilities.Count;
+
+    public UnityEvent<eAbilityType> AbilityLearnEvent { get; } = new();
+    public UnityEvent<eAbilityType> AbilityForgetEvent { get; } = new();
 
     public UnityEvent<int> SwitchLayoutEvent { get; private set; } = new();
+
+    public IAbility GetAbilityByType(eAbilityType type) => abilities[type];
 
     public void AddAbility(eAbilityType abilityType, IAbility ability)
     {
@@ -41,6 +48,7 @@ public class AbilityManager : IAbilityManager
             if (!learnedAbilities.ContainsKey(abilityNumber))
             {
                 learnedAbilities.Add(abilityNumber, ability);
+                AbilityLearnEvent.Invoke(ability.Type);
                 return abilityNumber;
             }
         }
@@ -93,6 +101,7 @@ public class AbilityManager : IAbilityManager
             if (learnedAbility.Value == ability)
             {
                 learnedAbilities.Remove(learnedAbility.Key);
+                AbilityForgetEvent.Invoke(ability.Type);
                 return true;
             }
         }
@@ -150,7 +159,6 @@ public class AbilityManager : IAbilityManager
         {
             CurrentLayoutNumber -= LayoutCount;
         }
-        Debug.Log($"Current Ability Layout: {CurrentLayoutNumber}");
         SwitchLayoutEvent.Invoke(CurrentLayoutNumber);
     }
 
