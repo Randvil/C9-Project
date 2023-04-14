@@ -30,10 +30,5 @@ public class MainMenu : MonoBehaviour
 
         MenuNode controls = new("controlsMenu", root, false);
         settings.AddChild(controls);
-
-        //input.onActionTriggered += context =>
-        //{
-        //    
-        //};
     }
 }

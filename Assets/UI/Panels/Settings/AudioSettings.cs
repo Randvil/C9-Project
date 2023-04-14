@@ -28,11 +28,14 @@ public class AudioSettings : MonoBehaviour
 
         foreach (var slider in sliders)
         {
+            slider.highValue = 1f;
+            slider.lowValue = 0.00001f;
+
             slider.RegisterValueChangedCallback
-                (evt => SetVolumeOnGroupInAllShanpshots(slider.name, evt.newValue));
+                (evt => SetVolumeOnGroupInAllShanpshots(slider.name, Mathf.Log10(evt.newValue) * 20f));
 
             mixer.GetFloat(slider.name, out float t);
-            slider.value = t;
+            slider.value = Mathf.Pow(10f, t / 20f);
         }
     }
 

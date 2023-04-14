@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private SceneObjectsCreatorData prefabsData;
 
-    private void Start()
+    private void Awake()
     {
         dataHandler = new FileDataHandler("Saves", "LastSave");
         gameData = dataHandler.Load();

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,7 +13,6 @@ public class AbilityUiDependencies : MonoBehaviour
     private VisualElement abilitiesScreen;
 
     private Polygon[] polyInHud;
-
     private Polygon[] polyInCollection;
 
     private readonly List<eAbilityType> abilityTypeOrder = new();
@@ -26,6 +26,7 @@ public class AbilityUiDependencies : MonoBehaviour
     private void Start()
     {
         panelManager = GetComponentInParent<PanelManager>();
+
         abilityManager = panelManager.Abilities;
 
         hudScreen = panelManager.panels[0];

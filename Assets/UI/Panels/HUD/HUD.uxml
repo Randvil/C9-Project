@@ -25,6 +25,7 @@
             <ui:Label text="USE \U00F1F60D/&lt;b&gt;SPACE&lt;/b&gt; FOR JUMP" display-tooltip-when-elided="true" name="jump" class="hint" />
             <ui:Label text="USE \U00F1F60E/\U00F1F80E FOR PARRY" display-tooltip-when-elided="true" name="parry" class="hint" />
             <ui:Label text="USE \U00F1F60F/&lt;b&gt;TAB&lt;/b&gt; FOR COLLECTION MENU" display-tooltip-when-elided="true" name="collection" class="hint" />
+            <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

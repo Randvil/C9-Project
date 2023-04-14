@@ -9,6 +9,8 @@ public class LoadMenu : MonoBehaviour
 
     DirectoryInfo directory = new("Saves");
 
+    [SerializeField] private NewGameSave newGameSave;
+
     private void Awake()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
@@ -17,25 +19,34 @@ public class LoadMenu : MonoBehaviour
         newGameB.clicked += NewGame;
 
         Button continueB = root.Q<Button>("continueB");
-        continueB.clicked += ContinueGame;
+
+        if (IsAnySaveFile)
+        {
+            continueB.clicked += LoadSave;
+            continueB.RemoveFromClassList("inactive-menu-b");
+            continueB.AddToClassList("menu-b");
+        }
     }
 
-    private void LoadSave(FileInfo save)
+    private void LoadSave()
     {
-        FileDataHandler handler = new(directory.Name, save.Name);
+        FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
 
         SceneManager.LoadScene(gameData.CheckpointData.scene);
     }
 
-    private void ContinueGame()
+    private bool IsAnySaveFile
     {
-
+        get
+        {
+            return directory.GetFiles("LastSave").Length > 0;
+        }
     }
 
     private void NewGame()
     {
-        Button newGameB = GetComponent<UIDocument>().rootVisualElement.Q<Button>("newGameB");
-        newGameB.clicked += NewGame;
+        newGameSave.CreateNewGameSave();
+        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.scene);
     }
 }

@@ -90,9 +90,6 @@ public class PanelManager : MonoBehaviour
 
     private void Awake()
     {
-        //Remove then load system is finished!
-        //Input = FindObjectOfType<PlayerInput>(); //~0.001s
-
         foreach (var doc in docs)
         {
             panels.Add(doc.rootVisualElement);
