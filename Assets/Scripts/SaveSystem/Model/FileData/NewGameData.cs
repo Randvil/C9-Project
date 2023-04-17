@@ -6,8 +6,4 @@ using UnityEngine;
 public class NewGameData : ScriptableObject
 {
     public Data CheckpointData;
-
-    public Data CurrentGameData;
-
-
 }

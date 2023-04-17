@@ -11,6 +11,7 @@ public class PlayerCreator : Creator
     {
         newGameObject.transform.position = data.CurrentGameData.position;
         newGameObject.GetComponent<Player>().HealthManager.ChangeCurrentHealth(-(PlayerComponent.HealthManager.Health.currentHealth - data.CurrentGameData.playerHealth));
+        newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerHealth);
     }
 
 }

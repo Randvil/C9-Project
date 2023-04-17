@@ -7,11 +7,11 @@ public class SpawnEnemyKillTime : SpawnEnemyCondition
     private float spawnRadius;
     private Spawnpoint spawnpoint;
     private int maxEnemyNumber;
-    private string enemyPrefab;
+    private GameObject enemyPrefab;
     private float currCountdownValue;
     private float killTime;
 
-    public SpawnEnemyKillTime(float spawnRadius, Spawnpoint spawnpoint, int maxEnemyNumber, string enemyPrefab, float killTime)
+    public SpawnEnemyKillTime(float spawnRadius, Spawnpoint spawnpoint, int maxEnemyNumber, GameObject enemyPrefab, float killTime)
     {
         this.spawnRadius = spawnRadius;
         this.spawnpoint = spawnpoint;
@@ -26,23 +26,18 @@ public class SpawnEnemyKillTime : SpawnEnemyCondition
         spawnpoint.StartCoroutine(SpawnEnemyCoroutine(killTime));
     }
 
-    public void SpawnEnemy()
-    {
-        GameObject prefab = Resources.Load<GameObject>(enemyPrefab);
-        GameObject instantiate = Object.Instantiate(prefab, spawnpoint.transform.position, Quaternion.identity, spawnpoint.transform);
-        instantiate.name = enemyPrefab;
-        spawnEnemyCount++;
-    }
-
     public IEnumerator SpawnEnemyCoroutine(float countdownValue)
     {
         yield return new WaitUntil(() => InRadius(spawnpoint, spawnRadius));
-        SpawnEnemy();
-        while (spawnpoint.transform.childCount != 0 && spawnEnemyCount != maxEnemyNumber)
+        SpawnOneEnemy(enemyPrefab, spawnpoint);
+
+        while (spawnEnemyCount != maxEnemyNumber)
         {
             yield return StartCountdown(countdownValue);
-            SpawnEnemy();
-        }  
+            if (spawnpoint.transform.childCount != 0)
+                SpawnOneEnemy(enemyPrefab, spawnpoint);
+        }
+
         yield return null;
     }
 

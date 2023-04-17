@@ -6,9 +6,9 @@ public class SpawnEnemyOnce : SpawnEnemyCondition
 {
     private float spawnRadius;
     private Spawnpoint spawnpoint;
-    private string enemyPrefab;
+    private GameObject enemyPrefab;
 
-    public SpawnEnemyOnce(float spawnRadius, Spawnpoint spawnpoint, string enemyPrefab)
+    public SpawnEnemyOnce(float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab)
     {
         this.spawnRadius = spawnRadius;
         this.spawnpoint = spawnpoint;
@@ -24,15 +24,7 @@ public class SpawnEnemyOnce : SpawnEnemyCondition
     public IEnumerator SpawnEnemyCoroutine()
     {
         yield return new WaitUntil(() => InRadius(spawnpoint, spawnRadius));
-        SpawnEnemy();
-    }
-
-    public void SpawnEnemy()
-    {
-        GameObject prefab = Resources.Load<GameObject>(enemyPrefab);
-        GameObject instantiate = Object.Instantiate(prefab, spawnpoint.transform.position, Quaternion.identity, spawnpoint.transform);
-        instantiate.name = enemyPrefab;
-        spawnEnemyCount++;
+        SpawnOneEnemy(enemyPrefab, spawnpoint);
     }
 
 }

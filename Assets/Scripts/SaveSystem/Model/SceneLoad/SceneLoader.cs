@@ -9,8 +9,11 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private SceneObjectsCreatorData prefabsData;
 
-    private void Start()
+    private void Awake()
     {
+        NewGameSave newGame = GetComponent<NewGameSave>();
+        newGame.CreateNewGameSave();
+
         dataHandler = new FileDataHandler("Saves", "LastSave");
         gameData = dataHandler.Load();
 
