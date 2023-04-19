@@ -1,0 +1,19 @@
+.polygon_container {
+}
+
+.polygon_border-image {
+    height: 65%;
+}
+
+.polygon_icon {
+    flex-grow: 1;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    opacity: 0;
+}
+
+.polygon_label {
+    white-space: normal;
+    flex-grow: 1;
+    -unity-text-align: lower-center;
+}

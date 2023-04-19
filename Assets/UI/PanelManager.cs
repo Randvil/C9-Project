@@ -1,30 +1,118 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using DG.Tweening;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 public class PanelManager : MonoBehaviour
 {
-    public UIDocument[] docs;
-    public UIDocument firstDoc;
+    [SerializeField] private UIDocument[] docs;
 
-    private VisualElement currentMenu;
+    public readonly List<VisualElement> panels = new();
+
+    private Stack<VisualElement> history = new();
+
+    private VisualElement lastPanel;
+
+    private VisualElement currentPanel;
     public VisualElement CurrentPanel
     {
-        get => currentMenu;
-        set
-        {
-            if (currentMenu != null)
-                currentMenu.style.display = DisplayStyle.None;
-            currentMenu = value;
-            if (currentMenu != null)
-                currentMenu.style.display = DisplayStyle.Flex;
+        get => currentPanel;
+
+        private set
+        {        
+            lastPanel = currentPanel;
+            currentPanel = value;           
+
+            if (lastPanel != null)
+            {
+                DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
+                StartCoroutine(DisplayDisableTween(lastPanel));  
+            }
+
+            if (currentPanel != null)
+            {
+                if (currentPanel.style.opacity != 0f) // Если игрок слишком быстро переключает панели (балуется)
+                    StopDisplayDisabling();
+
+                currentPanel.style.display = DisplayStyle.Flex;
+                DOTween.To(x => currentPanel.style.opacity = x, 0f, 1f, PanelTweenDuration).SetUpdate(true);
+            }      
         }
     }
 
-    private void Start()
+    [SerializeField] private float panelTweenDuration = 0.5f;
+    public float PanelTweenDuration => panelTweenDuration;
+
+    private PlayerInput _input;
+    public PlayerInput Input
+    { 
+        get => _input;
+        set
+        {
+            _input = value;
+            foreach (var doc in docs)
+                if (Input != null)
+                    doc.GetComponent<IPanel>().SetInput(Input);
+        }
+    }
+
+    public IAbilityManager Abilities { get; set; }
+
+    public void GoBack()
     {
-        foreach (var panel in docs)
-            panel.rootVisualElement.style.display = DisplayStyle.None;
-                
-        CurrentPanel = docs[0].rootVisualElement;
+        if (history.Count > 0 && history.Peek() != CurrentPanel)
+            CurrentPanel = history.Pop();
+    }
+
+    public void SwitchTo(int index)
+    {
+        SwitchTo(panels[index]);
+    }
+
+    public void SwitchTo(VisualElement panel)
+    {
+        if (panel == CurrentPanel)
+            return;
+
+        if (CurrentPanel != null)
+            history.Push(CurrentPanel);
+        CurrentPanel = panel;
+    }
+
+    public void AddPanel(VisualElement panel)
+    {
+        panels.Add(panel);
+        DisablePanel(panel);
+        CurrentPanel ??= panel;
+    }
+
+    private void Awake()
+    {
+        foreach (var doc in docs)
+        {
+            panels.Add(doc.rootVisualElement);
+            DisablePanel(doc.rootVisualElement);
+        }   
+
+        if (docs.Length > 0) // Если были задействованы ui-доки из инспектора
+            SwitchTo(0);
+    }
+
+    private void DisablePanel(VisualElement panel)
+    {
+        panel.style.display = DisplayStyle.None;
+    }
+
+    private IEnumerator DisplayDisableTween(VisualElement panelToDisable)
+    {
+        yield return new WaitForSecondsRealtime(PanelTweenDuration);
+        DisablePanel(panelToDisable);
+    }
+
+    private void StopDisplayDisabling()
+    {
+        StopAllCoroutines();
     }
 }
