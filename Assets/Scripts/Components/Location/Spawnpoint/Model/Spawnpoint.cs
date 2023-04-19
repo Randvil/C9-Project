@@ -48,7 +48,7 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
             case "SpiderBoy":
                 EnemyPrefab = prefabsData.spiderBoyPrefab;
                 break;
-            case "Spider":
+            case "SpiderMinion":
                 EnemyPrefab = prefabsData.spiderPrefab;
                 break;
             case "FlyingEye":

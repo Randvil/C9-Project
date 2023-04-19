@@ -48,7 +48,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
     {
         for (int i = 0; i < enemyPerWaveCount; i++)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.8f);
             SpawnOneEnemy(enemyPrefab, spawnpoint);
         }
     }

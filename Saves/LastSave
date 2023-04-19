@@ -62,7 +62,7 @@
                             "z": 0.0
                         },
                         "enemyNumber": 10,
-                        "enemyPrefabName": "Spider",
+                        "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 10.0,
                         "condition": "wave",
                         "timeCountdown": 10.0,
@@ -224,7 +224,7 @@
                             "z": 0.0
                         },
                         "enemyNumber": 10,
-                        "enemyPrefabName": "Spider",
+                        "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 10.0,
                         "condition": "wave",
                         "timeCountdown": 10.0,
