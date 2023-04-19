@@ -15,7 +15,7 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
 
     public UnityEvent EntranceOpenEvent { get; } = new();
 
-    public void Start()
+    public void Awake()
     {
         dataHandler = new FileDataHandler("Saves", "LastSave");
         gameData = dataHandler.Load();
@@ -42,25 +42,25 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                     ArcadeCenterSpawnpoints = locationData.spawnpoints;
                     break;
             }
+        }
 
-            if (spawnpointsID.CityLocation.Count != 0)
+        if (spawnpointsID.CityLocation.Count != 0)
+        {
+            foreach (int id in spawnpointsID.CityLocation)
             {
-                foreach (int id in spawnpointsID.CityLocation)
-                {
-                    SpawnpointData sp = CitySpawnpoints.Find(spawnpoint => spawnpoint.id == id);
-                    if (sp.enemyNumber > 0)
-                        return true;
-                }
+                SpawnpointData sp = CitySpawnpoints.Find(spawnpoint => spawnpoint.id == id);
+                if (sp.enemyNumber > 0)
+                    return true;
             }
+        }
 
-            if (spawnpointsID.ArcadeCenter.Count != 0)
+        if (spawnpointsID.ArcadeCenter.Count != 0)
+        {
+            foreach (int id in spawnpointsID.ArcadeCenter)
             {
-                foreach (int id in spawnpointsID.ArcadeCenter)
-                {
-                    SpawnpointData sp = ArcadeCenterSpawnpoints.Find(spawnpoint => spawnpoint.id == id);
-                    if (sp.enemyNumber > 0)
-                        return true;
-                }
+                SpawnpointData sp = ArcadeCenterSpawnpoints.Find(spawnpoint => spawnpoint.id == id);
+                if (sp.enemyNumber > 0)
+                    return true;
             }
         }
 

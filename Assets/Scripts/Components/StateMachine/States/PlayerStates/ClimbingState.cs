@@ -77,11 +77,6 @@ public class ClimbingState : BasePlayerState
 
     }
 
-    protected override void OnInteract(eActionPhase actionPhase)
-    {
-
-    }
-
     protected override void OnRoll(eActionPhase actionPhase)
     {
         if (actionPhase == eActionPhase.Started)

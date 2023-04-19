@@ -94,7 +94,7 @@ MonoBehaviour:
         condition: once
         timeCountdown: 0
         waveCount: 0
-      - id: 21
+      - id: 6
         position: {x: 61.85, y: 13.72, z: 0}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
