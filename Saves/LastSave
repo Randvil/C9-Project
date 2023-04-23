@@ -1,13 +1,19 @@
 {
     "CheckpointData": {
         "playerHealth": 1000.0,
-        "playerEnergy": 100.0,
+        "playerEnergy": 0.0,
         "position": {
             "x": -9.140000343322754,
             "y": 10.231952667236329,
             "z": 0.0
         },
-        "scene": "CityLocation",
+        "latestScene": "CityLocation",
+        "learnedAbilities": [
+            {
+                "pos": 1,
+                "abilityType": 1
+            }
+        ],
         "locations": [
             {
                 "sceneName": "CityLocation",
@@ -67,6 +73,34 @@
                         "condition": "wave",
                         "timeCountdown": 10.0,
                         "waveCount": 3
+                    },
+                    {
+                        "id": 5,
+                        "position": {
+                            "x": 41.70000076293945,
+                            "y": 11.149999618530274,
+                            "z": 6.980000019073486
+                        },
+                        "enemyNumber": 10,
+                        "enemyPrefabName": "SpiderMinion",
+                        "spawnRadius": 6.0,
+                        "condition": "wave",
+                        "timeCountdown": 10.0,
+                        "waveCount": 3
+                    },
+                    {
+                        "id": 6,
+                        "position": {
+                            "x": 53.95000076293945,
+                            "y": 11.449999809265137,
+                            "z": 6.980000019073486
+                        },
+                        "enemyNumber": 10,
+                        "enemyPrefabName": "SpiderMinion",
+                        "spawnRadius": 6.0,
+                        "condition": "wave",
+                        "timeCountdown": 10.0,
+                        "waveCount": 3
                     }
                 ]
             },
@@ -78,7 +112,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 0.6899999976158142,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -92,7 +126,7 @@
                         "position": {
                             "x": 61.849998474121097,
                             "y": 0.6899999976158142,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -106,7 +140,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 7.510000228881836,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -120,7 +154,7 @@
                         "position": {
                             "x": 61.849998474121097,
                             "y": 7.510000228881836,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -134,7 +168,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 13.720000267028809,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -144,11 +178,11 @@
                         "waveCount": 0
                     },
                     {
-                        "id": 21,
+                        "id": 6,
                         "position": {
                             "x": 61.849998474121097,
                             "y": 13.720000267028809,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -169,7 +203,13 @@
             "y": 10.229999542236329,
             "z": 0.0
         },
-        "scene": "CityLocation",
+        "latestScene": "CityLocation",
+        "learnedAbilities": [
+            {
+                "pos": 1,
+                "abilityType": 1
+            }
+        ],
         "locations": [
             {
                 "sceneName": "CityLocation",
@@ -229,6 +269,34 @@
                         "condition": "wave",
                         "timeCountdown": 10.0,
                         "waveCount": 3
+                    },
+                    {
+                        "id": 5,
+                        "position": {
+                            "x": 41.70000076293945,
+                            "y": 11.149999618530274,
+                            "z": 6.980000019073486
+                        },
+                        "enemyNumber": 10,
+                        "enemyPrefabName": "SpiderMinion",
+                        "spawnRadius": 6.0,
+                        "condition": "wave",
+                        "timeCountdown": 10.0,
+                        "waveCount": 3
+                    },
+                    {
+                        "id": 6,
+                        "position": {
+                            "x": 53.95000076293945,
+                            "y": 11.449999809265137,
+                            "z": 6.980000019073486
+                        },
+                        "enemyNumber": 10,
+                        "enemyPrefabName": "SpiderMinion",
+                        "spawnRadius": 6.0,
+                        "condition": "wave",
+                        "timeCountdown": 10.0,
+                        "waveCount": 3
                     }
                 ]
             },
@@ -240,7 +308,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 0.6899999976158142,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -254,7 +322,7 @@
                         "position": {
                             "x": 61.849998474121097,
                             "y": 0.6899999976158142,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -268,7 +336,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 7.510000228881836,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -282,7 +350,7 @@
                         "position": {
                             "x": 61.849998474121097,
                             "y": 7.510000228881836,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -296,7 +364,7 @@
                         "position": {
                             "x": 49.150001525878909,
                             "y": 13.720000267028809,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
@@ -306,11 +374,11 @@
                         "waveCount": 0
                     },
                     {
-                        "id": 21,
+                        "id": 6,
                         "position": {
                             "x": 61.849998474121097,
                             "y": 13.720000267028809,
-                            "z": 0.0
+                            "z": 1.25
                         },
                         "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",

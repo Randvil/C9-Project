@@ -69,7 +69,21 @@ public class Data
     public float playerHealth;
     public float playerEnergy;
     public Vector3 position;
-    public string scene;
+    public string latestScene;
+    public List<AbilityPair> learnedAbilities;
 
     public List<LocationData> locations = new();
+}
+
+[Serializable]
+public class AbilityPair
+{
+    public int pos;
+    public eAbilityType abilityType;
+
+    public AbilityPair(int pos, eAbilityType abilityType)
+    {
+        this.pos = pos;
+        this.abilityType = abilityType;
+    }
 }

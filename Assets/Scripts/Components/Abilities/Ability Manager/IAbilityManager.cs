@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine.Events;
 
 public interface IAbilityManager
 {
+    public Dictionary<eAbilityType, IAbility> Abilities { get; set; }
+    public Dictionary<int, IAbility> LearnedAbilities { get; set; }
     public void AddAbility(eAbilityType abilityType, IAbility ability);
     public int LearnAbility(eAbilityType abilityType);
     public int LearnAbility(IAbility ability);

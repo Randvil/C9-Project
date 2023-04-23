@@ -66,7 +66,7 @@ public class LoadMenu : MonoBehaviour
         FileDataHandler handler = new(directory.Name, save.Name);
         GameData gameData = handler.Load();
 
-        SceneManager.LoadScene(gameData.CheckpointData.scene);
+        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 
     private void NewGame()

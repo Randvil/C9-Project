@@ -13,6 +13,8 @@ public class AbilityManager : IAbilityManager
     public int AbilityCountInLayout { get; set; } = 2;
 
     public UnityEvent<int> SwitchLayoutEvent { get; private set; } = new();
+    public Dictionary<int, IAbility> LearnedAbilities { get => learnedAbilities; set => learnedAbilities = value; }
+    public Dictionary<eAbilityType, IAbility> Abilities { get => abilities; set => abilities = value; }
 
     public void AddAbility(eAbilityType abilityType, IAbility ability)
     {
