@@ -45,8 +45,8 @@ public class SceneObjectsCreator : Creator
                     {
                         SpawnpointCreator spawnpoint = new SpawnpointCreator();
                         spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
-                        spawnpoint.SpawnpointComponent.StartSpawnpoint(spdata.id, spdata.position, spdata.enemyNumber, spdata.killTime, 
-                            spdata.enemyPrefabName, spdata.spawnRadius, spdata.condition);
+                        spawnpoint.SpawnpointComponent.StartSpawnpoint(spdata.id, spdata.position, spdata.enemyNumber, spdata.timeCountdown,
+                            spdata.enemyPrefabName, spdata.spawnRadius, spdata.condition, spdata.waveCount);
                     }
                 }
             }

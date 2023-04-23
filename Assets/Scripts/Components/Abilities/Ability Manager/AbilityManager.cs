@@ -7,7 +7,6 @@ public class AbilityManager : IAbilityManager
 {
     private Dictionary<eAbilityType, IAbility> abilities = new();
     private Dictionary<int, IAbility> learnedAbilities = new();
-    public Dictionary<int, IAbility> LearnedAbilities => learnedAbilities;
 
     public int CurrentLayoutNumber { get; private set; } = 1;
     public int LayoutCount { get; set; } = 2;
@@ -18,6 +17,8 @@ public class AbilityManager : IAbilityManager
     public UnityEvent<eAbilityType> AbilityForgetEvent { get; } = new();
 
     public UnityEvent<int> SwitchLayoutEvent { get; private set; } = new();
+    public Dictionary<int, IAbility> LearnedAbilities { get => learnedAbilities; set => learnedAbilities = value; }
+    public Dictionary<eAbilityType, IAbility> Abilities { get => abilities; set => abilities = value; }
 
     public IAbility GetAbilityByType(eAbilityType type) => abilities[type];
 

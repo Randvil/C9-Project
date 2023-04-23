@@ -44,19 +44,22 @@ public class SpawnpointData
     public int enemyNumber;
     public string enemyPrefabName;
     public float spawnRadius;
-    public float killTime;
     public string condition;
 
-    public SpawnpointData(int id, Vector3 position, int enemyNumber, string enemyPrefabName, float spawnRadius, float killTime, 
-        string condition)
+    public float timeCountdown;
+    public int waveCount;
+
+    public SpawnpointData(int id, Vector3 position, int enemyNumber, string enemyPrefabName, float spawnRadius, string condition, 
+        float timeCountdown, int waveCount)
     {
         this.id = id;
         this.position = position;
         this.enemyNumber = enemyNumber;
         this.enemyPrefabName = enemyPrefabName;
         this.spawnRadius = spawnRadius;
-        this.killTime = killTime;
         this.condition = condition;
+        this.timeCountdown = timeCountdown;
+        this.waveCount = waveCount;
     }
 }
 
@@ -64,8 +67,23 @@ public class SpawnpointData
 public class Data
 {
     public float playerHealth;
+    public float playerEnergy;
     public Vector3 position;
-    public string scene;
+    public string latestScene;
+    public List<AbilityPair> learnedAbilities;
 
     public List<LocationData> locations = new();
+}
+
+[Serializable]
+public class AbilityPair
+{
+    public int pos;
+    public eAbilityType abilityType;
+
+    public AbilityPair(int pos, eAbilityType abilityType)
+    {
+        this.pos = pos;
+        this.abilityType = abilityType;
+    }
 }

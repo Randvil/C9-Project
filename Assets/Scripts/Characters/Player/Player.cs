@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -184,6 +184,17 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public void SaveData(Data data)
     {
         data.playerHealth = HealthManager.Health.currentHealth;
+        data.playerEnergy = EnergyManager.Energy.currentEnergy;
         data.position = transform.position;
+
+        foreach (KeyValuePair<int, IAbility> ability in AbilityManager.LearnedAbilities)
+        {
+            eAbilityType type = AbilityManager.Abilities.FirstOrDefault(x => x.Value == ability.Value).Key;
+            AbilityPair abilityPair = new(ability.Key, type);
+            if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
+                data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
+            else 
+                data.learnedAbilities.Add(abilityPair);
+        }
     }
 }

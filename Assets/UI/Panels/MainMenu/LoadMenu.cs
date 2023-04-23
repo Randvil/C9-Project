@@ -33,7 +33,7 @@ public class LoadMenu : MonoBehaviour
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
 
-        SceneManager.LoadScene(gameData.CheckpointData.scene);
+        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 
     private bool IsAnySaveFile
@@ -47,6 +47,6 @@ public class LoadMenu : MonoBehaviour
     private void NewGame()
     {
         newGameSave.CreateNewGameSave();
-        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.scene);
+        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.latestScene);
     }
 }

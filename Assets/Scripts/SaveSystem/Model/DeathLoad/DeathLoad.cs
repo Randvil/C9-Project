@@ -30,6 +30,6 @@ public class DeathLoad: IDeathLoad
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(gameData.CheckpointData.scene);
+        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 }
