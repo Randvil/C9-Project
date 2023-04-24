@@ -191,7 +191,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
     public void SaveData(Data data)
     {
         data.playerHealth = HealthManager.Health.currentHealth;
-        data.playerEnergy = EnergyManager.Energy.currentEnergy;
+        //data.playerEnergy = EnergyManager.Energy.currentEnergy;
         data.position = transform.position;
     }
 }
