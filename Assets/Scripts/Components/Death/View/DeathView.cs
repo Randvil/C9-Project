@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathView : IDeathView
+public class DeathView
 {
     private Animator animator;
 
-    public DeathView(Animator animator)
+    public DeathView(IDeathManager deathManager, Animator animator)
     {
         this.animator = animator;
+
+        deathManager.DeathEvent.AddListener(OnDeath);
+        deathManager.ResurrectionEvent.AddListener(OnResurrect);
     }
 
-    public void StartDying()
+    public void OnDeath()
     {
         animator.SetBool("IsDying", true);
     }
 
-    public void BreakDying()
+    public void OnResurrect()
     {
         animator.SetBool("IsDying", false);
     }

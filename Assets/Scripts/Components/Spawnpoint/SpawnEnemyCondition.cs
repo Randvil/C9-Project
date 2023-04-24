@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
 {
-    private ITeam team;
+    private ITeamMember team;
     public int spawnEnemyCount;
 
     public abstract void Spawn();
@@ -26,7 +26,7 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
             foreach (Collider2D o in objectsNear)
             {
                 o.TryGetComponent(out team);
-                if (team != null && team.Team == eTeam.Player)
+                if (team != null && team.CharacterTeam.Team == eTeam.Player)
                 {
                     return true;
                 }

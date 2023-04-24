@@ -6,5 +6,8 @@ public interface IWeapon
     public void BreakAttack();
     public bool IsAttacking { get; }
     public float AttackSpeed { get; }
+    public float AttackRange { get; }
+    public UnityEvent StartAttackEvent { get; }
+    public UnityEvent BreakAttackEvent { get; }
     public UnityEvent ReleaseAttackEvent { get; }
 }

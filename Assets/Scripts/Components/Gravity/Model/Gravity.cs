@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Gravity : MonoBehaviour, IGravity
@@ -9,40 +10,54 @@ public class Gravity : MonoBehaviour, IGravity
     private Collider2D checkGroundCollider;
 
     [SerializeField]
+    private GravityData gravityData;
+
     private LayerMask groundLayer;
-
-    [SerializeField]
     private AnimationCurve fallSpeedCurve;
+    private float maxFallSpeed;
+    private float maxSpeedTime;
 
-    [SerializeField, Min(0f)]
-    private float maxFallSpeed = 2f;
-
-    [SerializeField, Min(0f)]
-    private float maxSpeedTime = 1f;
-
-    private readonly List<object> disablers = new();
-    private new Rigidbody2D rigidbody;
     private float startFallTime;
+    private bool wasFalling;
+    private bool wasGrounded;
+    private readonly List<object> disablers = new();
+
+    private new Rigidbody2D rigidbody;
 
     public bool IsDisabled => disablers.Count > 0;
     public bool IsGrounded { get; private set; }
     public bool IsFalling { get; private set; }
 
+    public UnityEvent StartFallEvent { get; private set; } = new();
+    public UnityEvent BreakFallEvent { get; private set; } = new();
+    public UnityEvent GroundedEvent { get; private set; } = new();
+
     private void Awake()
     {
+        groundLayer = gravityData.groundLayer;
+        fallSpeedCurve = gravityData.fallSpeedCurve;
+        maxFallSpeed = gravityData.maxFallSpeed;
+        maxSpeedTime = gravityData.maxSpeedTime;
+
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
         SetFallingState();
-        HandleGravity();
+        HandleFallSpeed();
     }
 
     public void SetFallingState()
     {
         if (IsDisabled == true)
         {
+            if (wasFalling == true)
+            {
+                wasFalling = false;
+                BreakFallEvent.Invoke();
+            }
+
             IsFalling = false;
             return;
         }
@@ -50,6 +65,15 @@ public class Gravity : MonoBehaviour, IGravity
         IsGrounded = checkGroundCollider.IsTouchingLayers(groundLayer);
         if (IsGrounded == true)
         {
+            if (wasGrounded == false)
+            {
+                //rigidbody.velocity = new(rigidbody.velocity.x, 0f);
+
+                wasGrounded = true;
+                GroundedEvent.Invoke();
+                BreakFallEvent.Invoke();
+            }
+
             IsFalling = false;
             return;
         }
@@ -57,18 +81,15 @@ public class Gravity : MonoBehaviour, IGravity
         if (IsFalling == false)
         {
             startFallTime = Time.time;
+            StartFallEvent.Invoke();
         }
 
-        IsFalling = true;
+        IsFalling = wasFalling = true;
+        wasGrounded = false;
     }
 
-    private void HandleGravity()
+    private void HandleFallSpeed()
     {
-        //if (IsFalling == false)
-        //{
-        //    return;
-        //}
-
         if (IsDisabled == true || IsFalling == false)
         {
             return;
@@ -92,5 +113,10 @@ public class Gravity : MonoBehaviour, IGravity
     public void Enable(object disabler)
     {
         disablers.Remove(disabler);
+
+        if (IsDisabled == false)
+        {
+            SetFallingState();
+        }
     }
 }

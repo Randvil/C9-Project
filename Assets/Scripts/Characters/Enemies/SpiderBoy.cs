@@ -1,195 +1,73 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEffectable
+public class SpiderBoy : BaseCreature, IWatchmanBehavior
 {
-    [SerializeField] private GameObject avatar;
+    [Header("SpiderBoy Prefab Components")]
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private Transform spiderSpawnPoint;
+    [SerializeField] private AudioSource sharedAudioSource;
 
-    [SerializeField] private HealthManagerData healthManagerData;
-    [SerializeField] private EffectManagerData effectManagerData;
+    [Header("SpiderBoy Data")]
+    [SerializeField] private EnergyManagerData energyManagerData;
+    [SerializeField] private RangedWeaponData rangedWeaponData;
+    [SerializeField] private NoArmsWeaponViewData weaponViewData;
+    [SerializeField] private CreatureSpawnerData creatureSpawnerData;
+    [SerializeField] private DefensiveJumpData defensiveJumpData;
+    [SerializeField] private CompoundProtectionData compoundProtectionData;
+    [SerializeField] private CreatureSpawnerViewData spiderSpawnerViewData;
+    [SerializeField] private WatchmanStrategyData watchmanData;
 
-    [SerializeField] private TurningViewData turningViewData;
+    public WatchmanStrategyData WatchmanStrategyData => watchmanData;
+    public IModifierManager WeaponModifierManager { get; private set; }
+    public IWeapon Weapon { get; private set; }
+    public IEnergyManager EnergyManager { get; private set; }
+    public IAbility SpiderSpawnAbility { get; private set; }
+    public IAbility JumpAbility { get; private set; }
+    public ICompoundAttack CompoundAttack { get; private set; }
+    public ICompoundProtection CompoundProtection { get; private set; }
 
-    [SerializeField]
-    private float SpawnGroupDelay;
 
-    [SerializeField]
-    private float SpawnSpiderDelay;
+    protected NoArmsWeaponView weaponView;
+    protected CreatureSpawnerView spiderSpawnerView;
 
-    [SerializeField]
-    private int SpiderGroup;
+    protected IAIBehavior currentBehavior;
 
-    [SerializeField]
-    private GameObject SpiderPrefab;
-
-    [SerializeField]
-    private float attackRadius;
-
-    [SerializeField]
-    private LayerMask enemyLayerMask;
-
-    [SerializeField]
-    private Slider healthBarSlider;
-
-    private float positionX;
-    private GameObject player;
-    private bool playerInRadius = false;
-
-    public eTeam Team { get; private set; } = eTeam.Enemies;
-
-    public UnityEvent<eDirection> DirectionalMoveEvent { get; } = new();
-    public UnityEvent<eDirection> TurnEvent { get; } = new();
-    public UnityEvent<Vector2> FreeMoveEvent { get; } = new();
-    public UnityEvent StopEvent { get; } = new();
-    public UnityEvent<Vector2> JumpEvent { get; } = new();
-    public UnityEvent AttackEvent { get; } = new();
-    public UnityEvent<eAbilityType> AbilityEvent { get; } = new();
-
-    public UnityEvent SpawnEvent;
-
-    public BoxCollider2D Collider { get; private set;}
-    public Rigidbody2D Rigidbody { get; private set; }
-    public ITurning Turning { get; private set; }
-    public IHealthManager HealthManager { get; private set; }
-    public IModifierManager DefenceModifierManager { get; private set; }
-    public IEffectManager EffectManager { get; private set; }
-    public IDamageHandler DamageHandler { get; private set; }
-    public IDeathManager DeathManager { get; private set; }
-
-    private HealthBarView healthBarView;
-    private ITurningView turningView;
-
-    private void Start()
+    protected override void Awake()
     {
-        Collider = GetComponent<BoxCollider2D>();
-        Rigidbody = GetComponent<Rigidbody2D>();
+        base.Awake();
 
-        Turning = new Turning();
-        HealthManager = new HealthManager(healthManagerData);
-        DefenceModifierManager = new ModifierManager();
-        EffectManager = new EffectManager(effectManagerData);
-        DamageHandler = new DamageHandler(HealthManager, DefenceModifierManager, EffectManager);
-        DeathManager = new DeathManager(HealthManager);
+        EnergyManager = new EnergyManager(energyManagerData);
+        WeaponModifierManager = new ModifierManager();
+        //Weapon = new OrdinaryBow(this, gameObject, projectileSpawnPoint, rangedWeaponData, WeaponModifierManager, CharacterTeam, Turning);
+        Weapon = new BombThrower(this, gameObject, projectileSpawnPoint, rangedWeaponData, WeaponModifierManager, CharacterTeam, Turning);
+        SpiderSpawnAbility = new CreatureSpawner(this, spiderSpawnPoint, creatureSpawnerData, EnergyManager);
+        JumpAbility = new DefensiveJump(this, defensiveJumpData, EnergyManager, Rigidbody, Gravity, Turning);
+        CompoundAttack = new SpiderboyCompoundAttack(gameObject, Weapon, SpiderSpawnAbility);
+        CompoundProtection = new SpiderboyCompoundProtection(compoundProtectionData, HealthManager, JumpAbility);
 
-        healthBarView = new(healthBarSlider, HealthManager, DeathManager);
-        turningView = new TurningView(avatar, turningViewData, Turning);
+        weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
+        spiderSpawnerView = new CreatureSpawnerView(spiderSpawnerViewData, SpiderSpawnAbility, sharedAudioSource);
 
-        DamageHandler.TakeDamageEvent.AddListener(OnTakeDamage);
+        currentBehavior = new WatchmanStrategy(this);
+        currentBehavior.Activate();
+
         DeathManager.DeathEvent.AddListener(OnDeath);
     }
 
-    public void Update()
+    private void Update()
     {
-        TurnToPlayer();
-        Act();
-    }
-    public void Activate()
-    {
-
+        currentBehavior.LogicUpdate();
     }
 
-    public void Deactivate()
+    private void FixedUpdate()
     {
-
-    }
-
-    public void SpawnSpiders()
-    {
-        SpawnEvent.Invoke();
-        StartCoroutine(SpawnSpiderGroup());
-        
-    }
-
-    public void Act()
-    {
-        if (playerInRadius == false) 
-            CancelInvoke("SpawnSpiders");
-        if (playerInRadius && !IsInvoking("SpawnSpiders"))
-            InvokeRepeating("SpawnSpiders", 0.1f, SpawnGroupDelay);
-    }
-
-    public IEnumerator SpawnSpiderGroup()
-    {
-        positionX = transform.position.x;
-        
-        if (Turning.Direction == eDirection.Left) 
-            positionX += 1;
-        else positionX -= 1;
-
-        for (int i = 0; i < SpiderGroup; i++)
-        {
-            yield return new WaitForSeconds(SpawnSpiderDelay);
-            Instantiate(SpiderPrefab, new Vector3(positionX, transform.position.y + 0.1f, 0), Quaternion.identity);
-        }
-
-    }
-    private void TurnToPlayer()
-    {
-        if (PlayerPosX() != 0f)
-        {
-            if (transform.position.x > PlayerPosX() && Turning.Direction != eDirection.Left)
-                ChangeDirection();
-                
-            if (transform.position.x < PlayerPosX() && Turning.Direction != eDirection.Right)
-                ChangeDirection();
-        }
-
-        turningView.Turn();
-    }
-
-    private void ChangeDirection()
-    {
-        switch (Turning.Direction)
-        {
-            case eDirection.Right:
-                Turning.Turn(eDirection.Left);
-                TurnEvent.Invoke(eDirection.Left);
-                break;
-
-            case eDirection.Left:
-                Turning.Turn(eDirection.Right);
-                TurnEvent.Invoke(eDirection.Right);
-                break;
-        }
-    }
-
-    //also checks if player in attackRadius
-    private float PlayerPosX()
-    {
-        Collider2D[] objectsNear = Physics2D.OverlapCircleAll(transform.position, attackRadius);
-
-        if (objectsNear.Length == 0)
-        {
-            playerInRadius = false;
-            return 0f;
-        }
-            
-        foreach (Collider2D obj in objectsNear)
-        {
-            if (obj.TryGetComponent(out ITeam team) && team.Team != Team)
-            {
-                playerInRadius = true;
-                return obj.transform.position.x;
-            }
-        }
-        playerInRadius = false;
-        return 0f;
-    }
-
-    private void OnTakeDamage(DamageInfo damageInfo)
-    {
-        if (player != null)
-            return;
-
-        Collider2D attacker = Physics2D.OverlapCircle(transform.position, attackRadius, enemyLayerMask);
-        if (attacker != null)
-            player = attacker.gameObject;
+        currentBehavior.PhysicsUpdate();
     }
 
     private void OnDeath()
     {
-        Destroy(gameObject);
+        currentBehavior.Deactivate();
+        Destroy(gameObject, 0.5f);
     }
 }

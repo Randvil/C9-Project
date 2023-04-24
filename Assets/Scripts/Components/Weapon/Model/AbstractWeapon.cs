@@ -5,9 +5,14 @@ using UnityEngine.Events;
 
 public abstract class AbstractWeapon : IWeapon, IDamageDealer
 {
-    protected GameObject weaponOwner;
+    protected MonoBehaviour owner;
+    protected GameObject weaponOwnerObject;
 
-    protected WeaponData weaponData;
+    protected DamageData[] damageDatas;
+    protected float attackRange;
+    protected float[] preAttackDelays;
+    protected float postAttackDelay;
+    protected float attackSpeed;
 
     protected IModifierManager weaponModifierManager;
     protected ITeam team;
@@ -16,17 +21,25 @@ public abstract class AbstractWeapon : IWeapon, IDamageDealer
     protected Coroutine attackCoroutine;
     protected int attackSeries;
 
-    public float AttackSpeed => weaponData.attackSpeed;
     public bool IsAttacking => attackCoroutine != null;
+    public float AttackSpeed => attackSpeed;
+    public float AttackRange => attackRange;
 
+    public UnityEvent StartAttackEvent { get; } = new();
+    public UnityEvent BreakAttackEvent { get; } = new();
     public UnityEvent ReleaseAttackEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
-    public AbstractWeapon(GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning)
+    public AbstractWeapon(MonoBehaviour owner, GameObject weaponOwnerObject, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning)
     {
-        this.weaponOwner = weaponOwner;
+        this.owner = owner;
+        this.weaponOwnerObject = weaponOwnerObject;
 
-        this.weaponData = weaponData;
+        damageDatas = weaponData.damageDatas;
+        attackRange = weaponData.attackRange;
+        preAttackDelays = weaponData.preAttackDelays;
+        postAttackDelay = weaponData.postAttackDelay;
+        attackSpeed = weaponData.attackSpeed;
 
         this.weaponModifierManager = weaponModifierManager;
         this.team = team;
@@ -39,7 +52,9 @@ public abstract class AbstractWeapon : IWeapon, IDamageDealer
 
         if (attackCoroutine == null)
         {
-            attackCoroutine = Coroutines.StartCoroutine(AttackCoroutine());
+            attackCoroutine = owner.StartCoroutine(AttackCoroutine());
+
+            StartAttackEvent.Invoke();
         }
     }
 
@@ -47,23 +62,26 @@ public abstract class AbstractWeapon : IWeapon, IDamageDealer
     {
         if (attackCoroutine != null)
         {
-            Coroutines.StopCoroutine(ref attackCoroutine);
+            owner.StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
             attackSeries = 0;
+
+            BreakAttackEvent.Invoke();
         }
     }
 
     protected virtual IEnumerator AttackCoroutine()
     {
-        for (int attackNumber = 1; attackNumber <= Mathf.Min(attackSeries, weaponData.preAttackDelays.Length); attackNumber++)
+        for (int attackNumber = 1; attackNumber <= Mathf.Min(attackSeries, preAttackDelays.Length); attackNumber++)
         {
-            yield return new WaitForSeconds(weaponData.preAttackDelays[attackNumber - 1] / weaponData.attackSpeed);
-            ReleaseAttack();
+            yield return new WaitForSeconds(preAttackDelays[attackNumber - 1] / attackSpeed);
+            ReleaseAttack(attackNumber);
             ReleaseAttackEvent.Invoke();
         }
 
-        yield return new WaitForSeconds(weaponData.postAttackDelay / weaponData.attackSpeed);
+        yield return new WaitForSeconds(postAttackDelay / attackSpeed);
         BreakAttack();
     }
 
-    protected abstract void ReleaseAttack();
+    protected abstract void ReleaseAttack(int attackNumber);
 }

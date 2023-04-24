@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCaster, IMortal, IClimbable, IDataSavable
+public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbilityCaster, IDataSavable
 {
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
-    [SerializeField] public PlayerInput unityPlayerInput;
-    [SerializeField] private AudioSource attackSound;
-    [SerializeField] private AudioSource hurtSound;
-    [SerializeField] private AudioSource walkSound;
-    [SerializeField] private AudioSource parrySound;
+    [SerializeField] private AudioSource sharedAudioSource;
+    [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private AudioSource takeDamageAudioSource;
 
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EnergyManagerData energyManagerData;
     [SerializeField] private EffectManagerData effectManagerData;
     [SerializeField] private InteractData interactData;
-    [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private MovementData movementData;
     [SerializeField] private JumpData jumpData;
     [SerializeField] private CrouchData crouchData;
@@ -33,16 +29,22 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
     [SerializeField] private TessenData tessenData;
+    [SerializeField] private DefensiveJumpData defensiveJumpData;
+    [SerializeField] private RegenerationAbilityData regenerationAbilityData;
 
-    public eTeam Team { get; private set; } = eTeam.Player;
+    [SerializeField] private TurningViewData turningViewData;
+    [SerializeField] private JumpViewData jumpViewData;
+    [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
+
     public Transform CameraFollowPoint => avatar.transform;
 
     public BoxCollider2D Collider { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
     public IPlayerInput PlayerInput { get; set; }
+    public ITeam CharacterTeam { get; private set; }
     public IGravity Gravity { get; private set; }
-    public IGravityView GravityView { get; private set; }
+    public GravityView GravityView { get; private set; }
     public IMovement Movement { get; private set; }
     public ICrouch Crouch { get; private set; }
     public ITurning Turning { get; private set; }
@@ -61,19 +63,20 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public IDeathManager DeathManager { get; private set; }
     public IDamageHandler DamageHandler { get; private set; }
     public IParry Parry { get; private set; }
-    public IClimb Climb { get; private set; }
+    public IPlayerClimb Climb { get; private set; }
     public IDeathLoad DeathLoad { get; private set; }
 
-    public ITurningView TurningView { get; private set; }
-    public IMovementView MovementView { get; private set; }
-    public ICrouchView CrouchView { get; private set; }
-    public IJumpView JumpView { get; private set; }
-    public IRollView RollView { get; private set; }
-    public IWeaponView WeaponView { get; private set; }
-    public IParryView ParryView { get; private set; }
-    public IClimbView ClimbView { get; private set; }
-    public IStunVeiw StunVeiw { get; private set; }
-    public IDeathView DeathView { get; private set; }
+    public TurningView TurningView { get; private set; }
+    public PlayerMovementView MovementView { get; private set; }
+    public CrouchView CrouchView { get; private set; }
+    public JumpView JumpView { get; private set; }
+    public RollView RollView { get; private set; }
+    public PlayerWeaponView WeaponView { get; private set; }
+    public ParryView ParryView { get; private set; }
+    public ClimbView ClimbView { get; private set; }
+    public PlayerTakeDamageView TakeDamageView { get; private set; }
+    public StunView StunView { get; private set; }
+    public DeathView DeathView { get; private set; }
 
     public IStateMachine StateMachine { get; private set; }
     public IState Standing { get; private set; }
@@ -111,45 +114,49 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
         Animator = GetComponent<Animator>();
         Gravity = GetComponent<IGravity>();
 
+        CharacterTeam = new CharacterTeam(eTeam.Player);
         HealthManager = new HealthManager(healthManagerData);
         EnergyManager = new EnergyManager(energyManagerData);
-        EffectManager = new EffectManager(effectManagerData);
+        EffectManager = new EffectManager(this, effectManagerData);
         DeathManager = new DeathManager(HealthManager);
         WeaponModifierManager = new ModifierManager();
         AbilityModifierManager = new ModifierManager();
         DefenceModifierManager = new ModifierManager();
-        DamageHandler = new DamageHandler(HealthManager, DefenceModifierManager, EffectManager);
+        DamageHandler = new DamageHandler(HealthManager, DefenceModifierManager, EffectManager, DeathManager);
         Turning = new Turning();
         Movement = new Movement(movementData, Rigidbody, Turning, EffectManager);
         Crouch = new Crouch(crouchData, Collider, EffectManager);
-        Jump = new Jump(jumpData, Rigidbody, Gravity);
-        Roll = new Roll(rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
-        Weapon = new CleaveMeleeWeapon(gameObject, weaponData, WeaponModifierManager, this, Turning);
+        Jump = new Jump(this, jumpData, Rigidbody, Gravity);
+        Roll = new Roll(this, rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
+        Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
         WeaponEnergyRegenerator = new EnergyRegenerator(energyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
-        Parry = new Parry(gameObject, parryData, Turning, this, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
-        Climb = new Climb(climbData, Rigidbody, Gravity, Turning);
-        Interact = new Interact(gameObject, interactData);
+        Parry = new Parry(this, gameObject, parryData, Turning, CharacterTeam, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
+        Climb = new PlayerClimb(this, climbData, Rigidbody, Gravity, Turning);
+        Interact = new Interact(this, gameObject, interactData);
         DeathLoad = new DeathLoad(DeathManager);
 
         AbilityManager = new AbilityManager();
-        IAbility kanabo = new Kanabo(gameObject, kanaboData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
-        IAbility daikyu = new Daikyu(gameObject, daikyuData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this);
-        IAbility tessen = new Tessen(gameObject, tessenData, AbilityManager, EnergyManager, AbilityModifierManager, Turning, this, Collider);
+        IAbility kanabo = new Kanabo(this, gameObject, kanaboData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
+        IAbility daikyu = new Daikyu(this, gameObject, daikyuData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
+        IAbility tessen = new Tessen(this, gameObject, tessenData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam, Collider);
+        IAbility regeneration = new RegenerationAbility(this, regenerationAbilityData, EnergyManager, HealthManager);
         AbilityManager.AddAbility(eAbilityType.Kanabo, kanabo);
         AbilityManager.AddAbility(eAbilityType.Daikyu, daikyu);
         AbilityManager.AddAbility(eAbilityType.Tessen, tessen);
+        AbilityManager.AddAbility(eAbilityType.Regeneration, regeneration);
 
         GravityView = new GravityView(Gravity, Animator);
-        TurningView = new TurningView(avatar, turningViewData, Turning);
-        MovementView = new MovementView(Movement, Gravity, Animator, walkSound);
-        CrouchView = new CrouchView(Animator);
-        JumpView = new JumpView(Jump, Animator);
+        TurningView = new TurningView(this, avatar, turningViewData, Turning);
+        MovementView = new PlayerMovementView(Movement, Gravity, Animator, walkAudioSource);
+        CrouchView = new CrouchView(Crouch, Animator);
+        JumpView = new JumpView(jumpViewData, Jump, Animator, sharedAudioSource);
         RollView = new RollView(Roll, Animator);
-        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, Weapon, Animator, attackSound);
+        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, Animator, sharedAudioSource);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
-        ClimbView = new ClimbView(Animator, Rigidbody);
-        StunVeiw = new StunView(Animator);
-        DeathView = new DeathView(Animator);
+        ClimbView = new ClimbView(Climb, Animator);
+        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource);
+        StunView = new StunView(EffectManager, Animator);
+        DeathView = new DeathView(DeathManager, Animator);
 
         CreateStateMachine();
     }
@@ -186,6 +193,7 @@ public class Player : MonoBehaviour, ITeam, IDamageable, IEffectable, IAbilityCa
     public void SaveData(Data data)
     {
         data.playerHealth = HealthManager.Health.currentHealth;
+        data.playerEnergy = EnergyManager.Energy.currentEnergy;
         data.position = transform.position;
     }
 }

@@ -6,5 +6,7 @@ public interface IAbility
     public void BreakCast();
     public bool CanBeUsed { get; }
     public bool IsPerforming { get; }
+    public UnityEvent StartCastEvent { get; }
+    public UnityEvent BreakCastEvent { get; }
     public UnityEvent ReleaseCastEvent { get; }
 }

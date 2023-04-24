@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class OrdinaryBow : AbstractRangedWeapon
 {
-    public OrdinaryBow(GameObject weaponOwner, Transform projectileSpawnPoint, RangedWeaponData rangedWeaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(weaponOwner, weaponModifierManager, team, turning, projectileSpawnPoint, rangedWeaponData) { }
+    public OrdinaryBow(MonoBehaviour owner, GameObject weaponOwner, Transform projectileSpawnPoint, RangedWeaponData rangedWeaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(owner, weaponOwner, weaponModifierManager, team, turning, projectileSpawnPoint, rangedWeaponData) { }
 
-    protected override void ReleaseAttack()
+    protected override void ReleaseAttack(int attackNumber)
     {
-        IProjectile projectile = Object.Instantiate(rangedWeaponData.projectileData.prefab, new(projectileSpawnPoint.position.x, projectileSpawnPoint.position.y, 0f), Quaternion.identity).GetComponent<IProjectile>();
-        projectile.Initialize(weaponOwner, rangedWeaponData.weaponData.damageData, rangedWeaponData.projectileData, turning.Direction, team, weaponModifierManager, this);
+        DamageData damageData = damageDatas.Length >= attackNumber ? damageDatas[attackNumber - 1] : damageDatas[0];
+
+        IProjectile projectile = Object.Instantiate(prefab, new(projectileSpawnPoint.position.x, projectileSpawnPoint.position.y, 0f), Quaternion.identity).GetComponent<IProjectile>();
+        projectile.Initialize(weaponOwnerObject, damageData, projectileData, turning.Direction, team, weaponModifierManager, this);
     }
 }

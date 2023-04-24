@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnergyRegenerator : IEnergyRegenerator
 {
-    private EnergyRegeneratorData energyRegeneratorData;
+    //private EnergyRegeneratorData energyRegeneratorData;
+    private float energyPerHit = 1f;
 
     private IEnergyManager energyManager;
 
@@ -13,7 +14,7 @@ public class EnergyRegenerator : IEnergyRegenerator
     public EnergyRegenerator(EnergyRegeneratorData energyRegeneratorData, IEnergyManager energyManager, IDamageDealer damageDealer)
     {
         this.energyManager = energyManager;
-        this.energyRegeneratorData = energyRegeneratorData;
+        energyPerHit = energyRegeneratorData.energyPerHit;
 
         damageDealer.DealDamageEvent.AddListener(RestoreEnergy);
     }
@@ -25,8 +26,7 @@ public class EnergyRegenerator : IEnergyRegenerator
             return;
         }
 
-        energyManager.ChangeCurrentEnergy(energyRegeneratorData.energyPerHit);
-        Debug.Log($"{energyRegeneratorData.energyPerHit} energy were added");
+        energyManager.ChangeCurrentEnergy(energyPerHit);
     }
 
     public void AllowRegeneration(object allower)

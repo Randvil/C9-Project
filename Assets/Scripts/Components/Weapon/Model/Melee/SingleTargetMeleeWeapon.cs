@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 {
-    public SingleTargetMeleeWeapon(GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(weaponOwner, weaponData, weaponModifierManager, team, turning) { }
+    public SingleTargetMeleeWeapon(MonoBehaviour owner, GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(owner, weaponOwner, weaponData, weaponModifierManager, team, turning) { }
 
-    protected override void ReleaseAttack()
+    protected override void ReleaseAttack(int attackNumber)
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(weaponOwner.transform.position, weaponData.attackRadius);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(weaponOwnerObject.transform.position, attackRange);
 
         if (enemies.Length == 0)
         {
@@ -21,7 +21,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 
         foreach (Collider2D enemy in enemies)
         {
-            if (enemy.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
+            if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
             {
                 continue;
             }
@@ -31,9 +31,9 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
                 continue;
             }
 
-            if (((turning.Direction == eDirection.Right && enemy.transform.position.x >= weaponOwner.transform.position.x)
-                || (turning.Direction == eDirection.Left && enemy.transform.position.x <= weaponOwner.transform.position.x))
-                && Mathf.Abs(enemy.transform.position.x - weaponOwner.transform.position.x) < distanceToNearestEnemy)
+            if (((turning.Direction == eDirection.Right && enemy.transform.position.x >= weaponOwnerObject.transform.position.x)
+                || (turning.Direction == eDirection.Left && enemy.transform.position.x <= weaponOwnerObject.transform.position.x))
+                && Mathf.Abs(enemy.transform.position.x - weaponOwnerObject.transform.position.x) < distanceToNearestEnemy)
             {
                 nearestDamageableEnemy = damageableEnemy;
             }
@@ -41,6 +41,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 
         if (nearestDamageableEnemy != null)
         {
+            Damage damage = damages.Length >= attackNumber ? damages[attackNumber - 1] : damages[0];
             nearestDamageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
         }            
     }

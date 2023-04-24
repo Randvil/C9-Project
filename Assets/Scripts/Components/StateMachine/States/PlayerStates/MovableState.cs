@@ -15,16 +15,14 @@ public class MovableState : TurnableState
     {
         base.Exit();
 
-        player.Movement.StopMove();
-
-        player.MovementView.SetMovementParams();
+        player.Movement.BreakMove();
     }
 
     protected override void OnStop()
     {
         base.OnStop();
 
-        player.Movement.StopMove();
+        player.Movement.BreakMove();
     }
 
     public override void PhysicsUpdate()
@@ -40,7 +38,5 @@ public class MovableState : TurnableState
         {
             player.Movement.StartMove();
         }
-
-        player.MovementView.SetMovementParams();
     }
 }
