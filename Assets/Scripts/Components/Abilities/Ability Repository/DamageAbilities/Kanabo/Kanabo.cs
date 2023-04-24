@@ -11,6 +11,8 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
     public Kanabo(MonoBehaviour owner, GameObject caster, KanaboData kanaboData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, kanaboData, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Kanabo;
+        
         AttackRange = kanaboData.attackRange;
         stunDuration = kanaboData.stunDuration;
 

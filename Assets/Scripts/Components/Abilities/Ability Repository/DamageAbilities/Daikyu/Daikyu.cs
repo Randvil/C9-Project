@@ -13,6 +13,8 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
     public Daikyu(MonoBehaviour owner, GameObject caster, DaikyuData daikyuData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, daikyuData, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Daikyu;
+       
         projectileData = daikyuData.projectileData;
         fullChargeTime = daikyuData.fullChargeTime;
         fullChargeDamageMultiplier = daikyuData.fullChargeDamageMultiplier;

@@ -19,6 +19,8 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 
     public Tessen(MonoBehaviour owner, GameObject caster, TessenData tessenData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(owner, caster, tessenData, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Tessen;
+        
         AttackRange = tessenData.attackRange;
         castTime = tessenData.castTime;
         impactPeriod = tessenData.impactPeriod;

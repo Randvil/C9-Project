@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ManagersCreator : Creator
 {
-    public override void LoadDataToObject(GameData data)
-    {
-        
-    }
+    public PlayerInput PlayerInput { get => newGameObject.GetComponent<PlayerInput>(); }
+
 }

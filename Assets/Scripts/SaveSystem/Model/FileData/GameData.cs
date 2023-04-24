@@ -9,6 +9,16 @@ public class GameData
 
     //data about locations for moving between scenes
     public Data CurrentGameData = new();
+
+    public GameData()
+    {
+    }
+
+    public GameData(Data checkpointData, Data currentGameData)
+    {
+        CheckpointData = checkpointData;
+        CurrentGameData = currentGameData;
+    }
 }
 
 [Serializable]

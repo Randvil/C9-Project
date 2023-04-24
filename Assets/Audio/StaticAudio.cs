@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,33 +22,22 @@ public class StaticAudio : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
 
-            ChangeBackgroundTrack(SceneManager.GetActiveScene().buildIndex);
-
-            SceneManager.activeSceneChanged += (prevScene, nextScene) => ChangeBackgroundTrack(nextScene.buildIndex);
-            SubscribeButtonsOnSound();
+            SceneManager.activeSceneChanged += (_, _) => SubscribeButtonsOnSound();
         }
     }
 
-    void ChangeBackgroundTrack(int sceneIndex)
+    public void ChangeBackgroundTrack(string trackName)
     {
         musicSource.Stop();
 
-        if (sceneIndex >= backgroundTracks.Count)
-        {
-            Debug.Log("Add new background tracks!");
-            return;
-        }
-        musicSource.clip = backgroundTracks[sceneIndex];
-        musicSource.Play();
-        //...
+        musicSource.clip = backgroundTracks.Find(x => x.name == trackName);
+        if (musicSource.clip != null)
+            musicSource.Play();
     }
 
     void SubscribeButtonsOnSound()
     {
-        foreach (var panelManager in FindObjectsOfType<PanelManager>())
-            foreach (var panel in panelManager.panels)
-            {
-                panel.Query<Button>().ForEach(b => b.clicked += buttonClickSource.Play);
-            }
+        foreach (var doc in FindObjectsOfType<UIDocument>())
+            doc.rootVisualElement.Query<Button>().ForEach(b => b.clicked += buttonClickSource.Play);
     }
 }
