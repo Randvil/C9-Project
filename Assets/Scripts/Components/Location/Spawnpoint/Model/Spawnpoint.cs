@@ -96,11 +96,17 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                 {
                     if (sp.id == spawnpointData.id)
                     {
-                        int killedEnemies = spawnpointData.enemyNumber - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-                        if (killedEnemies < 0)
-                            sp.enemyNumber = 0;
-                        else
-                            sp.enemyNumber = killedEnemies;
+                        int enemiesAlive;
+                        if (Condition == "wave")
+                        {
+                            enemiesAlive = spawnpointData.enemyNumber * waveCount - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                            if (enemiesAlive == 0)
+                                sp.enemyNumber = 0;
+                        } else
+                        {
+                            enemiesAlive = spawnpointData.enemyNumber - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                            sp.enemyNumber = enemiesAlive;
+                        }                           
                     }
                 }
             }    

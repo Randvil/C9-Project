@@ -123,7 +123,7 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
         for (int i = 0; i < SpiderGroup; i++)
         {
             yield return new WaitForSeconds(SpawnSpiderDelay);
-            Instantiate(SpiderPrefab, new Vector3(positionX, transform.position.y + 0.1f, 0), Quaternion.identity);
+            Instantiate(SpiderPrefab, new Vector3(positionX, transform.position.y + 0.1f, transform.position.z), Quaternion.identity);
         }
 
     }
