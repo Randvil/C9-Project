@@ -60,6 +60,8 @@
     color: rgba(210, 210, 210, 0.5);
     -unity-font-definition: none;
     margin-right: 10px;
+    transition-property: opacity, rotate;
+    transition-duration: 0.4s, 0.4s;
 }
 
 .hint {
@@ -100,4 +102,15 @@
     transition-property: opacity, translate, display;
     transition-duration: 1s, 1s, 0s;
     transition-delay: 0s, 0s, 1s;
+}
+
+.hidden-poly {
+    opacity: 0;
+    transition-property: opacity, rotate;
+    transition-duration: 0.4s, 0.4s;
+    rotate: 90deg;
+}
+
+.poly-cant_use .polygon_border-image {
+    opacity: 0.3;
 }

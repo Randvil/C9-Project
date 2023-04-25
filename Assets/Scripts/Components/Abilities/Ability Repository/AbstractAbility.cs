@@ -13,9 +13,10 @@ public abstract class AbstractAbility : IAbility
     protected IAbilityManager abilityManager;
     protected IEnergyManager energyManager;
 
-    public virtual bool IsPerforming { get => strikeCoroutine != null; }
-    public virtual bool IsOnCooldown { get => Time.time < finishCooldownTime; }
-    public virtual bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= baseAbilityData.cost;
+    public eAbilityType Type { get; protected set; }
+    public virtual bool IsPerforming => strikeCoroutine != null; 
+    public virtual bool IsOnCooldown => Time.time < finishCooldownTime; 
+    public virtual bool CanBeUsed => !IsPerforming && !IsOnCooldown && energyManager.Energy.currentEnergy >= baseAbilityData.cost;
 
     public UnityEvent ReleaseCastEvent { get; } = new();
 

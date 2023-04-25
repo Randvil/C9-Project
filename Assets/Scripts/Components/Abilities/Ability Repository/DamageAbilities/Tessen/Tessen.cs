@@ -16,6 +16,8 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 
     public Tessen(GameObject caster, TessenData tessenData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(caster, tessenData, abilityManager, energyManager, modifierManager, turning, team)
     {
+        Type = eAbilityType.Tessen;
+
         this.tessenData = tessenData;
 
         this.collider = collider;

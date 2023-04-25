@@ -7,10 +7,12 @@ public class NewGameSave : MonoBehaviour
     [SerializeField]
     private NewGameData newGameData;
 
+    public GameData gameData;
+
     public void CreateNewGameSave()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
-        GameData gameData = new GameData(newGameData.CheckpointData, newGameData.CheckpointData);
+        gameData = new GameData(newGameData.CheckpointData, newGameData.CheckpointData);
         dataHandler.Save(gameData);
     }
 }

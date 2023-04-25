@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour
         //NewGameSave newGame = GetComponent<NewGameSave>();
         //newGame.CreateNewGameSave();
 
+
         dataHandler = new FileDataHandler("Saves", "LastSave");
         gameData = dataHandler.Load();
 

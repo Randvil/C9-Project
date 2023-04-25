@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneObjectsCreator : Creator
@@ -23,12 +24,12 @@ public class SceneObjectsCreator : Creator
         PlayerCreator player = new PlayerCreator();
         player.CreateObject(prefabsData.playerPrefab, data);
 
-        staticUI.PanelManager.Input = managers.PlayerInput;
-        staticUI.newGameObject.GetComponent<PanelManager>().Abilities = player.PlayerComponent.AbilityManager;
-
         player.PlayerComponent.Initialize(managers.PlayerInput);
         player.PlayerComponent.Document = staticUI.UIDocument;
         player.LoadDataToObject(data);
+
+        staticUI.PanelManager.Input = managers.PlayerInput;
+        staticUI.newGameObject.GetComponent<PanelManager>().Abilities = player.PlayerComponent.AbilityManager;
 
         DeathLoad deathLoad = new DeathLoad(player.PlayerComponent.DeathManager);
 

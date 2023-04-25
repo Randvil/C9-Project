@@ -20,8 +20,13 @@ public interface IAbilityManager
     public void StopSustainingAbility(int inputAbilityNumber);
     public void SwitchAbilityLayout();
     public int GetInputAbilityNumber(int actualAbilityNumber);
+    public IAbility GetAbilityByType(eAbilityType type);
+
     public int CurrentLayoutNumber { get; }
     public int LayoutCount { get; set; }
     public int AbilityCountInLayout { get; set; }
+
+    public UnityEvent<eAbilityType> AbilityLearnEvent { get; }
+    public UnityEvent<eAbilityType> AbilityForgetEvent { get; }
     public UnityEvent<int> SwitchLayoutEvent { get; }
 }
