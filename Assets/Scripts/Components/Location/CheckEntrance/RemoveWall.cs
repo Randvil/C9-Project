@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenEntrance : MonoBehaviour
+public class RemoveWall : MonoBehaviour
 {
     private ICheckEntrance checkEntrance;
     private bool isOpen;

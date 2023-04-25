@@ -50,7 +50,10 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
             {
                 SpawnpointData sp = CitySpawnpoints.Find(spawnpoint => spawnpoint.id == id);
                 if (sp.enemyNumber > 0)
+                {
                     return true;
+                }
+                    
             }
         }
 
@@ -60,7 +63,10 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
             {
                 SpawnpointData sp = ArcadeCenterSpawnpoints.Find(spawnpoint => spawnpoint.id == id);
                 if (sp.enemyNumber > 0)
+                {
                     return true;
+                }
+                    
             }
         }
 

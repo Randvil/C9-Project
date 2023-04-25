@@ -15,6 +15,8 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
     private int enemyNumber;
     private float timeCountdown;
     private GameObject enemyPrefab;
+    private Material enemyMaterial;
+
     private float spawnRadius;
     private string condition;
     private string enemyName;
@@ -31,6 +33,7 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
     public string Condition { get => condition; set => condition = value; }
     public string EnemyName { get => enemyName; set => enemyName = value; }
     public int WaveCount { get => waveCount; set => waveCount = value; }
+    public Material EnemyMaterial { get => enemyMaterial; set => enemyMaterial = value; }
 
     public void StartSpawnpoint(int id, Vector3 position, int enemyNumber, float timeCountdown, string enemyPrefab, 
         float spawnRadius, string condition, int waveCount)
@@ -47,15 +50,19 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
         {
             case "SpiderBoy":
                 EnemyPrefab = prefabsData.spiderBoyPrefab;
+                EnemyMaterial = prefabsData.spiderBoyMaterial;
                 break;
             case "SpiderMinion":
                 EnemyPrefab = prefabsData.spiderPrefab;
+                EnemyMaterial = prefabsData.spiderMaterial;
                 break;
             case "FlyingEye":
                 EnemyPrefab = prefabsData.flyingEyePrefab;
+                EnemyMaterial = prefabsData.flyingEyeMaterial;
                 break;
             case "Boss":
                 EnemyPrefab = prefabsData.bossPrefab;
+                EnemyMaterial = prefabsData.bossMaterial;
                 break;
         }
 
@@ -65,13 +72,13 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
         switch (condition)
         {
             case "once":
-                spawnCondition = new SpawnEnemyOnce(spawnRadius, this, EnemyPrefab);
+                spawnCondition = new SpawnEnemyOnce(spawnRadius, this, EnemyPrefab, EnemyMaterial);
                 break;
             case "killTime":
-                spawnCondition = new SpawnEnemyKillTime(spawnRadius, this, enemyNumber, EnemyPrefab, timeCountdown);
+                spawnCondition = new SpawnEnemyKillTime(spawnRadius, this, enemyNumber, EnemyPrefab, timeCountdown, EnemyMaterial);
                 break;
             case "wave":
-                spawnCondition = new SpawnEnemyWave(spawnRadius, this, EnemyPrefab, waveCount, enemyNumber, timeCountdown);
+                spawnCondition = new SpawnEnemyWave(spawnRadius, this, EnemyPrefab, waveCount, enemyNumber, timeCountdown, EnemyMaterial);
                 break;
         }
 
@@ -88,8 +95,13 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                 foreach (SpawnpointData sp in ld.spawnpoints)
                 {
                     if (sp.id == spawnpointData.id)
-                        sp.enemyNumber = spawnpointData.enemyNumber - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-
+                    {
+                        int killedEnemies = spawnpointData.enemyNumber - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                        if (killedEnemies < 0)
+                            sp.enemyNumber = 0;
+                        else
+                            sp.enemyNumber = killedEnemies;
+                    }
                 }
             }    
         }

@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, IEffectable
 {
@@ -36,6 +36,8 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
     public IMovementView MovementView { get; protected set; }
     public IWeaponView WeaponView { get; protected set; }
     public HealthBarView HealthBarView { get; protected set; }
+
+    public UnityEvent deathEvent = new();
 
     public eTeam Team { get; } = eTeam.Enemies;
 
@@ -162,7 +164,8 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Weapon.BreakAttack();
         WeaponView.BreakAttack();
 
-        Destroy(gameObject, 0f);
+        deathEvent.Invoke();
+        StartCoroutine(DestroyGameObjectCoroutine());
     }
 
     private void OnDestroy()
@@ -172,5 +175,11 @@ public abstract class BasePatrollingEnemy : MonoBehaviour, ITeam, IDamageable, I
         Movement.StopMove();
         Weapon.BreakAttack();
         WeaponView.BreakAttack();
+    }
+
+    private IEnumerator DestroyGameObjectCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

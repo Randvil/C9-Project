@@ -37,6 +37,8 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
     private GameObject player;
     private bool playerInRadius = false;
 
+    public UnityEvent deathEvent = new();
+
     public eTeam Team { get; private set; } = eTeam.Enemies;
 
     public UnityEvent<eDirection> DirectionalMoveEvent { get; } = new();
@@ -190,6 +192,13 @@ public class SpiderBoy : MonoBehaviour, IEnemyBehavior, ITeam, IDamageable, IEff
 
     private void OnDeath()
     {
+        deathEvent.Invoke();
+        StartCoroutine(DestroyGameObjectCoroutine());
+    }
+
+    private IEnumerator DestroyGameObjectCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 }

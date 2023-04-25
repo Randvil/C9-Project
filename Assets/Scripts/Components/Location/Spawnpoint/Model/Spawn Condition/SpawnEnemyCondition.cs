@@ -14,10 +14,12 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
         return spawnEnemyCount;
     }
 
-    public void SpawnOneEnemy(GameObject enemyPrefab, Spawnpoint spawnpoint)
+    public void SpawnOneEnemy(GameObject enemyPrefab, Spawnpoint spawnpoint, Material material)
     {
         GameObject instantiate = Object.Instantiate(enemyPrefab, GenerateRandomPos(spawnpoint.transform.position), 
             Quaternion.identity, spawnpoint.transform);
+        Material materialClone = Object.Instantiate<Material>(material);
+        instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
         instantiate.name = enemyPrefab.name;
         spawnEnemyCount++;
     }

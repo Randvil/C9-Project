@@ -7,6 +7,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
     private float spawnRadius;
     private Spawnpoint spawnpoint;
     private GameObject enemyPrefab;
+    private Material material;
     //how many waves of enemies
     private int waveCount;
     //enemies per wave
@@ -14,7 +15,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
     private float timeBetweenWaves;
     private float currCountdownValue;
 
-    public SpawnEnemyWave(float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab, int waveCount, int enemyPerWaveCount, float timeBetweenWaves)
+    public SpawnEnemyWave(float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab, int waveCount, int enemyPerWaveCount, float timeBetweenWaves, Material material)
     {
         this.spawnRadius = spawnRadius;
         this.spawnpoint = spawnpoint;
@@ -22,6 +23,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
         this.waveCount = waveCount;
         this.enemyPerWaveCount = enemyPerWaveCount;
         this.timeBetweenWaves = timeBetweenWaves;
+        this.material = material;
         spawnEnemyCount = 0;
     }
 
@@ -49,7 +51,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
         for (int i = 0; i < enemyPerWaveCount; i++)
         {
             yield return new WaitForSeconds(0.8f);
-            SpawnOneEnemy(enemyPrefab, spawnpoint);
+            SpawnOneEnemy(enemyPrefab, spawnpoint, material);
         }
     }
 
