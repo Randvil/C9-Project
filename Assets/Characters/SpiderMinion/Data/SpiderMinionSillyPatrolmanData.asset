@@ -9,20 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e13727c7dd9574d98b7a27afc14702, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ae764baf59e4c478c40864bbe72a92, type: 3}
   m_Name: SpiderMinionSillyPatrolmanData
   m_EditorClassIdentifier: 
-  senseDelay: 0.1
-  thinkDelay: 0.1
-  actDelay: 0.1
-  searchPlayerDistance: 10
-  loseSightOfPlayerDistance: 10
-  checkPlatformAheadRadius: 0.01
-  checkWallDistance: 0.5
-  attackRadius: 1
-  enemyLayerMask:
+  searchEnemyDistance: 10
+  checkPlatformAheadRadius: 0.1
+  checkWallDistance: 0.1
+  enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  platformLayerMask:
+  platformLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -15,7 +15,7 @@ public class AnimationSpiderboyController : MonoBehaviour
     }
     private void Start()
     {
-        spiderBoy.SpawnEvent.AddListener(OnSpawn);
+        //spiderBoy.SpawnEvent.AddListener(OnSpawn);
     }
 
     private void OnSpawn()

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpiderMinionHealhtManagerData
   m_EditorClassIdentifier: 
   initialHealth:
-    maxHealth: 20
-    currentHealth: 20
+    maxHealth: 30
+    currentHealth: 30

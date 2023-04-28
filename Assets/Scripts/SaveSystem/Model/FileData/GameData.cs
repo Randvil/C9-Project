@@ -49,7 +49,7 @@ public class SpawnpointData
     public float timeCountdown;
     public int waveCount;
 
-    public SpawnpointData(int id, Vector3 position, int enemyNumber, string enemyPrefabName, float spawnRadius, string condition, 
+    public SpawnpointData(int id, Vector3 position, int enemyNumber, string enemyPrefabName, float spawnRadius, string condition,
         float timeCountdown, int waveCount)
     {
         this.id = id;
@@ -60,6 +60,19 @@ public class SpawnpointData
         this.condition = condition;
         this.timeCountdown = timeCountdown;
         this.waveCount = waveCount;
+    }
+}
+
+[Serializable]
+public class AbilityPair
+{
+    public int pos;
+    public eAbilityType abilityType;
+
+    public AbilityPair(int pos, eAbilityType abilityType)
+    {
+        this.pos = pos;
+        this.abilityType = abilityType;
     }
 }
 
@@ -75,15 +88,3 @@ public class Data
     public List<LocationData> locations = new();
 }
 
-[Serializable]
-public class AbilityPair
-{
-    public int pos;
-    public eAbilityType abilityType;
-
-    public AbilityPair(int pos, eAbilityType abilityType)
-    {
-        this.pos = pos;
-        this.abilityType = abilityType;
-    }
-}

@@ -5,9 +5,28 @@ using UnityEngine.Events;
 
 public class Parry : IParry, IDamageDealer
 {
+    private MonoBehaviour owner;
     private GameObject character;
 
-    private ParryData parryData;
+    private float duration;
+    private float cooldown;
+    private float damageAbsorption;
+    private bool reflectMeleeDamage;
+    private bool reflectProjectiles;
+    private float reflectionDamageMultiplier;
+    private bool meleeAmplifyDamage;
+    private bool rangeAmplifyDamage;
+    private float extraAttackDamage;
+    private int amplifiedAttackNumber;
+    private float amplifyDuration;
+
+    private ITurning turning;
+    private ITeam team;
+    private IDamageHandler damageHandler;
+    private IWeapon weapon;
+    private IModifierManager defenceModifierManager;
+    private IModifierManager weaponModifierManager;
+    private IEffectManager effectManager;
 
     private Coroutine parryCoroutine;
     private float finishCooldownTime;
@@ -18,26 +37,31 @@ public class Parry : IParry, IDamageDealer
     private Coroutine amplifyDamageCoroutine;
     private int attackCounter;
 
-    private ITurning turning;
-    private ITeam team;
-    private IDamageHandler damageHandler;
-    private IWeapon weapon;
-    private IModifierManager defenceModifierManager;
-    private IModifierManager weaponModifierManager;
-    private IEffectManager effectManager;
-
     public bool IsParrying { get => parryCoroutine != null; }
     public bool IsOnCooldown { get => Time.time < finishCooldownTime; }
     public bool CanParry => IsParrying == false && IsOnCooldown == false;
 
-    public UnityEvent ParryEvent { get; } = new();
+    public UnityEvent StartParryEvent { get; } = new();
+    public UnityEvent BreakParryEvent { get; } = new();
+    public UnityEvent SuccessfulParryEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
-    public Parry(GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
+    public Parry(MonoBehaviour owner, GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {
+        this.owner = owner;
         this.character = character;
 
-        this.parryData = parryData;
+        duration = parryData.duration;
+        cooldown = parryData.cooldown;
+        damageAbsorption = parryData.damageAbsorption;
+        reflectMeleeDamage = parryData.reflectMeleeDamage;
+        reflectProjectiles = parryData.reflectProjectiles;
+        reflectionDamageMultiplier = parryData.reflectionDamageMultiplier;
+        meleeAmplifyDamage = parryData.meleeAmplifyDamage;
+        rangeAmplifyDamage = parryData.rangeAmplifyDamage;
+        extraAttackDamage = parryData.extraAttackDamage;
+        amplifiedAttackNumber = parryData.amplifiedAttackNumber;
+        amplifyDuration = parryData.amplifyDuration;
 
         this.turning = turning;
         this.team = team;
@@ -50,14 +74,22 @@ public class Parry : IParry, IDamageDealer
 
     public void StartParry()
     {
-        parryCoroutine = Coroutines.StartCoroutine(ParryCoroutine());
+        if (parryCoroutine != null)
+        {
+            return;
+        }
+
+        parryCoroutine = owner.StartCoroutine(ParryCoroutine());
+
+        StartParryEvent.Invoke();
     }
 
     public void BreakParry()
     {
         if (IsParrying == true)
         {
-            Coroutines.StopCoroutine(ref parryCoroutine);
+            owner.StopCoroutine(parryCoroutine);
+            parryCoroutine = null;
 
             defenceModifierManager.RemoveModifier(absorption);
 
@@ -72,7 +104,9 @@ public class Parry : IParry, IDamageDealer
 
             damageHandler.TakeDamageEvent.RemoveListener(OnSuccessfulParry);
 
-            finishCooldownTime = Time.time + parryData.cooldown;
+            finishCooldownTime = Time.time + cooldown;
+
+            BreakParryEvent.Invoke();
         }
     }
 
@@ -80,25 +114,25 @@ public class Parry : IParry, IDamageDealer
     { 
         SetParryConditions();
 
-        yield return new WaitForSeconds(parryData.duration);
+        yield return new WaitForSeconds(duration);
 
         BreakParry();
     }
 
     private void SetParryConditions()
     {
-        absorption = new RelativeDamageModifier(-parryData.damageAbsorption);
+        absorption = new RelativeDamageModifier(-damageAbsorption);
         defenceModifierManager.AddModifier(absorption);
 
         meleeDamageReflection = null;
-        if (parryData.reflectMeleeDamage)
+        if (reflectMeleeDamage)
         {
             meleeDamageReflection = new ParryMeleeDamageReflection(float.MaxValue, character, turning, this);
             effectManager.AddEffect(meleeDamageReflection);
         }
 
         projectileReflection = null;
-        if (parryData.reflectProjectiles)
+        if (reflectProjectiles)
         {
             projectileReflection = new ParryProjectileReflection(team, float.MaxValue, character, turning);
             effectManager.AddEffect(projectileReflection);
@@ -110,36 +144,36 @@ public class Parry : IParry, IDamageDealer
 
     private void OnSuccessfulParry(DamageInfo damageInfo)
     {
-        ParryEvent.Invoke();
+        SuccessfulParryEvent.Invoke();
 
         switch (damageInfo.damageType)
         {
             case eDamageType.MeleeWeapon:
-                if (parryData.meleeAmplifyDamage == false || amplifyDamageCoroutine != null)
+                if (meleeAmplifyDamage == false || amplifyDamageCoroutine != null)
                 {
                     return;
                 }
                 break;
 
             case eDamageType.RangedWeapon:
-                if (parryData.rangeAmplifyDamage == false || amplifyDamageCoroutine != null)
+                if (rangeAmplifyDamage == false || amplifyDamageCoroutine != null)
                 {
                     return;
                 }
                 break;
         }
 
-        amplifyDamageCoroutine = Coroutines.StartCoroutine(AmplifyDamageCoroutine());
+        amplifyDamageCoroutine = owner.StartCoroutine(AmplifyDamageCoroutine());
     }
 
     private IEnumerator AmplifyDamageCoroutine()
     {
-        damageAmplification = new RelativeDamageModifier(parryData.extraAttackDamage);
+        damageAmplification = new RelativeDamageModifier(extraAttackDamage);
         weaponModifierManager.AddModifier(damageAmplification);
         weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
         attackCounter = 0;
 
-        yield return new WaitForSeconds(parryData.amplifyDuration);
+        yield return new WaitForSeconds(amplifyDuration);
 
         RemoveAmplification();
     }
@@ -147,9 +181,9 @@ public class Parry : IParry, IDamageDealer
     private void OnReleaseAttack()
     {
         attackCounter++;
-        if (attackCounter >= parryData.amplifiedAttackNumber)
+        if (attackCounter >= amplifiedAttackNumber)
         {
-            Coroutines.StopCoroutine(ref amplifyDamageCoroutine);
+            owner.StopCoroutine(amplifyDamageCoroutine);
             RemoveAmplification();
         }
     }

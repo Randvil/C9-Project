@@ -2,11 +2,10 @@ using System.Collections;
 using UnityEngine.VFX;
 using UnityEngine;
 
-public class DissolveVisualEffect : MonoBehaviour
+public class DissolveVisualEffect : VisualEffectView
 {
     public SkinnedMeshRenderer skinnedMesh;
     private Material[] skinnedMaterials;
-    public VisualEffect dissolveGraph;
 
     public float dissolveRate = 0.0125f;
     public float refreshRate = 0.025f;
@@ -21,7 +20,7 @@ public class DissolveVisualEffect : MonoBehaviour
 
     public void ApplyDissolve()
     {
-        dissolveGraph.Play();
+        Graph.Play();
         StartCoroutine(DissolveCoroutine());
     }
 

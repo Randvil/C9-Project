@@ -25,11 +25,11 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 3,
+                        "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
                         "spawnRadius": 10.0,
-                        "condition": "killTime",
-                        "timeCountdown": 10.0,
+                        "condition": "once",
+                        "timeCountdown": 0.0,
                         "waveCount": 0
                     },
                     {
@@ -67,7 +67,7 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 5,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 10.0,
                         "condition": "wave",
@@ -81,11 +81,11 @@
                             "y": 11.149999618530274,
                             "z": 6.980000019073486
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 4,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 6.0,
                         "condition": "wave",
-                        "timeCountdown": 10.0,
+                        "timeCountdown": 8.0,
                         "waveCount": 3
                     },
                     {
@@ -95,11 +95,11 @@
                             "y": 11.449999809265137,
                             "z": 6.980000019073486
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 4,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 6.0,
                         "condition": "wave",
-                        "timeCountdown": 10.0,
+                        "timeCountdown": 8.0,
                         "waveCount": 3
                     }
                 ]
@@ -221,11 +221,11 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 3,
+                        "enemyNumber": 1,
                         "enemyPrefabName": "SpiderBoy",
                         "spawnRadius": 10.0,
-                        "condition": "killTime",
-                        "timeCountdown": 10.0,
+                        "condition": "once",
+                        "timeCountdown": 0.0,
                         "waveCount": 0
                     },
                     {
@@ -263,7 +263,7 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 5,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 10.0,
                         "condition": "wave",
@@ -277,11 +277,11 @@
                             "y": 11.149999618530274,
                             "z": 6.980000019073486
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 4,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 6.0,
                         "condition": "wave",
-                        "timeCountdown": 10.0,
+                        "timeCountdown": 8.0,
                         "waveCount": 3
                     },
                     {
@@ -291,11 +291,11 @@
                             "y": 11.449999809265137,
                             "z": 6.980000019073486
                         },
-                        "enemyNumber": 10,
+                        "enemyNumber": 4,
                         "enemyPrefabName": "SpiderMinion",
                         "spawnRadius": 6.0,
                         "condition": "wave",
-                        "timeCountdown": 10.0,
+                        "timeCountdown": 8.0,
                         "waveCount": 3
                     }
                 ]

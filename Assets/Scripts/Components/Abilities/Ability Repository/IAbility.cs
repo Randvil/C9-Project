@@ -7,5 +7,7 @@ public interface IAbility
     public eAbilityType Type { get; }
     public bool CanBeUsed { get; }
     public bool IsPerforming { get; }
+    public UnityEvent StartCastEvent { get; }
+    public UnityEvent BreakCastEvent { get; }
     public UnityEvent ReleaseCastEvent { get; }
 }

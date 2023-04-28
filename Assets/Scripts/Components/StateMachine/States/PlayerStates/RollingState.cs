@@ -7,31 +7,26 @@ public class RollingState : BasePlayerState
     public override void Enter()
     {
         base.Enter();
+        player.Roll.BreakRollEvent.AddListener(OnBreakRoll);
 
         player.Roll.StartRoll();
-        player.RollView.StartRoll();
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.Roll.BreakRollEvent.RemoveListener(OnBreakRoll);
 
         player.Roll.BreakRoll();
-        player.RollView.BreakRoll();
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        if (player.Roll.IsRolling == false)
-        {
-            stateMachine.ChangeState(player.Standing);
-        }
     }
 
     protected override void OnRoll(eActionPhase actionPhase)
     {
 
+    }
+
+    private void OnBreakRoll()
+    {
+        stateMachine.ChangeState(player.Standing);
     }
 }

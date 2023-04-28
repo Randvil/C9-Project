@@ -25,6 +25,15 @@ public class HealthBarView
 
     public void OnCurrentHealthChange(Health health)
     {
+        if (health.currentHealth == health.maxHealth)
+        {
+            //healthBarSlider.gameObject.SetActive(false);
+        }
+        else
+        {
+            healthBarSlider.gameObject.SetActive(true);
+        }
+
         healthBarSlider.value = health.currentHealth;
     }
 

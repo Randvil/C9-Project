@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class Interact : IInteract
 {
+    private MonoBehaviour owner;
     private GameObject character;
-    private InteractData interactData;
+
+    private float searchPeriod = 0.1f;
 
     private IInteractive interactive;
     private Coroutine searchCoroutine;
@@ -12,23 +14,25 @@ public class Interact : IInteract
     public bool IsInteracting => interactive.IsInteracting;
     public bool CanInteract => interactive != null;
 
-    public Interact(GameObject character, InteractData interactData)
+    public Interact(MonoBehaviour owner, GameObject character, InteractData interactData)
     {
+        this.owner = owner;
         this.character = character;
-        this.interactData = interactData;
 
-        searchCoroutine = Coroutines.StartCoroutine(SearchInteractiveObject());
+        searchPeriod = interactData.searchPeriod;
+
+        searchCoroutine = owner.StartCoroutine(SearchInteractiveObject());
     }
 
     private IEnumerator SearchInteractiveObject()
     {
         while (true)
         {
-            yield return new WaitForSeconds(interactData.searchPeriod);
+            yield return new WaitForSeconds(searchPeriod);
 
             if (character == null)
             {
-                Coroutines.StopCoroutine(ref searchCoroutine);
+                owner.StopCoroutine(searchCoroutine);
                 break;
             }
 
@@ -61,7 +65,7 @@ public class Interact : IInteract
 
         if (searchCoroutine != null)
         {
-            Coroutines.StopCoroutine(ref searchCoroutine);
+            owner.StopCoroutine(searchCoroutine);
         }
     }
 
@@ -71,7 +75,7 @@ public class Interact : IInteract
 
         if (searchCoroutine == null)
         {
-            searchCoroutine = Coroutines.StartCoroutine(SearchInteractiveObject());
+            searchCoroutine = owner.StartCoroutine(SearchInteractiveObject());
         }
     }
 

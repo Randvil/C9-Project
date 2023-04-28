@@ -9,7 +9,6 @@ public class ParryingState : TurnableState, IState
         base.Enter();
 
         player.Parry.StartParry();
-        player.ParryView.StartParry();
     }
 
     public override void Exit()
@@ -17,7 +16,6 @@ public class ParryingState : TurnableState, IState
         base.Exit();
 
         player.Parry.BreakParry();
-        player.ParryView.BreakParry();
     }
 
     public override void LogicUpdate()

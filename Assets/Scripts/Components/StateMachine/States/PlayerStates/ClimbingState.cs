@@ -16,10 +16,7 @@ public class ClimbingState : BasePlayerState
             haveToTurn = true;
         }
 
-        player.ClimbView.StartClimb();
-
         player.Gravity.SetFallingState();
-        player.GravityView.SetFallingParams();
     }
 
     public override void Exit()
@@ -27,18 +24,12 @@ public class ClimbingState : BasePlayerState
         base.Exit();
 
         player.Climb.BreakClimb();
-        player.ClimbView.BreakClimb();
 
         player.Gravity.SetFallingState();
-        player.GravityView.SetFallingParams();
     }
 
     public override void LogicUpdate()
     {
-        player.TurningView.Turn();
-
-        player.ClimbView.UpdateParameters();
-
         if (player.Climb.IsClimbing == false)
         {
             stateMachine.ChangeState(player.Standing);

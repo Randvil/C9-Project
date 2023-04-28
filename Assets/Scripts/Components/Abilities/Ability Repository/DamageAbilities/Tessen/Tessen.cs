@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class Tessen : AbstractDamageAbility, ISustainableAbility
 {
-    protected TessenData tessenData;
+    protected float castTime;
+    protected float impactPeriod;
+    protected float ascensionalPower;
 
     protected BoxCollider2D collider;
 
@@ -14,11 +17,14 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
     protected Dictionary<GameObject,IDamageHandler> damagedEnemies = new();
     protected Dictionary<IEffectManager, IEffect> stunnedEnemies = new();
 
-    public Tessen(GameObject caster, TessenData tessenData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(caster, tessenData, abilityManager, energyManager, modifierManager, turning, team)
+    public Tessen(MonoBehaviour owner, GameObject caster, TessenData tessenData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(owner, caster, tessenData, energyManager, modifierManager, turning, team)
     {
         Type = eAbilityType.Tessen;
-
-        this.tessenData = tessenData;
+        
+        AttackRange = tessenData.attackRange;
+        castTime = tessenData.castTime;
+        impactPeriod = tessenData.impactPeriod;
+        ascensionalPower = tessenData.ascensionalPower;
 
         this.collider = collider;
 
@@ -27,15 +33,15 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(tessenData.preCastDelay);
+        yield return new WaitForSeconds(preCastDelay);
 
-        endCastTime = Time.time + tessenData.castTime;
-        finishCooldownTime = Time.time + tessenData.cooldown;
+        endCastTime = Time.time + castTime;
+        finishCooldownTime = Time.time + cooldown;
 
-        while (Time.time < endCastTime && energyManager.Energy.currentEnergy > tessenData.cost * tessenData.impactPeriod)
+        while (Time.time < endCastTime && energyManager.Energy.currentEnergy > cost * impactPeriod)
         {
             Vector2 direction = turning.Direction == eDirection.Right ? Vector2.right : Vector2.left;
-            RaycastHit2D[] enemies = Physics2D.CircleCastAll(collider.transform.position, collider.size.y/2 * caster.transform.lossyScale.y, direction, tessenData.attackRadius);
+            RaycastHit2D[] enemies = Physics2D.CircleCastAll(collider.transform.position, collider.size.y/2 * caster.transform.lossyScale.y, direction, AttackRange);
 
             foreach (RaycastHit2D enemy in enemies)
             {
@@ -44,19 +50,9 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
                     continue;
                 }
 
-                if (enemy.collider.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
+                if (enemy.collider.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
                 {
                     continue;
-                }
-
-                if (enemy.collider.TryGetComponent(out IDamageable damageableEnemy) == true
-                    && damagedEnemies.ContainsKey(enemy.collider.gameObject) == false)
-                {
-                    damagedEnemies.Add(enemy.collider.gameObject, damageableEnemy.DamageHandler);
-
-                    enemy.collider.GetComponent<IGravity>().Disable(this);
-                    Rigidbody2D enemyRigidbody = enemy.collider.GetComponent<Rigidbody2D>();
-                    enemyRigidbody.velocity = new(enemyRigidbody.velocity.x, tessenData.ascensionalPower);
                 }
 
                 if (enemy.collider.TryGetComponent(out IEffectable stunnableEnemy) == true
@@ -65,6 +61,19 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
                     IEffect stunEffect = new StunEffect(float.PositiveInfinity);
                     stunnableEnemy.EffectManager.AddEffect(stunEffect);
                     stunnedEnemies.Add(stunnableEnemy.EffectManager, stunEffect);
+                }
+
+                if (enemy.collider.TryGetComponent(out IDamageable damageableEnemy) == true
+                    && damagedEnemies.ContainsKey(enemy.collider.gameObject) == false)
+                {
+                    damagedEnemies.Add(enemy.collider.gameObject, damageableEnemy.DamageHandler);
+                }
+
+                if (enemy.collider.TryGetComponent(out IGravity enemyGravity) == true)
+                {
+                    enemyGravity.Disable(this);
+                    Rigidbody2D enemyRigidbody = enemy.collider.GetComponent<Rigidbody2D>();
+                    enemyRigidbody.velocity = new(enemyRigidbody.velocity.x, ascensionalPower);
                 }
             }
 
@@ -76,14 +85,14 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
                 }
             }
 
-            energyManager.ChangeCurrentEnergy(-tessenData.cost * tessenData.impactPeriod);
+            energyManager.ChangeCurrentEnergy(-cost * impactPeriod);
 
             ReleaseCastEvent.Invoke();
 
-            yield return new WaitForSeconds(tessenData.impactPeriod);
+            yield return new WaitForSeconds(impactPeriod);
         }
 
-        yield return new WaitForSeconds(tessenData.postCastDelay);
+        yield return new WaitForSeconds(postCastDelay);
 
         BreakCast();
     }

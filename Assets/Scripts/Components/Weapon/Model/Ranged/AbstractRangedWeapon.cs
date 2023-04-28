@@ -5,11 +5,15 @@ using UnityEngine;
 public abstract class AbstractRangedWeapon : AbstractWeapon
 {
     protected Transform projectileSpawnPoint;
-    protected RangedWeaponData rangedWeaponData;
 
-    protected AbstractRangedWeapon(GameObject weaponOwner, IModifierManager weaponModifierManager, ITeam team, ITurning turning, Transform projectileSpawnPoint, RangedWeaponData rangedWeaponData) : base(weaponOwner, rangedWeaponData.weaponData, weaponModifierManager, team, turning)
+    protected ProjectileData projectileData;
+    protected GameObject prefab;
+
+    protected AbstractRangedWeapon(MonoBehaviour owner, GameObject weaponOwner, IModifierManager weaponModifierManager, ITeam team, ITurning turning, Transform projectileSpawnPoint, RangedWeaponData rangedWeaponData) : base(owner, weaponOwner, rangedWeaponData, weaponModifierManager, team, turning)
     {
         this.projectileSpawnPoint = projectileSpawnPoint;
-        this.rangedWeaponData = rangedWeaponData;
+
+        projectileData = rangedWeaponData.projectileData;
+        prefab = projectileData.prefab;
     }
 }

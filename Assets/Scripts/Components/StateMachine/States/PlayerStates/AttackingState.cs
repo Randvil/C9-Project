@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackingState : TurnableState
+public class AttackingState : MovableState
 {
     public AttackingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
 
@@ -11,7 +11,6 @@ public class AttackingState : TurnableState
         base.Enter();
 
         player.Weapon.StartAttack();
-        player.WeaponView.StartAttack();
     }
 
     public override void Exit()
@@ -19,7 +18,6 @@ public class AttackingState : TurnableState
         base.Exit();
 
         player.Weapon.BreakAttack();
-        player.WeaponView.BreakAttack();
     }
 
     public override void LogicUpdate()

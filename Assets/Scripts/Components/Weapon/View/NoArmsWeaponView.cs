@@ -2,37 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoArmsWeaponView : IWeaponView
+public class NoArmsWeaponView
 {
     private IWeapon weapon;
     private Animator animator;
     private AudioSource audioSource;
+    private AudioClip startAttackAudioClip;
+    private AudioClip releaseAttackAudioClip;
 
-    public NoArmsWeaponView(IWeapon weapon, Animator animator, AudioSource audioSource)
+    public NoArmsWeaponView(NoArmsWeaponViewData weaponViewData, IWeapon weapon, Animator animator, AudioSource audioSource)
     {
         this.weapon = weapon;
         this.animator = animator;
         this.audioSource = audioSource;
+        startAttackAudioClip = weaponViewData.startAttackAudioClip;
+        releaseAttackAudioClip = weaponViewData.releaseAttackAudioClip;
 
-        weapon.ReleaseAttackEvent.AddListener(ReleaseAttack);
+        weapon.StartAttackEvent.AddListener(OnStartAttack);
+        weapon.BreakAttackEvent.AddListener(OnBreakAttack);
+        weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
     }
 
-    public void StartAttack()
+    public void OnStartAttack()
     {
         animator.SetBool("IsAttacking", true);
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
 
-        audioSource.Play();
-        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(startAttackAudioClip);
     }
 
-    public void BreakAttack()
+    public void OnBreakAttack()
     {
         animator.SetBool("IsAttacking", false);
     }
 
-    public void ReleaseAttack()
+    public void OnReleaseAttack()
     {
-
+        audioSource.PlayOneShot(releaseAttackAudioClip);
     }
 }
