@@ -29,7 +29,8 @@ public class Parry : IParry, IDamageDealer
     public bool IsParrying { get => parryCoroutine != null; }
     public bool IsOnCooldown { get => Time.time < finishCooldownTime; }
     public bool CanParry => IsParrying == false && IsOnCooldown == false;
-
+    public float Cooldown => parryData.cooldown;
+    public UnityEvent StartParryCooldownEvent { get; } = new();
     public UnityEvent ParryEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
@@ -72,6 +73,7 @@ public class Parry : IParry, IDamageDealer
 
             damageHandler.TakeDamageEvent.RemoveListener(OnSuccessfulParry);
 
+            StartParryCooldownEvent.Invoke();
             finishCooldownTime = Time.time + parryData.cooldown;
         }
     }

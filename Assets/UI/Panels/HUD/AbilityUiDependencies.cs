@@ -1,4 +1,6 @@
-using System.Collections;
+using DG.Tweening;
+using NS.RomanLib;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,13 +8,16 @@ using UnityEngine.UIElements;
 public class AbilityUiDependencies : MonoBehaviour
 {
     private IAbilityManager abilityManager;
+    
+    public IParry Parry { get; set; }
 
     private PanelManager panelManager;
 
     private VisualElement hudScreen;
     private VisualElement abilitiesScreen;
 
-    private Polygon[] polyInHud;
+    private VisualElement[] polyInHud;
+    private VisualElement parryPoly;
     private Polygon[] polyInCollection;
 
     private readonly List<eAbilityType> abilityTypeOrder = new();
@@ -32,9 +37,16 @@ public class AbilityUiDependencies : MonoBehaviour
         hudScreen = panelManager.panels[0];
         abilitiesScreen = panelManager.panels[2];
 
-        polyInHud = new Polygon[polyCount];
+        parryPoly = hudScreen.Q<VisualElement>("parry");
+        SetFogForFilledArea(parryPoly, false);
+        Parry.StartParryCooldownEvent.AddListener(OnParry);
+
+        polyInHud = new VisualElement[polyCount];
         for (int i = 1; i <= polyCount; i++)
-            polyInHud[i - 1] = hudScreen.Q<Polygon>("p" + i);
+        {
+            polyInHud[i - 1] = hudScreen.Q<VisualElement>("p" + i);
+            SetFogForFilledArea(polyInHud[i - 1], false);
+        }
 
         polyInCollection = new Polygon[polyCount];
         for (int i = 1; i <= polyCount; i++)
@@ -87,12 +99,24 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void UpdateAbilityStatus(eAbilityType type)
     {
-        Polygon poly = polyInHud[abilityTypeOrder.IndexOf(type)];
+        VisualElement poly = polyInHud[abilityTypeOrder.IndexOf(type)];
 
         if (abilityCanBeUsed[type])
             poly.RemoveFromClassList(cantUseClass);
         else
             poly.AddToClassList(cantUseClass);
+    }
+
+    private void SubscribeToFog(eAbilityType type)
+    {
+        
+        IAbility ability = abilityManager.GetAbilityByType(type);
+        ability.ReleaseCastEvent.AddListener(() =>
+        {
+            int index = abilityTypeOrder.IndexOf(type);
+            if (abilityCanBeUsed.ContainsKey(type))
+                SetFogForFilledArea(polyInHud[index], ability.Cooldown);
+        });
     }
 
     private void OnLearn(eAbilityType type)
@@ -102,6 +126,8 @@ public class AbilityUiDependencies : MonoBehaviour
         SetAbilityOnSlot(type, newAbilityIndex);
         abilityCanBeUsed.Add(type, false);
         CheckAllAbilitiesStatus();
+
+        SubscribeToFog(type);
     }
 
     private void OnForget(eAbilityType type)
@@ -124,6 +150,11 @@ public class AbilityUiDependencies : MonoBehaviour
             }        
     }
 
+    private void OnParry()
+    {
+        SetFogForFilledArea(parryPoly, Parry.Cooldown);
+    }
+
     private void SetAbilityOnSlot(eAbilityType type, int slotIndex)
     {
         if (slotIndex < abilityTypeOrder.Count) // Если слот уже занят
@@ -133,7 +164,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
         string strNewType = type.ToString();
         polyInHud[slotIndex].AddToClassList(strNewType);
-        polyInCollection[slotIndex].AddToClassList(strNewType);
+        polyInCollection[slotIndex].AddToClassList(strNewType + "PolyControl");
     }
 
     private void ClearAbilitySlot(int slotIndex)
@@ -142,12 +173,24 @@ public class AbilityUiDependencies : MonoBehaviour
 
         polyInHud[slotIndex].RemoveFromClassList(strPreviousType);
         polyInHud[slotIndex].RemoveFromClassList(cantUseClass);
-        polyInCollection[slotIndex].RemoveFromClassList(strPreviousType);
+        polyInCollection[slotIndex].RemoveFromClassList(strPreviousType + "PolyControl");
+    }
+
+    private void SetFogForFilledArea(VisualElement poly, bool fog)
+    {
+        RadialFill radialFill = poly.Q<RadialFill>();
+        radialFill.value = fog ? 1f : 0f;
+    }
+
+    private void SetFogForFilledArea(VisualElement poly, float cooldown)
+    {
+        RadialFill radialFill = poly.Q<RadialFill>();
+        DOTween.To(x => radialFill.value = x, 1f, 0f, cooldown).SetEase(Ease.Linear);
     }
 
     private void OnLayoutChange(int layoutNumber)
     {
-        foreach (Polygon poly in polyInHud)
+        foreach (VisualElement poly in polyInHud)
             poly.ToggleInClassList(hiddenPolyClass);
     }
 }

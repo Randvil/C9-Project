@@ -31,7 +31,7 @@ public class Abilities : MonoBehaviour, IPanel
 
     private void RegisterDescriptions(MenuNode abilities)
     {
-        abilityDescriptions = new MenuNode[3];
+        abilityDescriptions = new MenuNode[4];
 
         for (int i = 1; i <= 3; i++)
         {
@@ -59,7 +59,7 @@ public class Abilities : MonoBehaviour, IPanel
     private void ToggleLearnButton(Button button)
     {
         button.ToggleInClassList("inactive-menu-b");
-        button.text = button.text == "LEARN" ? "LEARNED" : "LEARN";
+        button.text = button.text == "SET" ? "UNSET" : "SET";
     }
 
     private void ToggleAbilityLearning(eAbilityType type)

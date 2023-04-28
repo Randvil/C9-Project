@@ -45,6 +45,7 @@ namespace NS.RomanLib
         public Color fillColor { get; set; }
         public float angleOffset { get; set; }
         public string overlayImagePath { get; set; }
+        public bool hasLabel { get; set; }
 
         public enum FillDirection
         {
@@ -76,6 +77,7 @@ namespace NS.RomanLib
 
         public new class UxmlTraits : VisualElement.UxmlTraits
         {
+            UxmlBoolAttributeDescription m_hasLabel = new UxmlBoolAttributeDescription { name = "label", defaultValue = false };
             UxmlStringAttributeDescription m_text = new UxmlStringAttributeDescription { name = "text", defaultValue = "" };
             UxmlFloatAttributeDescription m_value = new UxmlFloatAttributeDescription() { name = "value", defaultValue = 1f };
             UxmlFloatAttributeDescription m_width = new UxmlFloatAttributeDescription() { name = "width", defaultValue = 100f };
@@ -97,6 +99,7 @@ namespace NS.RomanLib
                 var ate = ve as RadialFill;
 
                 // Assigning uxml attributes to c# properties
+                ate.hasLabel = m_hasLabel.GetValueFromBag(bag, cc);
                 ate.text = m_text.GetValueFromBag(bag, cc);
                 ate.value = m_value.GetValueFromBag(bag, cc);
                 ate.width = m_width.GetValueFromBag(bag, cc);
@@ -147,6 +150,9 @@ namespace NS.RomanLib
                 ate.label.style.color = ate.style.unityTextOutlineColor;
                 ate.label.style.unityFont = ate.style.unityFont;
                 ate.label.style.unityFontDefinition = ate.style.unityFontDefinition;
+
+                ate.label.style.display = ate.hasLabel ? DisplayStyle.Flex : DisplayStyle.None;
+
                 ate.Add(ate.label);
             }
         }

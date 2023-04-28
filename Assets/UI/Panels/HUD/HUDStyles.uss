@@ -111,6 +111,17 @@
     rotate: 90deg;
 }
 
-.poly-cant_use .polygon_border-image {
+.poly-cant_use #mask {
     opacity: 0.3;
+}
+
+.radialAbil {
+    background-image: none;
+    width: 40px;
+    translate: -1.7px -1px;
+}
+
+.vectorMask {
+    background-image: resource('bali3-5');
+    overflow: hidden;
 }

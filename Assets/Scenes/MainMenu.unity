@@ -337,10 +337,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3196400235347730574, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3800569736402309138, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
       propertyPath: backgroundTracks.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3800569736402309138, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
+      propertyPath: backgroundTracks.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2973ef5e7fb4bf542ace884962958b89, type: 3}
     - target: {fileID: 6914385876978990192, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
       propertyPath: m_Name
       value: StaticAudio

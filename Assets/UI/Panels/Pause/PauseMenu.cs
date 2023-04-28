@@ -1,4 +1,5 @@
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -34,6 +35,13 @@ public class PauseMenu : MonoBehaviour, IPanel
         settings.AddChild(controls);
 
         main.Panel.Q<Button>("continueB").clicked += ReturnToGame;
+        main.Panel.Q<Button>("quitB").clicked += Quit;
+    }
+
+    private void Quit()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SetInput(PlayerInput _input)

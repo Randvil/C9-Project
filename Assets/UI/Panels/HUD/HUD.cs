@@ -39,16 +39,7 @@ public class HUD : MonoBehaviour, IPanel
 
                     panelManager.SwitchTo(2);
                     break;
-
-                case "ChangeAbilityLayout":
-                    ChangeLayout();
-                    break;
             }
         };
-    }
-
-    private void ChangeLayout()
-    {
-
     }
 }
