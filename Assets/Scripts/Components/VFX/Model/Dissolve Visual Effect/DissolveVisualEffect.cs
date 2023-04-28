@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine.VFX;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class DissolveVisualEffect : VisualEffectView
+public class DissolveVisualEffect : MonoBehaviour 
 {
-    public SkinnedMeshRenderer skinnedMesh;
+    [SerializeField]
+    private SkinnedMeshRenderer skinnedMesh;
+    [SerializeField]
+    private VisualEffect dissolveGraph;
     private Material[] skinnedMaterials;
 
     public float dissolveRate = 0.0125f;
@@ -20,7 +24,7 @@ public class DissolveVisualEffect : VisualEffectView
 
     public void ApplyDissolve()
     {
-        Graph.Play();
+        dissolveGraph.Play();
         StartCoroutine(DissolveCoroutine());
     }
 

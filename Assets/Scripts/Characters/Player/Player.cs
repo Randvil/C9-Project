@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEngine.VFX;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -36,6 +36,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
     [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private JumpViewData jumpViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
+
+    [Header("Player Prefab VFX")]
+    [SerializeField] private VisualEffect slashGraph;
 
     public Transform CameraFollowPoint => avatar.transform;
 
@@ -150,7 +153,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
         CrouchView = new CrouchView(Crouch, Animator);
         JumpView = new JumpView(jumpViewData, Jump, Animator, sharedAudioSource);
         RollView = new RollView(Roll, Animator);
-        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, Animator, sharedAudioSource);
+        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
+            Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
         ClimbView = new ClimbView(Climb, Animator);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource);

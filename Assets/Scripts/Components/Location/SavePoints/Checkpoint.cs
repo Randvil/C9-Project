@@ -11,7 +11,6 @@ public class Checkpoint : SavePoint
     public void OnTriggerEnter2D(Collider2D collision)
     {
         SaveGame();
-        Debug.Log("save on " + name);
         gameObject.SetActive(false);
     }
 

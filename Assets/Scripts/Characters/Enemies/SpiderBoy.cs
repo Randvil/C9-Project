@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class SpiderBoy : BaseCreature, IWatchmanBehavior
@@ -68,6 +67,7 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     private void OnDeath()
     {
         currentBehavior.Deactivate();
-        Destroy(gameObject, 0.5f);
+        GetComponent<DissolveVisualEffect>().ApplyDissolve();
+        Destroy(gameObject, 1.2f);
     }
 }

@@ -39,7 +39,7 @@ public class LocationEntry : SavePoint, IInteractive
 
     public void ShowTooltip()
     {
-        Debug.Log(tip);
+
     }
 
     public void HideTooltip()
