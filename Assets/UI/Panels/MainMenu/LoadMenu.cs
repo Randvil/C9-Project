@@ -15,9 +15,6 @@ public class LoadMenu : MonoBehaviour
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
-        Button newGameB = root.Q<Button>("newGameB");
-        newGameB.clicked += NewGame;
-
         Button continueB = root.Q<Button>("continueB");
 
         if (IsAnySaveFile)
@@ -36,15 +33,9 @@ public class LoadMenu : MonoBehaviour
         SceneManager.LoadScene(gameData.CheckpointData.scene);
     }
 
-    private bool IsAnySaveFile
-    {
-        get
-        {
-            return directory.GetFiles("LastSave").Length > 0;
-        }
-    }
+    public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
 
-    private void NewGame()
+    public void NewGame()
     {
         newGameSave.CreateNewGameSave();
         SceneManager.LoadScene(newGameSave.gameData.CheckpointData.scene);

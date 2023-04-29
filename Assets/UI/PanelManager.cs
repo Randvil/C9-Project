@@ -75,7 +75,7 @@ public class PanelManager : MonoBehaviour
     {
         if (panel == CurrentPanel)
             return;
-
+        
         if (CurrentPanel != null)
             history.Push(CurrentPanel);
         CurrentPanel = panel;
