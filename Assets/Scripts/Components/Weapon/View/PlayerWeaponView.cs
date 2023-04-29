@@ -1,34 +1,52 @@
 using UnityEngine;
-using System.Collections;
+using UnityEngine.VFX;
 
-public class PlayerWeaponView : IWeaponView
+public class PlayerWeaponView
 {
     private GameObject weaponObject;
     private Transform weaponContainer;
     private Transform rightHand;
 
+    private AudioClip takeSword;
+    private AudioClip putAwaySword;
+    private AudioClip hitEnemy;
+    private AudioClip missEnemy;
+
     private IWeapon weapon;
+    private IDamageDealer damageDealer;
     private Animator animator;
     private AudioSource audioSource;
 
-    private Quaternion weaponRotation;
+    private VisualEffect slashGraph;
 
-    public PlayerWeaponView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, IWeapon weapon, Animator animator, AudioSource audioSource)
+    private bool enemyWasHit;
+
+    public PlayerWeaponView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, PlayerWeaponViewData playerWeaponViewData, 
+        IWeapon weapon, IDamageDealer damageDealer, Animator animator, AudioSource audioSource, VisualEffect slashGraph)
     {
         this.weaponObject = weaponObject;
         this.weaponContainer = weaponContainer;
         this.rightHand = rightHand;
 
+        takeSword = playerWeaponViewData.takeSword;
+        putAwaySword = playerWeaponViewData.putAwaySword;
+        hitEnemy = playerWeaponViewData.hitEnemy;
+        missEnemy = playerWeaponViewData.missEnemy;
+
         this.weapon = weapon;
+        this.damageDealer = damageDealer;
         this.animator = animator;
         this.audioSource = audioSource;
 
-        weaponRotation = weaponObject.transform.rotation;
+        weapon.StartAttackEvent.AddListener(OnStartAttack);
+        weapon.BreakAttackEvent.AddListener(OnBreakAttack);
+        weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
+        damageDealer.DealDamageEvent.AddListener(OnDamageDeal);
 
-        weapon.ReleaseAttackEvent.AddListener(ReleaseAttack);
+        this.slashGraph = slashGraph;
     }
 
-    public void StartAttack()
+    public void OnStartAttack()
     {
         weaponObject.SetActive(true);
         weaponObject.transform.parent = rightHand;
@@ -39,20 +57,36 @@ public class PlayerWeaponView : IWeaponView
         animator.SetTrigger("AttackTrigger");
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
 
-        audioSource.Play();
-        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        //audioSource.PlayOneShot(takeSword);
     }
 
-    public void BreakAttack()
+    public void OnBreakAttack()
     {
         weaponObject.SetActive(false);
         weaponObject.transform.parent = weaponContainer;
 
         animator.SetBool("IsAttacking", false);
+
+        //audioSource.PlayOneShot(putAwaySword);
     }
 
-    public void ReleaseAttack()
+    public void OnReleaseAttack()
     {
-        
+        slashGraph.Play();
+
+        if (enemyWasHit == true)
+        {
+            audioSource.PlayOneShot(hitEnemy);
+            enemyWasHit = false;
+        }
+        else
+        {
+            audioSource.PlayOneShot(missEnemy);
+        }
+    }
+
+    public void OnDamageDeal(DamageInfo damageInfo)
+    {
+        enemyWasHit = true;
     }
 }

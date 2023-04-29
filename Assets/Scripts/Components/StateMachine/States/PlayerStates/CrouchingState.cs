@@ -11,7 +11,6 @@ public class CrouchingState : MovableState
         base.Enter();
 
         player.Crouch.StartCrouch();
-        player.CrouchView.StartCrouch();
     }
 
     public override void Exit()
@@ -19,7 +18,6 @@ public class CrouchingState : MovableState
         base.Exit();
 
         player.Crouch.BreakCrouch();
-        player.CrouchView.BreakCrouch();
     }
 
     protected override void OnCrouch(eActionPhase actionPhase)

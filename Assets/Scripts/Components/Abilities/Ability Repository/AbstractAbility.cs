@@ -4,41 +4,58 @@ using UnityEngine.Events;
 
 public abstract class AbstractAbility : IAbility
 {
-    protected BaseAbilityData baseAbilityData;
+    protected MonoBehaviour owner;
+
+    protected float cooldown;
+    protected float preCastDelay;
+    protected float postCastDelay;
+    protected float cost;
 
     protected Coroutine strikeCoroutine;
     protected float finishCooldownTime;
     protected float startCastTime;
 
-    protected IAbilityManager abilityManager;
     protected IEnergyManager energyManager;
 
     public eAbilityType Type { get; protected set; }
     public virtual bool IsPerforming => strikeCoroutine != null; 
     public virtual bool IsOnCooldown => Time.time < finishCooldownTime; 
-    public virtual bool CanBeUsed => !IsPerforming && !IsOnCooldown && energyManager.Energy.currentEnergy >= baseAbilityData.cost;
-    public float Cooldown => baseAbilityData.cooldown;
+    public virtual bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= cost;
 
+    public UnityEvent StartCastEvent { get; } = new();
+    public UnityEvent BreakCastEvent { get; } = new();
     public UnityEvent ReleaseCastEvent { get; } = new();
 
-    public AbstractAbility(BaseAbilityData baseAbilityData, IAbilityManager abilityManager, IEnergyManager energyManager)
+    public AbstractAbility(MonoBehaviour owner, BaseAbilityData baseAbilityData, IEnergyManager energyManager)
     {
-        this.baseAbilityData = baseAbilityData;
+        this.owner = owner;
 
-        this.abilityManager = abilityManager;
+        cooldown = baseAbilityData.cooldown;
+        preCastDelay = baseAbilityData.preCastDelay;
+        postCastDelay = baseAbilityData.postCastDelay;
+        cost = baseAbilityData.cost;
+
         this.energyManager = energyManager;
     }
 
     public virtual void StartCast()
     {
-        strikeCoroutine = Coroutines.StartCoroutine(ReleaseStrikeCoroutine());
+        if (IsPerforming == false)
+        {
+            strikeCoroutine = owner.StartCoroutine(ReleaseStrikeCoroutine());
+
+            StartCastEvent.Invoke();
+        }
     }
 
     public virtual void BreakCast()
     {
-        if (IsPerforming)
+        if (IsPerforming == true)
         {
-            Coroutines.StopCoroutine(ref strikeCoroutine);
+            owner.StopCoroutine(strikeCoroutine);
+            strikeCoroutine = null;
+
+            BreakCastEvent.Invoke();
         }
     }
 

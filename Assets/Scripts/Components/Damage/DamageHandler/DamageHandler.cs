@@ -7,29 +7,40 @@ public class DamageHandler : IDamageHandler
 {
     public UnityEvent<DamageInfo> TakeDamageEvent { get; private set; } = new();
 
-    private IHealthManager healthManager;
-    private IModifierManager defenceModifierManager;
-    private IEffectManager effectManager;
+    protected IHealthManager healthManager;
+    protected IModifierManager defenceModifierManager;
+    protected IEffectManager effectManager;
+    protected IDeathManager deathManager;
 
-    public DamageHandler(IHealthManager healthManager, IModifierManager defenceModifierManager, IEffectManager effectManager)
+    public DamageHandler(IHealthManager healthManager, IModifierManager defenceModifierManager, IEffectManager effectManager, IDeathManager deathManager)
     {
         this.healthManager = healthManager;
         this.defenceModifierManager = defenceModifierManager;
         this.effectManager = effectManager;
+        this.deathManager = deathManager;
     }
 
     public void TakeDamage(Damage incomingDamage, UnityEvent<DamageInfo> dealDamageEvent)
     {
+        if (deathManager.IsAlive == false)
+        {
+            return;
+        }
+
         effectManager.ApplyDamageEffects(incomingDamage);
 
         float effectiveDamage = defenceModifierManager.ApplyModifiers(incomingDamage.EffectiveDamage);
-
-        healthManager.ChangeCurrentHealth(-effectiveDamage);
+        ChangeHealth(effectiveDamage);
 
         InvokeEvents(incomingDamage, effectiveDamage, dealDamageEvent);
     }
 
-    private void InvokeEvents(Damage incomingDamage, float effectiveDamage, UnityEvent<DamageInfo> dealDamageEvent)
+    protected virtual void ChangeHealth(float effectiveDamage)
+    {
+        healthManager.ChangeCurrentHealth(-effectiveDamage);
+    }
+
+    protected void InvokeEvents(Damage incomingDamage, float effectiveDamage, UnityEvent<DamageInfo> dealDamageEvent)
     {
         DamageInfo damageInfo = new DamageInfo
         {

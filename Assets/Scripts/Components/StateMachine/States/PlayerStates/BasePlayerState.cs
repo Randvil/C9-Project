@@ -60,15 +60,11 @@ public abstract class BasePlayerState : IState
         {
             stateMachine.ChangeState(player.Climbing);
         }
-
-        player.TurningView.Turn();
     }
 
     public virtual void PhysicsUpdate()
     {
-        player.GravityView.SetFallingParams();
 
-        player.Jump.CheckGround();
     }
 
     protected virtual void OnMove(eDirection direction)

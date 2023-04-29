@@ -30,7 +30,7 @@ public class LoadMenu : MonoBehaviour
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
 
-        SceneManager.LoadScene(gameData.CheckpointData.scene);
+        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 
     public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
@@ -38,6 +38,6 @@ public class LoadMenu : MonoBehaviour
     public void NewGame()
     {
         newGameSave.CreateNewGameSave();
-        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.scene);
+        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.latestScene);
     }
 }

@@ -4,10 +4,15 @@ using UnityEngine;
 
 public abstract class AbstractMeleeWeapon : AbstractWeapon
 {
-    protected Damage damage;
+    protected Damage[] damages;
 
-    public AbstractMeleeWeapon(GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(weaponOwner, weaponData, weaponModifierManager, team, turning)
+    public AbstractMeleeWeapon(MonoBehaviour owner, GameObject weaponOwner, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning) : base(owner, weaponOwner, weaponData, weaponModifierManager, team, turning)
     {
-        damage = new Damage(weaponOwner, weaponOwner, weaponData.damageData, weaponModifierManager);
+        DamageData[] damageDatas = weaponData.damageDatas;
+        damages = new Damage[damageDatas.Length];
+        for (int damageDataNumber = 0; damageDataNumber < damageDatas.Length; damageDataNumber++)
+        {
+            damages[damageDataNumber] = new Damage(weaponOwner, weaponOwner, damageDatas[damageDataNumber], weaponModifierManager);
+        }
     }
 }

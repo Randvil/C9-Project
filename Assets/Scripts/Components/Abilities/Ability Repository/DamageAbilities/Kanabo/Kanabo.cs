@@ -5,28 +5,29 @@ using UnityEngine;
 
 public class Kanabo : AbstractDamageAbility, IAbility
 {
-    protected KanaboData kanaboData;
+    protected float stunDuration;
 
     protected Damage damage;
 
-    public Kanabo(GameObject caster, KanaboData kanaboData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(caster, kanaboData, abilityManager, energyManager, modifierManager, turning, team)
+    public Kanabo(MonoBehaviour owner, GameObject caster, KanaboData kanaboData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, kanaboData, energyManager, modifierManager, turning, team)
     {
         Type = eAbilityType.Kanabo;
+        
+        AttackRange = kanaboData.attackRange;
+        stunDuration = kanaboData.stunDuration;
 
-        this.kanaboData = kanaboData;
-
-        damage = new(caster, caster, damageAbilityData.damageData, modifierManager);
+        damage = new(caster, caster, damageData, modifierManager);
     }
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(kanaboData.preCastDelay);
+        yield return new WaitForSeconds(preCastDelay);
 
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(caster.transform.position, kanaboData.attackRadius);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(caster.transform.position, AttackRange);
 
         foreach (Collider2D enemy in enemies)
         {
-            if (enemy.TryGetComponent(out ITeam enemyTeam) == false || enemyTeam.Team == team.Team)
+            if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
             {
                 continue;
             }
@@ -45,16 +46,16 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
             if (enemy.TryGetComponent(out IEffectable effectableEnemy) == true)
             {
-                effectableEnemy.EffectManager.AddEffect(new StunEffect(Time.time + kanaboData.stunDuration));
+                effectableEnemy.EffectManager.AddEffect(new StunEffect(Time.time + stunDuration));
             }
         }
 
-        energyManager.ChangeCurrentEnergy(-kanaboData.cost);
+        energyManager.ChangeCurrentEnergy(-cost);
 
-        finishCooldownTime = Time.time + kanaboData.cooldown;
+        finishCooldownTime = Time.time + cooldown;
         ReleaseCastEvent.Invoke();
 
-        yield return new WaitForSeconds(kanaboData.postCastDelay);
+        yield return new WaitForSeconds(postCastDelay);
 
         BreakCast();
     }

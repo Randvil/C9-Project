@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class EffectManager : IEffectManager
 {
+    private MonoBehaviour owner;
+
     private List<IEffect> effects = new();
     private List<IStunEffect> stunEffects = new();
     private List<ISlowEffect> slowEffects = new();
@@ -15,11 +17,12 @@ public class EffectManager : IEffectManager
 
     public UnityEvent<eEffectType, eEffectStatus> EffectEvent { get; } = new();
 
-    public EffectManager(EffectManagerData effectManagerData)
+    public EffectManager(MonoBehaviour owner, EffectManagerData effectManagerData)
     {
+        this.owner = owner;
         this.effectManagerData = effectManagerData;
 
-        Coroutines.StartCoroutine(CheckEffectsCoroutine());
+        owner.StartCoroutine(CheckEffectsCoroutine());
     }
 
     private IEnumerator CheckEffectsCoroutine()

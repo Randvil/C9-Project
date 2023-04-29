@@ -13,6 +13,7 @@ public class DeathManager : IDeathManager, IForbiddableDeath
     public bool IsForbidden => forbiddingObjects.Count > 0;
 
     public UnityEvent DeathEvent { get; } = new();
+    public UnityEvent ResurrectionEvent { get; } = new();
 
     public DeathManager(IHealthManager healthManager)
     {
@@ -33,6 +34,11 @@ public class DeathManager : IDeathManager, IForbiddableDeath
             IsAlive = false;
             DeathEvent.Invoke();
         }
+    }
+
+    public void Resurrect()
+    {
+        IsAlive = true;
     }
 
     public void ForbidDying(object forbiddingObject)

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AbstractDamageAbility : AbstractAbility, IAbility, IDamageDealer
+public abstract class AbstractDamageAbility : AbstractAbility, IDamageAbility, IDamageDealer
 {
     protected GameObject caster;
 
-    protected DamageAbilityData damageAbilityData;
+    protected DamageData damageData;
 
     protected IModifierManager modifierManager;
     protected ITurning turning;
@@ -15,11 +15,13 @@ public abstract class AbstractDamageAbility : AbstractAbility, IAbility, IDamage
 
     public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
 
-    public AbstractDamageAbility(GameObject caster, DamageAbilityData damageAbilityData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(damageAbilityData, abilityManager, energyManager)
+    public float AttackRange { get; protected set; } = float.MaxValue;
+
+    public AbstractDamageAbility(MonoBehaviour owner, GameObject caster, DamageAbilityData damageAbilityData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, damageAbilityData, energyManager)
     {
         this.caster = caster;
 
-        this.damageAbilityData = damageAbilityData;
+        damageData = damageAbilityData.damageData;
 
         this.modifierManager = modifierManager;
         this.turning = turning;

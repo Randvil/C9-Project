@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Daikyu : AbstractDamageAbility, ISustainableAbility
 {
-    protected DaikyuData daikyuData;
+    protected ProjectileData projectileData;
+    protected float fullChargeTime;
+    protected float fullChargeDamageMultiplier;
 
-    private bool stopSustaining;
-    private IDamageModifier damageModifier;
+    protected bool stopSustaining;
+    protected IDamageModifier damageModifier;
 
-    public Daikyu(GameObject caster, DaikyuData daikyuData, IAbilityManager abilityManager, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(caster, daikyuData, abilityManager, energyManager, modifierManager, turning, team)
+    public Daikyu(MonoBehaviour owner, GameObject caster, DaikyuData daikyuData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, daikyuData, energyManager, modifierManager, turning, team)
     {
         Type = eAbilityType.Daikyu;
-
-        this.daikyuData = daikyuData;
+       
+        projectileData = daikyuData.projectileData;
+        fullChargeTime = daikyuData.fullChargeTime;
+        fullChargeDamageMultiplier = daikyuData.fullChargeDamageMultiplier;
     }
 
     public override void StartCast()
@@ -35,26 +39,26 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(daikyuData.preCastDelay);
+        yield return new WaitForSeconds(preCastDelay);
 
         float startChargeTime = Time.time;
 
-        yield return new WaitUntil(() => (startChargeTime + daikyuData.fullChargeTime <= Time.time) || stopSustaining);
+        yield return new WaitUntil(() => (startChargeTime + fullChargeTime <= Time.time) || stopSustaining);
 
-        float additionalDamage = (daikyuData.fullChargeDamageMultiplier - 1f) * Mathf.Clamp01((Time.time - startChargeTime) / daikyuData.fullChargeTime);
+        float additionalDamage = (fullChargeDamageMultiplier - 1f) * Mathf.Clamp01((Time.time - startChargeTime) / fullChargeTime);
         damageModifier = new RelativeDamageModifier(1f + additionalDamage);
 
         modifierManager.AddModifier(damageModifier);
 
-        IProjectile projectile = Object.Instantiate(daikyuData.projectileData.prefab, caster.transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
-        projectile.Initialize(caster, daikyuData.damageData, daikyuData.projectileData, turning.Direction, team, modifierManager, this);
+        IProjectile projectile = Object.Instantiate(projectileData.prefab, caster.transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
+        projectile.Initialize(caster, damageData, projectileData, turning.Direction, team, modifierManager, this);
 
-        energyManager.ChangeCurrentEnergy(-daikyuData.cost);
+        energyManager.ChangeCurrentEnergy(-cost);
 
-        finishCooldownTime = Time.time + daikyuData.cooldown;
+        finishCooldownTime = Time.time + cooldown;
         ReleaseCastEvent.Invoke();
 
-        yield return new WaitForSeconds(daikyuData.postCastDelay);
+        yield return new WaitForSeconds(postCastDelay);
 
         BreakCast();
     }

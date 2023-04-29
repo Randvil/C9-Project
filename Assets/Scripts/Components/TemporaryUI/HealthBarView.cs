@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +7,6 @@ public class HealthBarView
 
     private IHealthManager healthManager;
     private IDeathManager deathManager;
-
-    private const float tweenDuration = 0.2f;
 
     public HealthBarView(Slider healthBarSlider, IHealthManager healthManager, IDeathManager deathManager)
     {
@@ -28,7 +25,16 @@ public class HealthBarView
 
     public void OnCurrentHealthChange(Health health)
     {
-        DOTween.To(x => healthBarSlider.value = x, healthBarSlider.value, health.currentHealth, tweenDuration);
+        if (health.currentHealth == health.maxHealth)
+        {
+            //healthBarSlider.gameObject.SetActive(false);
+        }
+        else
+        {
+            healthBarSlider.gameObject.SetActive(true);
+        }
+
+        healthBarSlider.value = health.currentHealth;
     }
 
     public void OnMaxHealthChange(Health health)

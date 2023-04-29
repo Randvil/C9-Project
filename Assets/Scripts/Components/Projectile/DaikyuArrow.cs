@@ -7,15 +7,27 @@ public class DaikyuArrow : Projectile
     [SerializeField]
     protected DaikyuEffectsData daikyuEffectsData;
 
+    protected DamageData doTDamageData;
+    protected float doTDuration;
+    protected float damagePeriod;
+    protected float movementSlow;
+    protected float slowDuration;
+
     protected Damage doTDamage;
     protected List<Collider2D> hitEnemies = new();
 
     protected override void Start()
     {
         base.Start();
-        doTDamage = new(projectileOwner, gameObject, daikyuEffectsData.doTDamageData, modifierManager);
-    }
 
+        doTDamageData = daikyuEffectsData.doTDamageData;
+        doTDuration = daikyuEffectsData.doTDuration;
+        damagePeriod = daikyuEffectsData.damagePeriod;
+        movementSlow = daikyuEffectsData.movementSlow;
+        slowDuration = daikyuEffectsData.slowDuration;
+
+        doTDamage = new(projectileOwner, gameObject, doTDamageData, modifierManager);
+    }
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,7 +38,7 @@ public class DaikyuArrow : Projectile
 
         hitEnemies.Add(other);
 
-        if (other.TryGetComponent(out ITeam hitCreature) == false || hitCreature.Team == ownerTeam.Team)
+        if (other.TryGetComponent(out ITeamMember hitCreature) == false || hitCreature.CharacterTeam.Team == ownerTeam.Team)
         {
             return;
         }
@@ -38,8 +50,8 @@ public class DaikyuArrow : Projectile
         
         if (other.TryGetComponent(out IEffectable effectableEnemy) == true)
         {
-            effectableEnemy.EffectManager.AddEffect(new DoTEffect(doTDamage, daikyuEffectsData.damagePeriod, Time.time + daikyuEffectsData.doTDuration, damageableEnemy.DamageHandler, damageDealer));
-            effectableEnemy.EffectManager.AddEffect(new SlowEffect(daikyuEffectsData.movementSlow, Time.time + daikyuEffectsData.slowDuration));
+            effectableEnemy.EffectManager.AddEffect(new DoTEffect(doTDamage, damagePeriod, Time.time + doTDuration, damageableEnemy.DamageHandler, damageDealer));
+            effectableEnemy.EffectManager.AddEffect(new SlowEffect(movementSlow, Time.time + slowDuration));
         }
     }
 }

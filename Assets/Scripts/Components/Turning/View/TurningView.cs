@@ -1,45 +1,53 @@
+using System.Collections;
 using UnityEngine;
 
-public class TurningView : ITurningView
+public class TurningView
 {
+    private MonoBehaviour owner;
     private GameObject turnGameObject;
+    private float turnSpeed;
 
-    private TurningViewData turningViewData;
+    private Coroutine turnCoroutine;
+    private eDirection newDirection;
 
-    private ITurning turning;
-
-    public TurningView(GameObject turnGameObject, TurningViewData turningViewData, ITurning turning)
+    public TurningView(MonoBehaviour owner, GameObject turnGameObject, TurningViewData turningViewData, ITurning turning)
     {
+        this.owner = owner;
         this.turnGameObject = turnGameObject;
-
-        this.turningViewData = turningViewData;
-
-        this.turning = turning;
+        turnSpeed = turningViewData.turnSpeed;
+        turning.TurnEvent.AddListener(Turn);
     }
 
-    public void Turn()
+    public void Turn(eDirection newDirection)
     {
-        if (Mathf.Approximately((float)turning.Direction, turnGameObject.transform.rotation.eulerAngles.y))
+        this.newDirection = newDirection;
+
+        if (turnCoroutine != null)
         {
-            return;
+            owner.StopCoroutine(turnCoroutine);
         }
 
-        float deltaAngle = (turning.Direction == eDirection.Left)
-            ? (turningViewData.turnSpeed * Time.deltaTime)
-            : -(turningViewData.turnSpeed * Time.deltaTime);
-
-        float newPlayerRotation = turnGameObject.transform.rotation.eulerAngles.y + deltaAngle;
-        if (newPlayerRotation < 0f || newPlayerRotation > 180f)
-        {
-            FinishTurn();
-            return;
-        }
-
-        turnGameObject.transform.Rotate(new(0f, deltaAngle, 0f));
+        turnCoroutine = owner.StartCoroutine(TurnCoroutine());
     }
 
-    public void FinishTurn()
+    public IEnumerator TurnCoroutine()
     {
-        turnGameObject.transform.eulerAngles = new(turnGameObject.transform.eulerAngles.x, (float)turning.Direction, turnGameObject.transform.eulerAngles.z);
+        while (Mathf.Approximately((float)newDirection, turnGameObject.transform.rotation.eulerAngles.y) == false)
+        {
+            float deltaAngle = (newDirection == eDirection.Left)
+                ? (turnSpeed * Time.deltaTime)
+                : -(turnSpeed * Time.deltaTime);
+
+            float newPlayerRotation = turnGameObject.transform.rotation.eulerAngles.y + deltaAngle;
+            if (newPlayerRotation < 0f || newPlayerRotation > 180f)
+            {
+                turnGameObject.transform.eulerAngles = new(turnGameObject.transform.eulerAngles.x, (float)newDirection, turnGameObject.transform.eulerAngles.z);
+                break;
+            }
+
+            turnGameObject.transform.Rotate(new(0f, deltaAngle, 0f));
+
+            yield return null;
+        }
     }
 }

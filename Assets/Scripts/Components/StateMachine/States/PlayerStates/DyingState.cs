@@ -4,22 +4,6 @@ public class DyingState : BasePlayerState
 {
     public DyingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
 
-    public override void Enter()
-    {
-        base.Enter();
-
-        player.DeathView.StartDying();
-
-        Debug.Log("You're dying :(");
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        player.DeathView.BreakDying();
-    }
-
     public override void LogicUpdate()
     {
 

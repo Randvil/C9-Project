@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd59d6e54e203714e9721e94ccb8b0d1, type: 3}
   m_Name: SpiderMinionMandiblesWeaponData
   m_EditorClassIdentifier: 
-  damageData: {fileID: 11400000, guid: 9f00a6af83404ea4ca169f3cc2255401, type: 2}
-  attackRadius: 2
+  damageDatas:
+  - {fileID: 11400000, guid: 86321e69ec04cdc4e88a8a8e6c2c29af, type: 2}
+  attackRange: 1
   preAttackDelays:
   - 0.5
-  postAttackDelay: 0.5
-  attackSpeed: 1
+  postAttackDelay: 0.1
+  attackSpeed: 0.5

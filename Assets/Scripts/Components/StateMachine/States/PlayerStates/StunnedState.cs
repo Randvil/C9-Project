@@ -6,20 +6,6 @@ public class StunnedState : BasePlayerState
 {
     public StunnedState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
 
-    public override void Enter()
-    {
-        base.Enter();
-
-        player.StunVeiw.StartStun();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        player.StunVeiw.BreakStun();
-    }
-
     public override void LogicUpdate()
     {
 
