@@ -1,7 +1,7 @@
 using DG.Tweening;
 using NS.RomanLib;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,7 +20,7 @@ public class AbilityUiDependencies : MonoBehaviour
     private VisualElement parryPoly;
     private Polygon[] polyInCollection;
 
-    private readonly List<eAbilityType> abilityTypeOrder = new();
+    private readonly Dictionary<eAbilityType, int> abilityTypeOrder = new();
     private readonly Dictionary<eAbilityType, bool> abilityCanBeUsed = new();
 
     const int polyCount = 4;
@@ -39,7 +39,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
         parryPoly = hudScreen.Q<VisualElement>("parry");
         SetFogForFilledArea(parryPoly, false);
-        Parry.StartParryCooldownEvent.AddListener(OnParry);
+        Parry.BreakParryEvent.AddListener(OnParry); // because cooldown starts after duration
 
         polyInHud = new VisualElement[polyCount];
         for (int i = 1; i <= polyCount; i++)
@@ -55,8 +55,8 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckForAlreadyLearned();
 
         abilityManager.SwitchLayoutEvent.AddListener(OnLayoutChange);
-        abilityManager.AbilityLearnEvent.AddListener(OnLearn);
-        abilityManager.AbilityForgetEvent.AddListener(OnForget);
+        abilityManager.AbilityLearnEvent.AddListener(OnSet);
+        abilityManager.AbilityForgetEvent.AddListener(OnUnset);
     }
 
     // В AbilityManager'e нет реактивных полей, поэтому нужно самим следить за ними
@@ -65,15 +65,15 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckAbilitiesStatus();
     }
 
+    private eAbilityType GetTypeByIndex(int slotIndex) => abilityTypeOrder.First(x => x.Value == slotIndex).Key;
+
     private void CheckForAlreadyLearned()
     {
-        int slotIndex = 0;
-        foreach (var ab in abilityManager.LearnedAbilities.Values)
+        foreach (var abilityWithInd in abilityManager.LearnedAbilities)
         {
-            SetAbilityOnSlot(ab.Type, slotIndex++);
-            abilityCanBeUsed.Add(ab.Type, ab.CanBeUsed);
-            CheckAllAbilitiesStatus();
+            OnSet(abilityWithInd.Value.Type);
         }
+        CheckAllAbilitiesStatus();
     }
 
     private void CheckAbilitiesStatus()
@@ -99,7 +99,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void UpdateAbilityStatus(eAbilityType type)
     {
-        VisualElement poly = polyInHud[abilityTypeOrder.IndexOf(type)];
+        VisualElement poly = polyInHud[abilityTypeOrder[type]];
 
         if (abilityCanBeUsed[type])
             poly.RemoveFromClassList(cantUseClass);
@@ -109,45 +109,33 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void SubscribeToFog(eAbilityType type)
     {
-        
         IAbility ability = abilityManager.GetAbilityByType(type);
         ability.ReleaseCastEvent.AddListener(() =>
         {
-            int index = abilityTypeOrder.IndexOf(type);
+            int index = abilityTypeOrder[type];
             if (abilityCanBeUsed.ContainsKey(type))
                 SetFogForFilledArea(polyInHud[index], ability.Cooldown);
         });
     }
 
-    private void OnLearn(eAbilityType type)
+    private void OnSet(eAbilityType type)
     {
-        int newAbilityIndex = abilityManager.LearnedAbilities.Count - 1;
-
+        int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.Type == type).Key - 1;
         SetAbilityOnSlot(type, newAbilityIndex);
         abilityCanBeUsed.Add(type, false);
-        CheckAllAbilitiesStatus();
 
         SubscribeToFog(type);
     }
 
-    private void OnForget(eAbilityType type)
+    private void OnUnset(eAbilityType type)
     {
-        int lastAbilityIndex = abilityTypeOrder.Count - 1;
+        int index = abilityTypeOrder[type];
+        ClearAbilitySlot(index);
+        abilityCanBeUsed.Remove(type);
 
-        for (int i = 0; i <= lastAbilityIndex; i++)
-            if (abilityTypeOrder[i] == type)
-            {
-                for (int j = i; j < lastAbilityIndex; j++)
-                    SetAbilityOnSlot(abilityTypeOrder[j + 1], j);
+        abilityTypeOrder.Remove(type);
 
-                ClearAbilitySlot(lastAbilityIndex);
-                abilityTypeOrder.RemoveAt(i);
-                abilityCanBeUsed.Remove(type);
-
-                CheckAllAbilitiesStatus();
-
-                break;
-            }        
+        CheckAllAbilitiesStatus();    
     }
 
     private void OnParry()
@@ -157,10 +145,10 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void SetAbilityOnSlot(eAbilityType type, int slotIndex)
     {
-        if (slotIndex < abilityTypeOrder.Count) // Если слот уже занят
+        if (abilityTypeOrder.ContainsValue(slotIndex)) // Если слот уже занят
             ClearAbilitySlot(slotIndex);
         else
-            abilityTypeOrder.Add(type);
+            abilityTypeOrder.Add(type, slotIndex);
 
         string strNewType = type.ToString();
         polyInHud[slotIndex].AddToClassList(strNewType);
@@ -169,8 +157,8 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void ClearAbilitySlot(int slotIndex)
     {
-        string strPreviousType = abilityTypeOrder[slotIndex].ToString();
-
+        string strPreviousType = GetTypeByIndex(slotIndex).ToString();
+        
         polyInHud[slotIndex].RemoveFromClassList(strPreviousType);
         polyInHud[slotIndex].RemoveFromClassList(cantUseClass);
         polyInCollection[slotIndex].RemoveFromClassList(strPreviousType + "PolyControl");
@@ -190,7 +178,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void OnLayoutChange(int layoutNumber)
     {
-        foreach (VisualElement poly in polyInHud)
-            poly.ToggleInClassList(hiddenPolyClass);
+        int leftBorder = abilityManager.AbilityCountInLayout * (layoutNumber - 1);
+        int rightBorder = abilityManager.AbilityCountInLayout * layoutNumber - 1;
+        for (int i = 0; i < polyCount; i++)
+            if (i >= leftBorder && i <= rightBorder)
+                polyInHud[i].RemoveFromClassList(hiddenPolyClass);
+            else
+                polyInHud[i].AddToClassList(hiddenPolyClass);
     }
 }

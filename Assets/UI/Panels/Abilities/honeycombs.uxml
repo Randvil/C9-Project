@@ -15,7 +15,9 @@
         <ui:VisualElement class="polys inactivePoly disabledPoly" style="top: 321px; left: 85px; background-image: url(&apos;project://database/Assets/UI/Panels/Abilities/emptyPolyLeft512h.png?fileID=2800000&amp;guid=f024410229a71c94291bb97230455e18&amp;type=3#emptyPolyLeft512h&apos;);" />
         <ui:VisualElement class="polys disabledPoly" style="top: 250px; left: 249px;" />
         <ui:VisualElement class="polys inactivePoly disabledPoly" style="top: 224px; left: 41px;" />
-        <ui:VisualElement class="polys disabledPoly" style="top: 237px; left: 145px;" />
+        <ui:Button name="RegenerationDescriptionB" class="polys activePoly" style="left: 145px; top: 237px;">
+            <ui:VisualElement style="flex-grow: 1; background-image: resource(&apos;button_ps&apos;);" />
+        </ui:Button>
         <ui:VisualElement class="polys inactivePoly disabledPoly" style="top: 337px; left: 186px;" />
         <ui:VisualElement class="polys inactivePoly disabledPoly" style="top: 349px; left: 290px; background-image: url(&apos;project://database/Assets/UI/Panels/Abilities/polyEmpty.png?fileID=2800000&amp;guid=6a3ce60d3fe410f49bd25fe9b9791d47&amp;type=3#polyEmpty&apos;);" />
     </ui:VisualElement>

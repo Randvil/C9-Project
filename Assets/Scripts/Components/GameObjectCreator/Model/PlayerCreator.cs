@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerCreator : Creator
 {
@@ -9,10 +9,10 @@ public class PlayerCreator : Creator
         newGameObject.transform.position = data.CurrentGameData.position;
         newGameObject.GetComponent<Player>().HealthManager.ChangeCurrentHealth(-(PlayerComponent.HealthManager.Health.currentHealth - data.CurrentGameData.playerHealth));
         newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerEnergy);
-        foreach(AbilityPair ability in data.CurrentGameData.learnedAbilities)
+        foreach (AbilityPair ability in data.CurrentGameData.learnedAbilities)
         {
-            newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType);
+            IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.Type == ability.abilityType).Value;
+            newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType, ability.pos);
         }
     }
-
 }

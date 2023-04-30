@@ -122,6 +122,6 @@
 }
 
 .vectorMask {
-    background-image: resource('bali3-5');
+    background-image: resource('polySVG');
     overflow: hidden;
 }

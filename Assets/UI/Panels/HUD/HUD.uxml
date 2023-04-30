@@ -12,7 +12,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="powers" style="flex-grow: 0; flex-direction: row; justify-content: flex-start; height: 40%; bottom: 15%; width: auto; margin-left: 26px;">
                     <ui:VisualElement name="p1" class="poly_InGame">
-                        <ui:VisualElement name="mask" class="vectorMask" style="background-image: resource(&apos;bali3-5&apos;); overflow: hidden;">
+                        <ui:VisualElement name="mask" class="vectorMask">
                             <NS.RomanLib.RadialFill text="100" width="40" height="44" overlay-image-path="poly" fill-color="#FF1A00FF" overlay-image-scale="0.95" fill-direction="AntiClockwise" value="0" class="radialAbil" />
                         </ui:VisualElement>
                         <ui:Label text="Q" class="polygon_label" />

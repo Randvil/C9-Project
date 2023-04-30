@@ -40,6 +40,7 @@ public class Parry : IParry, IDamageDealer
     public bool IsParrying { get => parryCoroutine != null; }
     public bool IsOnCooldown { get => Time.time < finishCooldownTime; }
     public bool CanParry => IsParrying == false && IsOnCooldown == false;
+    public float Cooldown => cooldown;
 
     public UnityEvent StartParryEvent { get; } = new();
     public UnityEvent BreakParryEvent { get; } = new();

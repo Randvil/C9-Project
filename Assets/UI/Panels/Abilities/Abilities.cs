@@ -33,7 +33,7 @@ public class Abilities : MonoBehaviour, IPanel
     {
         abilityDescriptions = new MenuNode[4];
 
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 4; i++)
         {
             eAbilityType type = (eAbilityType)i;
 
@@ -47,12 +47,12 @@ public class Abilities : MonoBehaviour, IPanel
 
             if (IsAbilityLearned(type))
                 ToggleLearnButton(learnB);
-            else
-                learnB.clicked += () =>
-                {
-                    ToggleAbilityLearning(type);
-                    ToggleLearnButton(learnB);
-                };
+            
+            learnB.clicked += () =>
+            {
+                ToggleAbilityLearning(type);
+                ToggleLearnButton(learnB);
+            };
         }
     }
 

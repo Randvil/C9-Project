@@ -72,6 +72,12 @@
     background-image: resource('TessenIcon512h');
 }
 
+.Regeneration RadialFill {
+    transition-duration: 0.4s;
+    opacity: 1;
+    background-image: resource('button_ps');
+}
+
 .TessenPolyControl .polygon_icon {
     background-image: resource('TessenIcon512h');
     opacity: 1;
@@ -88,4 +94,10 @@
     background-image: resource('KanaboIcon512h');
     opacity: 1;
     flex-grow: 1;
+}
+
+.RegenerationPolyControl .polygon_icon {
+    background-image: resource('button_ps');
+    opacity: 1;
+    flex-grow: 42;
 }

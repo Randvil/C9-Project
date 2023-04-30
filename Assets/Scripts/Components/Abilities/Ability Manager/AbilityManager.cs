@@ -15,6 +15,7 @@ public class AbilityManager : IAbilityManager
 
     public UnityEvent<eAbilityType> AbilityLearnEvent { get; } = new();
     public UnityEvent<eAbilityType> AbilityForgetEvent { get; } = new();
+    public UnityEvent<eAbilityType> AbilityAddEvent { get; } = new();
 
     public UnityEvent<int> SwitchLayoutEvent { get; private set; } = new();
     public Dictionary<int, IAbility> LearnedAbilities { get => learnedAbilities; set => learnedAbilities = value; }
@@ -25,6 +26,7 @@ public class AbilityManager : IAbilityManager
     public void AddAbility(eAbilityType abilityType, IAbility ability)
     {
         abilities.Add(abilityType, ability);
+        AbilityAddEvent.Invoke(abilityType);
     }
 
     public int LearnAbility(eAbilityType abilityType)
@@ -64,7 +66,7 @@ public class AbilityManager : IAbilityManager
         {
             return LearnAbility(abilities[abilityType], actualAbilityNumber);
         }
-
+        Debug.Log(false);
         return false;
     }
 
