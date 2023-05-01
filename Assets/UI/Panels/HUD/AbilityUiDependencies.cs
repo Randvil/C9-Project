@@ -1,5 +1,6 @@
 using DG.Tweening;
 using NS.RomanLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,11 +53,11 @@ public class AbilityUiDependencies : MonoBehaviour
         for (int i = 1; i <= polyCount; i++)
             polyInCollection[i - 1] = abilitiesScreen.Q<Polygon>("p" + i);
 
-        CheckForAlreadyLearned();
-
         abilityManager.SwitchLayoutEvent.AddListener(OnLayoutChange);
         abilityManager.AbilityLearnEvent.AddListener(OnSet);
         abilityManager.AbilityForgetEvent.AddListener(OnUnset);
+        
+        CheckForAlreadyLearned();
     }
 
     // В AbilityManager'e нет реактивных полей, поэтому нужно самим следить за ними
@@ -71,7 +72,7 @@ public class AbilityUiDependencies : MonoBehaviour
     {
         foreach (var abilityWithInd in abilityManager.LearnedAbilities)
         {
-            OnSet(abilityWithInd.Value.Type);
+            OnSetWithoutChecking(abilityWithInd.Value.Type);
         }
         CheckAllAbilitiesStatus();
     }
@@ -120,6 +121,16 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void OnSet(eAbilityType type)
     {
+        OnSetWithoutChecking(type);
+
+        CheckAllAbilitiesStatus();
+    }
+
+    private void OnSetWithoutChecking(eAbilityType type)
+    {
+        if (abilityTypeOrder.ContainsKey(type))
+            return;
+
         int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.Type == type).Key - 1;
         SetAbilityOnSlot(type, newAbilityIndex);
         abilityCanBeUsed.Add(type, false);

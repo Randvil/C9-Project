@@ -48,12 +48,31 @@ public class Abilities : MonoBehaviour, IPanel
             if (IsAbilityLearned(type))
                 ToggleLearnButton(learnB);
             
-            learnB.clicked += () =>
+
+            learnB.style.display = DisplayStyle.None;
+            description.ParentButton.style.display = DisplayStyle.None;
+
+            panelManager.Abilities.AbilityLearnEvent.AddListener(learnedType =>
             {
-                ToggleAbilityLearning(type);
-                ToggleLearnButton(learnB);
-            };
+                if (learnB.style.display == DisplayStyle.None && learnedType == type)
+                    ActivateSetPossibility(learnB, description.ParentButton, type);
+            });
+
+            if (IsAbilityLearned(type)) // изучение при загрузке происходит раньше чем подпись на события
+                ActivateSetPossibility(learnB, description.ParentButton, type);
         }
+    }
+
+    private void ActivateSetPossibility(Button learnB, VisualElement icon, eAbilityType type)
+    {
+        learnB.style.display = DisplayStyle.Flex;
+        icon.style.display = DisplayStyle.Flex;
+
+        learnB.clicked += () =>
+        {
+            ToggleAbilityLearning(type);
+            ToggleLearnButton(learnB);
+        };
     }
 
     private void ToggleLearnButton(Button button)
