@@ -31,7 +31,7 @@ public class AcidCeiling : MonoBehaviour, IDamageDealer
 
     private void Update()
     {
-        if (Time.time >= dropNumber * createDropPeriod)
+        if (Time.timeSinceLevelLoad >= dropNumber * createDropPeriod)
         {
             CreateDrop();
             dropNumber++;

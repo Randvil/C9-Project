@@ -210,12 +210,12 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 1000.0,
+        "playerHealth": 930.0,
         "playerEnergy": 0.0,
         "position": {
-            "x": -9.140000343322754,
-            "y": 10.229999542236329,
-            "z": 0.0
+            "x": 64.19999694824219,
+            "y": 0.6919931173324585,
+            "z": 1.25
         },
         "latestScene": "CityLocation",
         "learnedAbilities": [

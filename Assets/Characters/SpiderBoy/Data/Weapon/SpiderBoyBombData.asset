@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a1081b43fc14d47933f405da362b25, type: 3}
   m_Name: SpiderBoyBombData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5157685963341409230, guid: 83d5ccd98594cce4dbaf6243c625d627, type: 3}
-  speed: 10
-  zRotation: 30
+  speed: 7.5
+  zRotation: 10
   lifeTime: 5
   explosionRadius: 2

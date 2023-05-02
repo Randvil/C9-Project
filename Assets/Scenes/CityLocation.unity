@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.649
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.649}
+  m_IndirectSpecularColor: {r: 0.27332962, g: 0.27475688, b: 0.32960466, a: 0.649}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21337,6 +21337,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5890137656740421957, guid: 51d7964ac41e6c74fb36cd94efc23a21, type: 3}
+      propertyPath: nextScenePosition.x
+      value: -12.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 5890137656740421957, guid: 51d7964ac41e6c74fb36cd94efc23a21, type: 3}
+      propertyPath: nextScenePosition.y
+      value: -0.8999996
+      objectReference: {fileID: 0}
     - target: {fileID: 5890137656740421958, guid: 51d7964ac41e6c74fb36cd94efc23a21, type: 3}
       propertyPath: m_Name
       value: ToBossRoom
