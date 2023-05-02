@@ -59,12 +59,11 @@ public class AbilityManager : IAbilityManager
 
     public bool LearnAbility(eAbilityType abilityType, int actualAbilityNumber)
     {
-
         if (abilities.TryGetValue(abilityType, out IAbility ability))
         {
             return LearnAbility(abilities[abilityType], actualAbilityNumber);
         }
-
+        
         return false;
     }
 

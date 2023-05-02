@@ -21,6 +21,7 @@ public abstract class AbstractAbility : IAbility
     public virtual bool IsPerforming => strikeCoroutine != null; 
     public virtual bool IsOnCooldown => Time.time < finishCooldownTime; 
     public virtual bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= cost;
+    public float Cooldown => cooldown;
 
     public UnityEvent StartCastEvent { get; } = new();
     public UnityEvent BreakCastEvent { get; } = new();

@@ -7,6 +7,8 @@ public class JustWeaponCompoundAttack : ICompoundAttack
     private GameObject character;
     private IWeapon weapon;
 
+    public bool IsPerforming => weapon.IsAttacking;
+
     public JustWeaponCompoundAttack(GameObject character, IWeapon weapon)
     {
         this.character = character;

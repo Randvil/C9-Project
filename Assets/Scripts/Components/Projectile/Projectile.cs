@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Projectile : MonoBehaviour, IReflectableProjectile
+public class Projectile : MonoBehaviour, IProjectile
 {
-    protected GameObject projectileOwner;
-
-    protected DamageData damageData;
-    protected ProjectileData projectileData;
-    protected GameObject prefab;
+    [SerializeField] protected Collider2D damageCollider;
+    [SerializeField] private ProjectileData projectileData;
     protected float speed;
     protected float zRotation;
     protected float lifeTime;
+
+    protected GameObject projectileOwner;
+    protected DamageData damageData;
     protected eDirection direction;
 
     protected ITeam ownerTeam;
@@ -21,68 +21,59 @@ public class Projectile : MonoBehaviour, IReflectableProjectile
 
     protected Damage damage;
 
+    public bool Released { get; private set; }
     public UnityEvent SpawnEvent { get; } = new();
     public UnityEvent ExtinctionEvent { get; } = new();
 
-    protected virtual void Start()
-    {
-        transform.rotation = Quaternion.Euler(0f, (float)direction, zRotation);
-        damage = new(projectileOwner, gameObject, damageData, modifierManager);
-        Destroy(gameObject, lifeTime);
-    }
-
     protected virtual void FixedUpdate()
     {
+        if (Released == false)
+        {
+            return;
+        }
+
         transform.Translate(new Vector2(speed, 0f) * Time.fixedDeltaTime);
     }
 
-    public void Initialize(GameObject projectileOwner, DamageData damageData, ProjectileData projectileData, eDirection direction, ITeam ownerTeam, IModifierManager modifierManager, IDamageDealer damageDealer)
+    public virtual void Release(GameObject projectileOwner, DamageData damageData, eDirection direction, ITeam ownerTeam, IModifierManager modifierManager, IDamageDealer damageDealer)
     {
         this.projectileOwner = projectileOwner;
         this.damageData = damageData;
-        this.projectileData = projectileData;
         this.direction = direction;
         this.ownerTeam = ownerTeam;
         this.modifierManager = modifierManager;
         this.damageDealer = damageDealer;
 
-        prefab = projectileData.prefab;
         speed = projectileData.speed;
         zRotation = projectileData.zRotation;
         lifeTime = projectileData.lifeTime;
+
+        damageCollider.enabled = true;
+        transform.rotation = Quaternion.Euler(0f, (float)direction, zRotation);
+        damage = new(projectileOwner, gameObject, damageData, modifierManager);
+        Destroy(gameObject, lifeTime);
+
+        Released = true;
     }
 
-    public void Remove()
+    public virtual void Remove()
     {
+        Destroy(gameObject, 0.01f);
+
         ExtinctionEvent.Invoke();
-
-        Destroy(gameObject);
-    }
-
-    public GameObject CreateReflectedProjectile(ITeam newTeam)
-    {
-        eDirection newDirection = direction == eDirection.Left ? eDirection.Right : eDirection.Left;
-
-        GameObject reflectedProjectile = Instantiate(gameObject);
-        reflectedProjectile.GetComponent<IReflectableProjectile>().Initialize(projectileOwner, damageData, projectileData, newDirection, newTeam, modifierManager, damageDealer);
-
-        return reflectedProjectile;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out ITeamMember creatureTeam) == false || creatureTeam.CharacterTeam.Team == ownerTeam.Team)
+        if (ownerTeam.IsSame(other))
         {
             return;
         }
 
-        if (other.TryGetComponent(out IDamageable damageableEnemy) == false)
+        if (other.TryGetComponent(out IDamageable damageableEnemy) == true)
         {
-            return;
-        }            
-
-        damageableEnemy.DamageHandler.TakeDamage(damage, damageDealer.DealDamageEvent);
-
-        Remove();
+            damageableEnemy.DamageHandler.TakeDamage(damage, damageDealer);
+            Remove();
+        }
     }
 }

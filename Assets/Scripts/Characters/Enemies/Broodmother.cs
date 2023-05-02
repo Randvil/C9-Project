@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Broodmother : BaseCreature, IBroodmotherBehavior
 {
     [Header("Broodmother Prefab Components")]
-    [SerializeField] protected Slider shieldBarSlider;
+    [SerializeField] protected Transform[] webSpawnPoints;
     [SerializeField] protected AudioSource movementAudioSource;
     [SerializeField] protected AudioSource sharedAudioSource;
 
@@ -18,8 +18,10 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected ClimbData climbData;
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected KanaboData kanaboData;
-    [SerializeField] protected DaikyuData daikyuData;
+    [SerializeField] protected OffensiveJumpData offensiveJumpData;
+    [SerializeField] protected BroodmotherWebData broodmotherWebData;
     [SerializeField] protected RegenerationAbilityData regenerationAbilityData;
+    [SerializeField] protected SwarmSpawningData swarmSpawningData;
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
@@ -33,15 +35,28 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     public IWeapon Weapon { get; protected set; }
     public IDamageAbility StunAbility { get; protected set; }
     public IDamageAbility WebAbility { get; protected set; }
+    public IAbility OffensiveJumpAbility { get; protected set; }
     public IAbility RegenerationAbility { get; protected set; }
+    public IAbility SwarmSpawningAbility { get; protected set; }
     public ICompoundAttack CompoundAttack { get; protected set; }
+
+    private UIDocument document;
+    public UIDocument Document
+    {
+        get => document;
+        set
+        {
+            shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
+            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "healthBar");
+        }
+    }
 
     public BroodmotherStrategyData BroodmotherStrategyData => broodmotherStrategyData;
 
     protected IAIBehavior currentBehavior;
 
     protected NoArmsWeaponView weaponView;
-    protected HealthBarView shieldBarView;
+    protected IHealthBarView shieldBarView;
 
     protected override void Awake()
     {
@@ -61,13 +76,15 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         AbilityModifierManager = new ModifierManager();
         Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
         StunAbility = new Kanabo(this, gameObject, kanaboData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
-        WebAbility = new Daikyu(this, gameObject, daikyuData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
-        CompoundAttack = new BroodmotherCompoundAttack(gameObject, Weapon, WebAbility, StunAbility);
+        WebAbility = new BroodmotherWeb(this, gameObject, webSpawnPoints, broodmotherWebData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
+        OffensiveJumpAbility = new OffensiveJump(this, offensiveJumpData, EnergyManager, Rigidbody, Collider, Gravity, Turning, CharacterTeam, AbilityModifierManager);
         RegenerationAbility = new RegenerationAbility(this, regenerationAbilityData, EnergyManager, ShieldManager);
+        SwarmSpawningAbility = new SwarmSpawning(this, swarmSpawningData, EnergyManager);
+
+        CompoundAttack = new BroodmotherCompoundAttack(gameObject, Weapon, WebAbility, StunAbility, OffensiveJumpAbility, SwarmSpawningAbility);
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        shieldBarView = new HealthBarView(shieldBarSlider, ShieldManager, DeathManager);
         
         currentBehavior = new BroodmotherStrategy(this, enemy);
         currentBehavior.Activate();
@@ -89,13 +106,5 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     {
         currentBehavior.Deactivate();
         Destroy(gameObject, 0.5f);
-    }
-
-    public void ChangePhase(int newPhase)
-    {
-        if (CompoundAttack is BroodmotherCompoundAttack broodmotherAttack)
-        {
-            broodmotherAttack.Phase = newPhase;
-        }
     }
 }

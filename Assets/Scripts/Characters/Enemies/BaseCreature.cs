@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable
+public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IMortal
 {
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
+    [SerializeField] protected Material material;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
@@ -30,10 +31,18 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     public TurningView TurningView { get; protected set; }
     public AnimationAndSoundMovementView MovementView { get; protected set; }
-    public HealthBarView HealthBarView { get; protected set; }
+    public IHealthBarView HealthBarView { get; protected set; }
 
     protected virtual void Awake()
     {
+        //Temp material
+        if (material != null)
+        {
+            Material materialClone = Instantiate(material);
+            GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        }
+        //Temp material
+
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
@@ -48,6 +57,6 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
         Turning = new Turning();
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
-        HealthBarView = new(healthBarSlider, HealthManager, DeathManager);
+        HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
     }
 }

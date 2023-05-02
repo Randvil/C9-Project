@@ -41,7 +41,7 @@ public class PlayerWeaponView
         weapon.StartAttackEvent.AddListener(OnStartAttack);
         weapon.BreakAttackEvent.AddListener(OnBreakAttack);
         weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
-        damageDealer.DealDamageEvent.AddListener(OnDamageDeal);
+        damageDealer.DealDamageEventCallback.AddListener(OnDamageDeal);
 
         this.slashGraph = slashGraph;
     }
@@ -72,7 +72,7 @@ public class PlayerWeaponView
 
     public void OnReleaseAttack()
     {
-        slashGraph.Play();
+        SlashSwordVFXPlay();
 
         if (enemyWasHit == true)
         {
@@ -88,5 +88,22 @@ public class PlayerWeaponView
     public void OnDamageDeal(DamageInfo damageInfo)
     {
         enemyWasHit = true;
+    }
+
+    public void SlashSwordVFXPlay()
+    {
+        switch (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
+        {
+            case "First Attack":
+                slashGraph.SetFloat("Direction", -1f);
+                break;
+            case "Second Attack":
+                slashGraph.SetFloat("Direction", 1f);
+                break;
+            case "Third Attack":
+                slashGraph.SetFloat("Direction", 1f);
+                break;
+        }
+        slashGraph.Play();
     }
 }

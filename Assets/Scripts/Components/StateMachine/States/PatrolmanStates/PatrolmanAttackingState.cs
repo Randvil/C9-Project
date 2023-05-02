@@ -32,6 +32,11 @@ public class PatrolmanAttackingState : IState
 
         patrolman.TurnToEnemy();
 
+        if (patrolman.CompoundAttack.IsPerforming)
+        {
+            return;
+        }
+
         if (patrolman.CompoundAttack.MakeAfficientAttack(patrolman.Enemy.transform.position) == true)
         {
             patrolman.Stop();

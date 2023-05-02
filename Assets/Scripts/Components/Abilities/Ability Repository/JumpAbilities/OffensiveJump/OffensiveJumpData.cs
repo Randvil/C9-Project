@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Offensive Jump Data", menuName = "Component Data/Model/New Offensive Jump Data", order = 312)]
+[CreateAssetMenu(fileName = "NewOffensiveJumpData", menuName = "Data/Abilities/New Offensive Jump Data")]
 public class OffensiveJumpData : DefensiveJumpData
 {
+    [Header("Offensive Jump Data")]
     public DamageData damageData;
     public LayerMask enemyLayers;
 }

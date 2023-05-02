@@ -9,7 +9,7 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
 
     [Header("SpiderBoy Data")]
     [SerializeField] private EnergyManagerData energyManagerData;
-    [SerializeField] private RangedWeaponData rangedWeaponData;
+    [SerializeField] private RangedWeaponData bombThrowerData;
     [SerializeField] private NoArmsWeaponViewData weaponViewData;
     [SerializeField] private CreatureSpawnerData creatureSpawnerData;
     [SerializeField] private DefensiveJumpData defensiveJumpData;
@@ -38,8 +38,7 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
 
         EnergyManager = new EnergyManager(energyManagerData);
         WeaponModifierManager = new ModifierManager();
-        //Weapon = new OrdinaryBow(this, gameObject, projectileSpawnPoint, rangedWeaponData, WeaponModifierManager, CharacterTeam, Turning);
-        Weapon = new BombThrower(this, gameObject, projectileSpawnPoint, rangedWeaponData, WeaponModifierManager, CharacterTeam, Turning);
+        Weapon = new OrdinaryBow(this, gameObject, projectileSpawnPoint, bombThrowerData, WeaponModifierManager, CharacterTeam, Turning);
         SpiderSpawnAbility = new CreatureSpawner(this, spiderSpawnPoint, creatureSpawnerData, EnergyManager);
         JumpAbility = new DefensiveJump(this, defensiveJumpData, EnergyManager, Rigidbody, Gravity, Turning);
         CompoundAttack = new SpiderboyCompoundAttack(gameObject, Weapon, SpiderSpawnAbility);
@@ -52,6 +51,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
     private void Update()
@@ -67,7 +68,6 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     private void OnDeath()
     {
         currentBehavior.Deactivate();
-        GetComponent<DissolveVisualEffect>().ApplyDissolve();
         Destroy(gameObject, 1.2f);
     }
 }

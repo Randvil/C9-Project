@@ -58,7 +58,11 @@ public class BroodmotherStrategy : BaseStrategy
                 if (healthManager.Health.currentHealth < healthManager.Health.maxHealth * phaseTwoThresholdRelativeHealth)
                 {
                     CurrentPhase = 2;
-                    broodmother.ChangePhase(CurrentPhase);
+
+                    if (CompoundAttack is BroodmotherCompoundAttack broodmotherAttack)
+                    {
+                        broodmotherAttack.ChangePhase(CurrentPhase);
+                    }
 
                     return true;
                 }
@@ -68,7 +72,11 @@ public class BroodmotherStrategy : BaseStrategy
                 if (healthManager.Health.currentHealth < healthManager.Health.maxHealth * phaseThreeThresholdRelativeHealth)
                 {
                     CurrentPhase = 3;
-                    broodmother.ChangePhase(CurrentPhase);
+
+                    if (CompoundAttack is BroodmotherCompoundAttack broodmotherAttack)
+                    {
+                        broodmotherAttack.ChangePhase(CurrentPhase);
+                    }
 
                     return true;
                 }
@@ -92,7 +100,7 @@ public class BroodmotherStrategy : BaseStrategy
     {
         if (Vector2.Distance(collider.transform.position, recoveryPosition) < 0.2f)
         {
-            broodmother.Climb.StopClimb();
+            climb.StopClimb();
             broodmother.RegenerationAbility.StartCast();
 
             if (shieldManager.Health.currentHealth == shieldManager.Health.maxHealth)
@@ -103,16 +111,16 @@ public class BroodmotherStrategy : BaseStrategy
             return true;
         }
 
-        if (broodmother.Climb.IsClimbing)
+        if (climb.IsClimbing)
         {
-            broodmother.Climb.ClimbUp();
+            climb.ClimbUp();
             return true;
         }
 
         if (Mathf.Abs(collider.transform.position.x - recoveryPosition.x) < 0.1f)
         {
             Stop();
-            broodmother.Climb.StartClimb();
+            climb.StartClimb();
             return true;
         }
 
@@ -125,7 +133,7 @@ public class BroodmotherStrategy : BaseStrategy
     public void BreakRetreat()
     {
         broodmother.RegenerationAbility.BreakCast();
-        broodmother.Climb.BreakClimb();
+        climb.BreakClimb();
     }
 
     protected override void OnTakeDamage(DamageInfo damageInfo)

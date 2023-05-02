@@ -9,6 +9,8 @@ public class SpiderMinionCompoundAttack : ICompoundAttack
     private IWeapon weapon;
     private IAbility jumpAbility;
 
+    public bool IsPerforming => (jumpAbility.IsPerforming || weapon.IsAttacking);
+
     public SpiderMinionCompoundAttack(GameObject character, IWeapon weapon, IAbility jumpAbility)
     {
         this.character = character;
@@ -18,11 +20,6 @@ public class SpiderMinionCompoundAttack : ICompoundAttack
 
     public bool MakeAfficientAttack(Vector2 enemyPosition)
     {
-        if (jumpAbility.IsPerforming)
-        {
-            return true;
-        }
-
         if (jumpAbility.CanBeUsed)
         {
             jumpAbility.StartCast();
@@ -30,11 +27,6 @@ public class SpiderMinionCompoundAttack : ICompoundAttack
         }
 
         float distanceToEnemy = Vector2.Distance(character.transform.position, enemyPosition);
-        if (weapon.IsAttacking)
-        {
-            return true;
-        }
-
         if (distanceToEnemy < weapon.AttackRange)
         {
             weapon.StartAttack();

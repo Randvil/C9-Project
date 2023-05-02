@@ -15,9 +15,16 @@ public class ParryProjectileReflection : ProjectileReflection
     }
 
     public override void ApplyEffect(Damage incomingDamage)
-    {        
-        if ((turning.Direction == eDirection.Right && parryingCharacter.transform.position.x - incomingDamage.SourceObject.transform.position.x < 0f) ||
-            (turning.Direction == eDirection.Left && parryingCharacter.transform.position.x - incomingDamage.SourceObject.transform.position.x > 0f))
+    {
+        if (incomingDamage.SourceObject == null)
+        {
+            return;
+        }
+
+        bool enemyOnTheRight = parryingCharacter.transform.position.x - incomingDamage.SourceObject.transform.position.x < 0f;
+
+        if ((turning.Direction == eDirection.Right && enemyOnTheRight == true) ||
+            (turning.Direction == eDirection.Left && enemyOnTheRight == false))
         {
             base.ApplyEffect(incomingDamage);
         }

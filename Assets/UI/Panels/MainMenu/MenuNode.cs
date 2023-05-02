@@ -27,6 +27,8 @@ public class MenuNode
 
     public VisualElement Panel { get; }
 
+    public List<Button> Buttons => Panel.Query<Button>().ToList();
+
     public Button ParentButton { get; private set; }
     
     public MenuNode(string name, VisualElement root, bool active)
@@ -46,7 +48,7 @@ public class MenuNode
     {
         Button button = Panel.Q<Button>(child.Name + "B");
 
-        if (button != null) // TODO: Подумать как организовать вызов описания абилок, если сот - не кнопка
+        if (button != null)
         { 
             button.clicked += () =>
             {

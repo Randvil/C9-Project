@@ -20,7 +20,7 @@ public class DamageHandler : IDamageHandler
         this.deathManager = deathManager;
     }
 
-    public void TakeDamage(Damage incomingDamage, UnityEvent<DamageInfo> dealDamageEvent)
+    public void TakeDamage(Damage incomingDamage, IDamageDealer damageDealer)
     {
         if (deathManager.IsAlive == false)
         {
@@ -32,7 +32,7 @@ public class DamageHandler : IDamageHandler
         float effectiveDamage = defenceModifierManager.ApplyModifiers(incomingDamage.EffectiveDamage);
         ChangeHealth(effectiveDamage);
 
-        InvokeEvents(incomingDamage, effectiveDamage, dealDamageEvent);
+        InvokeEvents(incomingDamage, effectiveDamage, damageDealer.DealDamageEventCallback);
     }
 
     protected virtual void ChangeHealth(float effectiveDamage)

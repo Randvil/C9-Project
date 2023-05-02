@@ -3,7 +3,6 @@ using UnityEngine;
 
 public interface IBroodmotherBehavior
 {
-    public void ChangePhase(int newPhase);
     public BroodmotherStrategyData BroodmotherStrategyData { get; }
     public BoxCollider2D Collider { get; }
     public ITeam CharacterTeam { get; }

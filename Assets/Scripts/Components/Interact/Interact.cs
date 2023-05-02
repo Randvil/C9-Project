@@ -7,6 +7,7 @@ public class Interact : IInteract
     private GameObject character;
 
     private float searchPeriod = 0.1f;
+    private LayerMask interactiveObjectLayer;
 
     private IInteractive interactive;
     private Coroutine searchCoroutine;
@@ -20,6 +21,7 @@ public class Interact : IInteract
         this.character = character;
 
         searchPeriod = interactData.searchPeriod;
+        interactiveObjectLayer = interactData.interactiveObjectLayer;
 
         searchCoroutine = owner.StartCoroutine(SearchInteractiveObject());
     }
@@ -30,48 +32,46 @@ public class Interact : IInteract
         {
             yield return new WaitForSeconds(searchPeriod);
 
-            if (character == null)
-            {
-                owner.StopCoroutine(searchCoroutine);
-                break;
-            }
-
             if (interactive != null)
             {
                 interactive.HideTooltip();
                 interactive = null;
             }
 
-            Collider2D[] colliders = Physics2D.OverlapPointAll(character.transform.position);
-            if (colliders.Length == 0)
+            Collider2D collider = Physics2D.OverlapPoint(character.transform.position, interactiveObjectLayer);
+            if (collider == null)
             {
                 continue;
             }
 
-            foreach (Collider2D collider in colliders)
+            if (collider.TryGetComponent(out interactive) == true)
             {
-                if (collider.TryGetComponent(out interactive) == true)
-                {
-                    interactive.ShowTooltip();
-                    break;
-                }
+                interactive.ShowTooltip();
             }
         }
     }
 
     public void StartInteraction()
     {
-        interactive.StartInteraction();
+        if (interactive != null)
+        {
+            interactive.StartInteraction(character);
+        }        
 
         if (searchCoroutine != null)
         {
             owner.StopCoroutine(searchCoroutine);
+            searchCoroutine = null;
         }
     }
 
     public void BreakInteraction()
     {
-        interactive.StopInteraction();
+        if (interactive != null)
+        {
+            interactive.StopInteraction();
+            interactive = null;
+        }        
 
         if (searchCoroutine == null)
         {
