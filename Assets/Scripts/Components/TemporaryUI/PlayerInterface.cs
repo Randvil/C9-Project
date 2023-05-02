@@ -3,7 +3,7 @@ using NS.RomanLib;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerInterface : IPlayerInterface
+public class PlayerInterface : IPlayerInterface, IHealthBarView
 {
     public UIDocument uiDocument;
     private IHealthManager healthManager;
@@ -47,7 +47,7 @@ public class PlayerInterface : IPlayerInterface
         energyBar.value = energyManager.Energy.currentEnergy / energyManager.Energy.maxEnergy;
     }
 
-    private void OnCurrentHealthChange(Health health)
+    public void OnCurrentHealthChange(Health health)
     {
         if (health.currentHealth < 0)
             return;
@@ -57,7 +57,7 @@ public class PlayerInterface : IPlayerInterface
         hpLabel.text = Mathf.Round(health.currentHealth / healthBar.highValue * 100f) + "%";
     }
 
-    private void OnMaxHealthChange(Health health)
+    public void OnMaxHealthChange(Health health)
     {
         healthBar.highValue = health.maxHealth;
     }

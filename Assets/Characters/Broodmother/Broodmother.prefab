@@ -2121,7 +2121,6 @@ MonoBehaviour:
   turningViewData: {fileID: 11400000, guid: 60960aeb7cafabf4880ead5d52114263, type: 2}
   healthManagerData: {fileID: 11400000, guid: e0c04078e4708674788a7013e0dbbe31, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
-  shieldBarSlider: {fileID: 9167320386564060161}
   movementAudioSource: {fileID: 7845183630836557568}
   sharedAudioSource: {fileID: 8022143023300157512}
   damageHandlerWithShieldsData: {fileID: 11400000, guid: 468dba08536c3ac4d98b4a403cc0260e, type: 2}

@@ -2425,6 +2425,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706559396418764282}
     m_Modifications:
+    - target: {fileID: 5553439834750503026, guid: 554d0a694a4972543adf605cba7d6ebf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 6201795796055189927, guid: 554d0a694a4972543adf605cba7d6ebf, type: 3}
       propertyPath: m_Name
       value: asian house3 (2)
@@ -2657,6 +2661,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706559396418764282}
     m_Modifications:
+    - target: {fileID: 5553439834750503026, guid: 554d0a694a4972543adf605cba7d6ebf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 6201795796055189927, guid: 554d0a694a4972543adf605cba7d6ebf, type: 3}
       propertyPath: m_Name
       value: asian house3 (1)

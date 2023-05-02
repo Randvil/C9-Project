@@ -49,15 +49,15 @@ MonoBehaviour:
         waveCount: 0
       - id: 4
         position: {x: 100, y: -0.28, z: 0}
-        enemyNumber: 5
-        enemyPrefabName: SpiderMinion
+        enemyNumber: 1
+        enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        condition: wave
-        timeCountdown: 10
-        waveCount: 3
+        condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 5
         position: {x: 41.7, y: 11.15, z: 6.98}
-        enemyNumber: 4
+        enemyNumber: 2
         enemyPrefabName: SpiderMinion
         spawnRadius: 6
         condition: wave
@@ -65,12 +65,20 @@ MonoBehaviour:
         waveCount: 3
       - id: 6
         position: {x: 53.95, y: 11.45, z: 6.98}
-        enemyNumber: 4
+        enemyNumber: 2
         enemyPrefabName: SpiderMinion
         spawnRadius: 6
         condition: wave
         timeCountdown: 8
         waveCount: 3
+      - id: 7
+        position: {x: 75, y: -0.28, z: 0}
+        enemyNumber: 1
+        enemyPrefabName: SpiderBoy
+        spawnRadius: 10
+        condition: once
+        timeCountdown: 0
+        waveCount: 0
     - sceneName: ArcadeCenter
       spawnpoints:
       - id: 1

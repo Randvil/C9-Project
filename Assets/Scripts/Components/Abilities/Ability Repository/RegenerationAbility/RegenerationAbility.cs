@@ -13,6 +13,8 @@ public class RegenerationAbility : AbstractAbility, ISustainableAbility
 
     public RegenerationAbility(MonoBehaviour owner, RegenerationAbilityData regenerationAbilityData, IEnergyManager energyManager, IHealthManager healthManager) : base(owner, regenerationAbilityData, energyManager)
     {
+        Type = eAbilityType.Regeneration;
+
         this.regenerationAbilityData = regenerationAbilityData;
         healthPerSecond = regenerationAbilityData.healthPerSecond;
         maxRegenerationTime = regenerationAbilityData.maxRegenerationTime;

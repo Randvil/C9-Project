@@ -25,7 +25,7 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
     }
     public Vector3 GenerateRandomPos(Vector3 pos)
     {
-        return new Vector3(Random.Range(pos.x - 4f, pos.x + 4f), pos.y, pos.z);
+        return new Vector3(Random.Range(pos.x - 2f, pos.x + 2f), pos.y, pos.z);
     }
 
 

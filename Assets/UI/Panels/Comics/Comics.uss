@@ -1,0 +1,56 @@
+.comics-label {
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    bottom: 5%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(0, 0, 0, 0.47);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.comics-page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    scale: 1 1;
+}
+
+.comics-panel {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.animated-comics-page {
+    scale: 1.1 1.1;
+    transition-property: scale;
+    transition-duration: 10s;
+}
+
+.skip-button {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    transition-duration: 0.3s, 0.3s;
+    transition-property: color, scale;
+}
+
+.skip-button:hover {
+    color: rgba(255, 255, 255, 255);
+    transition-duration: 0.3s, 0.3s;
+    transition-property: color, scale;
+    scale: 1.2 1.2;
+}

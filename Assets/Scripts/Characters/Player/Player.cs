@@ -203,7 +203,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
             AbilityPair abilityPair = new(ability.Key, ability.Value.Type);
             if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
                 data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
-            else 
+            else
                 data.learnedAbilities.Add(abilityPair);
         }
     }

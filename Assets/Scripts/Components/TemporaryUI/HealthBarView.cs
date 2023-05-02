@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarView
+public class HealthBarView : IHealthBarView
 {
     private Slider healthBarSlider;
 

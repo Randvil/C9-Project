@@ -27,9 +27,11 @@ public class SceneObjectsCreator : Creator
         player.PlayerComponent.Initialize(managers.PlayerInput);
         player.PlayerComponent.Document = staticUI.UIDocument;
         player.LoadDataToObject(data);
-
+        
         staticUI.PanelManager.Input = managers.PlayerInput;
-        staticUI.newGameObject.GetComponent<PanelManager>().Abilities = player.PlayerComponent.AbilityManager;
+        staticUI.PanelManager.Abilities = player.PlayerComponent.AbilityManager;
+        staticUI.newGameObject.GetComponentInChildren<DeathScreen>().SetDeathManager(player.PlayerComponent.DeathManager);
+        staticUI.newGameObject.GetComponentInChildren<AbilityUiDependencies>().Parry = player.PlayerComponent.Parry;
 
         DeathLoad deathLoad = new DeathLoad(player.PlayerComponent.DeathManager);
 

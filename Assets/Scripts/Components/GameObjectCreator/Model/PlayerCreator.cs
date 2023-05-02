@@ -9,11 +9,10 @@ public class PlayerCreator : Creator
         newGameObject.transform.position = data.CurrentGameData.position;
         newGameObject.GetComponent<Player>().HealthManager.ChangeCurrentHealth(-(PlayerComponent.HealthManager.Health.currentHealth - data.CurrentGameData.playerHealth));
         newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerEnergy);
-        foreach(AbilityPair ability in data.CurrentGameData.learnedAbilities)
+        foreach (AbilityPair ability in data.CurrentGameData.learnedAbilities)
         {
             IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.Type == ability.abilityType).Value;
-            newGameObject.GetComponent<Player>().AbilityManager.LearnedAbilities.Add(ability.pos, learnedAbility);
+            newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType, ability.pos);
         }
     }
-
 }
