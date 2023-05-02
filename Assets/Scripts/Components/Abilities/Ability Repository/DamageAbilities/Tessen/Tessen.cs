@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class Tessen : AbstractDamageAbility, ISustainableAbility
 {
     protected float castTime;
     protected float impactPeriod;
     protected float ascensionalPower;
+    protected StunEffectData stunEffectData;
 
     protected BoxCollider2D collider;
 
@@ -25,6 +25,7 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
         castTime = tessenData.castTime;
         impactPeriod = tessenData.impactPeriod;
         ascensionalPower = tessenData.ascensionalPower;
+        stunEffectData = tessenData.stunEffectData;
 
         this.collider = collider;
 
@@ -41,38 +42,40 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
         while (Time.time < endCastTime && energyManager.Energy.currentEnergy > cost * impactPeriod)
         {
             Vector2 direction = turning.Direction == eDirection.Right ? Vector2.right : Vector2.left;
-            RaycastHit2D[] enemies = Physics2D.CircleCastAll(collider.transform.position, collider.size.y/2 * caster.transform.lossyScale.y, direction, AttackRange);
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(collider.transform.position, collider.size.y/2 * caster.transform.lossyScale.y, direction, AttackRange);
 
-            foreach (RaycastHit2D enemy in enemies)
+            foreach (RaycastHit2D hit in hits)
             {
-                if (enemy.collider == null)
+                Collider2D enemy = hit.collider;
+
+                if (enemy == null)
                 {
                     continue;
                 }
 
-                if (enemy.collider.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
+                if (team.IsSame(enemy))
                 {
                     continue;
                 }
 
-                if (enemy.collider.TryGetComponent(out IEffectable stunnableEnemy) == true
+                if (enemy.TryGetComponent(out IEffectable stunnableEnemy) == true
                     && stunnedEnemies.ContainsKey(stunnableEnemy.EffectManager) == false)
                 {
-                    IEffect stunEffect = new StunEffect(float.PositiveInfinity);
+                    IEffect stunEffect = new StunEffect(stunEffectData);
                     stunnableEnemy.EffectManager.AddEffect(stunEffect);
                     stunnedEnemies.Add(stunnableEnemy.EffectManager, stunEffect);
                 }
 
-                if (enemy.collider.TryGetComponent(out IDamageable damageableEnemy) == true
-                    && damagedEnemies.ContainsKey(enemy.collider.gameObject) == false)
+                if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true
+                    && damagedEnemies.ContainsKey(enemy.gameObject) == false)
                 {
-                    damagedEnemies.Add(enemy.collider.gameObject, damageableEnemy.DamageHandler);
+                    damagedEnemies.Add(enemy.gameObject, damageableEnemy.DamageHandler);
                 }
 
-                if (enemy.collider.TryGetComponent(out IGravity enemyGravity) == true)
+                if (enemy.TryGetComponent(out IGravity enemyGravity) == true)
                 {
                     enemyGravity.Disable(this);
-                    Rigidbody2D enemyRigidbody = enemy.collider.GetComponent<Rigidbody2D>();
+                    Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
                     enemyRigidbody.velocity = new(enemyRigidbody.velocity.x, ascensionalPower);
                 }
             }
@@ -81,7 +84,7 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
             {
                 if (damagedEnemy.Key != null)
                 {
-                    damagedEnemy.Value.TakeDamage(damage, DealDamageEvent);
+                    damagedEnemy.Value.TakeDamage(damage, this);
                 }
             }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Health Manager Data", menuName = "Component Data/Model/New Health Manager Data", order = 110)]
+[CreateAssetMenu(fileName = "NewHealthManagerData", menuName = "Data/Components/Managers/New Health Manager Data")]
 public class HealthManagerData : ScriptableObject
 {
     public Health initialHealth = new()

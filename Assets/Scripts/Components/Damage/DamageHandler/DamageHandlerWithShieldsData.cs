@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Damage Handler With Shields Data", menuName = "Component Data/Model/New Damage Handler With Shields Data", order = 150)]
+[CreateAssetMenu(fileName = "NewDamageHandlerWithShieldsData", menuName = "Data/Components/Damage Handler/New Damage Handler With Shields Data")]
 public class DamageHandlerWithShieldsData : ScriptableObject
 {
+    [Range(0f, 1f), Tooltip("How much damage will be absorbed by the shield")]
     public float shieldPercentageAbsorption = 0.5f;
 }

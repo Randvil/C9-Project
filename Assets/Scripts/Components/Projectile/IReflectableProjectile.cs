@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IReflectableProjectile : IProjectile
 {
-    public GameObject CreateReflectedProjectile(ITeam newTeam);
+    public void CreateReflectedProjectile(ITeam newTeam);
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Parry Data", menuName = "Component Data/Model/New Parry Data", order = 200)]
+[CreateAssetMenu(fileName = "NewParryData", menuName = "Data/Components/Parry/New Parry Data")]
 public class ParryData : ScriptableObject
 {
     [Min(0f), Tooltip("Maximum stance duration, [seconds]")]

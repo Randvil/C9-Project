@@ -8,6 +8,8 @@ public class SpiderboyCompoundAttack : ICompoundAttack
     private IWeapon weapon;
     private IAbility summonSpiderAbility;
 
+    public bool IsPerforming => (summonSpiderAbility.IsPerforming || weapon.IsAttacking);
+
     public SpiderboyCompoundAttack(GameObject spiderboy, IWeapon weapon, IAbility ability)
     {
         this.spiderboy = spiderboy;
@@ -17,11 +19,6 @@ public class SpiderboyCompoundAttack : ICompoundAttack
 
     public bool MakeAfficientAttack(Vector2 enemyPosition)
     {
-        if (summonSpiderAbility.IsPerforming)
-        {
-            return true;
-        }
-
         if (summonSpiderAbility.CanBeUsed)
         {
             summonSpiderAbility.StartCast();

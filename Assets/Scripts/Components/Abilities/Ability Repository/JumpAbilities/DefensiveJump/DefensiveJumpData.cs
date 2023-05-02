@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Defensive Jump Data", menuName = "Component Data/Model/New Defensive Jump Data", order = 311)]
+[CreateAssetMenu(fileName = "NewDefensiveJumpData", menuName = "Data/Abilities/New Defensive Jump Data")]
 public class DefensiveJumpData : BaseAbilityData
 {
     [Header("Defensive Jump Data")]
+    [Min(0f)]
     public float jumpTime;
+    [Tooltip("The X component defines the direction. Positive - forward, negative - back.")]
     public Vector2 initialJumpSpeed;
     public AnimationCurve speedCurve;
 }

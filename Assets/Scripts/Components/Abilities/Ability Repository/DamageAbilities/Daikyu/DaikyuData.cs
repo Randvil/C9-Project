@@ -1,10 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Daikyu Data", menuName = "Component Data/Model/New Daikyu Data", order = 312)]
+[CreateAssetMenu(fileName = "NewDaikyuData", menuName = "Data/Abilities/New Daikyu Data")]
 public class DaikyuData : DamageAbilityData
 {
     [Header("Daikyu Data")]
-    public ProjectileData projectileData;
+    public GameObject projectilePrefab;
+    [Min(0f), Tooltip("Charge time after which the ability deals maximum damage [seconds]")]
     public float fullChargeTime = 1f;
+    [Min(0f), Tooltip("Maximum damage multiplier when fully charged")]
     public float fullChargeDamageMultiplier = 2f;
 }

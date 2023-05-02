@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Weapon View Data", menuName = "Component Data/View/New Weapon View Data", order = 112)]
+[CreateAssetMenu(fileName = "NewPlayerWeaponViewData", menuName = "Data/Weapon/View/New Player Weapon View Data")]
 public class PlayerWeaponViewData : ScriptableObject
 {
     public AudioClip takeSword;

@@ -21,7 +21,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
 
         foreach (Collider2D enemy in enemies)
         {
-            if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
+            if (team.IsSame(enemy))
             {
                 continue;
             }
@@ -42,7 +42,7 @@ public class SingleTargetMeleeWeapon : AbstractMeleeWeapon
         if (nearestDamageableEnemy != null)
         {
             Damage damage = damages.Length >= attackNumber ? damages[attackNumber - 1] : damages[0];
-            nearestDamageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
+            nearestDamageableEnemy.DamageHandler.TakeDamage(damage, this);
         }            
     }
 }

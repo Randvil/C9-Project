@@ -16,4 +16,29 @@ public class CharacterTeam : ITeam
     {
         team = newTeam;
     }
+
+    public bool IsSame(ITeam characterTeam)
+    {
+        return characterTeam.Team == team;
+    }
+
+    public bool IsSame(Component character)
+    {
+        if (character.TryGetComponent(out ITeamMember teamMemeber) == false)
+        {
+            return false;
+        }
+
+        return IsSame(teamMemeber.CharacterTeam);
+    }
+
+    public bool IsSame(GameObject character)
+    {
+        if (character.TryGetComponent(out ITeamMember teamMemeber) == false)
+        {
+            return false;
+        }
+
+        return IsSame(teamMemeber.CharacterTeam);
+    }
 }

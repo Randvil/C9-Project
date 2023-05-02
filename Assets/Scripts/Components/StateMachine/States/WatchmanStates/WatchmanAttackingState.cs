@@ -31,6 +31,10 @@ public class WatchmanAttackingState : IState
 
         watchman.TurnToEnemy();
 
+        if (watchman.CompoundAttack.IsPerforming)
+        {
+            return;
+        }
         watchman.CompoundAttack.MakeAfficientAttack(watchman.Enemy.transform.position);
     }
 

@@ -17,7 +17,7 @@ public class CleaveMeleeWeapon : AbstractMeleeWeapon
 
         foreach (Collider2D enemy in enemies)
         {            
-            if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
+            if (team.IsSame(enemy))
             {
                 continue;
             }
@@ -28,7 +28,7 @@ public class CleaveMeleeWeapon : AbstractMeleeWeapon
                     || (turning.Direction == eDirection.Left && enemy.transform.position.x <= weaponOwnerObject.transform.position.x))
                 {
                     Damage damage = damages.Length >= attackNumber ? damages[attackNumber - 1] : damages[0];
-                    damageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
+                    damageableEnemy.DamageHandler.TakeDamage(damage, this);
                 }
             }
         }

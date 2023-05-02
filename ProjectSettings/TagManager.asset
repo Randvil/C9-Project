@@ -17,9 +17,9 @@ TagManager:
   - Projectile
   - InteractiveObject
   - ClimbableObject
-  - 
-  - 
-  - 
+  - GroundCollision
+  - PlayerCollision
+  - ExplosiveProjectile
   - 
   - 
   - 

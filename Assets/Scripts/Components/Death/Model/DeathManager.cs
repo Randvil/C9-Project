@@ -14,6 +14,7 @@ public class DeathManager : IDeathManager, IForbiddableDeath
 
     public UnityEvent DeathEvent { get; } = new();
     public UnityEvent ResurrectionEvent { get; } = new();
+    public UnityEvent PreventedDeathEvent { get; } = new();
 
     public DeathManager(IHealthManager healthManager)
     {
@@ -24,21 +25,33 @@ public class DeathManager : IDeathManager, IForbiddableDeath
 
     private void OnHealthChange(Health health)
     {
-        if (IsAlive == false || IsForbidden == true)
+        if (health.currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        if (IsAlive == false)
         {
             return;
         }
 
-        if (health.currentHealth <= 0f)
+        if (IsForbidden == true)
         {
-            IsAlive = false;
-            DeathEvent.Invoke();
+            PreventedDeathEvent.Invoke();
+            return;
         }
+
+        IsAlive = false;
+        DeathEvent.Invoke();
     }
 
     public void Resurrect()
     {
         IsAlive = true;
+        ResurrectionEvent.Invoke();
     }
 
     public void ForbidDying(object forbiddingObject)
@@ -51,5 +64,17 @@ public class DeathManager : IDeathManager, IForbiddableDeath
         forbiddingObjects.Remove(forbiddingObject);
 
         OnHealthChange(healthManager.Health);
+    }
+
+    public void Die(bool ignoreForbidding)
+    {
+        if (ignoreForbidding == false)
+        {
+            Die();
+            return;
+        }
+
+        IsAlive = false;
+        DeathEvent.Invoke();
     }
 }

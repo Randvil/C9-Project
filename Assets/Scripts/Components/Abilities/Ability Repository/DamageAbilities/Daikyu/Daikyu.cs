@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Daikyu : AbstractDamageAbility, ISustainableAbility
 {
-    protected ProjectileData projectileData;
+    protected GameObject projectilePrefab;
     protected float fullChargeTime;
     protected float fullChargeDamageMultiplier;
 
@@ -15,7 +15,7 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
     {
         Type = eAbilityType.Daikyu;
        
-        projectileData = daikyuData.projectileData;
+        projectilePrefab = daikyuData.projectilePrefab;
         fullChargeTime = daikyuData.fullChargeTime;
         fullChargeDamageMultiplier = daikyuData.fullChargeDamageMultiplier;
     }
@@ -50,8 +50,8 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
         modifierManager.AddModifier(damageModifier);
 
-        IProjectile projectile = Object.Instantiate(projectileData.prefab, caster.transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
-        projectile.Initialize(caster, damageData, projectileData, turning.Direction, team, modifierManager, this);
+        IProjectile projectile = Object.Instantiate(projectilePrefab, caster.transform.position, Quaternion.Euler(new Vector3(0f, (float)turning.Direction, 0f))).GetComponent<IProjectile>();
+        projectile.Release(caster, damageData, turning.Direction, team, modifierManager, this);
 
         energyManager.ChangeCurrentEnergy(-cost);
 

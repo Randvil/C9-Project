@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Kanabo : AbstractDamageAbility, IAbility
 {
-    protected float stunDuration;
+    protected StunEffectData stunEffectData;
 
     protected Damage damage;
 
@@ -14,7 +14,7 @@ public class Kanabo : AbstractDamageAbility, IAbility
         Type = eAbilityType.Kanabo;
         
         AttackRange = kanaboData.attackRange;
-        stunDuration = kanaboData.stunDuration;
+        stunEffectData = kanaboData.stunEffectData;
 
         damage = new(caster, caster, damageData, modifierManager);
     }
@@ -27,7 +27,7 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
         foreach (Collider2D enemy in enemies)
         {
-            if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == team.Team)
+            if (team.IsSame(enemy))
             {
                 continue;
             }
@@ -41,12 +41,12 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
             if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true)
             {
-                damageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
+                damageableEnemy.DamageHandler.TakeDamage(damage, this);
             }
 
             if (enemy.TryGetComponent(out IEffectable effectableEnemy) == true)
             {
-                effectableEnemy.EffectManager.AddEffect(new StunEffect(Time.time + stunDuration));
+                effectableEnemy.EffectManager.AddEffect(new StunEffect(stunEffectData));
             }
         }
 

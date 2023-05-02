@@ -2,39 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : Projectile
+public class Bomb : ReflectableProjectile
 {
-    protected float explosionRadius;
+    [SerializeField] private BombData bombData;
+    private IGravity gravity;
+    private Explosion explosion;
 
-    public void Initialize(BombData bombData)
+    public float ExplosionRadius { get; protected set; }
+
+    private void Awake()
     {
-        explosionRadius = bombData.explosionRadius;
+        gravity = GetComponent<IGravity>();
+        gravity.Disable(this);
+    }
+
+    public override void Release(GameObject projectileOwner, DamageData damageData, eDirection direction, ITeam ownerTeam, IModifierManager modifierManager, IDamageDealer damageDealer)
+    {
+        base.Release(projectileOwner, damageData, direction, ownerTeam, modifierManager, damageDealer);
+
+        ExplosionRadius = bombData.explosionRadius;
+        explosion = new Explosion(ExplosionRadius, damage, ownerTeam, damageDealer);
+
+        gravity.Enable(this);
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (ownerTeam.IsSame(other))
         {
-            Explode();
-            Remove();
+            return;
         }
-    }
 
-    protected virtual void Explode()
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-
-        foreach (Collider2D enemy in enemies)
-        {
-            if (enemy.TryGetComponent(out ITeamMember creatureTeam) == false || creatureTeam.CharacterTeam.Team == ownerTeam.Team)
-            {
-                continue;
-            }
-
-            if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true)
-            {
-                damageableEnemy.DamageHandler.TakeDamage(damage, damageDealer.DealDamageEvent);
-            }
-        }
+        explosion.Explode(transform.position);
+        Remove();
     }
 }

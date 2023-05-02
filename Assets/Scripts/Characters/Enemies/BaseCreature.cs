@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable
+public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IMortal
 {
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;

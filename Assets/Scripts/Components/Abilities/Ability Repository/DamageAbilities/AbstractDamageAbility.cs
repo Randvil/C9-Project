@@ -13,7 +13,7 @@ public abstract class AbstractDamageAbility : AbstractAbility, IDamageAbility, I
     protected ITurning turning;
     protected ITeam team;
 
-    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
+    public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
 
     public float AttackRange { get; protected set; } = float.MaxValue;
 

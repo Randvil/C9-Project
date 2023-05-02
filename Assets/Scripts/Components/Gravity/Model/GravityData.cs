@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Gravity Data", menuName = "Component Data/Model/New Gravity Data")]
+[CreateAssetMenu(fileName = "NewGravityData", menuName = "Data/Components/Gravity/New Gravity Data")]
 public class GravityData : ScriptableObject
 {
     public LayerMask groundLayer;
