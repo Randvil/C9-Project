@@ -1,7 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Turning View Data", menuName = "Component Data/View/New Turning View Data", order = 110)]
+[CreateAssetMenu(fileName = "NewTurningViewData", menuName = "Data/Components/Turning/View/New Turning View Data")]
 public class TurningViewData : ScriptableObject
 {
+    [Min(0f), Tooltip("Speed of turning [degrees]")]
     public float turnSpeed = 1000f;
 }

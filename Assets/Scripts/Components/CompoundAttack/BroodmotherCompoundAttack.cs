@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,25 +10,51 @@ public class BroodmotherCompoundAttack : ICompoundAttack
     private IWeapon weapon;
     private IDamageAbility webAbility;
     private IDamageAbility stunAbility;
+    private IAbility jumpAbility;
+    private IAbility swarmSpawningAbility;
 
-    public int Phase { get; set; } = 1;
+    public int CurrentPhase { get; private set; } = 1;
 
-    public BroodmotherCompoundAttack(GameObject broodmother, IWeapon weapon, IDamageAbility webAbility, IDamageAbility stunAbility)
+    public bool IsPerforming => (jumpAbility.IsPerforming || webAbility.IsPerforming || stunAbility.IsPerforming || weapon.IsAttacking);
+
+    public BroodmotherCompoundAttack(GameObject broodmother, IWeapon weapon, IDamageAbility webAbility, IDamageAbility stunAbility, IAbility jumpAbility, IAbility swarmSpawningAbility)
     {
         this.broodmother = broodmother;
 
         this.weapon = weapon;
         this.webAbility = webAbility;
         this.stunAbility = stunAbility;
+        this.jumpAbility = jumpAbility;
+        this.swarmSpawningAbility = swarmSpawningAbility;
     }
 
     public bool MakeAfficientAttack(Vector2 enemyPosition)
     {
         float distanceToEnemy = Vector2.Distance(broodmother.transform.position, enemyPosition);
 
-        if (Phase == 3)
+        if (CurrentPhase == 3)
         {
-            if (webAbility.IsPerforming == true || stunAbility.IsPerforming == true)
+            if (jumpAbility.IsPerforming == true || webAbility.IsPerforming == true)
+            {
+                return true;
+            }
+
+            if (jumpAbility.CanBeUsed)
+            {
+                jumpAbility.StartCast();
+                return true;
+            }
+
+            if (webAbility.CanBeUsed && webAbility.AttackRange > distanceToEnemy)
+            {
+                webAbility.StartCast();
+                return true;
+            }
+        }
+
+        if (CurrentPhase == 2)
+        {
+            if (webAbility.IsPerforming == true)
             {
                 return true;
             }
@@ -37,29 +64,20 @@ public class BroodmotherCompoundAttack : ICompoundAttack
                 webAbility.StartCast();
                 return true;
             }
-
-            if (stunAbility.CanBeUsed && stunAbility.AttackRange > distanceToEnemy)
-            {
-                stunAbility.StartCast();
-                return true;
-            }
         }
 
-        if (Phase == 2)
+        if (stunAbility.IsPerforming == true)
         {
-            if (stunAbility.IsPerforming == true)
-            {
-                return true;
-            }
-
-            if (stunAbility.CanBeUsed && stunAbility.AttackRange > distanceToEnemy)
-            {
-                stunAbility.StartCast();
-                return true;
-            }
+            return true;
         }
 
-        if (weapon.AttackRange > distanceToEnemy)
+        if (stunAbility.CanBeUsed && stunAbility.AttackRange > distanceToEnemy)
+        {
+            stunAbility.StartCast();
+            return true;
+        }
+
+        if (weapon.IsAttacking || weapon.AttackRange > distanceToEnemy)
         {
             weapon.StartAttack();
             return true;
@@ -70,8 +88,19 @@ public class BroodmotherCompoundAttack : ICompoundAttack
 
     public void BreakAttack()
     {
+        jumpAbility.BreakCast();
         webAbility.BreakCast();
         stunAbility.BreakCast();
         weapon.BreakAttack();
+    }
+
+    public void ChangePhase(int newPhase)
+    {
+        if (newPhase > CurrentPhase)
+        {
+            swarmSpawningAbility.StartCast();
+        }
+
+        CurrentPhase = newPhase;
     }
 }

@@ -11,6 +11,7 @@ public class AttackingState : MovableState
         base.Enter();
 
         player.Weapon.StartAttack();
+        player.EffectManager.AddEffect(player.SlowdownDuringAttack);
     }
 
     public override void Exit()
@@ -18,6 +19,7 @@ public class AttackingState : MovableState
         base.Exit();
 
         player.Weapon.BreakAttack();
+        player.EffectManager.RemoveEffect(player.SlowdownDuringAttack);
     }
 
     public override void LogicUpdate()

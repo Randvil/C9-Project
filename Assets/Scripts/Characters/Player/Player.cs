@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbilityCaster, IDataSavable
+public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffectable, IAbilityCaster, IDataSavable
 {
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
@@ -25,12 +25,13 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
     [SerializeField] private RollData rollData;
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private EnergyRegeneratorData energyRegeneratorData;
+    [SerializeField] private SlowEffectData slowdownDuringAttackData;
     [SerializeField] private ParryData parryData;
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
     [SerializeField] private TessenData tessenData;
-    [SerializeField] private DefensiveJumpData defensiveJumpData;
     [SerializeField] private RegenerationAbilityData regenerationAbilityData;
+    [SerializeField] private LastChanceData lastChanceData;
 
     [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private JumpViewData jumpViewData;
@@ -47,7 +48,6 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
     public IPlayerInput PlayerInput { get; set; }
     public ITeam CharacterTeam { get; private set; }
     public IGravity Gravity { get; private set; }
-    public GravityView GravityView { get; private set; }
     public IMovement Movement { get; private set; }
     public ICrouch Crouch { get; private set; }
     public ITurning Turning { get; private set; }
@@ -56,18 +56,21 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
     public IModifierManager WeaponModifierManager { get; private set; }
     public IModifierManager AbilityModifierManager { get; private set; }
     public IModifierManager DefenceModifierManager { get; private set; }
-    public IInteract Interact { get; private set; }
-    public IWeapon Weapon { get; private set; }
     public IHealthManager HealthManager { get; private set; }
     public IEnergyManager EnergyManager { get; private set; }
+    public IInteract Interact { get; private set; }
+    public IWeapon Weapon { get; private set; }
     public IEnergyRegenerator WeaponEnergyRegenerator { get; private set; }
+    public IEffect SlowdownDuringAttack { get; private set; }
     public IAbilityManager AbilityManager { get; private set; }
     public IEffectManager EffectManager { get; private set; }
     public IDeathManager DeathManager { get; private set; }
     public IDamageHandler DamageHandler { get; private set; }
     public IParry Parry { get; private set; }
     public IPlayerClimb Climb { get; private set; }
+    public ITalent LastChance { get; private set; }
 
+    public GravityView GravityView { get; private set; }
     public TurningView TurningView { get; private set; }
     public PlayerMovementView MovementView { get; private set; }
     public CrouchView CrouchView { get; private set; }
@@ -132,6 +135,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
         Roll = new Roll(this, rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
         Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
         WeaponEnergyRegenerator = new EnergyRegenerator(energyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
+        SlowdownDuringAttack = new SlowEffect(slowdownDuringAttackData);
         Parry = new Parry(this, gameObject, parryData, Turning, CharacterTeam, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
         Climb = new PlayerClimb(this, climbData, Rigidbody, Gravity, Turning);
         Interact = new Interact(this, gameObject, interactData);
@@ -145,6 +149,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
         AbilityManager.AddAbility(eAbilityType.Daikyu, daikyu);
         AbilityManager.AddAbility(eAbilityType.Tessen, tessen);
         AbilityManager.AddAbility(eAbilityType.Regeneration, regeneration);
+
+        LastChance = new LastChance(this, lastChanceData, DeathManager as IForbiddableDeath, HealthManager, DefenceModifierManager);
+        LastChance.Learn();
 
         GravityView = new GravityView(Gravity, Animator);
         TurningView = new TurningView(this, avatar, turningViewData, Turning);

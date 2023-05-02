@@ -185,7 +185,7 @@ public class EffectManager : IEffectManager
 
         foreach (ISlowEffect slowEffect in slowEffects)
         {
-            remainingSpeed *= 1f - slowEffect.MovementSlow;
+            remainingSpeed *= 1f - slowEffect.MovementSlowValue;
         }
 
         return (1f - remainingSpeed);

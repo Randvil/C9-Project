@@ -28,7 +28,10 @@ public class NoArmsWeaponView
         animator.SetBool("IsAttacking", true);
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
 
-        audioSource.PlayOneShot(startAttackAudioClip);
+        if (startAttackAudioClip != null)
+        {
+            audioSource.PlayOneShot(startAttackAudioClip);
+        }
     }
 
     public void OnBreakAttack()
@@ -38,6 +41,9 @@ public class NoArmsWeaponView
 
     public void OnReleaseAttack()
     {
-        audioSource.PlayOneShot(releaseAttackAudioClip);
+        if (releaseAttackAudioClip != null)
+        {
+            audioSource.PlayOneShot(releaseAttackAudioClip);
+        }
     }
 }

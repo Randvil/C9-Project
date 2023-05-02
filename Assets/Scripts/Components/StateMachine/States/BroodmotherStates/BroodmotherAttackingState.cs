@@ -37,6 +37,11 @@ public class BroodmotherAttackingState : IState
 
         broodmother.TurnToEnemy();
 
+        if (broodmother.CompoundAttack.IsPerforming)
+        {
+            return;
+        }
+
         if (broodmother.CompoundAttack.MakeAfficientAttack(broodmother.Enemy.transform.position) == true)
         {
             broodmother.Stop();

@@ -23,7 +23,7 @@ public class Crouch : ICrouch
         this.collider = collider;
         this.effectManager = effectManager;
 
-        slowEffect = new SlowEffect(crouchData.movementSlow, float.MaxValue);
+        slowEffect = new SlowEffect(crouchData.slowEffectData);
     }
 
     public void StartCrouch()

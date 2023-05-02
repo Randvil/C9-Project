@@ -16,7 +16,7 @@ public class EnergyRegenerator : IEnergyRegenerator
         this.energyManager = energyManager;
         energyPerHit = energyRegeneratorData.energyPerHit;
 
-        damageDealer.DealDamageEvent.AddListener(RestoreEnergy);
+        damageDealer.DealDamageEventCallback.AddListener(RestoreEnergy);
     }
 
     private void RestoreEnergy(DamageInfo damageInfo)

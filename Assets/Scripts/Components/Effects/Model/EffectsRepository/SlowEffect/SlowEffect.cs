@@ -1,11 +1,21 @@
+using UnityEngine;
+
 public class SlowEffect : ISlowEffect
 {
-    public float MovementSlow { get; }
+    public float MovementSlowValue { get; }
     public float EndEffectTime { get; }
 
-    public SlowEffect(float movementSlow, float endEffectTime)
+    public SlowEffect(SlowEffectData slowEffectData)
     {
-        MovementSlow = movementSlow;
-        EndEffectTime = endEffectTime;
+        MovementSlowValue = slowEffectData.movementSlowValue;
+
+        if (slowEffectData.duration == float.MaxValue)
+        {
+            EndEffectTime = float.MaxValue;
+        }
+        else
+        {
+            EndEffectTime = Time.time + slowEffectData.duration;
+        }
     }
 }

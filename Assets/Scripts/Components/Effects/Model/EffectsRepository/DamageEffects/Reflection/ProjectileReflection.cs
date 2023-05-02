@@ -19,12 +19,10 @@ public class ProjectileReflection : IDamageEffect
 
     public virtual void ApplyEffect(Damage incomingDamage)
     {
-        IReflectableProjectile projectile = incomingDamage.SourceObject.GetComponent<IReflectableProjectile>();
-
-        if (projectile != null)
+        if (incomingDamage.SourceObject.TryGetComponent(out IReflectableProjectile projectile))
         {
             projectile.CreateReflectedProjectile(team);
             DamageEffectEvent.Invoke();
-        }            
+        }
     }
 }

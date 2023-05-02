@@ -13,7 +13,7 @@ public class OffensiveJump : DefensiveJump, IDamageDealer
     protected LayerMask enemyLayers;
     protected List<Collider2D> hitEnemies = new();
 
-    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
+    public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
 
     public OffensiveJump(MonoBehaviour owner, OffensiveJumpData offensiveJumpData, IEnergyManager energyManager, Rigidbody2D rigidbody, BoxCollider2D collider, IGravity gravity, ITurning turning, ITeam characterTeam, IModifierManager modifierManager) : base(owner, offensiveJumpData, energyManager, rigidbody, gravity, turning)
     {
@@ -67,14 +67,14 @@ public class OffensiveJump : DefensiveJump, IDamageDealer
                 {
                     hitEnemies.Add(enemy);
 
-                    if (enemy.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == characterTeam.Team)
+                    if (characterTeam.IsSame(enemy))
                     {
                         break;
                     }
 
                     if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true)
                     {
-                        damageableEnemy.DamageHandler.TakeDamage(damage, DealDamageEvent);
+                        damageableEnemy.DamageHandler.TakeDamage(damage, this);
                     }
                 }
             }

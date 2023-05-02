@@ -210,18 +210,30 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 1000.0,
-        "playerEnergy": 0.0,
+        "playerHealth": 700.0,
+        "playerEnergy": 17.0,
         "position": {
-            "x": -9.140000343322754,
-            "y": 10.229999542236329,
-            "z": 0.0
+            "x": 64.19999694824219,
+            "y": 0.6919931173324585,
+            "z": 1.25
         },
         "latestScene": "CityLocation",
         "learnedAbilities": [
             {
                 "pos": 1,
                 "abilityType": 1
+            },
+            {
+                "pos": 2,
+                "abilityType": 4
+            },
+            {
+                "pos": 3,
+                "abilityType": 2
+            },
+            {
+                "pos": 4,
+                "abilityType": 3
             }
         ],
         "locations": [
@@ -235,7 +247,7 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "enemyPrefabName": "SpiderBoy",
                         "spawnRadius": 10.0,
                         "condition": "once",
@@ -263,7 +275,7 @@
                             "y": 11.170000076293946,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "enemyPrefabName": "SpiderBoy",
                         "spawnRadius": 10.0,
                         "condition": "once",

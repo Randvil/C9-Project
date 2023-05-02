@@ -1,4 +1,4 @@
 public interface ISlowEffect : IEffect
 {
-    public float MovementSlow { get; }
+    public float MovementSlowValue { get; }
 }

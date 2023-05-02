@@ -28,7 +28,7 @@ public abstract class AbstractWeapon : IWeapon, IDamageDealer
     public UnityEvent StartAttackEvent { get; } = new();
     public UnityEvent BreakAttackEvent { get; } = new();
     public UnityEvent ReleaseAttackEvent { get; } = new();
-    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
+    public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
 
     public AbstractWeapon(MonoBehaviour owner, GameObject weaponOwnerObject, WeaponData weaponData, IModifierManager weaponModifierManager, ITeam team, ITurning turning)
     {

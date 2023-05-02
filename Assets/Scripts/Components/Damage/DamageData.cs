@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Damage Data", menuName = "Component Data/Model/New Damage Data", order = 100)]
+[CreateAssetMenu(fileName = "NewDamageData", menuName = "Data/Damage/New Damage Data")]
 public class DamageData : ScriptableObject
 {
     public eDamageType damageType = eDamageType.MeleeWeapon;
+    [Min(0f)]
     public float damageValue = 1f;
 }

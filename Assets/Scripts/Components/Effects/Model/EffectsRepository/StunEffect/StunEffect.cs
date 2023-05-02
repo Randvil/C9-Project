@@ -1,10 +1,21 @@
 
+using UnityEngine;
+
 public class StunEffect : IStunEffect
 {
     public float EndEffectTime { get; }
 
-    public StunEffect(float endEffectTime)
+    public StunEffect(StunEffectData stunEffectData)
     {
-        EndEffectTime = endEffectTime;
+        float duration = stunEffectData.duration;
+
+        if (duration == float.MaxValue)
+        {
+            EndEffectTime = float.MaxValue;
+        }
+        else
+        {
+            EndEffectTime = Time.time + duration;
+        }
     }
 }

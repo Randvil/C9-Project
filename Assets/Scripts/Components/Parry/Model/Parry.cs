@@ -45,7 +45,7 @@ public class Parry : IParry, IDamageDealer
     public UnityEvent StartParryEvent { get; } = new();
     public UnityEvent BreakParryEvent { get; } = new();
     public UnityEvent SuccessfulParryEvent { get; } = new();
-    public UnityEvent<DamageInfo> DealDamageEvent { get; } = new();
+    public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
 
     public Parry(MonoBehaviour owner, GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {
@@ -184,14 +184,21 @@ public class Parry : IParry, IDamageDealer
         attackCounter++;
         if (attackCounter >= amplifiedAttackNumber)
         {
-            owner.StopCoroutine(amplifyDamageCoroutine);
             RemoveAmplification();
         }
     }
 
     private void RemoveAmplification()
     {
+        if (amplifyDamageCoroutine == null)
+        {
+            return;
+        }
+
         weaponModifierManager.RemoveModifier(damageAmplification);
         weapon.ReleaseAttackEvent.RemoveListener(OnReleaseAttack);
+
+        owner.StopCoroutine(amplifyDamageCoroutine);
+        amplifyDamageCoroutine = null;
     }
 }

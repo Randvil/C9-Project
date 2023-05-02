@@ -14,12 +14,32 @@ public class HealthManager : IHealthManager
         health = healthMangerData.initialHealth;
     }
 
+    public void SetMaxHealth(float value)
+    {
+        health.maxHealth = value;
+        MaxHealthChangedEvent.Invoke(health);
+
+        if (health.currentHealth > health.maxHealth)
+        {
+            SetCurrentHealth(value);
+        }
+    }
+
+    public void SetCurrentHealth(float value)
+    {
+        health.currentHealth = Mathf.Clamp(value, 0f, health.maxHealth);
+        CurrentHealthChangedEvent.Invoke(health);
+    }
+
     public void ChangeMaxHealth(float value)
     {
         health.maxHealth = Mathf.Clamp(health.maxHealth + value, 0f, float.MaxValue);
         MaxHealthChangedEvent.Invoke(health);
 
-        ChangeCurrentHealth(0f);
+        if (health.currentHealth > health.maxHealth)
+        {
+            SetCurrentHealth(value);
+        }
     }
 
     public void ChangeCurrentHealth(float value)
@@ -27,5 +47,4 @@ public class HealthManager : IHealthManager
         health.currentHealth = Mathf.Clamp(health.currentHealth + value, 0f, health.maxHealth);
         CurrentHealthChangedEvent.Invoke(health);
     }
-
 }

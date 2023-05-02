@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.086801745, g: 0.10545892, b: 0.12389002, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4270,7 +4270,7 @@ GameObject:
   - component: {fileID: 318860324}
   - component: {fileID: 318860323}
   - component: {fileID: 318860322}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ToCityRoofs
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -5094,7 +5094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384903719}
   - component: {fileID: 384903720}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10176,7 +10176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830304858}
   - component: {fileID: 830304859}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21348,7 +21348,7 @@ GameObject:
   - component: {fileID: 1802789781}
   - component: {fileID: 1802789780}
   - component: {fileID: 1802789782}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ToCity
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}

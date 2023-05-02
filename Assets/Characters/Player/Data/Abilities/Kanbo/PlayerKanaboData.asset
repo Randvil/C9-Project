@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9432b6fd0bc154c9d9e1c8e55c657d, type: 3}
+  m_Name: PlayerKanaboData
+  m_EditorClassIdentifier: 
+  cooldown: 10
+  preCastDelay: 1
+  postCastDelay: 1
+  cost: 10
+  damageData: {fileID: 11400000, guid: 23499bd354a0960478d2dbe1e4fdc115, type: 2}
+  attackRange: 1
+  stunEffectData: {fileID: 11400000, guid: 4e21f6365a12a654cb20fddaa3c77859, type: 2}

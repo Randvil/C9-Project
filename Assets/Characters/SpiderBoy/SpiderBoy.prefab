@@ -909,15 +909,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 689219592}
   healthBarSlider: {fileID: 7279061361503507754}
+  material: {fileID: 2100000, guid: 365f0abc06c4fe24a9c92536aa7546a3, type: 2}
   initialTeam: 1
-  turningViewData: {fileID: 11400000, guid: 56988a899d1ba3741afac0039dda3e6e, type: 2}
+  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: dca38918573e4ac4f8346617f153291b, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
   projectileSpawnPoint: {fileID: 4837131510682213775}
   spiderSpawnPoint: {fileID: 4323504826026341181}
   sharedAudioSource: {fileID: 6172552536687305650}
   energyManagerData: {fileID: 11400000, guid: c6b01b82162d27e4e8a46d6f1ed49718, type: 2}
-  rangedWeaponData: {fileID: 11400000, guid: 1138509033e4df84784eb020d52bf719, type: 2}
+  bombThrowerData: {fileID: 11400000, guid: c1ae548c5f3f4204090461169f3d4356, type: 2}
   weaponViewData: {fileID: 11400000, guid: 5a839e2e3dcabbe46ab1503d0a276c0e, type: 2}
   creatureSpawnerData: {fileID: 11400000, guid: 03aa6e3d612b86c4e8a7e901cdf42565, type: 2}
   defensiveJumpData: {fileID: 11400000, guid: 0d860882a88ab354c9dff304939461f8, type: 2}
@@ -1220,7 +1221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5499097162910303965}
   - component: {fileID: 8096678039550894304}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -41,7 +41,7 @@ public class PlayerWeaponView
         weapon.StartAttackEvent.AddListener(OnStartAttack);
         weapon.BreakAttackEvent.AddListener(OnBreakAttack);
         weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
-        damageDealer.DealDamageEvent.AddListener(OnDamageDeal);
+        damageDealer.DealDamageEventCallback.AddListener(OnDamageDeal);
 
         this.slashGraph = slashGraph;
     }

@@ -61,17 +61,20 @@ public class BaseStrategy : IAIBehavior
     {
         Vector2 direction = turning.Direction == eDirection.Left ? Vector2.left : Vector2.right;
         RaycastHit2D hit = Physics2D.Raycast(collider.transform.position, direction, searchEnemyDistance, enemyLayer);
-        if (hit.collider == null)
+
+        Collider2D enemy = hit.collider;
+
+        if (enemy == null)
         {
             return;
         }
 
-        if (hit.collider.TryGetComponent(out ITeamMember enemyTeam) == false || enemyTeam.CharacterTeam.Team == characterTeam.Team)
+        if (characterTeam.IsSame(enemy))
         {
             return;
         }
 
-        Enemy = hit.collider.gameObject;
+        Enemy = enemy.gameObject;
     }
 
     public virtual bool EnemyIsTracking()
@@ -112,6 +115,11 @@ public class BaseStrategy : IAIBehavior
 
     public virtual void TurnToEnemy()
     {
+        if (Enemy == null)
+        {
+            return;
+        }
+
         TurnToPoint(Enemy.transform.position.x);
     }
 
@@ -119,14 +127,18 @@ public class BaseStrategy : IAIBehavior
     {
         GameObject damagingEnemy = damageInfo.damageSourceObject;
 
+        if (damagingEnemy == null)
+        {
+            return;
+        }
+
+        if (characterTeam.IsSame(damagingEnemy))
+        {
+            return;
+        }
+
         if (Enemy == null)
         {
-            if (damagingEnemy.TryGetComponent(out ITeamMember damageDealerTeamMember) == false
-                || damageDealerTeamMember.CharacterTeam.Team == characterTeam.Team)
-            {
-                return;
-            }
-
             Enemy = damagingEnemy;
         }
 

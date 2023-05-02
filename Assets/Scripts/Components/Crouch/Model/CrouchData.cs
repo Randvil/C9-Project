@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Crouch Data", menuName = "Component Data/Model/New Crouch Data", order = 160)]
+[CreateAssetMenu(fileName = "NewCrouchData", menuName = "Data/Components/Crouch/New Crouch Data")]
 public class CrouchData : ScriptableObject
 {
+    [Range(0.01f, 1f)]
     public float colliderSizeMultiplier = 0.4f;
-    public float movementSlow = 0.5f;
+    public SlowEffectData slowEffectData;
 }

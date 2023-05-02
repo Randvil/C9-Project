@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoTEffect : IDoTEffect
 {
-    private IDamageHandler damageHandler;
+    private IDamageHandler damagingCharacterDamageHandler;
     private IDamageDealer damageDealer;
 
     public Damage Damage { get; private set; }
@@ -13,17 +13,17 @@ public class DoTEffect : IDoTEffect
     public float EndEffectTime { get; private set; }
 
 
-    public DoTEffect(Damage damage, float damagePeriod, float endEffectTime, IDamageHandler damageHandler, IDamageDealer damageDealer)
+    public DoTEffect(GameObject damageOwnerObject, GameObject damageSourceObject, DoTEffectData doTEffectData, IModifierManager damageModifierManager, IDamageHandler damagingCharacterDamageHandler, IDamageDealer damageDealer)
     {
-        Damage = damage;
-        DamagePeriod = damagePeriod;
-        EndEffectTime = endEffectTime;
-        this.damageHandler = damageHandler;
+        Damage = new(damageOwnerObject, damageSourceObject, doTEffectData.damageData, damageModifierManager);
+        DamagePeriod = doTEffectData.damagePeriod;
+        EndEffectTime = Time.time + doTEffectData.duration;
+        this.damagingCharacterDamageHandler = damagingCharacterDamageHandler;
         this.damageDealer = damageDealer;
     }
 
     public void DealDamage()
     {
-        damageHandler.TakeDamage(Damage, damageDealer.DealDamageEvent);
+        damagingCharacterDamageHandler.TakeDamage(Damage, damageDealer);
     }
 }

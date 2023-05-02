@@ -21,7 +21,7 @@ public class MeleeDamageReflection : IDamageEffect
     {
         if (incomingDamage.DamageType == eDamageType.MeleeWeapon)
         {
-            incomingDamage.SourceObject.GetComponent<IDamageable>().DamageHandler.TakeDamage(incomingDamage, damageDealer.DealDamageEvent);
+            incomingDamage.SourceObject.GetComponent<IDamageable>().DamageHandler.TakeDamage(incomingDamage, damageDealer);
             DamageEffectEvent.Invoke();
         }
     }

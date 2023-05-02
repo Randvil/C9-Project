@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable
+public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IMortal
 {
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
+    [SerializeField] protected Material material;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
@@ -34,6 +35,14 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     protected virtual void Awake()
     {
+        //Temp material
+        if (material != null)
+        {
+            Material materialClone = Instantiate(material);
+            GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        }
+        //Temp material
+
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
