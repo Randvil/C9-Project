@@ -2221,7 +2221,6 @@ MonoBehaviour:
   webSpawnPoints:
   - {fileID: 4658742498733326578}
   - {fileID: 8597955536379927155}
-  shieldBarSlider: {fileID: 9167320386564060161}
   movementAudioSource: {fileID: 7845183630836557568}
   sharedAudioSource: {fileID: 8022143023300157512}
   damageHandlerWithShieldsData: {fileID: 11400000, guid: 468dba08536c3ac4d98b4a403cc0260e, type: 2}

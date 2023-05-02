@@ -10,6 +10,7 @@
         <ui:VisualElement name="play" class="second-menu menu">
             <ui:Button text="CONTINUE" display-tooltip-when-elided="true" focusable="false" name="continueB" class="inactive-menu-b" />
             <ui:Button text="NEW GAME" display-tooltip-when-elided="true" name="newGameB" class="menu-b" />
+            <ui:Button text="COMICS" display-tooltip-when-elided="true" name="comicsB" class="inactive-menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
         <ui:VisualElement name="settings" class="menu second-menu hidden-menu">

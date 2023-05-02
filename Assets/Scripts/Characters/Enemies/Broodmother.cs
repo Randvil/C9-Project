@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Broodmother : BaseCreature, IBroodmotherBehavior
 {
     [Header("Broodmother Prefab Components")]
     [SerializeField] protected Transform[] webSpawnPoints;
-    [SerializeField] protected Slider shieldBarSlider;
     [SerializeField] protected AudioSource movementAudioSource;
     [SerializeField] protected AudioSource sharedAudioSource;
 
@@ -41,12 +40,23 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     public IAbility SwarmSpawningAbility { get; protected set; }
     public ICompoundAttack CompoundAttack { get; protected set; }
 
+    private UIDocument document;
+    public UIDocument Document
+    {
+        get => document;
+        set
+        {
+            shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
+            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "healthBar");
+        }
+    }
+
     public BroodmotherStrategyData BroodmotherStrategyData => broodmotherStrategyData;
 
     protected IAIBehavior currentBehavior;
 
     protected NoArmsWeaponView weaponView;
-    protected HealthBarView shieldBarView;
+    protected IHealthBarView shieldBarView;
 
     protected override void Awake()
     {
@@ -75,7 +85,6 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        shieldBarView = new HealthBarView(shieldBarSlider, ShieldManager, DeathManager);
         
         currentBehavior = new BroodmotherStrategy(this, enemy);
         currentBehavior.Activate();

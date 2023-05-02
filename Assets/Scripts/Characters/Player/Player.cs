@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEngine.VFX;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,6 +36,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private JumpViewData jumpViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
+
+    [Header("Player Prefab VFX")]
+    [SerializeField] private VisualEffect slashGraph;
 
     public Transform CameraFollowPoint => avatar.transform;
 
@@ -156,7 +159,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         CrouchView = new CrouchView(Crouch, Animator);
         JumpView = new JumpView(jumpViewData, Jump, Animator, sharedAudioSource);
         RollView = new RollView(Roll, Animator);
-        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, Animator, sharedAudioSource);
+        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
+            Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
         ClimbView = new ClimbView(Climb, Animator);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource);
@@ -198,7 +202,16 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public void SaveData(Data data)
     {
         data.playerHealth = HealthManager.Health.currentHealth;
-        //data.playerEnergy = EnergyManager.Energy.currentEnergy;
+        data.playerEnergy = EnergyManager.Energy.currentEnergy;
         data.position = transform.position;
+
+        foreach (KeyValuePair<int, IAbility> ability in AbilityManager.LearnedAbilities)
+        {
+            AbilityPair abilityPair = new(ability.Key, ability.Value.Type);
+            if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
+                data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
+            else
+                data.learnedAbilities.Add(abilityPair);
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class SpiderBoy : BaseCreature, IWatchmanBehavior
@@ -52,6 +51,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
     private void Update()
@@ -67,6 +68,6 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     private void OnDeath()
     {
         currentBehavior.Deactivate();
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1.2f);
     }
 }

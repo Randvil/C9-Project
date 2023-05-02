@@ -1,7 +1,4 @@
-using Cinemachine;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using System.Linq;
 
 public class PlayerCreator : Creator
 {
@@ -11,6 +8,11 @@ public class PlayerCreator : Creator
     {
         newGameObject.transform.position = data.CurrentGameData.position;
         newGameObject.GetComponent<Player>().HealthManager.SetCurrentHealth(data.CurrentGameData.playerHealth);
+        newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerEnergy);
+        foreach (AbilityPair ability in data.CurrentGameData.learnedAbilities)
+        {
+            IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.Type == ability.abilityType).Value;
+            newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType, ability.pos);
+        }
     }
-
 }

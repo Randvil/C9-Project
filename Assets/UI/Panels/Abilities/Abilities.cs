@@ -31,9 +31,9 @@ public class Abilities : MonoBehaviour, IPanel
 
     private void RegisterDescriptions(MenuNode abilities)
     {
-        abilityDescriptions = new MenuNode[3];
+        abilityDescriptions = new MenuNode[4];
 
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 4; i++)
         {
             eAbilityType type = (eAbilityType)i;
 
@@ -47,19 +47,38 @@ public class Abilities : MonoBehaviour, IPanel
 
             if (IsAbilityLearned(type))
                 ToggleLearnButton(learnB);
-            else
-                learnB.clicked += () =>
-                {
-                    ToggleAbilityLearning(type);
-                    ToggleLearnButton(learnB);
-                };
+            
+
+            learnB.style.display = DisplayStyle.None;
+            description.ParentButton.style.display = DisplayStyle.None;
+
+            panelManager.Abilities.AbilityLearnEvent.AddListener(learnedType =>
+            {
+                if (learnB.style.display == DisplayStyle.None && learnedType == type)
+                    ActivateSetPossibility(learnB, description.ParentButton, type);
+            });
+
+            if (IsAbilityLearned(type)) // изучение при загрузке происходит раньше чем подпись на события
+                ActivateSetPossibility(learnB, description.ParentButton, type);
         }
+    }
+
+    private void ActivateSetPossibility(Button learnB, VisualElement icon, eAbilityType type)
+    {
+        learnB.style.display = DisplayStyle.Flex;
+        icon.style.display = DisplayStyle.Flex;
+
+        learnB.clicked += () =>
+        {
+            ToggleAbilityLearning(type);
+            ToggleLearnButton(learnB);
+        };
     }
 
     private void ToggleLearnButton(Button button)
     {
         button.ToggleInClassList("inactive-menu-b");
-        button.text = button.text == "LEARN" ? "LEARNED" : "LEARN";
+        button.text = button.text == "SET" ? "UNSET" : "SET";
     }
 
     private void ToggleAbilityLearning(eAbilityType type)

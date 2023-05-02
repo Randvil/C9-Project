@@ -14,145 +14,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CheckpointData:
     playerHealth: 1000
+    playerEnergy: 0
     position: {x: -9.14, y: 10.23, z: 0}
-    scene: CityLocation
+    latestScene: CityLocation
+    learnedAbilities:
+    - pos: 1
+      abilityType: 1
     locations:
     - sceneName: CityLocation
       spawnpoints:
       - id: 1
         position: {x: 66.37, y: -0.28, z: 0}
-        enemyNumber: 3
+        enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 15
-        condition: killTime
+        condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 2
         position: {x: 36, y: -0.28, z: 0}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 3
         position: {x: 6.77, y: 11.17, z: 0}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
+      - id: 4
+        position: {x: 100, y: -0.28, z: 0}
+        enemyNumber: 1
+        enemyPrefabName: SpiderBoy
+        spawnRadius: 10
+        condition: once
+        timeCountdown: 0
+        waveCount: 0
+      - id: 5
+        position: {x: 41.7, y: 11.15, z: 6.98}
+        enemyNumber: 2
+        enemyPrefabName: SpiderMinion
+        spawnRadius: 6
+        condition: wave
+        timeCountdown: 8
+        waveCount: 3
+      - id: 6
+        position: {x: 53.95, y: 11.45, z: 6.98}
+        enemyNumber: 2
+        enemyPrefabName: SpiderMinion
+        spawnRadius: 6
+        condition: wave
+        timeCountdown: 8
+        waveCount: 3
+      - id: 7
+        position: {x: 75, y: -0.28, z: 0}
+        enemyNumber: 1
+        enemyPrefabName: SpiderBoy
+        spawnRadius: 10
+        condition: once
+        timeCountdown: 0
+        waveCount: 0
     - sceneName: ArcadeCenter
       spawnpoints:
       - id: 1
-        position: {x: 49.15, y: 0.69, z: 0}
+        position: {x: 49.15, y: 0.69, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 15
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 2
-        position: {x: 61.85, y: 0.69, z: 0}
+        position: {x: 61.85, y: 0.69, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 3
-        position: {x: 49.15, y: 7.51, z: 0}
+        position: {x: 49.15, y: 7.51, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 4
-        position: {x: 61.85, y: 7.51, z: 0}
+        position: {x: 61.85, y: 7.51, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 5
-        position: {x: 49.15, y: 13.72, z: 0}
+        position: {x: 49.15, y: 13.72, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
+        timeCountdown: 0
+        waveCount: 0
       - id: 6
-        position: {x: 61.85, y: 13.72, z: 0}
+        position: {x: 61.85, y: 13.72, z: 1.25}
         enemyNumber: 1
         enemyPrefabName: SpiderBoy
         spawnRadius: 10
-        killTime: 0
         condition: once
-  CurrentGameData:
-    playerHealth: 1000
-    position: {x: -9.14, y: 10.23, z: 0}
-    scene: CityLocation
-    locations:
-    - sceneName: CityLocation
-      spawnpoints:
-      - id: 1
-        position: {x: 66.37, y: -0.28, z: 0}
-        enemyNumber: 3
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 15
-        condition: killTime
-      - id: 2
-        position: {x: 36, y: -0.28, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-      - id: 3
-        position: {x: 6.77, y: 11.17, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-    - sceneName: ArcadeCenter
-      spawnpoints:
-      - id: 1
-        position: {x: 49.15, y: 0.69, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 15
-        condition: once
-      - id: 2
-        position: {x: 61.85, y: 0.69, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-      - id: 3
-        position: {x: 49.15, y: 7.51, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-      - id: 4
-        position: {x: 61.85, y: 7.51, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-      - id: 5
-        position: {x: 49.15, y: 13.72, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
-      - id: 6
-        position: {x: 61.85, y: 13.72, z: 0}
-        enemyNumber: 1
-        enemyPrefabName: SpiderBoy
-        spawnRadius: 10
-        killTime: 0
-        condition: once
+        timeCountdown: 0
+        waveCount: 0

@@ -31,7 +31,7 @@ public class CreatureSpawner : AbstractAbility
                 break;
             }
 
-            Object.Instantiate(creaturePrefab, new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0f), Quaternion.identity);
+            Object.Instantiate(creaturePrefab, new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z), Quaternion.identity);
             energyManager.ChangeCurrentEnergy(-cost);
 
             ReleaseCastEvent.Invoke();

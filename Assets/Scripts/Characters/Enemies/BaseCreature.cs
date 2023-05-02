@@ -30,7 +30,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     public TurningView TurningView { get; protected set; }
     public AnimationAndSoundMovementView MovementView { get; protected set; }
-    public HealthBarView HealthBarView { get; protected set; }
+    public IHealthBarView HealthBarView { get; protected set; }
 
     protected virtual void Awake()
     {
@@ -48,6 +48,6 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
         Turning = new Turning();
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
-        HealthBarView = new(healthBarSlider, HealthManager, DeathManager);
+        HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
     }
 }

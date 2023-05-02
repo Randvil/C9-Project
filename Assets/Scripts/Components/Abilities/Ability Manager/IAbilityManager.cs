@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public interface IAbilityManager
 {
+    public Dictionary<eAbilityType, IAbility> Abilities { get; set; }
+    public Dictionary<int, IAbility> LearnedAbilities { get; set; }
     public void AddAbility(eAbilityType abilityType, IAbility ability);
     public int LearnAbility(eAbilityType abilityType);
     public int LearnAbility(IAbility ability);
@@ -23,8 +25,6 @@ public interface IAbilityManager
     public int CurrentLayoutNumber { get; }
     public int LayoutCount { get; set; }
     public int AbilityCountInLayout { get; set; }
-
-    public Dictionary<int, IAbility> LearnedAbilities { get; }
 
     public UnityEvent<eAbilityType> AbilityLearnEvent { get; }
     public UnityEvent<eAbilityType> AbilityForgetEvent { get; }
