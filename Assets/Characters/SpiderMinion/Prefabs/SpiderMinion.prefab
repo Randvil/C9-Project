@@ -1838,6 +1838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 1281780840}
   healthBarSlider: {fileID: 281655481}
+  material: {fileID: 0}
   initialTeam: 1
   turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: 8aea1678cf21ec84483409fcc8de75b1, type: 2}

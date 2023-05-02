@@ -9,6 +9,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
+    [SerializeField] protected Material material;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
@@ -34,6 +35,14 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     protected virtual void Awake()
     {
+        //Temp material
+        if (material != null)
+        {
+            Material materialClone = Instantiate(material);
+            GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        }
+        //Temp material
+
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();

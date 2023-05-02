@@ -16,6 +16,6 @@ MonoBehaviour:
   preCastDelay: 0
   postCastDelay: 0
   cost: 5
-  healthPerSecond: 25
+  healthPerSecond: 250
   maxRegenerationTime: 10
   impactPeriod: 0.25

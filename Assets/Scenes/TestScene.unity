@@ -233,6 +233,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -6.26003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 0.73716307
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (2)
@@ -508,6 +516,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -6.20003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 10.417163
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (5)
@@ -573,6 +589,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: 10.759971
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 8.987163
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (3)
@@ -638,6 +662,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -11.82003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 2.9371629
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (7)
@@ -716,7 +748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &516673794
 Transform:
   m_ObjectHideFlags: 0
@@ -822,6 +854,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -11.8300295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 8.777163
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (6)
@@ -1089,7 +1129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &839229861
 Transform:
   m_ObjectHideFlags: 0
@@ -1452,6 +1492,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -0.8300297
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 12.077163
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (4)
@@ -1522,6 +1570,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: 11.27997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 0.7671628
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy (1)
@@ -2127,6 +2183,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1812747975}
     m_Modifications:
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: 0.9199702
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438955419698176489, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 3.2571626
+      objectReference: {fileID: 0}
     - target: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
       propertyPath: m_Name
       value: SpiderBoy
