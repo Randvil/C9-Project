@@ -52,6 +52,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
     private void Update()
@@ -67,7 +69,6 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     private void OnDeath()
     {
         currentBehavior.Deactivate();
-        GetComponent<DissolveVisualEffect>().ApplyDissolve();
         Destroy(gameObject, 1.2f);
     }
 }

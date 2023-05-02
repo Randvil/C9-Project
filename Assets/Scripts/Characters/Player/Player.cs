@@ -1,6 +1,5 @@
 using UnityEngine.VFX;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -201,8 +200,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IEffectable, IAbi
 
         foreach (KeyValuePair<int, IAbility> ability in AbilityManager.LearnedAbilities)
         {
-            eAbilityType type = AbilityManager.Abilities.FirstOrDefault(x => x.Value == ability.Value).Key;
-            AbilityPair abilityPair = new(ability.Key, type);
+            AbilityPair abilityPair = new(ability.Key, ability.Value.Type);
             if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
                 data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
             else 

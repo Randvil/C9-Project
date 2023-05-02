@@ -356,6 +356,8 @@ GameObject:
   - component: {fileID: 3564927411896484444}
   - component: {fileID: 4152148742717225436}
   - component: {fileID: 2912435735550057965}
+  - component: {fileID: 5698317744971508228}
+  - component: {fileID: 3721399980938848812}
   m_Layer: 0
   m_Name: SlashEffectGraph
   m_TagString: Untagged
@@ -370,12 +372,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029764714941489956}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.054226477, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalRotation: {x: 0.000000107535605, y: -0.000000119209275, z: 0.00000003749837, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6641374187180108059}
+  m_Father: {fileID: 5242086771832609348}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &4152148742717225436
@@ -387,18 +389,30 @@ VisualEffect:
   m_GameObject: {fileID: 1029764714941489956}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: cf51914b2df9e0e4ca3110a3e0c50b0f, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: -10
+        m_Name: Direction
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: -0, y: 0, z: 0}
+        m_Name: Angle Transform_angles
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: -0.65}
+        m_Name: Angle Transform_position
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 1, z: 1}
+        m_Name: Angle Transform_scale
+        m_Overridden: 1
     m_Vector4f:
       m_Array:
       - m_Value: {x: 25.688938, y: 1.4794676, z: 1.2104735, w: 5}
@@ -461,6 +475,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5698317744971508228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029764714941489956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 3721399980938848812}
+  m_VisualEffect: {fileID: 4152148742717225436}
+--- !u!114 &3721399980938848812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029764714941489956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: Angle Transform
+  Target: {fileID: 5400510299646600180}
 --- !u!1 &1086017582872562873
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6706464320810894248
 Transform:
   m_ObjectHideFlags: 0
@@ -1893,6 +1938,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6641374187180108059}
+  - {fileID: 3564927411896484444}
   m_Father: {fileID: 5242086771253099536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2329,7 +2375,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1983020389486190995}
-  - {fileID: 3564927411896484444}
   m_Father: {fileID: 5242086771832609348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -2506,7 +2551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5400510299646600180
 Transform:
   m_ObjectHideFlags: 0

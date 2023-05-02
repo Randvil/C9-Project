@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerCreator : Creator
 {
@@ -11,7 +11,8 @@ public class PlayerCreator : Creator
         newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerEnergy);
         foreach(AbilityPair ability in data.CurrentGameData.learnedAbilities)
         {
-            newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType);
+            IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.Type == ability.abilityType).Value;
+            newGameObject.GetComponent<Player>().AbilityManager.LearnedAbilities.Add(ability.pos, learnedAbility);
         }
     }
 

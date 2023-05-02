@@ -431,7 +431,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Secon Attack
+  m_Name: Second Attack
   m_Speed: 1.055
   m_CycleOffset: 0
   m_Transitions:
