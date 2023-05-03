@@ -10,6 +10,10 @@ public class DeathLoad: IDeathLoad
         deathManager.DeathEvent.AddListener(LoadCheckpoint);
     }
 
+    public DeathLoad()
+    {
+    }
+
     public void RewriteData()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
