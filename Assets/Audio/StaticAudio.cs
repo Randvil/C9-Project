@@ -1,11 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class StaticAudio : MonoBehaviour
 {
     public static StaticAudio Instance { get; private set; }
+
+    [SerializeField] private AudioMixer mixer;
+
+    private AudioMixerSnapshot currentSnapshot;
+    public string SnapshotName
+    {
+        get => currentSnapshot != null ? currentSnapshot.name : null;
+        set
+        {
+            if (currentSnapshot != null && currentSnapshot.name == value)
+                return;
+
+            currentSnapshot = mixer.FindSnapshot(value);
+            currentSnapshot.TransitionTo(0.5f);
+        }
+    }
 
     public List<AudioClip> backgroundTracks; // Create elements from inspector, don't use "= new()" !
 
@@ -26,6 +43,19 @@ public class StaticAudio : MonoBehaviour
             SceneManager.activeSceneChanged += (_, _) => SubscribeButtonsOnSound();
             SceneManager.activeSceneChanged += (_, _) => musicSource.Stop();
         }
+    }
+
+    private void Start()
+    {
+        SnapshotName = "InGame";
+    }
+
+    public void ToggleSnapshot()
+    {
+        if (SnapshotName == "InGame")
+            SnapshotName = "Pause";
+        else
+            SnapshotName = "InGame";
     }
 
     public void PlayEffect(eAudioEffect type)

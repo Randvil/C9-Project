@@ -58,6 +58,7 @@ public class PauseMenu : MonoBehaviour, IPanel
     {
         main.DeactivateChildren();
         DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);
+        StaticAudio.Instance.ToggleSnapshot();
         panelManager.GoBack();
         input.SwitchCurrentActionMap("Player");
     }

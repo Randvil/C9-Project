@@ -342,14 +342,6 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3800569736402309138, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
-      propertyPath: backgroundTracks.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3800569736402309138, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
-      propertyPath: backgroundTracks.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2973ef5e7fb4bf542ace884962958b89, type: 3}
     - target: {fileID: 6914385876978990192, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
       propertyPath: m_Name
       value: StaticAudio
@@ -606,6 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1749564777}
   - component: {fileID: 1749564776}
+  - component: {fileID: 1749564778}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -690,6 +683,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1749564778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749564775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!114 &906469672916950774
 MonoBehaviour:
   m_ObjectHideFlags: 0

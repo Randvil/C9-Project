@@ -23,6 +23,7 @@ public class VideoSettings : MonoBehaviour
     private void RegisterFullScreen(VisualElement root)
     {
         fullScreenToggle = root.Q<Toggle>("fullscreen");
+        fullScreenToggle.value = Screen.fullScreen;
 
         fullScreenToggle.RegisterValueChangedCallback(evt => Screen.fullScreen = evt.newValue);
     }

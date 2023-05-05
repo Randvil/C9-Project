@@ -115,5 +115,6 @@ public class Abilities : MonoBehaviour, IPanel
         DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);
         panelManager.GoBack();
         input.SwitchCurrentActionMap("Player");
+        StaticAudio.Instance.SnapshotName = "InGame";
     }
 }

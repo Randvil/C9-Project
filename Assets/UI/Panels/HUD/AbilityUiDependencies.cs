@@ -70,8 +70,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckForAlreadyLearned()
     {
+        int i = 0;
         foreach (var abilityWithInd in abilityManager.LearnedAbilities)
         {
+            if (++i > polyCount)
+                return;
+
             OnSetWithoutChecking(abilityWithInd.Value.Type);
         }
         CheckAllAbilitiesStatus();
@@ -79,8 +83,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckAbilitiesStatus()
     {
+        int i = 0;
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
+            if (++i > polyCount)
+                return;
+
             if (ab.CanBeUsed != abilityCanBeUsed[ab.Type])
             {
                 abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
@@ -91,8 +99,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckAllAbilitiesStatus()
     {
+        int i = 0;
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
+            if (++i > polyCount)
+                return;
+
             abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
             UpdateAbilityStatus(ab.Type);
         }

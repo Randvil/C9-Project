@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f245574bfc259234d8b7bbb17a63a2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 641ce8892fb30864a973a4d9b5daae0c, type: 2}
   backgroundTracks:
   - {fileID: 8300000, guid: 2973ef5e7fb4bf542ace884962958b89, type: 3}
   musicSource: {fileID: 3196400235347730574}

@@ -1,14 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour, IPanel
 {
     public PanelManager panelManager;
-
-    public AudioMixer audioMixer;
 
     private PlayerInput input;
 
@@ -25,9 +21,9 @@ public class HUD : MonoBehaviour, IPanel
                     //Плавно замедляем время до полной остановки за время анимации смены панелей
                     DOTween.To(t => Time.timeScale = t, 1f, 0f, panelManager.PanelTweenDuration).SetUpdate(true);
 
-                    audioMixer.FindSnapshot("Pause").TransitionTo(1f);
-
                     panelManager.SwitchTo(1);
+
+                    StaticAudio.Instance.SnapshotName = "Pause";
                     break;
 
                 case "Collection":
@@ -35,9 +31,9 @@ public class HUD : MonoBehaviour, IPanel
 
                     DOTween.To(t => Time.timeScale = t, 1f, 0f, panelManager.PanelTweenDuration).SetUpdate(true);
 
-                    audioMixer.FindSnapshot("Pause").TransitionTo(1f);
-
                     panelManager.SwitchTo(2);
+
+                    StaticAudio.Instance.SnapshotName = "Pause";
                     break;
             }
         };
