@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae207b2d78f1ca04e9893663d4e9886a, type: 3}
   m_Name: PlayerRegenerationAbilityData
   m_EditorClassIdentifier: 
+  abilityType: 4
   cooldown: 0
   preCastDelay: 0
   postCastDelay: 0

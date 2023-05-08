@@ -10,12 +10,19 @@ public class SceneLoaderSubstitute : MonoBehaviour
     [SerializeField] PlayerInput unityPlayerInput;
     [SerializeField] UIDocument playerUI;
     [SerializeField] PanelManager panelManager;
+    [SerializeField] DeathScreen deathScreen;
+    [SerializeField] AbilityUiDependencies abilityUiDependencies;
 
     private void Awake()
     {
         player.Initialize(unityPlayerInput);
         player.Document = playerUI;
+
         panelManager.Input = unityPlayerInput;
         panelManager.Abilities = player.AbilityManager;
+        deathScreen.SetDeathManager(player.DeathManager);
+        abilityUiDependencies.Parry = player.Parry;
+
+        DeathLoad deathLoad = new DeathLoad(player.DeathManager);
     }
 }

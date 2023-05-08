@@ -22,8 +22,6 @@ public class BroodmotherWeb : AbstractDamageAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         currentWeb = 0;
         while(currentWeb < webSeries)
         {
@@ -34,19 +32,12 @@ public class BroodmotherWeb : AbstractDamageAbility
             currentWeb++;
             energyManager.ChangeCurrentEnergy(-cost);
             finishCooldownTime = Time.time + cooldown;
-
             ReleaseCastEvent.Invoke();
 
-            if (currentWeb == webSeries)
-            {
-                yield return new WaitForSeconds(postCastDelay);
-            }
-            else
+            if (currentWeb != webSeries)
             {
                 yield return new WaitForSeconds(seriesDelay);
             }
         }        
-
-        BreakCast();
     }
 }

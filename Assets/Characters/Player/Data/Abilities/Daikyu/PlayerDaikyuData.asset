@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d4162ff17d0524fa24017c52178dd8, type: 3}
   m_Name: PlayerDaikyuData
   m_EditorClassIdentifier: 
+  abilityType: 2
   cooldown: 10
   preCastDelay: 0
   postCastDelay: 0

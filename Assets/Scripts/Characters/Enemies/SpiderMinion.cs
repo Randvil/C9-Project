@@ -14,6 +14,7 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
     [SerializeField] protected EnergyManagerData energyManagerData;
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected OffensiveJumpData offensiveJumpData;
+    [SerializeField] protected SpiderMinionCompoundAttackData spiderMinionCompoundAttackData;
     [SerializeField] protected PatrolmanStrategyData patrolmanStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
@@ -42,8 +43,7 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
         EnergyManager = new EnergyManager(energyManagerData);
         Weapon = new SingleTargetMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
         JumpAbility = new OffensiveJump(this, offensiveJumpData, EnergyManager, Rigidbody, Collider, Gravity, Turning, CharacterTeam, WeaponModifierManager);
-        //CompoundAttack = new JustWeaponCompoundAttack(gameObject, Weapon);
-        CompoundAttack = new SpiderMinionCompoundAttack(gameObject, Weapon, JumpAbility);
+        CompoundAttack = new SpiderMinionCompoundAttack(gameObject, spiderMinionCompoundAttackData, Weapon, JumpAbility);
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);

@@ -13,8 +13,6 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
     public Daikyu(MonoBehaviour owner, GameObject caster, DaikyuData daikyuData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, daikyuData, energyManager, modifierManager, turning, team)
     {
-        Type = eAbilityType.Daikyu;
-       
         projectilePrefab = daikyuData.projectilePrefab;
         fullChargeTime = daikyuData.fullChargeTime;
         fullChargeDamageMultiplier = daikyuData.fullChargeDamageMultiplier;
@@ -39,8 +37,6 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         float startChargeTime = Time.time;
 
         yield return new WaitUntil(() => (startChargeTime + fullChargeTime <= Time.time) || stopSustaining);
@@ -54,7 +50,6 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
         projectile.Release(caster, damageData, turning.Direction, team, modifierManager, this);
 
         energyManager.ChangeCurrentEnergy(-cost);
-
         finishCooldownTime = Time.time + cooldown;
         ReleaseCastEvent.Invoke();
 

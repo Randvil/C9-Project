@@ -72,7 +72,7 @@ public class AbilityUiDependencies : MonoBehaviour
     {
         foreach (var abilityWithInd in abilityManager.LearnedAbilities)
         {
-            OnSetWithoutChecking(abilityWithInd.Value.Type);
+            OnSetWithoutChecking(abilityWithInd.Value.AbilityType);
         }
         CheckAllAbilitiesStatus();
     }
@@ -81,10 +81,10 @@ public class AbilityUiDependencies : MonoBehaviour
     {
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
-            if (ab.CanBeUsed != abilityCanBeUsed[ab.Type])
+            if (ab.CanBeUsed != abilityCanBeUsed[ab.AbilityType])
             {
-                abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
-                UpdateAbilityStatus(ab.Type);
+                abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
+                UpdateAbilityStatus(ab.AbilityType);
             }
         }
     }
@@ -93,8 +93,8 @@ public class AbilityUiDependencies : MonoBehaviour
     {
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
-            abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
-            UpdateAbilityStatus(ab.Type);
+            abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
+            UpdateAbilityStatus(ab.AbilityType);
         }
     }
 
@@ -131,7 +131,7 @@ public class AbilityUiDependencies : MonoBehaviour
         if (abilityTypeOrder.ContainsKey(type))
             return;
 
-        int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.Type == type).Key - 1;
+        int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.AbilityType == type).Key - 1;
         SetAbilityOnSlot(type, newAbilityIndex);
         abilityCanBeUsed.Add(type, false);
 

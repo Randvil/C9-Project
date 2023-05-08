@@ -53,6 +53,7 @@
             <ui:Label text="USE \U00F1F60E/\U00F1F80E FOR PARRY" display-tooltip-when-elided="true" name="parry" class="hint" />
             <ui:Label text="USE \U00F1F60F/&lt;b&gt;TAB&lt;/b&gt; FOR COLLECTION MENU" display-tooltip-when-elided="true" name="collection" class="hint" />
             <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
+            <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO PICK UP THE ABILITY" display-tooltip-when-elided="true" name="ability" class="hint" />
         </ui:VisualElement>
         <ui:VisualElement name="bossStats" style="position: absolute; top: 22px; right: 0; display: none;">
             <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1;">

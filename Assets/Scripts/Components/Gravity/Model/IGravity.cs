@@ -10,5 +10,6 @@ public interface IGravity
     public bool IsFalling { get; }
     public UnityEvent StartFallEvent { get; }
     public UnityEvent BreakFallEvent { get; }
+    public UnityEvent LostGroundEvent { get; }
     public UnityEvent GroundedEvent { get; }
 }

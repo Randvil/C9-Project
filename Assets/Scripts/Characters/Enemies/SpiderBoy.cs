@@ -42,7 +42,7 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         SpiderSpawnAbility = new CreatureSpawner(this, spiderSpawnPoint, creatureSpawnerData, EnergyManager);
         JumpAbility = new DefensiveJump(this, defensiveJumpData, EnergyManager, Rigidbody, Gravity, Turning);
         CompoundAttack = new SpiderboyCompoundAttack(gameObject, Weapon, SpiderSpawnAbility);
-        CompoundProtection = new SpiderboyCompoundProtection(compoundProtectionData, HealthManager, JumpAbility);
+        CompoundProtection = new SpiderboyCompoundProtection(compoundProtectionData, HealthManager, JumpAbility, EffectManager);
 
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         spiderSpawnerView = new CreatureSpawnerView(spiderSpawnerViewData, SpiderSpawnAbility, sharedAudioSource);

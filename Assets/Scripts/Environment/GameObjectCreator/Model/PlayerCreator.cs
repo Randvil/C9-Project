@@ -11,7 +11,7 @@ public class PlayerCreator : Creator
         newGameObject.GetComponent<Player>().EnergyManager.ChangeCurrentEnergy(data.CurrentGameData.playerEnergy);
         foreach (AbilityPair ability in data.CurrentGameData.learnedAbilities)
         {
-            IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.Type == ability.abilityType).Value;
+            IAbility learnedAbility = newGameObject.GetComponent<Player>().AbilityManager.Abilities.FirstOrDefault(x => x.Value.AbilityType == ability.abilityType).Value;
             newGameObject.GetComponent<Player>().AbilityManager.LearnAbility(ability.abilityType, ability.pos);
         }
     }

@@ -16,7 +16,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected EnergyManagerData energyManagerData;
     [SerializeField] protected MovementData movementData;
     [SerializeField] protected ClimbData climbData;
-    [SerializeField] protected WeaponData weaponData;
+    [SerializeField] protected MeleeWeaponData meleeWeaponData;
     [SerializeField] protected KanaboData kanaboData;
     [SerializeField] protected OffensiveJumpData offensiveJumpData;
     [SerializeField] protected BroodmotherWebData broodmotherWebData;
@@ -74,7 +74,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         Climb = new Climb(this, climbData, Rigidbody, Gravity, Turning);
         WeaponModifierManager = new ModifierManager();
         AbilityModifierManager = new ModifierManager();
-        Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
+        Weapon = new CleaveMeleeWeapon(this, gameObject, meleeWeaponData, WeaponModifierManager, CharacterTeam, Turning);
         StunAbility = new Kanabo(this, gameObject, kanaboData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         WebAbility = new BroodmotherWeb(this, gameObject, webSpawnPoints, broodmotherWebData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         OffensiveJumpAbility = new OffensiveJump(this, offensiveJumpData, EnergyManager, Rigidbody, Collider, Gravity, Turning, CharacterTeam, AbilityModifierManager);

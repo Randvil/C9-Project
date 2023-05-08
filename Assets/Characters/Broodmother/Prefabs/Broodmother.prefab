@@ -2215,7 +2215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 1281780840}
   healthBarSlider: {fileID: 281655481}
-  material: {fileID: 0}
+  meshesToCloneMaterials: []
   initialTeam: 1
   turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: e0c04078e4708674788a7013e0dbbe31, type: 2}
@@ -2230,7 +2230,7 @@ MonoBehaviour:
   energyManagerData: {fileID: 11400000, guid: b84fbca73868aeb43b93b766dfa3c394, type: 2}
   movementData: {fileID: 11400000, guid: d8c72e4995fa2884fac15ba24c0dfb2e, type: 2}
   climbData: {fileID: 11400000, guid: c6e87596361db39488538cc2cb3790b9, type: 2}
-  weaponData: {fileID: 11400000, guid: fb1539af528347f4e96ce32e71d0a2c6, type: 2}
+  meleeWeaponData: {fileID: 11400000, guid: d15e31930d5d171438b3e40c5cc0071b, type: 2}
   kanaboData: {fileID: 11400000, guid: 2f62476014b9d0843b3fcc64e494f6f7, type: 2}
   offensiveJumpData: {fileID: 11400000, guid: c9216e6fde96ce142a0a91f5a704c0fe, type: 2}
   broodmotherWebData: {fileID: 11400000, guid: f48863a659cdac340970386bfa4eb607, type: 2}

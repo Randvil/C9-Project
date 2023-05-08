@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewWeaponData", menuName = "Data/Weapon/New Weapon Data")]
 public class WeaponData : ScriptableObject
 {
+    [Header("Weapon Data")]
     public DamageData[] damageDatas;
     [Min(0f)]
     public float attackRange = 1f;

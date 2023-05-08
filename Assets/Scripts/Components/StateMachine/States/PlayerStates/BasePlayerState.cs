@@ -6,16 +6,19 @@ public abstract class BasePlayerState : IState
     protected IPlayerInput playerInput;
     protected IStateMachine stateMachine;
 
-    protected static bool haveToTurn;
-    protected static bool isMoving;
-    protected static int abilityNumberToCast;
-    protected static int previousAbilityNumber;
+    protected PlayerInterstateData playerInterstateData;
 
-    public BasePlayerState(Player player, IStateMachine stateMachine, IPlayerInput playerInput)
+    //protected static bool haveToTurn;
+    //protected static bool isMoving;
+    //protected static int abilityNumberToCast;
+    //protected static int previousAbilityNumber;
+
+    public BasePlayerState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData)
     {
         this.player = player;
         this.playerInput = playerInput;
         this.stateMachine = stateMachine;
+        this.playerInterstateData = playerInterstateData;
     }
 
     public virtual void Enter()
@@ -69,22 +72,22 @@ public abstract class BasePlayerState : IState
 
     protected virtual void OnMove(eDirection direction)
     {
-        haveToTurn = direction == player.Turning.Direction ? false : true;
+        playerInterstateData.haveToTurn = direction == player.Turning.Direction ? false : true;
 
-        isMoving = true;
+        playerInterstateData.isMoving = true;
     }
 
     protected virtual void OnStop()
     {
-        isMoving = false;
+        playerInterstateData.isMoving = false;
     }
 
     protected virtual void OnCrouch(eActionPhase actionPhase)
     {
-        if (actionPhase == eActionPhase.Started)
-        {
-            stateMachine.ChangeState(player.Crouching);
-        }
+        //if (actionPhase == eActionPhase.Started)
+        //{
+        //    stateMachine.ChangeState(player.Crouching);
+        //}
     }
 
     protected virtual void OnJump(eActionPhase actionPhase)
@@ -136,8 +139,8 @@ public abstract class BasePlayerState : IState
     {
         if (actionPhase == eActionPhase.Started && player.AbilityManager.CanCastAbility(abilityNumber))
         {
-            previousAbilityNumber = abilityNumberToCast;
-            abilityNumberToCast = abilityNumber;
+            playerInterstateData.previousAbilityNumber = playerInterstateData.abilityNumberToCast;
+            playerInterstateData.abilityNumberToCast = abilityNumber;
             stateMachine.ChangeState(player.CastingAbility);
         }
     }

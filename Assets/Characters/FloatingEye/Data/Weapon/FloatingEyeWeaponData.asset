@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd59d6e54e203714e9721e94ccb8b0d1, type: 3}
-  m_Name: BroodmotherWeaponData
+  m_Name: FloatingEyeWeaponData
   m_EditorClassIdentifier: 
   damageDatas:
-  - {fileID: 11400000, guid: c08f875889617914aa6d1a6eeaa7fd99, type: 2}
-  attackRange: 3
+  - {fileID: 11400000, guid: 5f1d6c36683ef7140962c3e0d882e4de, type: 2}
+  attackRange: 2
   preAttackDelays:
   - 1
-  postAttackDelay: 1
-  attackSpeed: 2
+  postAttackDelay: 0.5
+  attackSpeed: 1

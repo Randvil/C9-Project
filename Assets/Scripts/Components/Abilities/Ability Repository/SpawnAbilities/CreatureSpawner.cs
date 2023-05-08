@@ -21,7 +21,6 @@ public class CreatureSpawner : AbstractAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
         finishCooldownTime = Time.time + cooldown;        
 
         for (int i = 0; i < creatureCount; i++)
@@ -37,9 +36,5 @@ public class CreatureSpawner : AbstractAbility
             ReleaseCastEvent.Invoke();
             yield return new WaitForSeconds(spawnDelay);
         }
-
-        yield return new WaitForSeconds(postCastDelay);
-
-        BreakCast();
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682a3ef4ebe022a4ab3af06edb8959be, type: 3}
   m_Name: PlayerTessenData
   m_EditorClassIdentifier: 
+  abilityType: 3
   cooldown: 5
   preCastDelay: 0
   postCastDelay: 0

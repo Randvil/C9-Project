@@ -30,6 +30,7 @@ public class Gravity : MonoBehaviour, IGravity
 
     public UnityEvent StartFallEvent { get; private set; } = new();
     public UnityEvent BreakFallEvent { get; private set; } = new();
+    public UnityEvent LostGroundEvent { get; private set; } = new();
     public UnityEvent GroundedEvent { get; private set; } = new();
 
     private void Awake()
@@ -44,6 +45,7 @@ public class Gravity : MonoBehaviour, IGravity
 
     private void FixedUpdate()
     {
+        CheckGround();
         SetFallingState();
         HandleFallSpeed();
     }
@@ -62,7 +64,6 @@ public class Gravity : MonoBehaviour, IGravity
             return;
         }
 
-        IsGrounded = checkGroundCollider.IsTouchingLayers(groundLayer);
         if (IsGrounded == true)
         {
             if (wasGrounded == false)
@@ -86,6 +87,15 @@ public class Gravity : MonoBehaviour, IGravity
 
         IsFalling = wasFalling = true;
         wasGrounded = false;
+    }
+
+    private void CheckGround()
+    {
+        IsGrounded = checkGroundCollider.IsTouchingLayers(groundLayer);
+        if (IsGrounded == false && wasGrounded == true)
+        {
+            LostGroundEvent.Invoke();
+        }
     }
 
     private void HandleFallSpeed()

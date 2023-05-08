@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24, y: 0.01}
+  m_Size: {x: 0.09, y: 0.01}
   m_EdgeRadius: 0
 --- !u!1 &108228307787600297
 GameObject:
@@ -1544,7 +1544,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 1}
+  m_Size: {x: 0.1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1288772854
 Rigidbody2D:
@@ -1609,13 +1609,14 @@ MonoBehaviour:
   crouchData: {fileID: 11400000, guid: 4df5fba1bf34625428a63c48c00a7c88, type: 2}
   climbData: {fileID: 11400000, guid: 0e65c293313b3c4458bbd66b43c712d8, type: 2}
   rollData: {fileID: 11400000, guid: 0c22dd40f0ef60343999917fbf7cf60e, type: 2}
-  weaponData: {fileID: 11400000, guid: 2b6c473b53226394ba58652880e2c3e5, type: 2}
+  meleeWeaponData: {fileID: 11400000, guid: 50051f46170ddb74a93556a80bd441e8, type: 2}
   energyRegeneratorData: {fileID: 11400000, guid: d74c969c5496c884e8d098fc2d7754d0, type: 2}
   slowdownDuringAttackData: {fileID: 11400000, guid: 3cb81037d030c214dad55b69ab0bde15, type: 2}
   parryData: {fileID: 11400000, guid: 4bb7df67b3ec5454baa060afb2e92d05, type: 2}
   kanaboData: {fileID: 11400000, guid: b51628169ebd0e1468dc896043bfa7eb, type: 2}
   daikyuData: {fileID: 11400000, guid: a2f65e9b195517640b5efe219405527d, type: 2}
   tessenData: {fileID: 11400000, guid: 0bac820e5f2b7174f868c9c546d63e4e, type: 2}
+  areaTessenData: {fileID: 11400000, guid: 44cc6efdc1a9a2640aaaa634050f67ed, type: 2}
   regenerationAbilityData: {fileID: 11400000, guid: ab0e0c30ef2bc86469851d5ee28f6cbd, type: 2}
   lastChanceData: {fileID: 11400000, guid: c5de94503739f9b49943bacc09b5dfc8, type: 2}
   turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
@@ -1708,7 +1709,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1804,7 +1805,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

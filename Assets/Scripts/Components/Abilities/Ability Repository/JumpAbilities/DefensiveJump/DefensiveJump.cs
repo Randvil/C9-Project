@@ -26,22 +26,12 @@ public class DefensiveJump : AbstractAbility
         this.turning = turning;
     }
 
-    public override void StartCast()
-    {
-        if (IsPerforming == false)
-        {
-            strikeCoroutine = owner.StartCoroutine(ReleaseStrikeCoroutine());
-
-            StartCastEvent.Invoke();
-        }
-    }
-
     public override void BreakCast()
     {
         if (IsPerforming == true)
         {
-            owner.StopCoroutine(strikeCoroutine);
-            strikeCoroutine = null;
+            owner.StopCoroutine(abilityCoroutine);
+            abilityCoroutine = null;
             rigidbody.velocity = new(0f, 0f);
             gravity.Enable(this);
 
@@ -51,8 +41,6 @@ public class DefensiveJump : AbstractAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         finishCooldownTime = Time.time + cooldown;
         energyManager.ChangeCurrentEnergy(-cost);
 
@@ -72,9 +60,5 @@ public class DefensiveJump : AbstractAbility
 
         yield return new WaitUntil(() => gravity.IsGrounded == true);
         rigidbody.velocity = new(0f, 0f);
-
-        yield return new WaitForSeconds(postCastDelay);
-
-        BreakCast();
     }
 }
