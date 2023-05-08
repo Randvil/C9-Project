@@ -21,9 +21,13 @@ public class SceneObjectsCreator : Creator
         StaticUICreator staticUI = new StaticUICreator();
         staticUI.CreateObject(prefabsData.staticUIPrefab, data);
 
+        SceneEffectsCreator sceneEffects = new SceneEffectsCreator();
+        sceneEffects.CreateObject(prefabsData.postProcessingEffects, data);
+
         PlayerCreator player = new PlayerCreator();
         player.CreateObject(prefabsData.playerPrefab, data);
 
+        player.PlayerComponent.volume = sceneEffects.Volume;
         player.PlayerComponent.Initialize(managers.PlayerInput);
         player.PlayerComponent.Document = staticUI.UIDocument;
         player.LoadDataToObject(data);

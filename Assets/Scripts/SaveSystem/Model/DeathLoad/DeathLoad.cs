@@ -7,7 +7,6 @@ public class DeathLoad: IDeathLoad
     public DeathLoad(IDeathManager deathManager)
     {
         deathManager.DeathEvent.AddListener(RewriteData);
-        deathManager.DeathEvent.AddListener(LoadCheckpoint);
     }
 
     public DeathLoad()

@@ -10,4 +10,5 @@ public class SceneObjectsCreatorData : ScriptableObject
     public GameObject cameraPrefab;
     public GameObject managersPrefab;
     public GameObject staticUIPrefab;
+    public GameObject postProcessingEffects;
 }

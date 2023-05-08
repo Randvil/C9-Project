@@ -455,6 +455,8 @@ GameObject:
   - component: {fileID: 4902145513624130031}
   - component: {fileID: 8800236748537048357}
   - component: {fileID: 920402925457481163}
+  - component: {fileID: 2862467330426763811}
+  - component: {fileID: 4513868092138232053}
   m_Layer: 0
   m_Name: DissolveParticlesGraph
   m_TagString: Untagged
@@ -486,20 +488,35 @@ VisualEffect:
   m_GameObject: {fileID: 858282748860365975}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 9524d0274076cd04a8f786538af1ed12, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.6
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: -0.000000022351745, y: 0.067719415, z: 3.5527137e-15}
+        m_Name: Transform_position
+        m_Overridden: 1
+      - m_Value: {x: 0.000012074186, y: 180, z: 179.99998}
+        m_Name: Transform_angles
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 1, z: 1}
+        m_Name: Transform_scale
+        m_Overridden: 1
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 2.5277083, y: 0.29807878, z: 0.29807878, w: 0}
+        m_Name: Color
+        m_Overridden: 0
     m_Uint:
       m_Array: []
     m_Int:
@@ -509,9 +526,43 @@ VisualEffect:
     m_AnimationCurve:
       m_Array: []
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 2.0236006, g: 0.14317927, b: 0.14317927, a: 1}
+          key1: {r: 0, g: 0.25482428, b: 9.122709, a: 1}
+          key2: {r: 0, g: 0, b: 0, a: 0}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 45875
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 65535
+          atime2: 0
+          atime3: 0
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 2
+        m_Name: Gradient
+        m_Overridden: 0
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 1899006775300374491}
+        m_Name: SkinnedMeshRenderer
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!73398921 &920402925457481163
@@ -554,6 +605,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2862467330426763811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858282748860365975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 4513868092138232053}
+  m_VisualEffect: {fileID: 8800236748537048357}
+--- !u!114 &4513868092138232053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858282748860365975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: Transform
+  Target: {fileID: 8170141773168103536}
 --- !u!1 &1644199959734998194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1149,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5735735636365214798, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
       propertyPath: m_Name
       value: spider_small_animation
@@ -1081,5 +1167,10 @@ SkinnedMeshRenderer:
 --- !u!4 &3293973246907327362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
+  m_PrefabInstance: {fileID: 3043362742664709225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8170141773168103536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2639638324218457063, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
   m_PrefabInstance: {fileID: 3043362742664709225}
   m_PrefabAsset: {fileID: 0}
