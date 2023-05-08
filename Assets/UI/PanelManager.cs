@@ -11,7 +11,7 @@ public class PanelManager : MonoBehaviour
 
     public readonly List<VisualElement> panels = new();
 
-    private Stack<VisualElement> history = new();
+    private readonly Stack<VisualElement> history = new();
 
     private VisualElement lastPanel;
 
@@ -34,7 +34,7 @@ public class PanelManager : MonoBehaviour
             if (currentPanel != null)
             {
                 if (currentPanel.style.opacity != 0f) // Если игрок слишком быстро переключает панели (балуется)
-                    StopDisplayDisabling();
+                    StopDisplayDisabling(lastPanel);
 
                 currentPanel.style.display = DisplayStyle.Flex;
                 DOTween.To(x => currentPanel.style.opacity = x, 0f, 1f, PanelTweenDuration).SetUpdate(true);
@@ -111,8 +111,11 @@ public class PanelManager : MonoBehaviour
         DisablePanel(panelToDisable);
     }
 
-    private void StopDisplayDisabling()
+    private void StopDisplayDisabling(VisualElement panelToDisable)
     {
         StopAllCoroutines();
+
+        if (panelToDisable != null)
+            DisablePanel(panelToDisable);
     }
 }
