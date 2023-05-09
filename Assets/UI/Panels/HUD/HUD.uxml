@@ -54,7 +54,7 @@
             <ui:Label text="USE \U00F1F60F/&lt;b&gt;TAB&lt;/b&gt; FOR COLLECTION MENU" display-tooltip-when-elided="true" name="collection" class="hint" />
             <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
         </ui:VisualElement>
-        <ui:VisualElement name="bossStats" style="position: absolute; top: 45px; right: 66px; scale: 1.4 1.4; align-items: flex-end;">
+        <ui:VisualElement name="bossStats" style="position: absolute; top: 45px; right: 66px; scale: 1.4 1.4; align-items: flex-end; display: none;">
             <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1;">
                 <ui:Label text="100%" name="healthBarLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-right: 13px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                 <ui:ProgressBar value="1" name="healthBar" high-value="1" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 4px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
