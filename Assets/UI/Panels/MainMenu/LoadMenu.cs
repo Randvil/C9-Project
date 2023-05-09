@@ -50,7 +50,7 @@ public class LoadMenu : MonoBehaviour
 
     public void NewGame()
     {
-        panelManager.SwitchTo(2, true, false); // To load screen
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
 
         newGameSave.CreateNewGameSave();
         StartCoroutine(LoadSceneCoroutine(newGameSave.gameData.CheckpointData.latestScene));
