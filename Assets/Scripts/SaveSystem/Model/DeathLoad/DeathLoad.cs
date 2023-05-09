@@ -11,9 +11,9 @@ public class DeathLoad: IDeathLoad
         deathManager.DeathEvent.AddListener(RewriteData);
     }
 
-    public DeathLoad()
-    {
-    }
+    //public DeathLoad()
+    //{
+    //}
 
     public void RewriteData()
     {

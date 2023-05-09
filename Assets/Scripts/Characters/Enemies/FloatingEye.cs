@@ -53,6 +53,8 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
 
         Invisibility.StartCast();
     }
@@ -70,6 +72,6 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
     protected void OnDeath()
     {
         currentBehavior.Deactivate();
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1f);
     }
 }

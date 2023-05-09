@@ -49,6 +49,12 @@ public class InvisibilityView
 
     private IEnumerator ChangeTransparency(float deltaAlpha)
     {
+        if (skinnedMeshes.Length == 0)
+        {
+            Debug.LogError("Can't change transparency because there is no meshes");
+            yield break;
+        }
+
         Material firstMaterial = skinnedMeshes[0].materials[0];
 
         while (ChangeAlphaCondition(deltaAlpha, firstMaterial))

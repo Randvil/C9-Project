@@ -864,7 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 1281780840}
   healthBarSlider: {fileID: 281655481}
-  material: {fileID: 0}
+  meshesToCloneMaterials: []
   initialTeam: 1
   turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: 8aea1678cf21ec84483409fcc8de75b1, type: 2}
@@ -876,6 +876,7 @@ MonoBehaviour:
   energyManagerData: {fileID: 11400000, guid: 053c1046c4477a842a1dedfa45d8558c, type: 2}
   weaponData: {fileID: 11400000, guid: 109eefa71a88f004ba9bd38eae0154ef, type: 2}
   offensiveJumpData: {fileID: 11400000, guid: 9d5b06dfa87f61a4da708502e7cfbed6, type: 2}
+  spiderMinionCompoundAttackData: {fileID: 11400000, guid: 8072e5613090a3046b1cebb3668075c9, type: 2}
   patrolmanStrategyData: {fileID: 11400000, guid: 4ba72e9e8fedcd74d8abf45d898a73f0, type: 2}
   weaponViewData: {fileID: 11400000, guid: a27f33c1ed052374c88d428e5c77f143, type: 2}
 --- !u!114 &6491763889907874999
