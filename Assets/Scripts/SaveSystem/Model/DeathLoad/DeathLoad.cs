@@ -35,6 +35,18 @@ public class DeathLoad: IDeathLoad
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
         //yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
+
+        switch (gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                SceneManager.LoadScene("CityLocation");
+                break;
+            case eSceneName.ArcadeCenter:
+                SceneManager.LoadScene("ArcadeCenter");
+                break;
+            case eSceneName.BossLocation:
+                SceneManager.LoadScene("BossLocation");
+                break;
+        }
     }
 }

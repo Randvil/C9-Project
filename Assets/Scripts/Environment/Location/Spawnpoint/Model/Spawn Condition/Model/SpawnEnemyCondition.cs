@@ -7,26 +7,27 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
     public int spawnEnemyCount;
 
     public abstract void Spawn();
+    public abstract SpawnEnemiesWaveData ReturnWaveInfo();
+    public abstract SpawnEnemiesOnceData ReturnOnceInfo();
 
     public int SpawnEnemyCount()
     {
         return spawnEnemyCount;
     }
 
-    public void SpawnOneEnemy(GameObject enemyPrefab, Spawnpoint spawnpoint, Material material)
+    public void SpawnOneEnemy(GameObject enemyPrefab, Spawnpoint spawnpoint, Material material, float diff)
     {
-        GameObject instantiate = Object.Instantiate(enemyPrefab, GenerateRandomPos(spawnpoint.transform.position), 
+        GameObject instantiate = Object.Instantiate(enemyPrefab, GenerateRandomPos(spawnpoint.transform.position, diff), 
             Quaternion.identity, spawnpoint.transform);
-        //Material materialClone = Object.Instantiate<Material>(material);
-        //instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        Material materialClone = Object.Instantiate(material);
+        instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
         instantiate.name = enemyPrefab.name;
         spawnEnemyCount++;
     }
-    public Vector3 GenerateRandomPos(Vector3 pos)
+    public Vector3 GenerateRandomPos(Vector3 pos, float diff)
     {
-        return new Vector3(Random.Range(pos.x - 2f, pos.x + 2f), pos.y, pos.z);
+        return new Vector3(Random.Range(pos.x - diff, pos.x + diff), pos.y, pos.z);
     }
-
 
     public bool InRadius(Spawnpoint spawnpoint, float spawnRadius)
     {

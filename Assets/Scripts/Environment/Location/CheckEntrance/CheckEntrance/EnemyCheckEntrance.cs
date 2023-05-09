@@ -10,8 +10,11 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
 
     private FileDataHandler dataHandler;
     private GameData gameData = new();
-    private List<SpawnpointData> CitySpawnpoints;
-    private List<SpawnpointData> ArcadeCenterSpawnpoints;
+
+    private List<SpawnpointsOnce> CitySpawnpointsOnce;
+    private List<SpawnpointsWave> CitySpawnpointsWave;
+    private List<SpawnpointsOnce> ArcadeCenterOnce;
+    private List<SpawnpointsWave> ArcadeCenterWave;
 
     public UnityEvent EntranceOpenEvent { get; } = new();
 
@@ -35,11 +38,13 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
 
             switch (locationData.sceneName)
             {
-                case "CityLocation":
-                    CitySpawnpoints = locationData.spawnpoints;
+                case eSceneName.CityLocation:
+                    CitySpawnpointsOnce = locationData.SpawnpointsOnce;
+                    CitySpawnpointsWave = locationData.SpawnpointsWave;
                     break;
-                case "ArcadeCenter":
-                    ArcadeCenterSpawnpoints = locationData.spawnpoints;
+                case eSceneName.ArcadeCenter:
+                    ArcadeCenterOnce = locationData.SpawnpointsOnce;
+                    ArcadeCenterWave = locationData.SpawnpointsWave;
                     break;
             }
         }
@@ -48,12 +53,22 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
         {
             foreach (int id in spawnpointsID.CityLocation)
             {
-                SpawnpointData sp = CitySpawnpoints.Find(spawnpoint => spawnpoint.id == id);
-                if (sp.enemyNumber > 0)
+                SpawnpointsOnce once = CitySpawnpointsOnce.Find(spawnpoint => spawnpoint.id == id);
+                if (once != null && once.enemyNumber > 0)
                 {
                     return true;
                 }
                     
+            }
+
+            foreach (int id in spawnpointsID.CityLocation)
+            {
+                SpawnpointsWave wave = CitySpawnpointsWave.Find(spawnpoint => spawnpoint.id == id);
+                if (wave != null && wave.spawnWaveData.enemyPerWaveCount > 0)
+                {
+                    return true;
+                }
+
             }
         }
 
@@ -61,12 +76,22 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
         {
             foreach (int id in spawnpointsID.ArcadeCenter)
             {
-                SpawnpointData sp = ArcadeCenterSpawnpoints.Find(spawnpoint => spawnpoint.id == id);
-                if (sp.enemyNumber > 0)
+                SpawnpointsOnce once = ArcadeCenterOnce.Find(spawnpoint => spawnpoint.id == id);
+                if (once.enemyNumber > 0)
                 {
                     return true;
                 }
-                    
+
+            }
+
+            foreach (int id in spawnpointsID.ArcadeCenter)
+            {
+                SpawnpointsWave wave = ArcadeCenterWave.Find(spawnpoint => spawnpoint.id == id);
+                if (wave.spawnWaveData.enemyPerWaveCount > 0)
+                {
+                    return true;
+                }
+
             }
         }
 
