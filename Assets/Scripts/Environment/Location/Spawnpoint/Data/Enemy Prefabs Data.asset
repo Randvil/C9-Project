@@ -17,6 +17,6 @@ MonoBehaviour:
   flyingEyePrefab: {fileID: 0}
   bossPrefab: {fileID: 9048720266790035559, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
   spiderBoyMaterial: {fileID: 2100000, guid: 365f0abc06c4fe24a9c92536aa7546a3, type: 2}
-  spiderMaterial: {fileID: 2100000, guid: 6b2c42459280d4f428d54063477f5759, type: 2}
+  spiderMaterial: {fileID: 2100000, guid: 3ae9e876e75a356449d24ddfce6aae8e, type: 2}
   flyingEyeMaterial: {fileID: 0}
   bossMaterial: {fileID: 0}

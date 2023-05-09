@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffectable, IAbilityCaster, IDataSavable
 {
@@ -40,6 +41,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
 
     [Header("Player Prefab VFX")]
     [SerializeField] private VisualEffect slashGraph;
+    [SerializeField] private VisualEffect kanaboGraph;
+    [SerializeField] private VisualEffect tessenGraph;
+    public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
 
@@ -83,6 +87,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public PlayerTakeDamageView TakeDamageView { get; private set; }
     public StunView StunView { get; private set; }
     public DeathView DeathView { get; private set; }
+    public TessenAbilityView TessenAbilityView { get; private set; }
+    public KanaboAbilityView KanaboAbilityView { get; private set; }
 
     public IStateMachine StateMachine { get; private set; }
     public IState Standing { get; private set; }
@@ -166,9 +172,11 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
             Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
         ClimbView = new ClimbView(Climb, Animator);
-        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource);
+        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
         StunView = new StunView(EffectManager, Animator);
         DeathView = new DeathView(DeathManager, Animator);
+        TessenAbilityView = new TessenAbilityView(tessenGraph, tessen, Turning);
+        KanaboAbilityView = new KanaboAbilityView(kanaboGraph, kanabo, Turning);
 
         CreateStateMachine();
     }
@@ -212,8 +220,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         foreach (KeyValuePair<int, IAbility> ability in AbilityManager.LearnedAbilities)
         {
             AbilityPair abilityPair = new(ability.Key, ability.Value.AbilityType);
-            if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
-                data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
+            AbilityPair learnedAbilityPair = data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType);
+            if (learnedAbilityPair != null)
+                learnedAbilityPair.pos = abilityPair.pos;
             else
                 data.learnedAbilities.Add(abilityPair);
         }
