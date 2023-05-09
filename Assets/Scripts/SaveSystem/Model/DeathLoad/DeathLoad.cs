@@ -11,10 +11,6 @@ public class DeathLoad: IDeathLoad
         deathManager.DeathEvent.AddListener(RewriteData);
     }
 
-    //public DeathLoad()
-    //{
-    //}
-
     public void RewriteData()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
@@ -27,14 +23,8 @@ public class DeathLoad: IDeathLoad
 
     public void LoadCheckpoint()
     {
-        LoadSceneCoroutine();
-    }
-
-    private void LoadSceneCoroutine()
-    {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
-        //yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 }
