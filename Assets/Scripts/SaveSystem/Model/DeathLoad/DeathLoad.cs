@@ -4,6 +4,8 @@ using System.Collections;
 
 public class DeathLoad: IDeathLoad
 {
+    public DeathLoad() { }
+
     public DeathLoad(IDeathManager deathManager)
     {
         deathManager.DeathEvent.AddListener(RewriteData);
@@ -22,14 +24,14 @@ public class DeathLoad: IDeathLoad
 
     public void LoadCheckpoint()
     {
-        Coroutines.StartCoroutine(LoadSceneCoroutine());
+        LoadSceneCoroutine();
     }
 
-    public IEnumerator LoadSceneCoroutine()
+    private void LoadSceneCoroutine()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
-        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(gameData.CheckpointData.latestScene);
     }
 }

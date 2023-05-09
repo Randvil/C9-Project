@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,9 @@ public class LocationEntry : SavePoint, IInteractive
 
     [SerializeField]
     private Vector3 nextScenePosition;
+
+    private PanelManager panelManager;
+    private LoadScreen loadScreen;
 
     public bool IsInteracting { get; private set; }
 
@@ -47,14 +51,30 @@ public class LocationEntry : SavePoint, IInteractive
         
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        panelManager = FindObjectOfType<PanelManager>(); // creates from GameLoader
+        loadScreen = panelManager.GetComponentInChildren<LoadScreen>();
+    }
+
     public void StartInteraction(GameObject interactingCharacter)
     {
+        loadScreen.EndOfScene();
+
         HideTooltip();
 
         IsInteracting = true;
 
         SaveGame();
 
+        StartCoroutine(LoadSceneCoroutine());
+    }
+
+    private IEnumerator LoadSceneCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
         SceneManager.LoadScene(sceneName);
     }
 

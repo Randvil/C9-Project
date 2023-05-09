@@ -40,12 +40,13 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     public IAbility SwarmSpawningAbility { get; protected set; }
     public ICompoundAttack CompoundAttack { get; protected set; }
 
-    private UIDocument document;
-    public UIDocument Document
+    private VisualElement document;
+    public VisualElement Document
     {
         get => document;
         set
         {
+            document = value;
             shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
             HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "healthBar");
         }
@@ -90,6 +91,13 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+    }
+
+    private void Start()
+    {
+        // Should be removed, use SceneLoader
+        var a = FindObjectOfType<PanelManager>();
+        Document = a.panels[0];
     }
 
     protected void Update()

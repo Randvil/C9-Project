@@ -60,7 +60,7 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckForAlreadyLearned();
     }
 
-    // В AbilityManager'e нет реактивных полей, поэтому нужно самим следить за ними
+    // пїЅ AbilityManager'e пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     private void Update()
     {
         CheckAbilitiesStatus();
@@ -70,8 +70,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckForAlreadyLearned()
     {
+        int i = 0;
         foreach (var abilityWithInd in abilityManager.LearnedAbilities)
         {
+            if (++i > polyCount)
+                return;
+
             OnSetWithoutChecking(abilityWithInd.Value.AbilityType);
         }
         CheckAllAbilitiesStatus();
@@ -79,8 +83,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckAbilitiesStatus()
     {
+        int i = 0;
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
+            if (++i > polyCount)
+                return;
+
             if (ab.CanBeUsed != abilityCanBeUsed[ab.AbilityType])
             {
                 abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
@@ -91,8 +99,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void CheckAllAbilitiesStatus()
     {
+        int i = 0;
         foreach (var ab in abilityManager.LearnedAbilities.Values)
         {
+            if (++i > polyCount)
+                return;
+
             abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
             UpdateAbilityStatus(ab.AbilityType);
         }
@@ -156,7 +168,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void SetAbilityOnSlot(eAbilityType type, int slotIndex)
     {
-        if (abilityTypeOrder.ContainsValue(slotIndex)) // Если слот уже занят
+        if (abilityTypeOrder.ContainsValue(slotIndex)) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             ClearAbilitySlot(slotIndex);
         else
             abilityTypeOrder.Add(type, slotIndex);

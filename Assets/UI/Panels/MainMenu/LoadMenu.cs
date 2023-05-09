@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,14 +6,25 @@ using UnityEngine.UIElements;
 
 public class LoadMenu : MonoBehaviour
 {
-    VisualElement slots;
-
-    DirectoryInfo directory = new("Saves");
+    DirectoryInfo directory;
+    const string path = "Saves";
 
     [SerializeField] private NewGameSave newGameSave;
 
+    private PanelManager panelManager;
+
+    public LoadMenu()
+    {
+        if (!Directory.Exists(path))
+            directory = Directory.CreateDirectory(path);
+        else
+            directory = new(path);
+    }
+
     private void Awake()
     {
+        panelManager = GetComponentInParent<PanelManager>();
+
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
         Button continueB = root.Q<Button>("continueB");
@@ -27,17 +39,27 @@ public class LoadMenu : MonoBehaviour
 
     private void LoadSave()
     {
+        panelManager.SwitchTo(2);
+
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
-
-        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
+        StartCoroutine(LoadSceneCoroutine(gameData.CheckpointData.latestScene));
     }
 
     public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
 
     public void NewGame()
     {
+        panelManager.SwitchTo(2, true, false); // To load screen
+
         newGameSave.CreateNewGameSave();
-        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.latestScene);
+        StartCoroutine(LoadSceneCoroutine(newGameSave.gameData.CheckpointData.latestScene));
+    }
+
+    private IEnumerator LoadSceneCoroutine(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
+
+        SceneManager.LoadScene(sceneName);
     }
 }

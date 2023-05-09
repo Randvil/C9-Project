@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="screen" style="flex-grow: 1; justify-content: center; background-color: rgba(53, 10, 10, 0.16);">
+    <Style src="project://database/Assets/UI/Panels/MainMenu/mainMenu.uss?fileID=7433441132597879392&amp;guid=b230ee4403d5de44ebcc4831f33f5349&amp;type=3#mainMenu" />
+    <ui:VisualElement name="screen" style="flex-grow: 1; justify-content: center; background-color: rgba(53, 10, 10, 0.24);">
         <ui:VisualElement style="height: 35%; justify-content: center; background-color: rgba(0, 0, 0, 0.75);">
             <ui:Label text="YOU LOOSE" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 70px; color: rgba(255, 0, 0, 0.75);" />
-            <ui:Label text="TRY AGAIN" display-tooltip-when-elided="true" style="color: rgba(255, 255, 255, 0.75); font-size: 32px; -unity-text-align: upper-center;" />
+            <ui:Button text="TRY AGAIN" name="retryB" class="menu-b" style="color: rgba(255, 255, 255, 0.75);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

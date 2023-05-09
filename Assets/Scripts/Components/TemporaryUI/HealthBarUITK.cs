@@ -13,11 +13,12 @@ public abstract class HealthBarUITK : IHealthBarView
 
     protected const float tweenDuration = 0.4f;
 
-    public HealthBarUITK(UIDocument doc, IHealthManager healthManager, IDeathManager deathManager)
+    public HealthBarUITK(VisualElement root, IHealthManager healthManager, IDeathManager deathManager)
     {
-        root = doc.rootVisualElement;
+        this.root = root;
         this.healthManager = healthManager;
         this.deathManager = deathManager;
+
 
         healthManager.CurrentHealthChangedEvent.AddListener(OnCurrentHealthChange);
         healthManager.MaxHealthChangedEvent.AddListener(OnMaxHealthChange);
@@ -29,8 +30,9 @@ public abstract class HealthBarUITK : IHealthBarView
         if (health.currentHealth < 0f)
             return;
 
+        float partOfHealth = health.currentHealth / health.maxHealth;
         DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue),
-            healthBar.value, health.currentHealth, tweenDuration);
+            healthBar.value, partOfHealth, tweenDuration);
     }
 
     public virtual void OnMaxHealthChange(Health health)

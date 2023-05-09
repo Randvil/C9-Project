@@ -51,7 +51,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="RegenerationDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
-                <Polygon poly-image-path="poly512h" text=" " icon-path="button_ps" class="poly_InGame" style="width: 168px; height: 288px;" />
+                <Polygon poly-image-path="poly512h" text=" " icon-path="RegenerationIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="REGENERATION" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />

@@ -4,9 +4,9 @@
     <Style src="project://database/Assets/UI/CustomControls/Polygon/Resources/PolygonStyles.uss?fileID=7433441132597879392&amp;guid=244aae9a5d60e5f4688dfaed29a3bfec&amp;type=3#PolygonStyles" />
     <ui:VisualElement name="screen" style="flex-grow: 1; margin-left: 66px; margin-top: 66px; margin-bottom: 66px; margin-right: 66px;">
         <ui:VisualElement name="playerStatsContainer" style="width: 35%; flex-direction: row; scale: 1.4 1.4; transform-origin: left top;">
-            <NS.RomanLib.RadialFill name="energyBar" text="100" width="70" height="70" value="0.86" overlay-image-path="radialBlack" overlay-image-scale="0.914" fill-color="#D6D6DAFF" label="true" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(0, 0, 0);" />
+            <NS.RomanLib.RadialFill name="energyBar" text="100" width="70" height="70" value="0.86" overlay-image-path="radialBlack" overlay-image-scale="0.914" fill-color="#3F3FF1BE" label="true" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(0, 0, 0);" />
             <ui:VisualElement style="flex-grow: 1; justify-content: space-around; align-items: flex-start; margin-left: 11px; margin-top: 12px;">
-                <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1;">
+                <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; flex-shrink: 1;">
                     <ui:ProgressBar value="58" name="healthBar" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 4px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
                     <ui:Label text="75%" display-tooltip-when-elided="true" name="hpLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-left: 13px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                 </ui:VisualElement>
@@ -38,7 +38,7 @@
                     </ui:VisualElement>
                     <ui:VisualElement name="parry" class="poly_InGame">
                         <ui:VisualElement name="mask" class="vectorMask">
-                            <NS.RomanLib.RadialFill text="100" width="40" height="44" fill-color="#FF0000FF" value="0.33" overlay-image-path="poly" overlay-image-scale="0.95" class="radialAbil" style="background-image: resource(&apos;parryIcon&apos;);" />
+                            <NS.RomanLib.RadialFill text="100" width="40" height="44" fill-color="#FF000096" overlay-image-path="poly" overlay-image-scale="0.95" value="0" class="radialAbil" style="background-image: resource(&apos;ParryIcon512h&apos;);" />
                         </ui:VisualElement>
                         <ui:Label text="RMB" display-tooltip-when-elided="true" />
                     </ui:VisualElement>
@@ -55,12 +55,13 @@
             <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
             <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO PICK UP THE ABILITY" display-tooltip-when-elided="true" name="ability" class="hint" />
         </ui:VisualElement>
-        <ui:VisualElement name="bossStats" style="position: absolute; top: 22px; right: 0; display: none;">
+        <ui:VisualElement name="bossStats" style="position: absolute; top: 45px; right: 66px; scale: 1.4 1.4; align-items: flex-end; display: none;">
             <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1;">
-                <ui:ProgressBar value="58" name="healthBar" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 3px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
-                <ui:Label text="75%" display-tooltip-when-elided="true" name="hpLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-left: 13px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                <ui:Label text="100%" name="healthBarLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-right: 13px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                <ui:ProgressBar value="1" name="healthBar" high-value="1" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 4px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
             </ui:VisualElement>
-            <ui:Label text="CHUPAKABRA" display-tooltip-when-elided="true" style="font-size: 32px; color: rgba(255, 255, 255, 0.75);" />
+            <ui:ProgressBar value="1" name="shieldBar" high-value="1" style="width: 200px; height: 8px; margin-right: 0; margin-top: 10px; margin-bottom: 10px;" />
+            <ui:Label text="OGUMO" display-tooltip-when-elided="true" style="font-size: 32px; color: rgba(183, 39, 39, 0.75); -unity-text-align: upper-right; padding-right: 0; margin-right: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

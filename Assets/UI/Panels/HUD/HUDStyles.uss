@@ -1,8 +1,8 @@
-.unity-progress-bar__background {
+#healthBar .unity-progress-bar__background {
     height: 100%;
     background-image: none;
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgb(90, 91, 104);
+    background-color: rgba(90, 91, 104, 0.61);
     flex-grow: 1;
     -unity-background-scale-mode: stretch-to-fill;
     border-left-width: 0;
@@ -19,7 +19,7 @@
     border-bottom-right-radius: 2px;
 }
 
-.unity-progress-bar__container {
+ProgressBar .unity-progress-bar__container {
     flex-grow: 1;
     height: 100%;
     align-items: stretch;
@@ -34,7 +34,7 @@
 }
 
 #healthBar .unity-progress-bar__progress {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 81, 81, 0.75);
     flex-grow: 0;
     background-image: none;
     overflow: visible;
@@ -124,4 +124,45 @@
 .vectorMask {
     background-image: resource('polySVG');
     overflow: hidden;
+}
+
+#shieldBar .unity-progress-bar__progress {
+    background-color: rgba(154, 104, 0, 0.75);
+    flex-grow: 0;
+    background-image: none;
+    overflow: visible;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 2px;
+    margin-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+#shieldBar .unity-progress-bar__background {
+    height: 100%;
+    background-image: none;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(255, 222, 170);
+    flex-grow: 1;
+    -unity-background-scale-mode: stretch-to-fill;
+    position: absolute;
+    flex-shrink: 1;
+    max-height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 2px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-bottom-right-radius: 2px;
 }

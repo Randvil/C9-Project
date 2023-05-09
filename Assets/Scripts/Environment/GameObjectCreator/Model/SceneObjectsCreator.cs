@@ -33,8 +33,6 @@ public class SceneObjectsCreator : Creator
         staticUI.newGameObject.GetComponentInChildren<DeathScreen>().SetDeathManager(player.PlayerComponent.DeathManager);
         staticUI.newGameObject.GetComponentInChildren<AbilityUiDependencies>().Parry = player.PlayerComponent.Parry;
 
-        DeathLoad deathLoad = new DeathLoad(player.PlayerComponent.DeathManager);
-
         camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
 
         foreach (LocationData ld in data.CurrentGameData.locations)

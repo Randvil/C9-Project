@@ -42,9 +42,10 @@ public class PlayerInterface : IPlayerInterface, IHealthBarView
         hpLabel = root.Q<Label>("hpLabel");
         energyBar = root.Q<RadialFill>("energyBar");
 
-        healthBar.value = healthBar.highValue = healthManager.Health.maxHealth;
-        hpLabel.text = healthBar.value / healthBar.highValue * 100f + "%";
-        energyBar.value = energyManager.Energy.currentEnergy / energyManager.Energy.maxEnergy;
+        healthBar.highValue = 100f;
+        OnCurrentHealthChange(healthManager.Health);
+
+        OnCurrentEnergyChange(energyManager.Energy);
     }
 
     public void OnCurrentHealthChange(Health health)
@@ -52,14 +53,19 @@ public class PlayerInterface : IPlayerInterface, IHealthBarView
         if (health.currentHealth < 0)
             return;
 
-        DOTween.To(x => healthBar.value = Mathf.Clamp(x, 0f, healthBar.highValue),
-            healthBar.value, health.currentHealth, tweenDuration);
-        hpLabel.text = Mathf.Round(health.currentHealth / healthBar.highValue * 100f) + "%";
+        float percentage = Mathf.Round(health.currentHealth / health.maxHealth * 100f);
+
+        DOTween.To(x => healthBar.value = x, healthBar.value, percentage, tweenDuration);
+
+        if (percentage <= 0f)
+            ++percentage;
+        hpLabel.text = percentage + "%";
     }
 
     public void OnMaxHealthChange(Health health)
     {
-        healthBar.highValue = health.maxHealth;
+        OnCurrentHealthChange(health); // Всё равно всё в процентах...
+        // Можно будет добавить визуальное расширение бара
     }
 
     private void OnCurrentEnergyChange(Energy energy)
