@@ -18,8 +18,14 @@ public class LoadScreen : MonoBehaviour, IPanel
     IEnumerator Start()
     {
         // Если вообще не ждать, то будет дёргано
-        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration / 2); 
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration); 
 
         panelManager.SwitchTo(0, true, true); // To HUD
+    }
+
+    public void EndOfScene()
+    {
+        panelManager.SwitchTo(4);
+        // mb some code for cool animation
     }
 }

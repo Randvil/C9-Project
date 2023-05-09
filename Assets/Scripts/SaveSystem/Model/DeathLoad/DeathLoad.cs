@@ -27,7 +27,7 @@ public class DeathLoad: IDeathLoad
         LoadSceneCoroutine();
     }
 
-    public void LoadSceneCoroutine()
+    private void LoadSceneCoroutine()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();

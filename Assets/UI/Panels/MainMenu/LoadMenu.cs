@@ -6,11 +6,20 @@ using UnityEngine.UIElements;
 
 public class LoadMenu : MonoBehaviour
 {
-    DirectoryInfo directory = new("Saves");
+    DirectoryInfo directory;
+    const string path = "Saves";
 
     [SerializeField] private NewGameSave newGameSave;
 
     private PanelManager panelManager;
+
+    public LoadMenu()
+    {
+        if (!Directory.Exists(path))
+            directory = Directory.CreateDirectory(path);
+        else
+            directory = new(path);
+    }
 
     private void Awake()
     {
@@ -52,11 +61,5 @@ public class LoadMenu : MonoBehaviour
         yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
 
         SceneManager.LoadScene(sceneName);
-    }
-
-    private void Start()
-    {
-        panelManager.SwitchTo(0);
-        StaticAudio.Instance.ChangeBackgroundTrack("mainTheme");
     }
 }

@@ -56,4 +56,10 @@ public class MainMenu : MonoBehaviour
         comicsSwitcher.ToNextPage();
         panelManager.SwitchTo(1);
     }
+
+    private void Start()
+    {
+        panelManager.SwitchTo(0);
+        StaticAudio.Instance.ChangeBackgroundTrack("mainTheme");
+    }
 }
