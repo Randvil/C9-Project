@@ -60,7 +60,7 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckForAlreadyLearned();
     }
 
-    // В AbilityManager'e нет реактивных полей, поэтому нужно самим следить за ними
+    // пїЅ AbilityManager'e пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     private void Update()
     {
         CheckAbilitiesStatus();
@@ -76,7 +76,7 @@ public class AbilityUiDependencies : MonoBehaviour
             if (++i > polyCount)
                 return;
 
-            OnSetWithoutChecking(abilityWithInd.Value.Type);
+            OnSetWithoutChecking(abilityWithInd.Value.AbilityType);
         }
         CheckAllAbilitiesStatus();
     }
@@ -89,10 +89,10 @@ public class AbilityUiDependencies : MonoBehaviour
             if (++i > polyCount)
                 return;
 
-            if (ab.CanBeUsed != abilityCanBeUsed[ab.Type])
+            if (ab.CanBeUsed != abilityCanBeUsed[ab.AbilityType])
             {
-                abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
-                UpdateAbilityStatus(ab.Type);
+                abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
+                UpdateAbilityStatus(ab.AbilityType);
             }
         }
     }
@@ -105,8 +105,8 @@ public class AbilityUiDependencies : MonoBehaviour
             if (++i > polyCount)
                 return;
 
-            abilityCanBeUsed[ab.Type] = ab.CanBeUsed;
-            UpdateAbilityStatus(ab.Type);
+            abilityCanBeUsed[ab.AbilityType] = ab.CanBeUsed;
+            UpdateAbilityStatus(ab.AbilityType);
         }
     }
 
@@ -143,7 +143,7 @@ public class AbilityUiDependencies : MonoBehaviour
         if (abilityTypeOrder.ContainsKey(type))
             return;
 
-        int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.Type == type).Key - 1;
+        int newAbilityIndex = abilityManager.LearnedAbilities.First(x => x.Value.AbilityType == type).Key - 1;
         SetAbilityOnSlot(type, newAbilityIndex);
         abilityCanBeUsed.Add(type, false);
 
@@ -168,7 +168,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void SetAbilityOnSlot(eAbilityType type, int slotIndex)
     {
-        if (abilityTypeOrder.ContainsValue(slotIndex)) // Если слот уже занят
+        if (abilityTypeOrder.ContainsValue(slotIndex)) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             ClearAbilitySlot(slotIndex);
         else
             abilityTypeOrder.Add(type, slotIndex);

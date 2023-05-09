@@ -28,7 +28,7 @@ public class OffensiveJump : DefensiveJump, IDamageDealer
     {
         if (IsPerforming == false)
         {
-            strikeCoroutine = owner.StartCoroutine(ReleaseStrikeCoroutine());
+            abilityCoroutine = owner.StartCoroutine(AbilityCoroutine());
 
             damageCoroutine = owner.StartCoroutine(DamageCoroutine());
 
@@ -40,8 +40,8 @@ public class OffensiveJump : DefensiveJump, IDamageDealer
     {
         if (IsPerforming == true)
         {
-            owner.StopCoroutine(strikeCoroutine);
-            strikeCoroutine = null;
+            owner.StopCoroutine(abilityCoroutine);
+            abilityCoroutine = null;
             rigidbody.velocity = new(0f, 0f);
             gravity.Enable(this);
 

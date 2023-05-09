@@ -11,8 +11,6 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
     public Kanabo(MonoBehaviour owner, GameObject caster, KanaboData kanaboData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, kanaboData, energyManager, modifierManager, turning, team)
     {
-        Type = eAbilityType.Kanabo;
-        
         AttackRange = kanaboData.attackRange;
         stunEffectData = kanaboData.stunEffectData;
 
@@ -21,7 +19,6 @@ public class Kanabo : AbstractDamageAbility, IAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(caster.transform.position, AttackRange);
 
@@ -51,7 +48,6 @@ public class Kanabo : AbstractDamageAbility, IAbility
         }
 
         energyManager.ChangeCurrentEnergy(-cost);
-
         finishCooldownTime = Time.time + cooldown;
         ReleaseCastEvent.Invoke();
 

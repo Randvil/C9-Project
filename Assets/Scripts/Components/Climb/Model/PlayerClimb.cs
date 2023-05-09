@@ -11,6 +11,7 @@ public class PlayerClimb : Climb, IPlayerClimb
 
     private Coroutine searchCoroutine;
     private IClimbableObject climbableObject;
+    private Coroutine checkGroundCoroutine;
 
     public bool CanClimb => climbableObject != null;
     public bool HaveToTurn { get; private set; }
@@ -74,6 +75,12 @@ public class PlayerClimb : Climb, IPlayerClimb
         }
 
         StartClimbEvent.Invoke();
+
+        //Test
+        if (checkGroundCoroutine == null)
+        {
+            checkGroundCoroutine = owner.StartCoroutine(CheckGroundCoroutine());
+        }
     }
 
     public override void BreakClimb()
@@ -87,5 +94,30 @@ public class PlayerClimb : Climb, IPlayerClimb
         searchCoroutine = owner.StartCoroutine(SearchClimbableObject());
 
         BreakClimbEvent.Invoke();
+
+        //Test
+        if (checkGroundCoroutine != null)
+        {
+            owner.StopCoroutine(checkGroundCoroutine);
+            checkGroundCoroutine = null;
+        }
+    }
+
+    private IEnumerator CheckGroundCoroutine()
+    {
+        while (gravity.IsGrounded)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        while (true)
+        {
+            if (gravity.IsGrounded)
+            {
+                BreakClimb();
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

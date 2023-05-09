@@ -44,7 +44,7 @@ public class BaseStrategy : IAIBehavior
         effectManager.EffectEvent.RemoveListener(OnStun);
         deathManager.DeathEvent.RemoveListener(OnDie);
 
-        StateMachine.ChangeState(IdleState);
+        //StateMachine.ChangeState(DyingState);
     }
 
     public virtual void LogicUpdate()

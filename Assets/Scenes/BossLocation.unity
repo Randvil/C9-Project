@@ -3892,7 +3892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: CityLocation
   tip: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u0433\u043E\u0440\u043E\u0434"
-  nextScenePosition: {x: 114.8, y: 0.62, z: 0}
+  nextScenePosition: {x: 214.22, y: 11.45, z: 0}
 --- !u!61 &3196931327370581541
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,19 +6,29 @@ public class SpiderboyCompoundProtection : ICompoundProtection
 {
     private IHealthManager healthManager;
     private IAbility jump;
+    private IEffectManager effectManager;
 
+    private bool isDisabled;
     private float relativeHealthThreshold;
 
-    public SpiderboyCompoundProtection(CompoundProtectionData compoundProtectionData, IHealthManager healthManager, IAbility jump)
+    public SpiderboyCompoundProtection(CompoundProtectionData compoundProtectionData, IHealthManager healthManager, IAbility jump, IEffectManager effectManager)
     {
         relativeHealthThreshold = compoundProtectionData.relativeHealthThreshold;
 
         this.healthManager = healthManager;
         this.jump = jump;
+        this.effectManager = effectManager;
+
+        effectManager.EffectEvent.AddListener(OnStun);
     }
 
     public void Protect()
     {
+        if (isDisabled)
+        {
+            return;
+        }
+
         if (jump.IsPerforming)
         {
             return;
@@ -36,6 +46,24 @@ public class SpiderboyCompoundProtection : ICompoundProtection
         if (jump.IsPerforming)
         {
             jump.BreakCast();
+        }
+    }
+
+    public void OnStun(eEffectType effectType, eEffectStatus effectStatus)
+    {
+        if (effectType != eEffectType.Stun)
+        {
+            return;
+        }
+
+        if (effectStatus == eEffectStatus.Added)
+        {
+            isDisabled = true;
+        }
+
+        if (effectStatus == eEffectStatus.Cleared)
+        {
+            isDisabled = false;
         }
     }
 }

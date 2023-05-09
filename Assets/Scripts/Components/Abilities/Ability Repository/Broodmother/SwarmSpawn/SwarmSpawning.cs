@@ -15,9 +15,9 @@ public class SwarmSpawning : AbstractAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         energyManager.ChangeCurrentEnergy(-cost);
+        finishCooldownTime = Time.time + cooldown;
+        ReleaseCastEvent.Invoke();
 
         float startTime = Time.time;
         Dictionary<Swarm, float> swarmSpawnTimes = new();
@@ -58,9 +58,5 @@ public class SwarmSpawning : AbstractAbility
 
             yield return new WaitForFixedUpdate();
         }
-
-        yield return new WaitForSeconds(postCastDelay);
-
-        BreakCast();
     }
 }

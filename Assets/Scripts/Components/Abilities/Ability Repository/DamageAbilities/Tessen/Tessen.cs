@@ -19,8 +19,6 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 
     public Tessen(MonoBehaviour owner, GameObject caster, TessenData tessenData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team, BoxCollider2D collider) : base(owner, caster, tessenData, energyManager, modifierManager, turning, team)
     {
-        Type = eAbilityType.Tessen;
-        
         AttackRange = tessenData.attackRange;
         castTime = tessenData.castTime;
         impactPeriod = tessenData.impactPeriod;
@@ -34,8 +32,6 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         endCastTime = Time.time + castTime;
         finishCooldownTime = Time.time + cooldown;
 
@@ -89,15 +85,10 @@ public class Tessen : AbstractDamageAbility, ISustainableAbility
             }
 
             energyManager.ChangeCurrentEnergy(-cost * impactPeriod);
-
             ReleaseCastEvent.Invoke();
 
             yield return new WaitForSeconds(impactPeriod);
         }
-
-        yield return new WaitForSeconds(postCastDelay);
-
-        BreakCast();
     }
 
     public override void BreakCast()

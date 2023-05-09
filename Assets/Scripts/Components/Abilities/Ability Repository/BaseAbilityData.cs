@@ -4,6 +4,7 @@ using UnityEngine;
 public class BaseAbilityData : ScriptableObject
 {
     [Header("Base Ability Data")]
+    public eAbilityType abilityType;
     [Min(0f)]
     public float cooldown;
     [Min(0f)]

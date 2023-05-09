@@ -9,7 +9,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
-    [SerializeField] protected Material material;
+    [SerializeField] protected SkinnedMeshRenderer[] meshesToCloneMaterials;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
@@ -35,13 +35,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     protected virtual void Awake()
     {
-        //Temp material
-        if (material != null)
-        {
-            Material materialClone = Instantiate(material);
-            GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
-        }
-        //Temp material
+        CloneMaterials();
 
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -58,5 +52,25 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
         HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
+    }
+
+    protected void CloneMaterials()
+    {
+        if (meshesToCloneMaterials.Length == 0)
+        {
+            return;
+        }
+
+        for (int j = 0; j < meshesToCloneMaterials.Length; j++)
+        {
+            Material[] newMaterials = new Material[meshesToCloneMaterials[j].materials.Length];
+
+            for (int i = 0; i < newMaterials.Length; i++)
+            {
+                newMaterials[i] = Instantiate(meshesToCloneMaterials[j].materials[i]);
+            }
+
+            meshesToCloneMaterials[j].materials = newMaterials;
+        }
     }
 }
