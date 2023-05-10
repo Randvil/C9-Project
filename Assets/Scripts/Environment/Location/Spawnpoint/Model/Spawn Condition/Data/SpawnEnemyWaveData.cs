@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class SpawnEnemiesWaveData
+public class SpawnEnemiesWaveData : ISpawnEnemiesConditionData
 {
     public float detectPlayerRadius;
     public float spawnRadius;

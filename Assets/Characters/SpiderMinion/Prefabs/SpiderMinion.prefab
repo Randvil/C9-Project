@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 8800236748537048357}
   - component: {fileID: 920402925457481163}
   - component: {fileID: 2862467330426763811}
-  - component: {fileID: 4513868092138232053}
+  - component: {fileID: 6658567192969017801}
   m_Layer: 0
   m_Name: DissolveParticlesGraph
   m_TagString: Untagged
@@ -619,9 +619,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
   m_Bindings:
-  - {fileID: 4513868092138232053}
+  - {fileID: 6658567192969017801}
   m_VisualEffect: {fileID: 8800236748537048357}
---- !u!114 &4513868092138232053
+--- !u!114 &6658567192969017801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

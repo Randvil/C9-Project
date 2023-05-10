@@ -59,7 +59,7 @@ public class SceneObjectsCreator : Creator
             {
                 foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                 {
-                    if (once.enemyNumber != 0)
+                    if (once.enemyNumber > 0)
                     {
                         SpawnpointCreator spawnpoint = new SpawnpointCreator();
                         spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
@@ -72,7 +72,7 @@ public class SceneObjectsCreator : Creator
 
                 foreach (SpawnpointsWave wave in ld.SpawnpointsWave)
                 {
-                    if (wave.spawnWaveData.enemyPerWaveCount != 0)
+                    if (wave.spawnWaveData.enemyPerWaveCount > 0)
                     {
                         SpawnpointCreator spawnpoint = new SpawnpointCreator();
                         spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);

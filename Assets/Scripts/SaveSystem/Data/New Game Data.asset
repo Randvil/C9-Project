@@ -42,15 +42,6 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 2
       - id: 3
-        position: {x: 66.37, y: -0.28, z: 0}
-        enemyNumber: 1
-        spawnCondition: 0
-        enemyPrefab: 0
-        enemyMaterial: 0
-        spawnOnceData:
-          detectPlayerRadius: 10
-          spawnRadius: 2
-      - id: 4
         position: {x: 100, y: -0.28, z: 0}
         enemyNumber: 1
         spawnCondition: 0
@@ -59,7 +50,7 @@ MonoBehaviour:
         spawnOnceData:
           detectPlayerRadius: 10
           spawnRadius: 2
-      - id: 5
+      - id: 4
         position: {x: 120, y: -0.28, z: 0}
         enemyNumber: 1
         spawnCondition: 0
@@ -70,6 +61,17 @@ MonoBehaviour:
           spawnRadius: 2
       SpawnpointsWave:
       - id: 5
+        position: {x: 60, y: -0.28, z: 0}
+        spawnCondition: 1
+        enemyPrefab: 0
+        enemyMaterial: 0
+        spawnWaveData:
+          detectPlayerRadius: 40
+          spawnRadius: 15
+          waveCount: 3
+          enemyPerWaveCount: 1
+          timeBetweenWaves: 1
+      - id: 6
         position: {x: 41.7, y: 11.14, z: 6.98}
         spawnCondition: 1
         enemyPrefab: 1
@@ -80,7 +82,7 @@ MonoBehaviour:
           waveCount: 3
           enemyPerWaveCount: 2
           timeBetweenWaves: 7
-      - id: 6
+      - id: 7
         position: {x: 53.95, y: 11.44, z: 6.98}
         spawnCondition: 1
         enemyPrefab: 1
@@ -101,16 +103,16 @@ MonoBehaviour:
         enemyMaterial: 0
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
       - id: 2
         position: {x: 61.84, y: 0.68, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
-        enemyPrefab: 0
-        enemyMaterial: 0
+        enemyPrefab: 2
+        enemyMaterial: 2
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
       - id: 3
         position: {x: 49.15, y: 7.51, z: 1.25}
         enemyNumber: 1
@@ -119,7 +121,7 @@ MonoBehaviour:
         enemyMaterial: 0
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
       - id: 4
         position: {x: 61.84, y: 7.51, z: 1.25}
         enemyNumber: 1
@@ -128,16 +130,16 @@ MonoBehaviour:
         enemyMaterial: 0
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
       - id: 5
         position: {x: 49.15, y: 13.72, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
-        enemyPrefab: 0
-        enemyMaterial: 0
+        enemyPrefab: 2
+        enemyMaterial: 2
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
       - id: 6
         position: {x: 61.84, y: 13.72, z: 1.25}
         enemyNumber: 1
@@ -146,5 +148,59 @@ MonoBehaviour:
         enemyMaterial: 0
         spawnOnceData:
           detectPlayerRadius: 10
-          spawnRadius: 2
+          spawnRadius: 1
+      - id: 7
+        position: {x: 45, y: 13.72, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 2
+        enemyMaterial: 2
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
+      - id: 8
+        position: {x: 45, y: 7.51, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 0
+        enemyMaterial: 0
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
+      - id: 9
+        position: {x: 45, y: 0.68, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 2
+        enemyMaterial: 2
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
+      - id: 10
+        position: {x: 35, y: 0.68, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 0
+        enemyMaterial: 0
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
+      - id: 11
+        position: {x: 35, y: 7.51, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 0
+        enemyMaterial: 0
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
+      - id: 12
+        position: {x: 35, y: 13.72, z: 1.25}
+        enemyNumber: 0
+        spawnCondition: 0
+        enemyPrefab: 2
+        enemyMaterial: 2
+        spawnOnceData:
+          detectPlayerRadius: 10
+          spawnRadius: 1
       SpawnpointsWave: []

@@ -103,7 +103,7 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                 {
                     case eSpawnCondition.Once:
                         SpawnpointsOnce spawnpointsOnce = new SpawnpointsOnce(id, position, conditionType, enemyType, materialType,
-                            spawnCondition.ReturnOnceInfo());
+                            (SpawnEnemiesOnceData)spawnCondition.ReturnInfo());
                         foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                         {
                             if (once.id == spawnpointsOnce.id)
@@ -117,7 +117,7 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
 
                     case eSpawnCondition.Wave:
                         SpawnpointsWave spawnpointsWave = new SpawnpointsWave(id, position, conditionType, enemyType, materialType,
-                            spawnCondition.ReturnWaveInfo());
+                            (SpawnEnemiesWaveData)spawnCondition.ReturnInfo());
                         foreach (SpawnpointsWave wave in ld.SpawnpointsWave)
                         {
                             if (wave.id == spawnpointsWave.id)

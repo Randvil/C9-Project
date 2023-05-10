@@ -56,19 +56,19 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                 SpawnpointsOnce once = CitySpawnpointsOnce.Find(spawnpoint => spawnpoint.id == id);
                 if (once != null && once.enemyNumber > 0)
                 {
+                    Debug.Log("Once in city checked " + once.id);
                     return true;
-                }
-                    
+                }     
             }
 
             foreach (int id in spawnpointsID.CityLocation)
             {
                 SpawnpointsWave wave = CitySpawnpointsWave.Find(spawnpoint => spawnpoint.id == id);
-                if (wave != null && wave.spawnWaveData.enemyPerWaveCount > 0)
+                if (wave != null && wave.spawnWaveData.enemyPerWaveCount != 0)
                 {
+                    Debug.Log("Wave in city checked " + wave.id);
                     return true;
                 }
-
             }
         }
 
@@ -77,21 +77,21 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
             foreach (int id in spawnpointsID.ArcadeCenter)
             {
                 SpawnpointsOnce once = ArcadeCenterOnce.Find(spawnpoint => spawnpoint.id == id);
-                if (once.enemyNumber > 0)
+                if (once != null && once.enemyNumber > 0)
                 {
+                    Debug.Log("Once in arcade checked " + once.id);
                     return true;
                 }
-
             }
 
             foreach (int id in spawnpointsID.ArcadeCenter)
             {
                 SpawnpointsWave wave = ArcadeCenterWave.Find(spawnpoint => spawnpoint.id == id);
-                if (wave.spawnWaveData.enemyPerWaveCount > 0)
+                if (wave != null && wave.spawnWaveData.enemyPerWaveCount > 0)
                 {
+                    Debug.Log("Wave in city checked " + wave.id);
                     return true;
                 }
-
             }
         }
 
@@ -100,6 +100,8 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
 
     public bool EntranceOpen()
     {
+        if (!AnyEnemiesAlive())
+            EntranceOpenEvent.Invoke();
         return !AnyEnemiesAlive();
     }
 }

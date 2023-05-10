@@ -21,14 +21,9 @@ public class SpawnEnemyOnce : SpawnEnemyCondition
         spawnEnemyCount = 0;
     }
 
-    public override SpawnEnemiesOnceData ReturnOnceInfo()
+    public override ISpawnEnemiesConditionData ReturnInfo()
     {
         return new SpawnEnemiesOnceData(detectPlayerRadius, spawnRadius);
-    }
-
-    public override SpawnEnemiesWaveData ReturnWaveInfo()
-    {
-        throw new System.NotImplementedException();
     }
 
     public override void Spawn()

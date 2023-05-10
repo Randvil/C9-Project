@@ -7,9 +7,7 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
     public int spawnEnemyCount;
 
     public abstract void Spawn();
-    public abstract SpawnEnemiesWaveData ReturnWaveInfo();
-    public abstract SpawnEnemiesOnceData ReturnOnceInfo();
-
+    public abstract ISpawnEnemiesConditionData ReturnInfo();
     public int SpawnEnemyCount()
     {
         return spawnEnemyCount;
