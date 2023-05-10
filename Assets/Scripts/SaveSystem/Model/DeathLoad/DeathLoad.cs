@@ -11,6 +11,10 @@ public class DeathLoad: IDeathLoad
         deathManager.DeathEvent.AddListener(RewriteData);
     }
 
+    //public DeathLoad()
+    //{
+    //}
+
     public void RewriteData()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
@@ -23,8 +27,26 @@ public class DeathLoad: IDeathLoad
 
     public void LoadCheckpoint()
     {
+        LoadSceneCoroutine();
+    }
+
+    private void LoadSceneCoroutine()
+    {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
-        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
+        //yield return new WaitForSeconds(2f);
+
+        switch (gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                SceneManager.LoadScene("CityLocation");
+                break;
+            case eSceneName.ArcadeCenter:
+                SceneManager.LoadScene("ArcadeCenter");
+                break;
+            case eSceneName.BossLocation:
+                SceneManager.LoadScene("BossLocation");
+                break;
+        }
     }
 }

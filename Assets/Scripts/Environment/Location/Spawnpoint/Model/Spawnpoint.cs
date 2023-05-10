@@ -11,105 +11,126 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
     private int id;
     private Vector3 position;
 
-    //max enemies spawnpoint can spawn
-    private int enemyNumber;
-    private float timeCountdown;
-    private GameObject enemyPrefab;
-    private Material enemyMaterial;
+    private GameObject EnemyPrefab;
+    private eEnemyPrefab enemyType;
 
-    private float spawnRadius;
-    private string condition;
-    private string enemyName;
-    private int waveCount;
+    private Material material;
+    private eEnemyMaterials materialType;
 
     private ISpawnEnemyCondition spawnCondition;
+    private eSpawnCondition conditionType;
 
-    public int Id { get => id; set => id = value; }
-    public Vector3 Position { get => position; set => position = value; }
-    public int EnemyNumber { get => enemyNumber; set => enemyNumber = value; }
-    public float TimeCountdown { get => timeCountdown; set => timeCountdown = value; }
-    public GameObject EnemyPrefab { get => enemyPrefab; set => enemyPrefab = value; }
-    public float SpawnRadius { get => spawnRadius; set => spawnRadius = value; }
-    public string Condition { get => condition; set => condition = value; }
-    public string EnemyName { get => enemyName; set => enemyName = value; }
-    public int WaveCount { get => waveCount; set => waveCount = value; }
-    public Material EnemyMaterial { get => enemyMaterial; set => enemyMaterial = value; }
-
-    public void StartSpawnpoint(int id, Vector3 position, int enemyNumber, float timeCountdown, string enemyPrefab, 
-        float spawnRadius, string condition, int waveCount)
+    public void SetSpawnpointInfo(int id, Vector3 position, eEnemyPrefab enemyPrefab, eEnemyMaterials enemyMaterial,
+        eSpawnCondition spawnCondition)
     {
-        Id = id;
-        Position = position;
-        gameObject.transform.position = Position;
-        EnemyNumber = enemyNumber;
-        TimeCountdown = timeCountdown;
-        EnemyName = enemyPrefab;
-        WaveCount = waveCount;
+        this.id = id;
+        this.position = position;
+        gameObject.transform.position = position;
+        enemyType = enemyPrefab;
+        materialType = enemyMaterial;
+        conditionType = spawnCondition;
 
         switch (enemyPrefab)
         {
-            case "SpiderBoy":
+            case eEnemyPrefab.SpiderBoy:
                 EnemyPrefab = prefabsData.spiderBoyPrefab;
-                EnemyMaterial = prefabsData.spiderBoyMaterial;
                 break;
-            case "SpiderMinion":
+            case eEnemyPrefab.SpiderMinion:
                 EnemyPrefab = prefabsData.spiderPrefab;
-                EnemyMaterial = prefabsData.spiderMaterial;
                 break;
-            case "FlyingEye":
+            case eEnemyPrefab.FlyingEye:
                 EnemyPrefab = prefabsData.flyingEyePrefab;
-                EnemyMaterial = prefabsData.flyingEyeMaterial;
                 break;
-            case "Boss":
+            case eEnemyPrefab.Broodmother:
                 EnemyPrefab = prefabsData.bossPrefab;
-                EnemyMaterial = prefabsData.bossMaterial;
                 break;
         }
 
-        SpawnRadius = spawnRadius;
-        Condition = condition;
-
-        switch (condition)
+        switch (enemyMaterial)
         {
-            case "once":
-                spawnCondition = new SpawnEnemyOnce(spawnRadius, this, EnemyPrefab, EnemyMaterial);
+            case eEnemyMaterials.DissolveSpiderBoyMAT:
+                material = prefabsData.dissolveSpiderBoyMaterial;
                 break;
-            case "killTime":
-                spawnCondition = new SpawnEnemyKillTime(spawnRadius, this, enemyNumber, EnemyPrefab, timeCountdown, EnemyMaterial);
+            case eEnemyMaterials.DissolveSpiderMinionMAT:
+                material = prefabsData.dissolveSpiderMaterial;
                 break;
-            case "wave":
-                spawnCondition = new SpawnEnemyWave(spawnRadius, this, EnemyPrefab, waveCount, enemyNumber, timeCountdown, EnemyMaterial);
+            case eEnemyMaterials.DissolveFlyingEyeMAT:
+                material = prefabsData.dissolveFlyingEyeMaterial;
+                break;
+            case eEnemyMaterials.DissolveBossMAT:
+                material = prefabsData.dissolveBossMaterial;
                 break;
         }
 
+    }
+
+    public void SetSpawnpointCondition(float detectPlayerRadius, float spawnRadius)
+    {
+        spawnCondition = new SpawnEnemyOnce(detectPlayerRadius, spawnRadius, this, EnemyPrefab, material);
+        spawnCondition.Spawn();
+    }
+
+    public void SetSpawnpointCondition(float detectPlayerRadius, float spawnRadius, int waveCount, int enemyPerWaveCount, 
+        float timeBetweenWaves)
+    {
+        spawnCondition = new SpawnEnemyWave(detectPlayerRadius, spawnRadius, this, EnemyPrefab, material, waveCount, 
+            enemyPerWaveCount, timeBetweenWaves);
         spawnCondition.Spawn();
     }
 
     public void SaveData(Data data)
     {
-        SpawnpointData spawnpointData = new SpawnpointData(Id, Position, enemyNumber, EnemyName, SpawnRadius, Condition, TimeCountdown, WaveCount);
+        string currentSceneName = "";
+
         foreach (LocationData ld in data.locations)
         {
-            if (ld.sceneName == SceneManager.GetActiveScene().name)
+            switch (ld.sceneName)
             {
-                foreach (SpawnpointData sp in ld.spawnpoints)
+                case eSceneName.CityLocation:
+                    currentSceneName = "CityLocation";
+                    break;
+                case eSceneName.ArcadeCenter:
+                    currentSceneName = "ArcadeCenter";
+                    break;
+                case eSceneName.BossLocation:
+                    currentSceneName = "BossLocation";
+                    break;
+            }
+
+            if (currentSceneName == SceneManager.GetActiveScene().name)
+            {
+                switch (conditionType)
                 {
-                    if (sp.id == spawnpointData.id)
-                    {
-                        int enemiesAlive;
-                        if (Condition == "wave")
+                    case eSpawnCondition.Once:
+                        SpawnpointsOnce spawnpointsOnce = new SpawnpointsOnce(id, position, conditionType, enemyType, materialType,
+                            (SpawnEnemiesOnceData)spawnCondition.ReturnInfo());
+                        foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                         {
-                            enemiesAlive = spawnpointData.enemyNumber * waveCount - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-                            if (enemiesAlive == 0)
-                                sp.enemyNumber = 0;
-                        } else
+                            if (once.id == spawnpointsOnce.id)
+                            {
+                                int enemiesAlive;
+                                enemiesAlive = 1 - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                                once.enemyNumber = enemiesAlive;
+                            }
+                        }
+                        break;
+
+                    case eSpawnCondition.Wave:
+                        SpawnpointsWave spawnpointsWave = new SpawnpointsWave(id, position, conditionType, enemyType, materialType,
+                            (SpawnEnemiesWaveData)spawnCondition.ReturnInfo());
+                        foreach (SpawnpointsWave wave in ld.SpawnpointsWave)
                         {
-                            enemiesAlive = spawnpointData.enemyNumber - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-                            sp.enemyNumber = enemiesAlive;
-                        }                           
-                    }
+                            if (wave.id == spawnpointsWave.id)
+                            {
+                                int enemiesAlive;
+                                enemiesAlive = wave.spawnWaveData.enemyPerWaveCount * wave.spawnWaveData.waveCount - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                                if (enemiesAlive == 0)
+                                    wave.spawnWaveData.enemyPerWaveCount = 0;
+                            }
+                        }
+                        break;
                 }
-            }    
+            }
         }
     }
 

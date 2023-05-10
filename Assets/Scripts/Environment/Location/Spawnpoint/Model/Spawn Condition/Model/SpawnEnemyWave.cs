@@ -4,27 +4,33 @@ using UnityEngine;
 
 public class SpawnEnemyWave : SpawnEnemyCondition
 {
+    private float detectPlayerRadius;
     private float spawnRadius;
     private Spawnpoint spawnpoint;
     private GameObject enemyPrefab;
     private Material material;
-    //how many waves of enemies
     private int waveCount;
-    //enemies per wave
     private int enemyPerWaveCount;
     private float timeBetweenWaves;
     private float currCountdownValue;
 
-    public SpawnEnemyWave(float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab, int waveCount, int enemyPerWaveCount, float timeBetweenWaves, Material material)
+    public SpawnEnemyWave(float detectPlayerRadius, float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab, 
+        Material material, int waveCount, int enemyPerWaveCount, float timeBetweenWaves)
     {
+        this.detectPlayerRadius = detectPlayerRadius;
         this.spawnRadius = spawnRadius;
         this.spawnpoint = spawnpoint;
         this.enemyPrefab = enemyPrefab;
+        this.material = material;
         this.waveCount = waveCount;
         this.enemyPerWaveCount = enemyPerWaveCount;
         this.timeBetweenWaves = timeBetweenWaves;
-        this.material = material;
         spawnEnemyCount = 0;
+    }
+
+    public override ISpawnEnemiesConditionData ReturnInfo()
+    {
+        return new SpawnEnemiesWaveData(detectPlayerRadius, spawnRadius, waveCount, enemyPerWaveCount, timeBetweenWaves);
     }
 
     public override void Spawn()
@@ -34,7 +40,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
 
     public IEnumerator SpawnCoroutine(float timeBetweenWaves)
     {
-        yield return new WaitUntil(() => InRadius(spawnpoint, spawnRadius));
+        yield return new WaitUntil(() => InRadius(spawnpoint, detectPlayerRadius));
         spawnpoint.StartCoroutine(SpawnOneWave());
 
         for (int i = 1; i < waveCount; i++)
@@ -51,7 +57,7 @@ public class SpawnEnemyWave : SpawnEnemyCondition
         for (int i = 0; i < enemyPerWaveCount; i++)
         {
             yield return new WaitForSeconds(0.8f);
-            SpawnOneEnemy(enemyPrefab, spawnpoint, material);
+            SpawnOneEnemy(enemyPrefab, spawnpoint, material, spawnRadius);
         }
     }
 

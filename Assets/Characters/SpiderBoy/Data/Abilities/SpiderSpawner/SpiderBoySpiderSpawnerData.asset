@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6dc5479a8e6574ebd7430cc4a6151d, type: 3}
   m_Name: SpiderBoySpiderSpawnerData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 5
   preCastDelay: 0.5
   postCastDelay: 0
