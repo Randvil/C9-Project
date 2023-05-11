@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +11,14 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
     [SerializeField] protected SkinnedMeshRenderer[] meshesToCloneMaterials;
+    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
-    [SerializeField] protected TurningViewData turningViewData;
     [SerializeField] protected HealthManagerData healthManagerData;
     [SerializeField] protected EffectManagerData effectManagerData;
+    [SerializeField] protected TurningViewData turningViewData;
+    [SerializeField] protected DeathViewData deathViewData;
 
     public BoxCollider2D Collider { get; protected set; }
     public Rigidbody2D Rigidbody { get; protected set; }
@@ -32,6 +35,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     public TurningView TurningView { get; protected set; }
     public AnimationAndSoundMovementView MovementView { get; protected set; }
     public IHealthBarView HealthBarView { get; protected set; }
+    public DeathView DeathView { get; protected set; }
 
     protected virtual void Awake()
     {
@@ -52,6 +56,9 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
         HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
+        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+
+        DeathManager.DeathEvent.AddListener(OnDeath);
     }
 
     protected void CloneMaterials()
@@ -72,5 +79,10 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
             meshesToCloneMaterials[j].materials = newMaterials;
         }
+    }
+
+    protected void OnDeath()
+    {
+        Destroy(gameObject, 1.5f);
     }
 }

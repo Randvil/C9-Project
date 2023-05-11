@@ -6,11 +6,13 @@ public class ClimbView
 {
     private IClimb climb;
     private Animator animator;
+    private AudioSource audioSource;
 
-    public ClimbView(IClimb climb, Animator animator)
+    public ClimbView(IClimb climb, Animator animator, AudioSource audioSource)
     {
         this.climb = climb;
         this.animator = animator;
+        this.audioSource = audioSource;
 
         climb.StartClimbEvent.AddListener(StartClimb);
         climb.BreakClimbEvent.AddListener(BreakClimb);
@@ -31,7 +33,20 @@ public class ClimbView
 
     public void OnChangeClimbState()
     {
-        animator.SetFloat("ClimbSpeed", climb.ClimbSpeed);
+        float speed = climb.ClimbSpeed;
+
+        if (Mathf.Abs(speed) > 0f)
+        {
+            Debug.Log("Play climb sound");
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.Log("Pause climb sound");
+            audioSource.Pause();
+        }
+
+        animator.SetFloat("ClimbSpeed", speed);
     }
 
 }

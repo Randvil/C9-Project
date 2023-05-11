@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDefensiveJumpData", menuName = "Data/Abilities/New Defensive Jump Data")]
+[CreateAssetMenu(fileName = "NewDefensiveJumpData", menuName = "Data/Abilities/Defensive Jump/New Defensive Jump Data")]
 public class DefensiveJumpData : BaseAbilityData
 {
     [Header("Defensive Jump Data")]

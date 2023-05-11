@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityType: 3
   cooldown: 5
-  preCastDelay: 0
+  preCastDelay: 1.5
   postCastDelay: 0
   cost: 3
   damageData: {fileID: 11400000, guid: 58ba08d6b2ebc1f409d3e49dd6fe230a, type: 2}

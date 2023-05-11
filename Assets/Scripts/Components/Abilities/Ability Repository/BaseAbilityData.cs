@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewBaseAbilityData", menuName = "Data/Abilities/New Base Ability Data")]
+[CreateAssetMenu(fileName = "NewBaseAbilityData", menuName = "Data/Abilities/Base Ability/New Base Ability Data")]
 public class BaseAbilityData : ScriptableObject
 {
     [Header("Base Ability Data")]

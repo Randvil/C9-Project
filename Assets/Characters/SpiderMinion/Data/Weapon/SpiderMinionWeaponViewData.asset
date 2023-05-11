@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef752d7396432374f814e0e46aeea2a9, type: 3}
   m_Name: SpiderMinionWeaponViewData
   m_EditorClassIdentifier: 
-  startAttackAudioClip: {fileID: 8300000, guid: d86819506d72c074f9d36fa01fcdfe53, type: 3}
-  releaseAttackAudioClip: {fileID: 8300000, guid: 3506d789146ebf14b896d958074f37ee, type: 3}
+  startAttackAudioClip: {fileID: 0}
+  releaseAttackAudioClip: {fileID: 8300000, guid: 495ca69ae5ecbef4bbe981915ab6fdd8, type: 3}

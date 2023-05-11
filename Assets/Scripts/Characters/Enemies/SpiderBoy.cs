@@ -5,7 +5,6 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     [Header("SpiderBoy Prefab Components")]
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private Transform spiderSpawnPoint;
-    [SerializeField] private AudioSource sharedAudioSource;
 
     [Header("SpiderBoy Data")]
     [SerializeField] private EnergyManagerData energyManagerData;
@@ -47,27 +46,20 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         spiderSpawnerView = new CreatureSpawnerView(spiderSpawnerViewData, SpiderSpawnAbility, sharedAudioSource);
 
-        currentBehavior = new WatchmanStrategy(this);
+        currentBehavior = new WatchmanStrategy(this, this);
         currentBehavior.Activate();
 
-        DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
-    private void Update()
-    {
-        currentBehavior.LogicUpdate();
-    }
+    //private void Update()
+    //{
+    //    currentBehavior.LogicUpdate();
+    //}
 
-    private void FixedUpdate()
-    {
-        currentBehavior.PhysicsUpdate();
-    }
-
-    private void OnDeath()
-    {
-        currentBehavior.Deactivate();
-        Destroy(gameObject, 1.2f);
-    }
+    //private void FixedUpdate()
+    //{
+    //    currentBehavior.PhysicsUpdate();
+    //}
 }

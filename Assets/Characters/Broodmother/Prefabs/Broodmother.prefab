@@ -1016,15 +1016,16 @@ MonoBehaviour:
   avatar: {fileID: 1281780840}
   healthBarSlider: {fileID: 281655481}
   meshesToCloneMaterials: []
+  sharedAudioSource: {fileID: 8022143023300157512}
   initialTeam: 1
-  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: e0c04078e4708674788a7013e0dbbe31, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
+  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
+  deathViewData: {fileID: 11400000, guid: bae40afa3d5b0354095d3980103575c8, type: 2}
   webSpawnPoints:
   - {fileID: 4658742498733326578}
   - {fileID: 8597955536379927155}
   movementAudioSource: {fileID: 7845183630836557568}
-  sharedAudioSource: {fileID: 8022143023300157512}
   damageHandlerWithShieldsData: {fileID: 11400000, guid: 468dba08536c3ac4d98b4a403cc0260e, type: 2}
   shieldManagerData: {fileID: 11400000, guid: 14d743afb94ce764d8c9838e88262050, type: 2}
   energyManagerData: {fileID: 11400000, guid: b84fbca73868aeb43b93b766dfa3c394, type: 2}

@@ -6,6 +6,6 @@ public class StandingState : MovableState
     {
         base.Enter();
 
-        Move();
+        //Move();
     }
 }
