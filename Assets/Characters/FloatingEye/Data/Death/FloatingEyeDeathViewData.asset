@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FloatingEyeDeathViewData
   m_EditorClassIdentifier: 
   animatorParameter: IsDying
-  deathAudioClip: {fileID: 8300000, guid: d86819506d72c074f9d36fa01fcdfe53, type: 3}
+  deathAudioClip: {fileID: 0}

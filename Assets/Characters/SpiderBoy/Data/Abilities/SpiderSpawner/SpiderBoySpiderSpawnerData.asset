@@ -19,4 +19,4 @@ MonoBehaviour:
   cost: 0
   creaturePrefab: {fileID: 9048720266790035559, guid: 766f34aa5b6b8d8468736feb8f185304, type: 3}
   creatureCount: 3
-  spawnDelay: 1.5
+  spawnDelay: 1
