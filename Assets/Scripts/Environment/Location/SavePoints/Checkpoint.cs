@@ -24,7 +24,19 @@ public class Checkpoint : SavePoint
                 savableObject.SaveData(gameData.CheckpointData);
             }
 
-            gameData.CheckpointData.latestScene = SceneManager.GetActiveScene().name;
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "CityLocation" :
+                    gameData.CheckpointData.latestScene = eSceneName.CityLocation;
+                    break;
+                case "ArcadeCenter":
+                    gameData.CheckpointData.latestScene = eSceneName.ArcadeCenter;
+                    break;
+                case "BossLocation":
+                    gameData.CheckpointData.latestScene = eSceneName.BossLocation;
+                    break;
+            }
+
         }
         catch (Exception e) {
             Debug.LogError("Couldn't save \n" + e);

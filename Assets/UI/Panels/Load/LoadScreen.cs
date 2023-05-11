@@ -1,31 +1,54 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class LoadScreen : MonoBehaviour, IPanel
 {
     private PanelManager panelManager;
+
+    [SerializeField] private int indOfThisPanel;
+
+    [SerializeField] bool needToStartWith = true;
+
+    private Label logo;
+
+    const string hiddenRightClass = "hidden-right";
+    const string hiddenLeftClass = "hidden-left";
 
     public void SetInput(PlayerInput input) { }
 
     void Awake()
     {
         panelManager = GetComponentInParent<PanelManager>();
+        logo = GetComponent<UIDocument>().rootVisualElement.Q<Label>("logo");
 
-        panelManager.SwitchTo(4, false, false); // To this load screen
+        if (needToStartWith)
+            BeginOfScene();
+    }
+    
+    IEnumerator Start()
+    {      
+        // Если вообще не ждать, то будет дёргано
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
+
+        logo.AddToClassList(hiddenRightClass);
+
+        if (needToStartWith)
+            panelManager.SwitchTo(0, true, true); // To HUD
     }
 
-    IEnumerator Start()
+    public void BeginOfScene()
     {
-        // Если вообще не ждать, то будет дёргано
-        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration); 
-
-        panelManager.SwitchTo(0, true, true); // To HUD
+        panelManager.SwitchTo(indOfThisPanel, false, false); // To this load screen      
     }
 
     public void EndOfScene()
     {
-        panelManager.SwitchTo(4);
-        // mb some code for cool animation
+        logo.RemoveFromClassList(hiddenRightClass);
+        logo.AddToClassList(hiddenLeftClass); 
+        panelManager.SwitchTo(indOfThisPanel);
+              
+        logo.RemoveFromClassList(hiddenLeftClass);
     }
 }

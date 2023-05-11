@@ -37,12 +37,10 @@ public class ClimbView
 
         if (Mathf.Abs(speed) > 0f)
         {
-            Debug.Log("Play climb sound");
             audioSource.Play();
         }
         else
         {
-            Debug.Log("Pause climb sound");
             audioSource.Pause();
         }
 

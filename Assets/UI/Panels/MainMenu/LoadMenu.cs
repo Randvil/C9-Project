@@ -39,21 +39,45 @@ public class LoadMenu : MonoBehaviour
 
     private void LoadSave()
     {
-        panelManager.SwitchTo(2);
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene();
 
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
-        StartCoroutine(LoadSceneCoroutine(gameData.CheckpointData.latestScene));
+
+        switch (gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                StartCoroutine(LoadSceneCoroutine("CityLocation"));
+                break;
+            case eSceneName.ArcadeCenter:
+                StartCoroutine(LoadSceneCoroutine("ArcadeCenter"));
+                break;
+            case eSceneName.BossLocation:
+                StartCoroutine(LoadSceneCoroutine("BossLocation"));
+                break;
+        }
+        
     }
 
     public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
 
     public void NewGame()
     {
-        panelManager.SwitchTo(2, true, false); // To load screen
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
 
         newGameSave.CreateNewGameSave();
-        StartCoroutine(LoadSceneCoroutine(newGameSave.gameData.CheckpointData.latestScene));
+        switch (newGameSave.gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                StartCoroutine(LoadSceneCoroutine("CityLocation"));
+                break;
+            case eSceneName.ArcadeCenter:
+                StartCoroutine(LoadSceneCoroutine("ArcadeCenter"));
+                break;
+            case eSceneName.BossLocation:
+                StartCoroutine(LoadSceneCoroutine("BossLocation"));
+                break;
+        }
     }
 
     private IEnumerator LoadSceneCoroutine(string sceneName)

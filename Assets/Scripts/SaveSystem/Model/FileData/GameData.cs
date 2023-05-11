@@ -24,42 +24,62 @@ public class GameData
 [Serializable]
 public class LocationData
 {
-    public string sceneName;
+    public eSceneName sceneName;
 
     //data about spawnpoints on location
-    public List<SpawnpointData> spawnpoints = new();
+    public List<SpawnpointsOnce> SpawnpointsOnce = new();
+    public List<SpawnpointsWave> SpawnpointsWave = new();
 
-    public LocationData(string sceneName, List<SpawnpointData> spawnpoints)
+    public LocationData(eSceneName sceneName, List<SpawnpointsOnce> spawnpointsOnce, List<SpawnpointsWave> spawnpointsWave)
     {
         this.sceneName = sceneName;
-        this.spawnpoints = spawnpoints;
+        SpawnpointsOnce = spawnpointsOnce;
+        SpawnpointsWave = spawnpointsWave;
     }
 }
 
 [Serializable]
-public class SpawnpointData
+public class SpawnpointsOnce
 {
     public int id;
     public Vector3 position;
-    public int enemyNumber;
-    public string enemyPrefabName;
-    public float spawnRadius;
-    public string condition;
+    public int enemyNumber = 1;
+    public eSpawnCondition spawnCondition = eSpawnCondition.Once;
+    public eEnemyPrefab enemyPrefab;
+    public eEnemyMaterials enemyMaterial;
+    public SpawnEnemiesOnceData spawnOnceData;
 
-    public float timeCountdown;
-    public int waveCount;
-
-    public SpawnpointData(int id, Vector3 position, int enemyNumber, string enemyPrefabName, float spawnRadius, string condition,
-        float timeCountdown, int waveCount)
+    public SpawnpointsOnce(int id, Vector3 position, eSpawnCondition spawnCondition, eEnemyPrefab enemyPrefab, 
+        eEnemyMaterials enemyMaterial, SpawnEnemiesOnceData spawnOnceData)
     {
         this.id = id;
         this.position = position;
-        this.enemyNumber = enemyNumber;
-        this.enemyPrefabName = enemyPrefabName;
-        this.spawnRadius = spawnRadius;
-        this.condition = condition;
-        this.timeCountdown = timeCountdown;
-        this.waveCount = waveCount;
+        this.spawnCondition = spawnCondition;
+        this.enemyPrefab = enemyPrefab;
+        this.enemyMaterial = enemyMaterial;
+        this.spawnOnceData = spawnOnceData;
+    }
+}
+
+[Serializable]
+public class SpawnpointsWave
+{
+    public int id;
+    public Vector3 position;
+    public eSpawnCondition spawnCondition = eSpawnCondition.Wave;
+    public eEnemyPrefab enemyPrefab;
+    public eEnemyMaterials enemyMaterial;
+    public SpawnEnemiesWaveData spawnWaveData;
+
+    public SpawnpointsWave(int id, Vector3 position, eSpawnCondition spawnCondition, eEnemyPrefab enemyPrefab, 
+        eEnemyMaterials enemyMaterial, SpawnEnemiesWaveData spawnWaveData)
+    {
+        this.id = id;
+        this.position = position;
+        this.spawnCondition = spawnCondition;
+        this.enemyPrefab = enemyPrefab;
+        this.enemyMaterial = enemyMaterial;
+        this.spawnWaveData = spawnWaveData;
     }
 }
 
@@ -82,7 +102,7 @@ public class Data
     public float playerHealth;
     public float playerEnergy;
     public Vector3 position;
-    public string latestScene;
+    public eSceneName latestScene;
     public List<AbilityPair> learnedAbilities;
 
     public List<LocationData> locations = new();

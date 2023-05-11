@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a07ae5fb5b0924e8720fa17d8078fc, type: 3}
   m_Name: SpiderMinionOffensiveJumpViewData
   m_EditorClassIdentifier: 
-  animatorParameter: IsUsingAbility
-  startCastSoundEffect: {fileID: 0}
+  animatorParameter: IsUsingOffensiveJump
+  startCastSoundEffect: {fileID: 8300000, guid: d86819506d72c074f9d36fa01fcdfe53, type: 3}
   releaseCastSoundEffect: {fileID: 0}
   breakCastSoundEffect: {fileID: 0}

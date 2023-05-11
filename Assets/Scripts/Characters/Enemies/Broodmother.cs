@@ -46,8 +46,8 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         set
         {
             document = value;
-            shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
-            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "healthBar");
+            shieldBarView = new BroodmotherHealthBar(Document, ShieldManager, DeathManager, "shieldBar");
+            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "broodmotherHealthBar");
         }
     }
 

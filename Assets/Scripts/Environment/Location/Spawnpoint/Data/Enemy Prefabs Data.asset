@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderPrefab: {fileID: 9048720266790035559, guid: 766f34aa5b6b8d8468736feb8f185304, type: 3}
   spiderBoyPrefab: {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
-  flyingEyePrefab: {fileID: 0}
+  flyingEyePrefab: {fileID: 5726873128067666410, guid: 9f1846d6783953d4185d97dbe51a0dcd, type: 3}
   bossPrefab: {fileID: 9048720266790035559, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
-  spiderBoyMaterial: {fileID: 2100000, guid: 365f0abc06c4fe24a9c92536aa7546a3, type: 2}
-  spiderMaterial: {fileID: 2100000, guid: 3ae9e876e75a356449d24ddfce6aae8e, type: 2}
-  flyingEyeMaterial: {fileID: 0}
-  bossMaterial: {fileID: 0}
+  dissolveSpiderBoyMaterial: {fileID: 2100000, guid: 365f0abc06c4fe24a9c92536aa7546a3, type: 2}
+  dissolveSpiderMaterial: {fileID: 2100000, guid: d36972801abd993489faffe1d429b1f8, type: 2}
+  dissolveFlyingEyeMaterial: {fileID: 2100000, guid: 63a02c802270a0449a3e255c4227c4a2, type: 2}
+  dissolveBossMaterial: {fileID: 2100000, guid: ad1a2fe27fdd99e4daa869b917c453ff, type: 2}

@@ -38,7 +38,7 @@ public class PlayerInterface : IPlayerInterface, IHealthBarView
     {
         VisualElement root = uiDocument.rootVisualElement;
 
-        healthBar = root.Q<ProgressBar>("healthBar");
+        healthBar = root.Q<ProgressBar>("playerHealthBar");
         hpLabel = root.Q<Label>("hpLabel");
         energyBar = root.Q<RadialFill>("energyBar");
 
