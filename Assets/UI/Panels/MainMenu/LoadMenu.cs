@@ -39,7 +39,7 @@ public class LoadMenu : MonoBehaviour
 
     private void LoadSave()
     {
-        panelManager.SwitchTo(2);
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene();
 
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();

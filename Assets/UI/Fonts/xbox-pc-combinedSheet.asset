@@ -99,21 +99,21 @@ MonoBehaviour:
     m_Name: xbox-pc-combinedSheet_3
     m_HashCode: 529425144
   - m_ElementType: 2
-    m_Unicode: 15857162
+    m_Unicode: 65534
     m_GlyphIndex: 4
     m_Scale: 1.5
     m_Name: xbox-pc-combinedSheet_4
     m_HashCode: 529425151
   - m_ElementType: 2
-    m_Unicode: 65534
+    m_Unicode: 15857167
     m_GlyphIndex: 5
-    m_Scale: 1
+    m_Scale: 2
     m_Name: xbox-pc-combinedSheet_5
     m_HashCode: 529425150
   - m_ElementType: 2
-    m_Unicode: 65534
+    m_Unicode: 15857162
     m_GlyphIndex: 6
-    m_Scale: 1
+    m_Scale: 2
     m_Name: xbox-pc-combinedSheet_6
     m_HashCode: 529425149
   - m_ElementType: 2
@@ -285,9 +285,9 @@ MonoBehaviour:
     m_Name: xbox-pc-combinedSheet_36
     m_HashCode: 291160526
   - m_ElementType: 2
-    m_Unicode: 65534
+    m_Unicode: 15857679
     m_GlyphIndex: 35
-    m_Scale: 1
+    m_Scale: 3
     m_Name: xbox-pc-combinedSheet_37
     m_HashCode: 291160527
   - m_ElementType: 2
@@ -400,8 +400,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -64
-      m_HorizontalBearingY: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 90
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 640
@@ -415,8 +415,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -64
-      m_HorizontalBearingY: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 90
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 768
@@ -850,8 +850,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -64
-      m_HorizontalBearingY: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
