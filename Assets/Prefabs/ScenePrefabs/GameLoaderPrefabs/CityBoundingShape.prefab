@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4490963565382592115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4490963565382592117}
+  - component: {fileID: 4490963565382592116}
+  m_Layer: 0
+  m_Name: CityBoundingShape
+  m_TagString: BoundingShape
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4490963565382592117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490963565382592115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.26, y: 10.11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &4490963565382592116
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490963565382592115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 15.167584, y: -1.4036102}
+      - {x: 20.211742, y: -1.5247116}
+      - {x: 20.38641, y: -8.139812}
+      - {x: 29.665518, y: -8.235487}
+      - {x: 38.259224, y: -10.18648}
+      - {x: 169.36775, y: -10.2791195}
+      - {x: 169.47058, y: -2.7334938}
+      - {x: 218.22276, y: -2.0216932}
+      - {x: 218.33333, y: 7.930357}
+      - {x: -9.408259, y: 6.899811}
+      - {x: -9.402519, y: 0.0028897524}
+      - {x: -4.8370943, y: 0.09590244}
+      - {x: -4.8456855, y: -0.56347466}
+      - {x: -2.8303003, y: -0.51070404}
+      - {x: 5.422547, y: -0.43305397}
+      - {x: 7.1904397, y: -0.41864777}
+      - {x: 7.1325703, y: 0.17513657}
+      - {x: 10.461831, y: 0.30264568}
+      - {x: 11.117371, y: 0.27729535}
+      - {x: 11.728042, y: 0.26761556}
+      - {x: 15.116792, y: 0.22359776}
