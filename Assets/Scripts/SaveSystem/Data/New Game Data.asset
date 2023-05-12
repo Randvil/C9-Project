@@ -151,7 +151,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 7
         position: {x: 45, y: 13.72, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 2
         enemyMaterial: 2
@@ -160,7 +160,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 8
         position: {x: 45, y: 7.51, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 0
         enemyMaterial: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 9
         position: {x: 45, y: 0.68, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 2
         enemyMaterial: 2
@@ -178,7 +178,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 10
         position: {x: 35, y: 0.68, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 0
         enemyMaterial: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 11
         position: {x: 35, y: 7.51, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 0
         enemyMaterial: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
           spawnRadius: 1
       - id: 12
         position: {x: 35, y: 13.72, z: 1.25}
-        enemyNumber: 0
+        enemyNumber: -1
         spawnCondition: 0
         enemyPrefab: 2
         enemyMaterial: 2
