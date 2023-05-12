@@ -8,7 +8,7 @@ public class MovableState : TurnableState
     {
         base.Enter();
 
-        //Move();
+        Move();
     }
 
     public override void Exit()

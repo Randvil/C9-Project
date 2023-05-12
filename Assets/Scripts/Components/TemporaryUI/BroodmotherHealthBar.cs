@@ -15,7 +15,7 @@ class BroodmotherHealthBar : HealthBarUITK
 
         healthBar.value = healthManager.Health.currentHealth / healthManager.Health.maxHealth;
 
-        root.style.display = DisplayStyle.Flex;
+        this.root.style.display = DisplayStyle.Flex;
     }
 
     public override void OnCurrentHealthChange(Health health)

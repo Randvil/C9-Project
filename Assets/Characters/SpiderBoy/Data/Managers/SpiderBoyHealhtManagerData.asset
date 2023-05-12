@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpiderBoyHealhtManagerData
   m_EditorClassIdentifier: 
   initialHealth:
-    maxHealth: 60
-    currentHealth: 60
+    maxHealth: 100
+    currentHealth: 100

@@ -18,4 +18,4 @@ MonoBehaviour:
   postCastDelay: 0
   cost: 10
   ascensionAreaPrefab: {fileID: 6165835155305148254, guid: f16d4c6b5ca5e824991bc01f4b6f1df5, type: 3}
-  areaSpawnDistance: 5
+  areaSpawnDistance: 3

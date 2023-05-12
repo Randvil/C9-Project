@@ -256,7 +256,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1985707152}
   - {fileID: 3293973246907327362}
   m_Father: {fileID: 9048720266790035554}
   m_RootOrder: 0
@@ -347,7 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1985707152}
   m_Layer: 7
-  m_Name: PlatformAheadChecker
+  m_Name: PlatformRightChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,8 +364,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1281780841}
-  m_RootOrder: 0
+  m_Father: {fileID: 9048720266790035554}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016374567
 GameObject:
@@ -666,7 +665,7 @@ Transform:
   m_Children:
   - {fileID: 4902145513624130031}
   m_Father: {fileID: 9048720266790035554}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3876144165426494017
 GameObject:
@@ -698,7 +697,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9048720266790035554}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1058746231157178227
 BoxCollider2D:
@@ -726,6 +725,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.95, y: 0.02}
   m_EdgeRadius: 0
+--- !u!1 &7035703347132617104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153302880633968401}
+  m_Layer: 7
+  m_Name: PlatformLeftChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1153302880633968401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035703347132617104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -0.195, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9048720266790035554}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9048720266790035559
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +794,8 @@ Transform:
   m_Children:
   - {fileID: 1281780841}
   - {fileID: 691549901}
+  - {fileID: 1985707152}
+  - {fileID: 1153302880633968401}
   - {fileID: 4663303169160018753}
   - {fileID: 8020400361772510766}
   m_Father: {fileID: 0}
@@ -865,13 +897,15 @@ MonoBehaviour:
   avatar: {fileID: 1281780840}
   healthBarSlider: {fileID: 281655481}
   meshesToCloneMaterials: []
+  sharedAudioSource: {fileID: 2010206403946714772}
   initialTeam: 1
-  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: 8aea1678cf21ec84483409fcc8de75b1, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
-  checkPlatformAheadTransform: {fileID: 1985707152}
+  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
+  deathViewData: {fileID: 11400000, guid: 3fd04552427915647bccae23d539f2f4, type: 2}
+  checkPlatformRightTransform: {fileID: 1985707152}
+  checkPlatformLeftTransform: {fileID: 1153302880633968401}
   movementAudioSource: {fileID: 7845183630836557568}
-  sharedAudioSource: {fileID: 2010206403946714772}
   movementData: {fileID: 11400000, guid: 421b06f628a63c34a8948f221a5249af, type: 2}
   energyManagerData: {fileID: 11400000, guid: 053c1046c4477a842a1dedfa45d8558c, type: 2}
   weaponData: {fileID: 11400000, guid: 109eefa71a88f004ba9bd38eae0154ef, type: 2}
@@ -879,6 +913,7 @@ MonoBehaviour:
   spiderMinionCompoundAttackData: {fileID: 11400000, guid: 8072e5613090a3046b1cebb3668075c9, type: 2}
   patrolmanStrategyData: {fileID: 11400000, guid: 4ba72e9e8fedcd74d8abf45d898a73f0, type: 2}
   weaponViewData: {fileID: 11400000, guid: a27f33c1ed052374c88d428e5c77f143, type: 2}
+  jumpViewData: {fileID: 11400000, guid: 81fee8bf6971c0945ba5ea80d069189d, type: 2}
 --- !u!114 &6491763889907874999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1096,7 +1131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c81f0f6aea5f384586a23b8de715f06, type: 3}
       propertyPath: m_LocalScale.x

@@ -28,9 +28,9 @@ public class AreaTessen : AbstractAbility, IDamageDealer
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        Vector2 characterPosition = owner.transform.position;
+        Vector3 characterPosition = owner.transform.position;
         float shift = turning.Direction == eDirection.Right ? areaSpawnDistance : -areaSpawnDistance;
-        Vector2 ascensionAreaPosition = characterPosition + new Vector2(shift, 0f);
+        Vector3 ascensionAreaPosition = characterPosition + new Vector3(shift, 0f, 0f);
 
         AscensionArea ascensionArea = Object.Instantiate(ascensionAreaPrefab, ascensionAreaPosition, Quaternion.identity).GetComponent<AscensionArea>();
         ascensionArea.Initialize(owner.gameObject, abilityModifierManager, team, this);

@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ea4deb3e65f0ca48bbf001978ee8e94, type: 2}
   attackRange: Infinity
   preAttackDelays:
-  - 1
-  postAttackDelay: 5
+  - 3
+  postAttackDelay: 0
   attackSpeed: 1
   projectilePrefab: {fileID: 7132006248812665339, guid: 7e1cc7d2021238d47b85978b2b30954b, type: 3}

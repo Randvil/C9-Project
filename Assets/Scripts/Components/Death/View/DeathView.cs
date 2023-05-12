@@ -2,11 +2,19 @@ using UnityEngine;
 
 public class DeathView
 {
-    private Animator animator;
+    private string animatorParameter;
+    private AudioClip deathAudioClip;
 
-    public DeathView(IDeathManager deathManager, Animator animator)
+    private Animator animator;
+    private AudioSource audioSource;
+
+    public DeathView(DeathViewData deathViewData, IDeathManager deathManager, Animator animator, AudioSource audioSource)
     {
+        animatorParameter = deathViewData.animatorParameter; 
+        deathAudioClip = deathViewData.deathAudioClip;
+
         this.animator = animator;
+        this.audioSource = audioSource;
 
         deathManager.DeathEvent.AddListener(OnDeath);
         deathManager.ResurrectionEvent.AddListener(OnResurrect);
@@ -14,12 +22,25 @@ public class DeathView
 
     public void OnDeath()
     {
-        animator.SetBool("IsDying", true);
+        SetAnimatorParameter(true);
+        PlayDeathSound();
     }
 
     public void OnResurrect()
     {
-        animator.SetBool("IsDying", false);
+        SetAnimatorParameter(false);
     }
 
+    private void SetAnimatorParameter(bool value)
+    {
+        animator.SetBool(animatorParameter, value);
+    }
+
+    private void PlayDeathSound()
+    {
+        if (deathAudioClip != null)
+        {
+            audioSource.PlayOneShot(deathAudioClip);
+        }
+    }
 }

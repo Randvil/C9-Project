@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseStrategy : IAIBehavior
 {
+    protected MonoBehaviour owner;
     protected float searchEnemyDistance;
     protected LayerMask enemyLayer;
 
@@ -14,6 +15,11 @@ public class BaseStrategy : IAIBehavior
     protected IDeathManager deathManager;
     protected ITurning turning;
 
+    protected float logicUpdateDelay = 0.1f;
+    protected float physicsUpdateDelay = Time.fixedDeltaTime;
+    protected Coroutine logicUpdateCoroutine;
+    protected Coroutine physicsUpdateCoroutine;
+
     public IStateMachine StateMachine { get; protected set; }
     public IState IdleState { get; protected set; }
     public IState AttackingState { get; protected set; }
@@ -22,6 +28,11 @@ public class BaseStrategy : IAIBehavior
 
     public GameObject Enemy { get; protected set; }
     public ICompoundAttack CompoundAttack { get; protected set; }
+
+    public BaseStrategy(MonoBehaviour owner)
+    {
+        this.owner = owner;
+    }
 
     public virtual void Activate()
     {
@@ -32,10 +43,20 @@ public class BaseStrategy : IAIBehavior
         if (StateMachine.CurrentState == null)
         {
             StateMachine.Initialize(IdleState);
-            return;
         }
+        else
+        {
+            StateMachine.ChangeState(IdleState);
+        }        
 
-        StateMachine.ChangeState(IdleState);
+        if (logicUpdateCoroutine == null)
+        {
+            logicUpdateCoroutine = owner.StartCoroutine(LogicUpdateCoroutine());
+        }
+        if (physicsUpdateCoroutine == null)
+        {
+            physicsUpdateCoroutine = owner.StartCoroutine(PhysicsUpdateCoroutine());
+        }
     }
 
     public virtual void Deactivate()
@@ -44,17 +65,34 @@ public class BaseStrategy : IAIBehavior
         effectManager.EffectEvent.RemoveListener(OnStun);
         deathManager.DeathEvent.RemoveListener(OnDie);
 
-        //StateMachine.ChangeState(DyingState);
+        if (logicUpdateCoroutine != null)
+        {
+            owner.StopCoroutine(logicUpdateCoroutine);
+            logicUpdateCoroutine = null;
+        }
+        if (physicsUpdateCoroutine != null)
+        {
+            owner.StopCoroutine(physicsUpdateCoroutine);
+            physicsUpdateCoroutine = null;
+        }
     }
 
-    public virtual void LogicUpdate()
+    protected IEnumerator LogicUpdateCoroutine()
     {
-        StateMachine.CurrentState.LogicUpdate();
+        while (true)
+        {
+            StateMachine.CurrentState.LogicUpdate();
+            yield return new WaitForSeconds(logicUpdateDelay);
+        }
     }
 
-    public virtual void PhysicsUpdate()
+    protected IEnumerator PhysicsUpdateCoroutine()
     {
-        StateMachine.CurrentState.PhysicsUpdate();
+        while (true)
+        {
+            StateMachine.CurrentState.PhysicsUpdate();
+            yield return new WaitForSeconds(physicsUpdateDelay);
+        }
     }
 
     public virtual void SearchEnemy()
@@ -88,10 +126,15 @@ public class BaseStrategy : IAIBehavior
 
         if (enemyIsNear == false)
         {
-            Enemy = null;
+            LoseSightOfEnemy();
         }
 
         return enemyIsNear;
+    }
+
+    public virtual void LoseSightOfEnemy()
+    {
+        Enemy = null;
     }
 
     public virtual void Turn()

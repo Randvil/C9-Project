@@ -22,11 +22,17 @@ public class PlayerTakeDamageView
 
     public void OnTakeDamage(DamageInfo damageInfo)
     {
-        if (damageInfo.effectiveDamageValue > 0f && audioSource.isPlaying == false)
+        if (damageInfo.effectiveDamageValue <= 0f)
         {
-            ShowRedVignette();
+            return;
+        }
+
+        if (audioSource.isPlaying == false)
+        {
             audioSource.Play();
         }
+        
+        ShowRedVignette();
     }
 
     public async void ShowRedVignette()

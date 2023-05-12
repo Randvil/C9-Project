@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewBroodmotherWebData", menuName = "Data/Abilities/New Broodmother Web Data")]
+[CreateAssetMenu(fileName = "NewBroodmotherWebData", menuName = "Data/Abilities/Broodmother Web/New Broodmother Web Data")]
 public class BroodmotherWebData : DamageAbilityData
 {
     [Header("Broodmother Web")]

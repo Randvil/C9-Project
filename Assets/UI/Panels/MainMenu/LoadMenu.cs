@@ -39,7 +39,7 @@ public class LoadMenu : MonoBehaviour
 
     private void LoadSave()
     {
-        panelManager.SwitchTo(2);
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene();
 
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
@@ -63,7 +63,7 @@ public class LoadMenu : MonoBehaviour
 
     public void NewGame()
     {
-        panelManager.SwitchTo(2, true, false); // To load screen
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
 
         newGameSave.CreateNewGameSave();
         switch (newGameSave.gameData.CheckpointData.latestScene)

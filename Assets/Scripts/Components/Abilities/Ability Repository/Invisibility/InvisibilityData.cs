@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InvisibilityData", menuName = "Data/Abilities/New Invisibility Data")]
+[CreateAssetMenu(fileName = "InvisibilityData", menuName = "Data/Abilities/Invisibility/New Invisibility Data")]
 public class InvisibilityData : BaseAbilityData
 {
     [Header("Invisibility")]
