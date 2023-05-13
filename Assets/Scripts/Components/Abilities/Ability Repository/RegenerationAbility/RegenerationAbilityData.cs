@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewRegenerationAbilityData", menuName = "Data/Abilities/New Regeneration Ability Data")]
+[CreateAssetMenu(fileName = "NewRegenerationAbilityData", menuName = "Data/Abilities/Regenertaion/New Regeneration Ability Data")]
 public class RegenerationAbilityData : BaseAbilityData
 {
     [Header("Regeneraion")]

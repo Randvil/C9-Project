@@ -28,7 +28,6 @@ public class SwarmSpawning : AbstractAbility
 
         while (Time.time < startTime + spawnDuration)
         {
-            Debug.Log("Spawning");
             float currentTime = Time.time;
 
             Dictionary<Swarm, float> newTimes = new();

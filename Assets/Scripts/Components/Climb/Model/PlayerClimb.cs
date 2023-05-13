@@ -11,9 +11,10 @@ public class PlayerClimb : Climb, IPlayerClimb
 
     private Coroutine searchCoroutine;
     private IClimbableObject climbableObject;
+    private IClimbableObject lastClimbableObject;
     private Coroutine checkGroundCoroutine;
 
-    public bool CanClimb => climbableObject != null;
+    public bool CanClimb { get; private set; }
     public bool HaveToTurn { get; private set; }
 
     public PlayerClimb(MonoBehaviour owner, ClimbData climbData, Rigidbody2D rigidbody, IGravity gravity, ITurning turning) : base(owner, climbData, rigidbody, gravity, turning)
@@ -38,16 +39,11 @@ public class PlayerClimb : Climb, IPlayerClimb
         {
             yield return new WaitForSeconds(searchPeriod);
 
-            if (rigidbody == null)
-            {
-                owner.StopCoroutine(searchCoroutine);
-                break;
-            }
-
             Collider2D[] colliders = Physics2D.OverlapCircleAll(rigidbody.position, searchRadius, climbableObjectLayer);
             if (colliders.Length == 0)
             {
                 IsClimbing = false;
+                lastClimbableObject = null;
                 continue;
             }
 
@@ -55,7 +51,12 @@ public class PlayerClimb : Climb, IPlayerClimb
             {
                 if (collider.TryGetComponent(out climbableObject) == true)
                 {
-                    IsClimbing = true;
+                    if (climbableObject != lastClimbableObject)
+                    {
+                        IsClimbing = true;
+                        CanClimb = true;
+                        lastClimbableObject = climbableObject;
+                    }                    
                     break;
                 }
             }
@@ -74,13 +75,12 @@ public class PlayerClimb : Climb, IPlayerClimb
             HaveToTurn = true;
         }
 
-        StartClimbEvent.Invoke();
-
-        //Test
         if (checkGroundCoroutine == null)
         {
             checkGroundCoroutine = owner.StartCoroutine(CheckGroundCoroutine());
         }
+
+        StartClimbEvent.Invoke();
     }
 
     public override void BreakClimb()
@@ -89,18 +89,18 @@ public class PlayerClimb : Climb, IPlayerClimb
         gravity.Enable(this);
         rigidbody.velocity = new(0f, 0f);
         climbableObject = null;
+        CanClimb = false;
 
         owner.StopCoroutine(searchCoroutine);
         searchCoroutine = owner.StartCoroutine(SearchClimbableObject());
 
-        BreakClimbEvent.Invoke();
-
-        //Test
         if (checkGroundCoroutine != null)
         {
             owner.StopCoroutine(checkGroundCoroutine);
             checkGroundCoroutine = null;
         }
+
+        BreakClimbEvent.Invoke();
     }
 
     private IEnumerator CheckGroundCoroutine()

@@ -9,10 +9,14 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
 {
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
+    [SerializeField] private GameObject daikyuBowObject;
+    [SerializeField] private GameObject kanaboObject;
+    [SerializeField] private GameObject tessenObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
     [SerializeField] private AudioSource sharedAudioSource;
     [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private AudioSource climbAudioSource;
     [SerializeField] private AudioSource takeDamageAudioSource;
 
     [SerializeField] private HealthManagerData healthManagerData;
@@ -36,8 +40,12 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private LastChanceData lastChanceData;
 
     [SerializeField] private TurningViewData turningViewData;
+    [SerializeField] private DeathViewData deathViewData;
     [SerializeField] private JumpViewData jumpViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
+    [SerializeField] private DaikyuViewData daikyuViewData;
+    [SerializeField] private KanaboViewData kanaboViewData;
+    [SerializeField] private TessenViewData tessenViewData;
 
     [Header("Player Prefab VFX")]
     [SerializeField] private VisualEffect slashGraph;
@@ -87,6 +95,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public PlayerTakeDamageView TakeDamageView { get; private set; }
     public StunView StunView { get; private set; }
     public DeathView DeathView { get; private set; }
+    public DaikyuView DaikyuAbilityView { get; private set; }
     public TessenAbilityView TessenAbilityView { get; private set; }
     public KanaboAbilityView KanaboAbilityView { get; private set; }
 
@@ -171,12 +180,13 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
-        ClimbView = new ClimbView(Climb, Animator);
+        ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
         StunView = new StunView(EffectManager, Animator);
-        DeathView = new DeathView(DeathManager, Animator);
-        TessenAbilityView = new TessenAbilityView(tessenGraph, tessen, Turning);
-        KanaboAbilityView = new KanaboAbilityView(kanaboGraph, kanabo, Turning);
+        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+        DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
+        TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
+        KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
 
         CreateStateMachine();
     }

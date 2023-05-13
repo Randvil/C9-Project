@@ -8,7 +8,6 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [Header("Broodmother Prefab Components")]
     [SerializeField] protected Transform[] webSpawnPoints;
     [SerializeField] protected AudioSource movementAudioSource;
-    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Broodmother Data")]
     [SerializeField] protected DamageHandlerWithShieldsData damageHandlerWithShieldsData;
@@ -47,7 +46,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         set
         {
             document = value;
-            shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
+            shieldBarView = new BroodmotherHealthBar(Document, ShieldManager, DeathManager, "shieldBar");
             HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "broodmotherHealthBar");
         }
     }
@@ -61,6 +60,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     protected override void Awake()
     {
+        //Replace this with initialization in scene loader
         Initialize(GameObject.FindGameObjectWithTag("Player"));
     }
 
@@ -87,7 +87,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         
-        currentBehavior = new BroodmotherStrategy(this, enemy);
+        currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
@@ -100,19 +100,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         Document = a.panels[0];
     }
 
-    protected void Update()
-    {
-        currentBehavior.LogicUpdate();
-    }
+    //protected void Update()
+    //{
+    //    currentBehavior.LogicUpdate();
+    //}
 
-    protected void FixedUpdate()
-    {
-        currentBehavior.PhysicsUpdate();
-    }
+    //protected void FixedUpdate()
+    //{
+    //    currentBehavior.PhysicsUpdate();
+    //}
 
-    protected void OnDeath()
-    {
-        currentBehavior.Deactivate();
-        Destroy(gameObject, 0.5f);
-    }
 }

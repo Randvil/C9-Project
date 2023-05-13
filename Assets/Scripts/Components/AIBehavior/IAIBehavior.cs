@@ -6,6 +6,4 @@ public interface IAIBehavior
 {
     public void Activate();
     public void Deactivate();
-    public void LogicUpdate();
-    public void PhysicsUpdate();
 }

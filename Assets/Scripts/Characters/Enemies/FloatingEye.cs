@@ -5,9 +5,9 @@ using UnityEngine;
 public class FloatingEye : BaseCreature, IPatrollingBehavior
 {
     [Header("Floating Eye Prefab Components")]
-    [SerializeField] protected Transform checkPlatformAheadTransform;
+    [SerializeField] protected Transform checkPlatformRightTransform;
+    [SerializeField] protected Transform checkPlatformLeftTransform;
     [SerializeField] protected AudioSource movementAudioSource;
-    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Floating Eye Data")]
     [SerializeField] protected MovementData movementData;
@@ -30,7 +30,8 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
 
     protected IAIBehavior currentBehavior;
 
-    public Transform CheckPlatformAheadTransform => checkPlatformAheadTransform;
+    public Transform CheckPlatformRightTransform => checkPlatformRightTransform;
+    public Transform CheckPlatformLeftTransform => checkPlatformLeftTransform;
     public PatrolmanStrategyData PatrolmanStrategyData => patrolmanStrategyData;
 
 
@@ -49,29 +50,22 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         invisibilityView = new InvisibilityView(this, Invisibility as Invisibility, meshesToCloneMaterials);
 
-        currentBehavior = new PatrolmanStrategy(this);
+        currentBehavior = new PatrolmanStrategy(this, this);
         currentBehavior.Activate();
 
-        DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
 
         Invisibility.StartCast();
     }
 
-    protected void Update()
-    {
-        currentBehavior.LogicUpdate();
-    }
+    //protected void Update()
+    //{
+    //    currentBehavior.LogicUpdate();
+    //}
 
-    protected void FixedUpdate()
-    {
-        currentBehavior.PhysicsUpdate();
-    }
-
-    protected void OnDeath()
-    {
-        currentBehavior.Deactivate();
-        Destroy(gameObject, 1f);
-    }
+    //protected void FixedUpdate()
+    //{
+    //    currentBehavior.PhysicsUpdate();
+    //}
 }

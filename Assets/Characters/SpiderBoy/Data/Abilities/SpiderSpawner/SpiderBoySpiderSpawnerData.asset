@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SpiderBoySpiderSpawnerData
   m_EditorClassIdentifier: 
   abilityType: 0
-  cooldown: 5
+  cooldown: 10
   preCastDelay: 0.5
   postCastDelay: 0
-  cost: 33
+  cost: 0
   creaturePrefab: {fileID: 9048720266790035559, guid: 766f34aa5b6b8d8468736feb8f185304, type: 3}
-  creatureCount: 1
-  spawnDelay: 0.33
+  creatureCount: 3
+  spawnDelay: 1

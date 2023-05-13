@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewTessenData", menuName = "Data/Abilities/New Tessen Data")]
+[CreateAssetMenu(fileName = "NewTessenData", menuName = "Data/Abilities/Tessen/New Tessen Data")]
 public class TessenData : DamageAbilityData
 {
     [Header("Tessen Data")]

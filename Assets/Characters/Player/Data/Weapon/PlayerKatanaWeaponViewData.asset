@@ -15,4 +15,4 @@ MonoBehaviour:
   takeSword: {fileID: 8300000, guid: b8ca753d7718ddd43a1b2998e3f8f38b, type: 3}
   putAwaySword: {fileID: 8300000, guid: ad9340538a9270c47bff2007accd1e8c, type: 3}
   hitEnemy: {fileID: 8300000, guid: 56917ee2da52d5e4e909d90d10647813, type: 3}
-  missEnemy: {fileID: 8300000, guid: 7c026a79c5338e34f8a4b37d3bab2563, type: 3}
+  missEnemy: {fileID: 8300000, guid: fe4cd44311f785045a22683dbf0d8fe7, type: 3}

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public interface IPatrollingBehavior
 {
-    public Transform CheckPlatformAheadTransform { get; }
+    public Transform CheckPlatformRightTransform { get; }
+    public Transform CheckPlatformLeftTransform { get; }
     public PatrolmanStrategyData PatrolmanStrategyData { get; }
     public BoxCollider2D Collider { get; }
     public ITeam CharacterTeam { get; }

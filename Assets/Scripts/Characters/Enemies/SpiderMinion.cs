@@ -5,9 +5,9 @@ using UnityEngine;
 public class SpiderMinion : BaseCreature, IPatrollingBehavior
 {
     [Header("Spider Minion Prefab Components")]
-    [SerializeField] protected Transform checkPlatformAheadTransform;
+    [SerializeField] protected Transform checkPlatformRightTransform;
+    [SerializeField] protected Transform checkPlatformLeftTransform;
     [SerializeField] protected AudioSource movementAudioSource;
-    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Spider Minion Data")]
     [SerializeField] protected MovementData movementData;
@@ -18,6 +18,7 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
     [SerializeField] protected PatrolmanStrategyData patrolmanStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
+    [SerializeField] protected CommonAbilityViewData jumpViewData;
 
     public IMovement Movement { get; protected set; }
     public IModifierManager WeaponModifierManager { get; protected set; }
@@ -27,10 +28,12 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
     public ICompoundAttack CompoundAttack { get; protected set; }
 
     protected NoArmsWeaponView weaponView;
+    protected CommonAbilityView jumpAbilityView;
 
     protected IAIBehavior currentBehavior;
 
-    public Transform CheckPlatformAheadTransform => checkPlatformAheadTransform;
+    public Transform CheckPlatformRightTransform => checkPlatformRightTransform;
+    public Transform CheckPlatformLeftTransform => checkPlatformLeftTransform;
     public PatrolmanStrategyData PatrolmanStrategyData => patrolmanStrategyData;
 
 
@@ -47,28 +50,12 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
+        jumpAbilityView = new CommonAbilityView(jumpViewData, JumpAbility, Animator, sharedAudioSource);
 
-        currentBehavior = new PatrolmanStrategy(this);
+        currentBehavior = new PatrolmanStrategy(this, this);
         currentBehavior.Activate();
 
-        DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
-    }
-
-    protected void Update()
-    {
-        currentBehavior.LogicUpdate();
-    }
-
-    protected void FixedUpdate()
-    {
-        currentBehavior.PhysicsUpdate();
-    }
-
-    protected void OnDeath()
-    {
-        currentBehavior.Deactivate();
-        Destroy(gameObject, 1f);
     }
 }

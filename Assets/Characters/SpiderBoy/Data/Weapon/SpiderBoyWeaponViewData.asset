@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef752d7396432374f814e0e46aeea2a9, type: 3}
   m_Name: SpiderBoyWeaponViewData
   m_EditorClassIdentifier: 
-  startAttackAudioClip: {fileID: 8300000, guid: a416994fbabf79d449cb8fb298f1003a, type: 3}
-  releaseAttackAudioClip: {fileID: 0}
+  startAttackAudioClip: {fileID: 0}
+  releaseAttackAudioClip: {fileID: 8300000, guid: a416994fbabf79d449cb8fb298f1003a, type: 3}

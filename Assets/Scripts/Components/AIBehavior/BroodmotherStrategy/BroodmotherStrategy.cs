@@ -20,7 +20,7 @@ public class BroodmotherStrategy : BaseStrategy
 
     public IState RetreatingState { get; private set; }
 
-    public BroodmotherStrategy(IBroodmotherBehavior broodmother, GameObject enemy)
+    public BroodmotherStrategy(MonoBehaviour owner, IBroodmotherBehavior broodmother, GameObject enemy) : base(owner)
     {
         this.broodmother = broodmother;
         Enemy = enemy;

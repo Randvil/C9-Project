@@ -3,24 +3,68 @@ using UnityEngine.VFX;
 
 public class TessenAbilityView 
 {
+    private GameObject tessenObject;
+
+    private string animatorParameter;
+    private AudioClip startCastSoundEffect;
+    private AudioClip releaseCastSoundEffect;
+    private AudioClip breakCastSoundEffect;
+
+    private Animator animator;
+    private AudioSource audioSource;
     private VisualEffect tessenEffectGraph;
     private IAbility ability;
     private ITurning turning;
     private float xPos;
 
-    public TessenAbilityView(VisualEffect tessenEffectGraph, IAbility ability, ITurning turning)
+    public TessenAbilityView(GameObject tessenObject, TessenViewData tessenViewData, VisualEffect tessenEffectGraph, IAbility ability, ITurning turning, Animator animator, AudioSource audioSource)
     {
+        this.tessenObject = tessenObject;
+
+        animatorParameter = tessenViewData.animatorParameter;
+        startCastSoundEffect = tessenViewData.startCastSoundEffect;
+        releaseCastSoundEffect = tessenViewData.releaseCastSoundEffect;
+        breakCastSoundEffect = tessenViewData.breakCastSoundEffect;
+
+        this.animator = animator;
+        this.audioSource = audioSource;
         this.tessenEffectGraph = tessenEffectGraph;
         this.ability = ability;
         this.turning = turning;
         xPos = tessenEffectGraph.GetFloat("xPositionOverPlayer");
 
-        ability.ReleaseCastEvent.AddListener(OnCastRelease);
+        ability.StartCastEvent.AddListener(OnStartCast);
+        ability.ReleaseCastEvent.AddListener(OnReleaseCast);
+        ability.BreakCastEvent.AddListener(OnBreakCast);
     }
 
-    public void OnCastRelease()
+
+    private void OnStartCast()
     {
-        PlayTessenVFXGraph();
+        tessenObject.SetActive(true);
+        animator.SetBool(animatorParameter, true);
+        PlaySoundEffect(startCastSoundEffect);
+    }
+
+    private void OnReleaseCast()
+    {
+        PlaySoundEffect(releaseCastSoundEffect);
+        //PlayTessenVFXGraph();
+    }
+
+    private void OnBreakCast()
+    {
+        tessenObject.SetActive(false);
+        animator.SetBool(animatorParameter, false);
+        PlaySoundEffect(breakCastSoundEffect);
+    }
+
+    private void PlaySoundEffect(AudioClip soundEffect)
+    {
+        if (soundEffect != null)
+        {
+            audioSource.PlayOneShot(soundEffect);
+        }
     }
 
     public void PlayTessenVFXGraph()

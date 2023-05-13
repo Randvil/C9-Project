@@ -912,13 +912,14 @@ MonoBehaviour:
   healthBarSlider: {fileID: 7279061361503507754}
   meshesToCloneMaterials:
   - {fileID: 438865735438962936}
+  sharedAudioSource: {fileID: 6172552536687305650}
   initialTeam: 1
-  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
   healthManagerData: {fileID: 11400000, guid: dca38918573e4ac4f8346617f153291b, type: 2}
   effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
+  turningViewData: {fileID: 11400000, guid: 38fab3eabe0f9e242ae6461d6143063a, type: 2}
+  deathViewData: {fileID: 11400000, guid: ee18bdc507c9ff046b93ce780e2956fe, type: 2}
   projectileSpawnPoint: {fileID: 4837131510682213775}
   spiderSpawnPoint: {fileID: 4323504826026341181}
-  sharedAudioSource: {fileID: 6172552536687305650}
   energyManagerData: {fileID: 11400000, guid: c6b01b82162d27e4e8a46d6f1ed49718, type: 2}
   bombThrowerData: {fileID: 11400000, guid: c1ae548c5f3f4204090461169f3d4356, type: 2}
   weaponViewData: {fileID: 11400000, guid: 5a839e2e3dcabbe46ab1503d0a276c0e, type: 2}

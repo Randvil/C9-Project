@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public class AscensionArea : MonoBehaviour
 {
-    [SerializeField] AscensionAreaData ascensionAreaData;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private VisualEffect visualEffect;
+    [SerializeField] private AscensionAreaData ascensionAreaData;
 
     private float lifetime;
     private float impactPeriod;
@@ -20,6 +24,8 @@ public class AscensionArea : MonoBehaviour
     private Dictionary<GameObject, IDamageHandler> damagedEnemies = new();
     private Dictionary<IEffectManager, IEffect> stunnedEnemies = new();
 
+    public UnityEvent SpawnEvent { get; } = new();
+
     private void Awake()
     {
         lifetime = ascensionAreaData.lifetime;
@@ -27,6 +33,10 @@ public class AscensionArea : MonoBehaviour
         ascensionalPower = ascensionAreaData.ascensionalPower;
         stunEffectData = ascensionAreaData.stunEffectData;
         damageData = ascensionAreaData.damageData;
+
+        AscensionAreaView ascensionAreaView = new AscensionAreaView(this, audioSource, visualEffect);
+
+        SpawnEvent.Invoke();
     }
 
     public void Initialize(GameObject caster, IModifierManager modifierManager, ITeam team, IDamageDealer damageDealer)

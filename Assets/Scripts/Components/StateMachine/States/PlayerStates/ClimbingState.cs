@@ -41,11 +41,6 @@ public class ClimbingState : BasePlayerState
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
     protected override void OnCrouch(eActionPhase actionPhase)
     {
         switch(actionPhase)

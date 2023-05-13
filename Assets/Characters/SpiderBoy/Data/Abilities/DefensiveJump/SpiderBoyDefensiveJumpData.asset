@@ -18,7 +18,7 @@ MonoBehaviour:
   postCastDelay: 0
   cost: 0
   jumpTime: 0.3
-  initialJumpSpeed: {x: -10, y: 7}
+  initialJumpSpeed: {x: -10, y: 3}
   speedCurve:
     serializedVersion: 2
     m_Curve:
