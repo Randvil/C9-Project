@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovableState : TurnableState
 {
-    public MovableState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public MovableState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {
@@ -32,9 +32,9 @@ public class MovableState : TurnableState
         Move();
     }
 
-    private void Move()
+    protected void Move()
     {
-        if (isMoving == true)
+        if (playerInterstateData.isMoving == true && player.Movement.IsMoving == false)
         {
             player.Movement.StartMove();
         }

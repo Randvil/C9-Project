@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrouchingState : MovableState
 {
-    public CrouchingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public CrouchingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {

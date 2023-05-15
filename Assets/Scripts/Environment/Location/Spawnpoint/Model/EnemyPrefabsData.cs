@@ -10,8 +10,8 @@ public class EnemyPrefabsData : ScriptableObject
     public GameObject flyingEyePrefab;
     public GameObject bossPrefab;
 
-    public Material spiderBoyMaterial;
-    public Material spiderMaterial;
-    public Material flyingEyeMaterial;
-    public Material bossMaterial;
+    public Material dissolveSpiderBoyMaterial;
+    public Material dissolveSpiderMaterial;
+    public Material dissolveFlyingEyeMaterial;
+    public Material dissolveBossMaterial;
 }

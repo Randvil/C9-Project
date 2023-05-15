@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ParryingState : TurnableState, IState
 {
-    public ParryingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public ParryingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {

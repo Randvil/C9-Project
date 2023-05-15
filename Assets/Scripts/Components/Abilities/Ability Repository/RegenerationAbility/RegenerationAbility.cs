@@ -13,8 +13,6 @@ public class RegenerationAbility : AbstractAbility, ISustainableAbility
 
     public RegenerationAbility(MonoBehaviour owner, RegenerationAbilityData regenerationAbilityData, IEnergyManager energyManager, IHealthManager healthManager) : base(owner, regenerationAbilityData, energyManager)
     {
-        Type = eAbilityType.Regeneration;
-
         this.regenerationAbilityData = regenerationAbilityData;
         healthPerSecond = regenerationAbilityData.healthPerSecond;
         maxRegenerationTime = regenerationAbilityData.maxRegenerationTime;
@@ -25,8 +23,6 @@ public class RegenerationAbility : AbstractAbility, ISustainableAbility
 
     protected override IEnumerator ReleaseStrikeCoroutine()
     {
-        yield return new WaitForSeconds(preCastDelay);
-
         float endCastTime = Time.time + maxRegenerationTime;
         finishCooldownTime = Time.time + cooldown;
 
@@ -40,10 +36,6 @@ public class RegenerationAbility : AbstractAbility, ISustainableAbility
 
             yield return new WaitForSeconds(impactPeriod);
         }
-
-        yield return new WaitForSeconds(postCastDelay);
-
-        BreakCast();
     }
 
     public void StopSustaining()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Web : Projectile
 {
     [SerializeField] protected SlowEffectData slowEffectData;
+    private Material[] matArray;
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,6 +23,9 @@ public class Web : Projectile
         if (other.TryGetComponent(out IEffectable effectableEnemy) == true)
         {
             effectableEnemy.EffectManager.AddEffect(new SlowEffect(slowEffectData));
+            matArray = other.GetComponentInChildren<SkinnedMeshRenderer>().materials;
+            matArray[1] = slowEffectData.webMaterial;
+            other.GetComponentInChildren<SkinnedMeshRenderer>().materials = matArray;
         }
 
         Remove();

@@ -9,7 +9,7 @@ public abstract class SavePoint : MonoBehaviour
     private FileDataHandler dataHandler;
     private List<IDataSavable> savableObjects;
 
-    private void Start()
+    protected virtual void Start()
     {
         dataHandler = new FileDataHandler("Saves", "LastSave");
     }

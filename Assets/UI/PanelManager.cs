@@ -11,7 +11,10 @@ public class PanelManager : MonoBehaviour
 
     public readonly List<VisualElement> panels = new();
 
-    private Stack<VisualElement> history = new();
+    private readonly Stack<VisualElement> history = new();
+
+    private bool needToTweenNext = true;
+    private bool needToTweenPrev = true;
 
     private VisualElement lastPanel;
 
@@ -23,21 +26,30 @@ public class PanelManager : MonoBehaviour
         private set
         {        
             lastPanel = currentPanel;
-            currentPanel = value;           
+            currentPanel = value;
 
             if (lastPanel != null)
             {
-                DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
-                StartCoroutine(DisplayDisableTween(lastPanel));  
+                if (needToTweenPrev)
+                {
+                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
+                }                
+                
+                StartCoroutine(DisplayDisableTween(lastPanel));
+                
             }
 
             if (currentPanel != null)
             {
-                if (currentPanel.style.opacity != 0f) // Если игрок слишком быстро переключает панели (балуется)
-                    StopDisplayDisabling();
+                if (currentPanel.style.opacity.value > 0.001f) // Если игрок слишком быстро переключает панели (балуется)
+                    DisplayDisableImmediate(lastPanel);
 
                 currentPanel.style.display = DisplayStyle.Flex;
-                DOTween.To(x => currentPanel.style.opacity = x, 0f, 1f, PanelTweenDuration).SetUpdate(true);
+
+                if (needToTweenNext)
+                    DOTween.To(x => currentPanel.style.opacity = x, 0f, 1f, PanelTweenDuration).SetUpdate(true);
+                else
+                    currentPanel.style.opacity = 1f;
             }      
         }
     }
@@ -66,6 +78,17 @@ public class PanelManager : MonoBehaviour
             CurrentPanel = history.Pop();
     }
 
+    public void SwitchTo(int index, bool tweenNext, bool tweenPrev)
+    {
+        needToTweenNext = tweenNext;
+        needToTweenPrev = tweenPrev;
+
+        SwitchTo(index);
+
+        needToTweenNext = true;
+        needToTweenPrev = true;
+    }
+
     public void SwitchTo(int index)
     {
         SwitchTo(panels[index]);
@@ -85,7 +108,6 @@ public class PanelManager : MonoBehaviour
     {
         panels.Add(panel);
         DisablePanel(panel);
-        CurrentPanel ??= panel;
     }
 
     private void Awake()
@@ -94,10 +116,10 @@ public class PanelManager : MonoBehaviour
         {
             panels.Add(doc.rootVisualElement);
             DisablePanel(doc.rootVisualElement);
-        }   
+        }
 
-        if (docs.Length > 0) // Если были задействованы ui-доки из инспектора
-            SwitchTo(0);
+        //if (docs.Length > 0)
+        //    SwitchTo(0);
     }
 
     private void DisablePanel(VisualElement panel)
@@ -111,8 +133,10 @@ public class PanelManager : MonoBehaviour
         DisablePanel(panelToDisable);
     }
 
-    private void StopDisplayDisabling()
+    private void DisplayDisableImmediate(VisualElement panelToDisable)
     {
         StopAllCoroutines();
+        if (panelToDisable != null)
+            DisablePanel(panelToDisable);
     }
 }

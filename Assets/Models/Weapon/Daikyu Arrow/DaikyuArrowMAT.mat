@@ -63,6 +63,6 @@ Material:
     - _Smoothness: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _GradientNoiseColor: {r: 1.0200342, g: 0.75294113, b: 32, a: 1}
+    - _GradientNoiseColor: {r: 13.580686, g: 0.2133092, b: 0.2133092, a: 1}
     - _GradientNoiseSpeed: {r: 0, g: 0.6, b: 0, a: 0}
   m_BuildTextureStacks: []

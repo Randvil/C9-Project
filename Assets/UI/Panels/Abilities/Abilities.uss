@@ -75,7 +75,7 @@
 .Regeneration RadialFill {
     transition-duration: 0.4s;
     opacity: 1;
-    background-image: resource('button_ps');
+    background-image: resource('RegenerationIcon512h');
 }
 
 .TessenPolyControl .polygon_icon {
@@ -97,7 +97,7 @@
 }
 
 .RegenerationPolyControl .polygon_icon {
-    background-image: resource('button_ps');
+    background-image: resource('RegenerationIcon512h');
     opacity: 1;
     flex-grow: 42;
 }

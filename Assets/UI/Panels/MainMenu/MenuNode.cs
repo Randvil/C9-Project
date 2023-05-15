@@ -58,7 +58,8 @@ public class MenuNode
 
                 child.Active = !child.Active;
             };
-            children.Add(button, child);
+            if (!children.ContainsKey(button))
+                children.Add(button, child);
         }
         child.Panel.SendToBack();       
     }

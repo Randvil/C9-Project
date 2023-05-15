@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffectable, IAbilityCaster, IDataSavable
 {
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject weaponObject;
+    [SerializeField] private GameObject daikyuBowObject;
+    [SerializeField] private GameObject kanaboObject;
+    [SerializeField] private GameObject tessenObject;
     [SerializeField] private Transform weaponContainer;
     [SerializeField] private Transform weaponGrip;
     [SerializeField] private AudioSource sharedAudioSource;
     [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private AudioSource climbAudioSource;
     [SerializeField] private AudioSource takeDamageAudioSource;
 
     [SerializeField] private HealthManagerData healthManagerData;
@@ -23,22 +28,31 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private CrouchData crouchData;
     [SerializeField] private ClimbData climbData;
     [SerializeField] private RollData rollData;
-    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private MeleeWeaponData meleeWeaponData;
     [SerializeField] private EnergyRegeneratorData energyRegeneratorData;
     [SerializeField] private SlowEffectData slowdownDuringAttackData;
     [SerializeField] private ParryData parryData;
     [SerializeField] private KanaboData kanaboData;
     [SerializeField] private DaikyuData daikyuData;
     [SerializeField] private TessenData tessenData;
+    [SerializeField] private AreaTessenData areaTessenData;
     [SerializeField] private RegenerationAbilityData regenerationAbilityData;
     [SerializeField] private LastChanceData lastChanceData;
 
     [SerializeField] private TurningViewData turningViewData;
+    [SerializeField] private DeathViewData deathViewData;
     [SerializeField] private JumpViewData jumpViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
+    [SerializeField] private DaikyuViewData daikyuViewData;
+    [SerializeField] private KanaboViewData kanaboViewData;
+    [SerializeField] private TessenViewData tessenViewData;
 
     [Header("Player Prefab VFX")]
     [SerializeField] private VisualEffect slashGraph;
+    [SerializeField] private VisualEffect kanaboGraph;
+    [SerializeField] private VisualEffect tessenGraph;
+    [SerializeField] private VisualEffect regenerationGraph;
+    public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
 
@@ -82,6 +96,11 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public PlayerTakeDamageView TakeDamageView { get; private set; }
     public StunView StunView { get; private set; }
     public DeathView DeathView { get; private set; }
+    public DaikyuView DaikyuAbilityView { get; private set; }
+    public TessenAbilityView TessenAbilityView { get; private set; }
+    public KanaboAbilityView KanaboAbilityView { get; private set; }
+    public RegenerationAbilityView RegenerationAbilityView { get; private set; }
+    public RemoveWebView RemoveWebView { get; private set; }
 
     public IStateMachine StateMachine { get; private set; }
     public IState Standing { get; private set; }
@@ -133,7 +152,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         Crouch = new Crouch(crouchData, Collider, EffectManager);
         Jump = new Jump(this, jumpData, Rigidbody, Gravity);
         Roll = new Roll(this, rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
-        Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
+        Weapon = new CleaveMeleeWeapon(this, gameObject, meleeWeaponData, WeaponModifierManager, CharacterTeam, Turning);
         WeaponEnergyRegenerator = new EnergyRegenerator(energyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
         SlowdownDuringAttack = new SlowEffect(slowdownDuringAttackData);
         Parry = new Parry(this, gameObject, parryData, Turning, CharacterTeam, DamageHandler, Weapon, DefenceModifierManager, WeaponModifierManager, EffectManager);
@@ -144,11 +163,13 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         IAbility kanabo = new Kanabo(this, gameObject, kanaboData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         IAbility daikyu = new Daikyu(this, gameObject, daikyuData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         IAbility tessen = new Tessen(this, gameObject, tessenData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam, Collider);
+        IAbility areaTessen = new AreaTessen(this, areaTessenData, EnergyManager, Turning, AbilityModifierManager, CharacterTeam);
         IAbility regeneration = new RegenerationAbility(this, regenerationAbilityData, EnergyManager, HealthManager);
-        AbilityManager.AddAbility(eAbilityType.Kanabo, kanabo);
-        AbilityManager.AddAbility(eAbilityType.Daikyu, daikyu);
-        AbilityManager.AddAbility(eAbilityType.Tessen, tessen);
-        AbilityManager.AddAbility(eAbilityType.Regeneration, regeneration);
+        AbilityManager.AddAbility(kanabo);
+        AbilityManager.AddAbility(daikyu);
+        //AbilityManager.AddAbility(tessen);
+        AbilityManager.AddAbility(regeneration);
+        AbilityManager.AddAbility(areaTessen);
 
         LastChance = new LastChance(this, lastChanceData, DeathManager as IForbiddableDeath, HealthManager, DefenceModifierManager);
         LastChance.Learn();
@@ -162,10 +183,15 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
-        ClimbView = new ClimbView(Climb, Animator);
-        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource);
+        ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
+        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
         StunView = new StunView(EffectManager, Animator);
-        DeathView = new DeathView(DeathManager, Animator);
+        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+        DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
+        TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
+        KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
+        RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
+        RemoveWebView = new RemoveWebView(EffectManager, GetComponentInChildren<SkinnedMeshRenderer>());
 
         CreateStateMachine();
     }
@@ -174,17 +200,18 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     {
         StateMachine = new StateMachine();
 
-        Standing = new StandingState(this, StateMachine, PlayerInput);
-        Crouching = new CrouchingState(this, StateMachine, PlayerInput);
-        Jumping = new JumpingState(this, StateMachine, PlayerInput);
-        Rolling = new RollingState(this, StateMachine, PlayerInput);
-        Attacking = new AttackingState(this, StateMachine, PlayerInput);
-        Parrying = new ParryingState(this, StateMachine, PlayerInput);
-        CastingAbility = new CastingAbilityState(this, StateMachine, PlayerInput);
-        Interacting = new InteractingState(this, StateMachine, PlayerInput);
-        Climbing = new ClimbingState(this, StateMachine, PlayerInput);
-        Stunned = new StunnedState(this, StateMachine, PlayerInput);
-        Dying = new DyingState(this, StateMachine, PlayerInput);
+        PlayerInterstateData playerInterstateData = new();
+        Standing = new StandingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Crouching = new CrouchingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Jumping = new JumpingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Rolling = new RollingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Attacking = new AttackingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Parrying = new ParryingState(this, StateMachine, PlayerInput, playerInterstateData);
+        CastingAbility = new CastingAbilityState(this, StateMachine, PlayerInput, playerInterstateData);
+        Interacting = new InteractingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Climbing = new ClimbingState(this, StateMachine, PlayerInput, playerInterstateData);
+        Stunned = new StunnedState(this, StateMachine, PlayerInput, playerInterstateData);
+        Dying = new DyingState(this, StateMachine, PlayerInput, playerInterstateData);
 
         StateMachine.Initialize(Standing);
     }
@@ -207,9 +234,10 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
 
         foreach (KeyValuePair<int, IAbility> ability in AbilityManager.LearnedAbilities)
         {
-            AbilityPair abilityPair = new(ability.Key, ability.Value.Type);
-            if (data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType) != null)
-                data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType).pos = abilityPair.pos;
+            AbilityPair abilityPair = new(ability.Key, ability.Value.AbilityType);
+            AbilityPair learnedAbilityPair = data.learnedAbilities.Find(pair => pair.abilityType == abilityPair.abilityType);
+            if (learnedAbilityPair != null)
+                learnedAbilityPair.pos = abilityPair.pos;
             else
                 data.learnedAbilities.Add(abilityPair);
         }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,14 +6,25 @@ using UnityEngine.UIElements;
 
 public class LoadMenu : MonoBehaviour
 {
-    VisualElement slots;
-
-    DirectoryInfo directory = new("Saves");
+    DirectoryInfo directory;
+    const string path = "Saves";
 
     [SerializeField] private NewGameSave newGameSave;
 
+    private PanelManager panelManager;
+
+    public LoadMenu()
+    {
+        if (!Directory.Exists(path))
+            directory = Directory.CreateDirectory(path);
+        else
+            directory = new(path);
+    }
+
     private void Awake()
     {
+        panelManager = GetComponentInParent<PanelManager>();
+
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
         Button continueB = root.Q<Button>("continueB");
@@ -27,17 +39,54 @@ public class LoadMenu : MonoBehaviour
 
     private void LoadSave()
     {
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene();
+
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
 
-        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
+        DeathLoad deathLoad = new DeathLoad();
+        deathLoad.RewriteData();
+
+        switch (gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                StartCoroutine(LoadSceneCoroutine("CityLocation"));
+                break;
+            case eSceneName.ArcadeCenter:
+                StartCoroutine(LoadSceneCoroutine("ArcadeCenter"));
+                break;
+            case eSceneName.BossLocation:
+                StartCoroutine(LoadSceneCoroutine("BossLocation"));
+                break;
+        }
+        
     }
 
     public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
 
     public void NewGame()
     {
+        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
+
         newGameSave.CreateNewGameSave();
-        SceneManager.LoadScene(newGameSave.gameData.CheckpointData.latestScene);
+        switch (newGameSave.gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                StartCoroutine(LoadSceneCoroutine("CityLocation"));
+                break;
+            case eSceneName.ArcadeCenter:
+                StartCoroutine(LoadSceneCoroutine("ArcadeCenter"));
+                break;
+            case eSceneName.BossLocation:
+                StartCoroutine(LoadSceneCoroutine("BossLocation"));
+                break;
+        }
+    }
+
+    private IEnumerator LoadSceneCoroutine(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
+
+        SceneManager.LoadScene(sceneName);
     }
 }

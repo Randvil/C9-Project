@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClimbingState : BasePlayerState
 {
-    public ClimbingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public ClimbingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {
@@ -13,7 +13,7 @@ public class ClimbingState : BasePlayerState
         {
             eDirection newDirection = player.Turning.Direction == eDirection.Right ? eDirection.Left : eDirection.Right;
             player.Turning.Turn(newDirection);
-            haveToTurn = true;
+            playerInterstateData.haveToTurn = true;
         }
 
         player.Gravity.SetFallingState();
@@ -33,6 +33,11 @@ public class ClimbingState : BasePlayerState
         if (player.Climb.IsClimbing == false)
         {
             stateMachine.ChangeState(player.Standing);
+        }
+
+        if (player.Gravity.IsGrounded && player.Climb.ClimbSpeed < 0f)
+        {
+            player.Climb.StopClimb();
         }
     }
 

@@ -27,7 +27,6 @@ public class ComicsSwitcher : MonoBehaviour
     const string labelClass = "comics-label";
     const string pageClass = "comics-page";
     const string panelClass = "comics-panel";
-    const string animatedPageClass = "animated-comics-page";
 
     public bool StartNGAfterComics { get; set; } 
 
@@ -41,9 +40,6 @@ public class ComicsSwitcher : MonoBehaviour
 
     private void CreateNewPage()
     {
-        if (panel != null)
-            root.Remove(panel);
-
         panel = new();
         panel.AddToClassList(panelClass);
 
@@ -66,9 +62,6 @@ public class ComicsSwitcher : MonoBehaviour
 
     public void ToNextPage()
     {
-        if (index > 0)
-            pageManager.panels[index - 1].Q<VisualElement>("page").RemoveFromClassList(animatedPageClass);
-
         if (index >= pages.Count)
         {
             EndOfComics();
@@ -76,18 +69,11 @@ public class ComicsSwitcher : MonoBehaviour
         }
 
         CreateNewPage();
-        pageManager.SwitchTo(index);
-        StartCoroutine(AnimateAfterTween());
+        pageManager.SwitchTo(index, true, false);
 
         skipButton.BringToFront();
 
         index++;
-    }
-
-    private IEnumerator AnimateAfterTween()
-    {
-        yield return new WaitForSeconds(pageManager.PanelTweenDuration);
-        page.AddToClassList(animatedPageClass);
     }
 
     private void EndOfComics()

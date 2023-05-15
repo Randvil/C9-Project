@@ -1,11 +1,10 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
-    //private const string choosenClass = "choosen-element";
-
     private VisualElement root;
 
     private PanelManager panelManager;
@@ -13,8 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private PlayerInput input;
 
     [SerializeField] private ComicsSwitcher comicsSwitcher;
-
-    //Button choosenButton;
 
     private void Awake()
     {
@@ -60,34 +57,9 @@ public class MainMenu : MonoBehaviour
         panelManager.SwitchTo(1);
     }
 
-    //private void SetInput()
-    //{
-    //    input.onActionTriggered += context =>
-    //    {
-    //        switch (context.action.name)
-    //        {
-    //            case "Navigate":
-    //                NavigateCommand(context.action.ReadValue<Vector2>());
-    //                break;
-    //        }
-    //    };
-    //}
-
-    //private void ChooseNewButton(Button button)
-    //{
-    //    choosenButton.RemoveFromClassList(choosenClass);
-    //    button.AddToClassList(choosenClass);
-    //    choosenButton = button;
-    //}
-
-    //private void NavigateCommand(Vector2 vector)
-    //{
-    //    if (vector.magnitude == 0f)
-    //        return;
-    //}
-
     private void Start()
     {
+        panelManager.SwitchTo(0);
         StaticAudio.Instance.ChangeBackgroundTrack("mainTheme");
     }
 }

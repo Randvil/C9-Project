@@ -39,40 +39,39 @@ public class Abilities : MonoBehaviour, IPanel
 
             MenuNode description = new(type + "Description", root, false);
 
-            abilities.AddChild(description);
             abilityDescriptions[i - 1] = description;
             description.ParentButton.RegisterCallback<MouseEnterEvent>(ZIndexFix);
 
             Button learnB = description.Panel.Q<Button>("learn" + type + "B");
+            learnB.clicked += () =>
+            {
+                ToggleAbilityLearning(type);
+                ToggleLearnButton(learnB);
+            };
 
             if (IsAbilityLearned(type))
                 ToggleLearnButton(learnB);
             
-
-            learnB.style.display = DisplayStyle.None;
-            description.ParentButton.style.display = DisplayStyle.None;
-
+            var icon = description.ParentButton.Q<VisualElement>("icon");
+            icon.style.display = DisplayStyle.None;
             panelManager.Abilities.AbilityLearnEvent.AddListener(learnedType =>
             {
-                if (learnB.style.display == DisplayStyle.None && learnedType == type)
-                    ActivateSetPossibility(learnB, description.ParentButton, type);
+                if (icon.style.display == DisplayStyle.None && learnedType == type)
+                {
+                    ActivateSetPossibility(abilities, description, icon);
+                    ToggleLearnButton(learnB);
+                }
             });
 
             if (IsAbilityLearned(type)) // изучение при загрузке происходит раньше чем подпись на события
-                ActivateSetPossibility(learnB, description.ParentButton, type);
+                ActivateSetPossibility(abilities, description, icon);
         }
     }
 
-    private void ActivateSetPossibility(Button learnB, VisualElement icon, eAbilityType type)
+    private void ActivateSetPossibility(MenuNode abilities, MenuNode description, VisualElement icon)
     {
-        learnB.style.display = DisplayStyle.Flex;
         icon.style.display = DisplayStyle.Flex;
-
-        learnB.clicked += () =>
-        {
-            ToggleAbilityLearning(type);
-            ToggleLearnButton(learnB);
-        };
+        abilities.AddChild(description);
     }
 
     private void ToggleLearnButton(Button button)
@@ -113,7 +112,8 @@ public class Abilities : MonoBehaviour, IPanel
     {
         main.DeactivateChildren();
         DOTween.To(t => Time.timeScale = t, 0f, 1f, panelManager.PanelTweenDuration).SetUpdate(true);
-        panelManager.GoBack();
+        panelManager.SwitchTo(0);
         input.SwitchCurrentActionMap("Player");
+        StaticAudio.Instance.SnapshotName = "InGame";
     }
 }

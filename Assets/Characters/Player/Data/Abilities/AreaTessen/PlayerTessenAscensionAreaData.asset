@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609da666428e2624a820fa9c465022df, type: 3}
+  m_Name: PlayerTessenAscensionAreaData
+  m_EditorClassIdentifier: 
+  lifetime: 3
+  impactPeriod: 0.25
+  ascensionalPower: 2
+  stunEffectData: {fileID: 11400000, guid: a875f222c5370ca49bebe14ac9a6742a, type: 2}
+  damageData: {fileID: 11400000, guid: 3cf9a0ad594878b4bacab806f22928c6, type: 2}

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JumpingState : MovableState
 {
-    public JumpingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public JumpingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {
@@ -30,5 +30,10 @@ public class JumpingState : MovableState
         {
             stateMachine.ChangeState(player.Standing);
         }
+    }
+
+    protected override void OnAttack(eActionPhase actionPhase)
+    {
+        
     }
 }

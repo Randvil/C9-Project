@@ -10,7 +10,7 @@ public class WatchmanStrategy : BaseStrategy
 
     public float TurningTimePeriod { get; private set; }
 
-    public WatchmanStrategy(IWatchmanBehavior watchman)
+    public WatchmanStrategy(MonoBehaviour owner, IWatchmanBehavior watchman) : base(owner)
     {
         watchmanData = watchman.WatchmanStrategyData;
         searchEnemyDistance = watchmanData.searchEnemyDistance;

@@ -9,7 +9,7 @@ public class AudioSettings : MonoBehaviour
     private AudioMixerSnapshot inGameSnapshot;
     private AudioMixerSnapshot pauseSnapshot;
 
-    private void OnEnable()
+    private void Start()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -36,7 +36,7 @@ public class AudioSettings : MonoBehaviour
 
             mixer.GetFloat(slider.name, out float t);
             slider.value = Mathf.Pow(10f, t / 20f);
-        }
+        }      
     }
 
     /// <summary>
@@ -49,5 +49,6 @@ public class AudioSettings : MonoBehaviour
         inGameSnapshot.TransitionTo(0f);
         mixer.SetFloat(paramName, vol);
         pauseSnapshot.TransitionTo(0f);
+        (StaticAudio.Instance.SnapshotName == "InGame" ? inGameSnapshot : pauseSnapshot).TransitionTo(0f);
     }
 }

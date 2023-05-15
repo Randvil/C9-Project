@@ -40,10 +40,20 @@ public class PatrolmanAttackingState : IState
         if (patrolman.CompoundAttack.MakeAfficientAttack(patrolman.Enemy.transform.position) == true)
         {
             patrolman.Stop();
+            return;
         }
         else
         {
             patrolman.Move();
+        }
+
+        patrolman.CheckPlatformAhead();
+        patrolman.CheckWallAhead();
+        if (patrolman.PlatformIsAhead == false || patrolman.WallIsAhead == true)
+        {
+            patrolman.LoseSightOfEnemy();
+            patrolman.Turn();
+            patrolman.StateMachine.ChangeState(patrolman.IdleState);
         }
     }
 

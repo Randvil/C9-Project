@@ -4,11 +4,16 @@ using System.Collections;
 
 public class DeathLoad: IDeathLoad
 {
+    public DeathLoad() { }
+
     public DeathLoad(IDeathManager deathManager)
     {
         deathManager.DeathEvent.AddListener(RewriteData);
-        deathManager.DeathEvent.AddListener(LoadCheckpoint);
     }
+
+    //public DeathLoad()
+    //{
+    //}
 
     public void RewriteData()
     {
@@ -22,14 +27,26 @@ public class DeathLoad: IDeathLoad
 
     public void LoadCheckpoint()
     {
-        Coroutines.StartCoroutine(LoadSceneCoroutine());
+        LoadSceneCoroutine();
     }
 
-    public IEnumerator LoadSceneCoroutine()
+    private void LoadSceneCoroutine()
     {
         FileDataHandler dataHandler = new FileDataHandler("Saves", "LastSave");
         GameData gameData = dataHandler.Load();
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(gameData.CheckpointData.latestScene);
+        //yield return new WaitForSeconds(2f);
+
+        switch (gameData.CheckpointData.latestScene)
+        {
+            case eSceneName.CityLocation:
+                SceneManager.LoadScene("CityLocation");
+                break;
+            case eSceneName.ArcadeCenter:
+                SceneManager.LoadScene("ArcadeCenter");
+                break;
+            case eSceneName.BossLocation:
+                SceneManager.LoadScene("BossLocation");
+                break;
+        }
     }
 }

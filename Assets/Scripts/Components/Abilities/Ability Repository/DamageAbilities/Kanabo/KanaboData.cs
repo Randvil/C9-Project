@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewKanaboData", menuName = "Data/Abilities/New Kanabo Data")]
+[CreateAssetMenu(fileName = "NewKanaboData", menuName = "Data/Abilities/Kanabo/New Kanabo Data")]
 public class KanaboData : DamageAbilityData
 {
     [Header("Kanabo Data")]

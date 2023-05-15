@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class SceneObjectsCreator : Creator
 {
     private SceneObjectsCreatorData prefabsData;
+    private string currentSceneName;
 
     public SceneObjectsCreator(SceneObjectsCreatorData prefabsData)
     {
@@ -21,9 +22,13 @@ public class SceneObjectsCreator : Creator
         StaticUICreator staticUI = new StaticUICreator();
         staticUI.CreateObject(prefabsData.staticUIPrefab, data);
 
+        SceneEffectsCreator sceneEffects = new SceneEffectsCreator();
+        sceneEffects.CreateObject(prefabsData.postProcessingEffects, data);
+
         PlayerCreator player = new PlayerCreator();
         player.CreateObject(prefabsData.playerPrefab, data);
 
+        player.PlayerComponent.volume = sceneEffects.Volume;
         player.PlayerComponent.Initialize(managers.PlayerInput);
         player.PlayerComponent.Document = staticUI.UIDocument;
         player.LoadDataToObject(data);
@@ -33,24 +38,52 @@ public class SceneObjectsCreator : Creator
         staticUI.newGameObject.GetComponentInChildren<DeathScreen>().SetDeathManager(player.PlayerComponent.DeathManager);
         staticUI.newGameObject.GetComponentInChildren<AbilityUiDependencies>().Parry = player.PlayerComponent.Parry;
 
-        DeathLoad deathLoad = new DeathLoad(player.PlayerComponent.DeathManager);
-
         camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
 
         foreach (LocationData ld in data.CurrentGameData.locations)
         {
-            if (ld.sceneName == SceneManager.GetActiveScene().name)
+            switch (ld.sceneName)
             {
-                foreach (SpawnpointData spdata in ld.spawnpoints)
+                case eSceneName.CityLocation:
+                    currentSceneName = "CityLocation";
+                    break;
+                case eSceneName.ArcadeCenter:
+                    currentSceneName = "ArcadeCenter";
+                    break;
+                case eSceneName.BossLocation:
+                    currentSceneName = "BossLocation";
+                    break;
+            }
+
+            if (currentSceneName == SceneManager.GetActiveScene().name)
+            {
+                foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                 {
-                    if (spdata.enemyNumber != 0)
+                    if (once.enemyNumber > 0)
                     {
                         SpawnpointCreator spawnpoint = new SpawnpointCreator();
                         spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
-                        spawnpoint.SpawnpointComponent.StartSpawnpoint(spdata.id, spdata.position, spdata.enemyNumber, spdata.timeCountdown,
-                            spdata.enemyPrefabName, spdata.spawnRadius, spdata.condition, spdata.waveCount);
+                        spawnpoint.SpawnpointComponent.SetSpawnpointInfo(once.id, once.position, once.enemyPrefab, once.enemyMaterial,
+                            once.spawnCondition);
+                        spawnpoint.SpawnpointComponent.SetSpawnpointCondition(once.spawnOnceData.detectPlayerRadius,
+                            once.spawnOnceData.spawnRadius);
                     }
                 }
+
+                foreach (SpawnpointsWave wave in ld.SpawnpointsWave)
+                {
+                    if (wave.spawnWaveData.enemyPerWaveCount > 0)
+                    {
+                        SpawnpointCreator spawnpoint = new SpawnpointCreator();
+                        spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
+                        spawnpoint.SpawnpointComponent.SetSpawnpointInfo(wave.id, wave.position, wave.enemyPrefab, wave.enemyMaterial,
+                            wave.spawnCondition);
+                        spawnpoint.SpawnpointComponent.SetSpawnpointCondition(wave.spawnWaveData.detectPlayerRadius,
+                            wave.spawnWaveData.spawnRadius, wave.spawnWaveData.waveCount, wave.spawnWaveData.enemyPerWaveCount,
+                            wave.spawnWaveData.timeBetweenWaves);
+                    }
+                }
+
             }
         }
     }

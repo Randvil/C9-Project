@@ -1,26 +1,26 @@
 public class CastingAbilityState : BasePlayerState
 {
-    public CastingAbilityState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public CastingAbilityState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        player.AbilityManager.StartCastAbility(abilityNumberToCast);
+        player.AbilityManager.StartCastAbility(playerInterstateData.abilityNumberToCast);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        player.AbilityManager.BreakCastAbility(previousAbilityNumber);
+        player.AbilityManager.BreakCastAbility(playerInterstateData.previousAbilityNumber);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (player.AbilityManager.IsPerforming(abilityNumberToCast) == false)
+        if (player.AbilityManager.IsPerforming(playerInterstateData.abilityNumberToCast) == false)
         {
             stateMachine.ChangeState(player.Standing);
         }
@@ -28,11 +28,11 @@ public class CastingAbilityState : BasePlayerState
 
     protected override void OnAbilityUse(eActionPhase actionPhase, int abilityNumber)
     {
-        if (abilityNumber == abilityNumberToCast)
+        if (abilityNumber == playerInterstateData.abilityNumberToCast)
         {
             if (actionPhase == eActionPhase.Canceled)
             {
-                player.AbilityManager.StopSustainingAbility(abilityNumberToCast);
+                player.AbilityManager.StopSustainingAbility(playerInterstateData.abilityNumberToCast);
             }
 
             return;

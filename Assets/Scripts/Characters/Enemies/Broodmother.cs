@@ -8,7 +8,6 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [Header("Broodmother Prefab Components")]
     [SerializeField] protected Transform[] webSpawnPoints;
     [SerializeField] protected AudioSource movementAudioSource;
-    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Broodmother Data")]
     [SerializeField] protected DamageHandlerWithShieldsData damageHandlerWithShieldsData;
@@ -16,7 +15,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected EnergyManagerData energyManagerData;
     [SerializeField] protected MovementData movementData;
     [SerializeField] protected ClimbData climbData;
-    [SerializeField] protected WeaponData weaponData;
+    [SerializeField] protected MeleeWeaponData meleeWeaponData;
     [SerializeField] protected KanaboData kanaboData;
     [SerializeField] protected OffensiveJumpData offensiveJumpData;
     [SerializeField] protected BroodmotherWebData broodmotherWebData;
@@ -25,6 +24,10 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
+
+    [Header("Broodmother Visual Data")]
+    [SerializeField] protected Material shieldMaterial;
+    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
 
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
@@ -40,14 +43,15 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     public IAbility SwarmSpawningAbility { get; protected set; }
     public ICompoundAttack CompoundAttack { get; protected set; }
 
-    private UIDocument document;
-    public UIDocument Document
+    private VisualElement document;
+    public VisualElement Document
     {
         get => document;
         set
         {
-            shieldBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "shieldBar");
-            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "healthBar");
+            document = value;
+            shieldBarView = new BroodmotherHealthBar(Document, ShieldManager, DeathManager, "shieldBar");
+            HealthBarView = new BroodmotherHealthBar(Document, HealthManager, DeathManager, "broodmotherHealthBar");
         }
     }
 
@@ -57,9 +61,11 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     protected NoArmsWeaponView weaponView;
     protected IHealthBarView shieldBarView;
+    protected BroodmotherShieldView BroodmotherShieldView;
 
     protected override void Awake()
     {
+        //Replace this with initialization in scene loader
         Initialize(GameObject.FindGameObjectWithTag("Player"));
     }
 
@@ -74,7 +80,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         Climb = new Climb(this, climbData, Rigidbody, Gravity, Turning);
         WeaponModifierManager = new ModifierManager();
         AbilityModifierManager = new ModifierManager();
-        Weapon = new CleaveMeleeWeapon(this, gameObject, weaponData, WeaponModifierManager, CharacterTeam, Turning);
+        Weapon = new CleaveMeleeWeapon(this, gameObject, meleeWeaponData, WeaponModifierManager, CharacterTeam, Turning);
         StunAbility = new Kanabo(this, gameObject, kanaboData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         WebAbility = new BroodmotherWeb(this, gameObject, webSpawnPoints, broodmotherWebData, EnergyManager, AbilityModifierManager, Turning, CharacterTeam);
         OffensiveJumpAbility = new OffensiveJump(this, offensiveJumpData, EnergyManager, Rigidbody, Collider, Gravity, Turning, CharacterTeam, AbilityModifierManager);
@@ -85,26 +91,31 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
+        //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
         
-        currentBehavior = new BroodmotherStrategy(this, enemy);
+        currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
-    protected void Update()
+    private void Start()
     {
-        currentBehavior.LogicUpdate();
+        // Should be removed, use SceneLoader
+        var a = FindObjectOfType<PanelManager>();
+        Document = a.panels[0];
     }
 
-    protected void FixedUpdate()
-    {
-        currentBehavior.PhysicsUpdate();
-    }
+    //protected void Update()
+    //{
+    //    currentBehavior.LogicUpdate();
+    //}
 
-    protected void OnDeath()
-    {
-        currentBehavior.Deactivate();
-        Destroy(gameObject, 0.5f);
-    }
+    //protected void FixedUpdate()
+    //{
+    //    currentBehavior.PhysicsUpdate();
+    //}
+
 }

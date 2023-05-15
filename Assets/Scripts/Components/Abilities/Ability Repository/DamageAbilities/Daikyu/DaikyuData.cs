@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDaikyuData", menuName = "Data/Abilities/New Daikyu Data")]
+[CreateAssetMenu(fileName = "NewDaikyuData", menuName = "Data/Abilities/Daikyu/New Daikyu Data")]
 public class DaikyuData : DamageAbilityData
 {
     [Header("Daikyu Data")]

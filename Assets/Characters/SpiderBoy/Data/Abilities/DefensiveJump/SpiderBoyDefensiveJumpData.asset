@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e04ac60ab3fd64cb21cb2c2062d412, type: 3}
   m_Name: SpiderBoyDefensiveJumpData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 5
-  preCastDelay: 0
+  preCastDelay: 0.5
   postCastDelay: 0
   cost: 0
   jumpTime: 0.3
-  initialJumpSpeed: {x: -10, y: 7}
+  initialJumpSpeed: {x: -10, y: 3}
   speedCurve:
     serializedVersion: 2
     m_Curve:

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PatrolmanStrategy : BaseStrategy
 {
-    private Transform checkPlatformAheadTransform;
+    private Transform checkPlatformRightTransform;
+    private Transform checkPlatformLeftTransform;
 
     private PatrolmanStrategyData patrolmanStrategyData;
     private float checkPlatformAheadRadius;
@@ -16,9 +17,10 @@ public class PatrolmanStrategy : BaseStrategy
     public bool PlatformIsAhead { get; private set; }
     public bool WallIsAhead { get; private set; }
 
-    public PatrolmanStrategy(IPatrollingBehavior patrolling)
+    public PatrolmanStrategy(MonoBehaviour owner, IPatrollingBehavior patrolling) : base(owner)
     {
-        checkPlatformAheadTransform = patrolling.CheckPlatformAheadTransform;
+        checkPlatformRightTransform = patrolling.CheckPlatformRightTransform;
+        checkPlatformLeftTransform = patrolling.CheckPlatformLeftTransform;
 
         patrolmanStrategyData = patrolling.PatrolmanStrategyData;
         searchEnemyDistance = patrolmanStrategyData.searchEnemyDistance;
@@ -45,7 +47,8 @@ public class PatrolmanStrategy : BaseStrategy
 
     public void CheckPlatformAhead()
     {
-        PlatformIsAhead = Physics2D.OverlapCircle(checkPlatformAheadTransform.position, checkPlatformAheadRadius, platformLayer) != null;
+        Vector2 checkPlatformPosition = turning.Direction == eDirection.Right ? checkPlatformRightTransform.position : checkPlatformLeftTransform.position;
+        PlatformIsAhead = Physics2D.OverlapCircle(checkPlatformPosition, checkPlatformAheadRadius, platformLayer) != null;
     }
 
     public void CheckWallAhead()

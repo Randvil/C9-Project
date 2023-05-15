@@ -369,7 +369,7 @@
                 {
                     "name": "",
                     "id": "bd139b25-125b-4847-96c0-47f63ed55ef5",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -402,7 +402,7 @@
                 {
                     "name": "",
                     "id": "87441dcd-44d3-44cf-8dfc-c0322b5d15a4",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -435,7 +435,7 @@
                 {
                     "name": "",
                     "id": "24484fd3-a147-4483-b3a1-58306342b981",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -468,7 +468,7 @@
                 {
                     "name": "",
                     "id": "16222f6c-1f7d-4035-ae8f-4f577fc509b4",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -501,7 +501,7 @@
                 {
                     "name": "",
                     "id": "54b4f00f-02c8-4fbc-9409-d0d0683500f1",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -644,7 +644,7 @@
                 {
                     "name": "",
                     "id": "e4581118-c228-42f6-9fe4-3ab0ffeb7dd2",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DyingState : BasePlayerState
 {
-    public DyingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public DyingState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
 
     public override void LogicUpdate()
     {

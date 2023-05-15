@@ -11,14 +11,15 @@ public abstract class AbstractAbility : IAbility
     protected float postCastDelay;
     protected float cost;
 
+    protected Coroutine abilityCoroutine;
     protected Coroutine strikeCoroutine;
     protected float finishCooldownTime;
     protected float startCastTime;
 
     protected IEnergyManager energyManager;
 
-    public eAbilityType Type { get; protected set; }
-    public virtual bool IsPerforming => strikeCoroutine != null; 
+    public eAbilityType AbilityType { get; protected set; }
+    public virtual bool IsPerforming => abilityCoroutine != null; 
     public virtual bool IsOnCooldown => Time.time < finishCooldownTime; 
     public virtual bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= cost;
     public float Cooldown => cooldown;
@@ -31,6 +32,7 @@ public abstract class AbstractAbility : IAbility
     {
         this.owner = owner;
 
+        AbilityType = baseAbilityData.abilityType;
         cooldown = baseAbilityData.cooldown;
         preCastDelay = baseAbilityData.preCastDelay;
         postCastDelay = baseAbilityData.postCastDelay;
@@ -43,7 +45,7 @@ public abstract class AbstractAbility : IAbility
     {
         if (IsPerforming == false)
         {
-            strikeCoroutine = owner.StartCoroutine(ReleaseStrikeCoroutine());
+            abilityCoroutine = owner.StartCoroutine(AbilityCoroutine());
 
             StartCastEvent.Invoke();
         }
@@ -53,11 +55,22 @@ public abstract class AbstractAbility : IAbility
     {
         if (IsPerforming == true)
         {
-            owner.StopCoroutine(strikeCoroutine);
-            strikeCoroutine = null;
+            owner.StopCoroutine(abilityCoroutine);
+            abilityCoroutine = null;
 
             BreakCastEvent.Invoke();
         }
+    }
+
+    protected virtual IEnumerator AbilityCoroutine()
+    {
+        yield return new WaitForSeconds(preCastDelay);
+
+        yield return ReleaseStrikeCoroutine();
+
+        yield return new WaitForSeconds(postCastDelay);
+
+        BreakCast();
     }
 
     protected abstract IEnumerator ReleaseStrikeCoroutine();

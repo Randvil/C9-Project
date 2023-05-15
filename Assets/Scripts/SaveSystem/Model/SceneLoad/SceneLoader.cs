@@ -11,7 +11,6 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-
         dataHandler = new FileDataHandler("Saves", "LastSave");
         gameData = dataHandler.Load();
 

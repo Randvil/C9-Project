@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,15 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     [Header("Land Creature Prefab Components")]
     [SerializeField] protected GameObject avatar;
     [SerializeField] protected Slider healthBarSlider;
-    [SerializeField] protected Material material;
+    [SerializeField] protected SkinnedMeshRenderer[] meshesToCloneMaterials;
+    [SerializeField] protected AudioSource sharedAudioSource;
 
     [Header("Land Creature Data")]
     [SerializeField] protected eTeam initialTeam = eTeam.Enemies;
-    [SerializeField] protected TurningViewData turningViewData;
     [SerializeField] protected HealthManagerData healthManagerData;
     [SerializeField] protected EffectManagerData effectManagerData;
+    [SerializeField] protected TurningViewData turningViewData;
+    [SerializeField] protected DeathViewData deathViewData;
 
     public BoxCollider2D Collider { get; protected set; }
     public Rigidbody2D Rigidbody { get; protected set; }
@@ -32,16 +35,11 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     public TurningView TurningView { get; protected set; }
     public AnimationAndSoundMovementView MovementView { get; protected set; }
     public IHealthBarView HealthBarView { get; protected set; }
+    public DeathView DeathView { get; protected set; }
 
     protected virtual void Awake()
     {
-        //Temp material
-        if (material != null)
-        {
-            Material materialClone = Instantiate(material);
-            GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
-        }
-        //Temp material
+        CloneMaterials();
 
         Collider = GetComponent<BoxCollider2D>();
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -58,5 +56,33 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
         HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
+        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+
+        DeathManager.DeathEvent.AddListener(OnDeath);
+    }
+
+    protected void CloneMaterials()
+    {
+        if (meshesToCloneMaterials.Length == 0)
+        {
+            return;
+        }
+
+        for (int j = 0; j < meshesToCloneMaterials.Length; j++)
+        {
+            Material[] newMaterials = new Material[meshesToCloneMaterials[j].materials.Length];
+
+            for (int i = 0; i < newMaterials.Length; i++)
+            {
+                newMaterials[i] = Instantiate(meshesToCloneMaterials[j].materials[i]);
+            }
+
+            meshesToCloneMaterials[j].materials = newMaterials;
+        }
+    }
+
+    protected void OnDeath()
+    {
+        Destroy(gameObject, 1.5f);
     }
 }

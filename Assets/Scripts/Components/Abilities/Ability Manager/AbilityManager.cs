@@ -22,9 +22,9 @@ public class AbilityManager : IAbilityManager
 
     public IAbility GetAbilityByType(eAbilityType type) => abilities[type];
 
-    public void AddAbility(eAbilityType abilityType, IAbility ability)
+    public void AddAbility(IAbility ability)
     {
-        abilities.Add(abilityType, ability);
+        abilities.Add(ability.AbilityType, ability);
     }
 
     public int LearnAbility(eAbilityType abilityType)
@@ -49,7 +49,7 @@ public class AbilityManager : IAbilityManager
             if (!learnedAbilities.ContainsKey(abilityNumber))
             {
                 learnedAbilities.Add(abilityNumber, ability);
-                AbilityLearnEvent.Invoke(ability.Type);
+                AbilityLearnEvent.Invoke(ability.AbilityType);
                 return abilityNumber;
             }
         }
@@ -101,7 +101,7 @@ public class AbilityManager : IAbilityManager
             if (learnedAbility.Value == ability)
             {
                 learnedAbilities.Remove(learnedAbility.Key);
-                AbilityForgetEvent.Invoke(ability.Type);
+                AbilityForgetEvent.Invoke(ability.AbilityType);
                 return true;
             }
         }

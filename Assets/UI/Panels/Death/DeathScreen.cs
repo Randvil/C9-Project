@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class DeathScreen : MonoBehaviour, IPanel
 {
@@ -10,11 +10,15 @@ public class DeathScreen : MonoBehaviour, IPanel
 
     private PanelManager panelManager;
 
+    [SerializeField] private LoadScreen loadScreen;
+
     private void Start()
     {
         panelManager = GetComponentInParent<PanelManager>();
 
         deathManager.DeathEvent.AddListener(OnDeath);
+
+        panelManager.panels[3].Q<Button>("retryB").clicked += TryAgainClicked;
     }
 
     private void OnDeath()
@@ -26,5 +30,23 @@ public class DeathScreen : MonoBehaviour, IPanel
         //There's no need to switch back because DeathLoad reloads the scene)
     }
 
-    public void SetInput(PlayerInput input) { }
+    private void TryAgainClicked()
+    {
+        loadScreen.EndOfScene();
+
+        DeathLoad deathLoad = new();
+        deathLoad.RewriteData();   
+        StartCoroutine(ReloadSceneCoroutine(deathLoad));
+    }
+
+    private IEnumerator ReloadSceneCoroutine(DeathLoad deathLoad)
+    {
+        yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
+        deathLoad.LoadCheckpoint();
+    }
+
+    public void SetInput(PlayerInput input)
+    {
+
+    }
 }

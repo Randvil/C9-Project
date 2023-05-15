@@ -1,16 +1,38 @@
+
+using UnityEngine;
+
 public class TurnableState : BasePlayerState
 {
-    public TurnableState(Player player, IStateMachine stateMachine, IPlayerInput playerInput) : base(player, stateMachine, playerInput) { }
+    public TurnableState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        Turn();
+    }
 
     public override void LogicUpdate()
     {
-        if (haveToTurn)
+        base.LogicUpdate();
+
+        //Turn();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Turn();
+    }
+
+    protected void Turn()
+    {
+        if (playerInterstateData.haveToTurn)
         {
             eDirection newDirection = player.Turning.Direction == eDirection.Left ? eDirection.Right : eDirection.Left;
             player.Turning.Turn(newDirection);
-            haveToTurn = false;
+            playerInterstateData.haveToTurn = false;
         }
-
-        base.LogicUpdate();
     }
 }

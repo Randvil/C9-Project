@@ -70,6 +70,7 @@ Material:
     - _DissolveAmount: 0
     - _DissolveScale: 40
     - _DissolveWidth: 0.02
+    - _IsHurt: 0
     - _Metallic: 0
     - _NormalStrength: 0.5
     - _QueueControl: 1
@@ -78,6 +79,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 1.712211, g: 0.04058822, b: 0.02422936, a: 0}
+    - _HurtColor: {r: 7.471698, g: 0.2467072, b: 0.2467072, a: 0.5333334}
   m_BuildTextureStacks: []
 --- !u!114 &4227449394443238897
 MonoBehaviour:
