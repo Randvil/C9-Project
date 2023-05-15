@@ -25,8 +25,8 @@ public class EnableSpawnpointsOnce : MonoBehaviour
             switch (locationData.sceneName)
             {
                 case eSceneName.ArcadeCenter:
-                    // enables spawnpoints from 7 to 12 in ArcadeCenter
-                    for (int i = 7; i < 13; i++)
+                    // enables spawnpoints in ArcadeCenter
+                    for (int i = 1; i < locationData.SpawnpointsOnce.Count + 1; i++)
                     {
                         if (locationData.SpawnpointsOnce.Find(spawnpoint => spawnpoint.id == i).enemyNumber == -1)
                             locationData.SpawnpointsOnce.Find(spawnpoint => spawnpoint.id == i).enemyNumber = 1;
