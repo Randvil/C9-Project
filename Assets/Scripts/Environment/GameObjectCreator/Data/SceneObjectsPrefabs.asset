@@ -18,3 +18,7 @@ MonoBehaviour:
   managersPrefab: {fileID: 585390692687979368, guid: b624d71c53758484aa54c40802dd773a, type: 3}
   staticUIPrefab: {fileID: 7951657493376032355, guid: f788f5c5d81acd34abc8c2b34d8a678b, type: 3}
   postProcessingEffects: {fileID: 3875902077564889407, guid: 0ee6c368594206749a3b75e7b47f2781, type: 3}
+  cityBoundingShape: {fileID: 4490963565382592115, guid: fe8310abea07219459e8ed463197ca13, type: 3}
+  arcadeBoundingShape: {fileID: 5214921312942228423, guid: 562ad61821c36fc46988b59659107c0e, type: 3}
+  bossBoundingShape: {fileID: 3536144088956559141, guid: d9de5ca7c3f246043bffdc65e7532f45, type: 3}
+  targetGroupBossRoom: {fileID: 8576323225518311790, guid: beb5194eef8aef241992a6ddc711658a, type: 3}

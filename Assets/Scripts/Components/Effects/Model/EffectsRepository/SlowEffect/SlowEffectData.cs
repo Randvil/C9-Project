@@ -9,4 +9,5 @@ public class SlowEffectData : ScriptableObject
     public float movementSlowValue;
     [Min(0f)]
     public float duration;
+    public Material webMaterial;
 }

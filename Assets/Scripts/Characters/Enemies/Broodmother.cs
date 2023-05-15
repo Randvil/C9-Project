@@ -25,6 +25,10 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
 
+    [Header("Broodmother Visual Data")]
+    [SerializeField] protected Material shieldMaterial;
+    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
+
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
     public IClimb Climb { get; protected set; }
@@ -55,6 +59,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     protected NoArmsWeaponView weaponView;
     protected IHealthBarView shieldBarView;
+    protected BroodmotherShieldView BroodmotherShieldView;
 
     protected override void Awake()
     {
@@ -84,11 +89,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
+        //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
         
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
+        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 
     private void Start()

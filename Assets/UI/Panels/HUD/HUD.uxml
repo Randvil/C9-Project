@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI/Panels/HUD/HUDStyles.uss?fileID=7433441132597879392&amp;guid=c0442d01171f404418977d7baf0b01b8&amp;type=3#HUDStyles" />
     <Style src="project://database/Assets/UI/Panels/Abilities/Abilities.uss?fileID=7433441132597879392&amp;guid=e047b53d0d51cef49a3d5bce126c854d&amp;type=3#Abilities" />
     <Style src="project://database/Assets/UI/CustomControls/Polygon/Resources/PolygonStyles.uss?fileID=7433441132597879392&amp;guid=244aae9a5d60e5f4688dfaed29a3bfec&amp;type=3#PolygonStyles" />
-    <ui:VisualElement name="screen" style="flex-grow: 1; margin-left: 66px; margin-top: 66px; margin-bottom: 66px; margin-right: 66px;">
-        <ui:VisualElement name="playerStatsContainer" style="width: 35%; flex-direction: row; scale: 1.4 1.4; transform-origin: left top;">
+    <ui:VisualElement name="screen" style="flex-grow: 1; margin-left: 66px; margin-top: 66px; margin-bottom: 66px; margin-right: 66px; align-items: center;">
+        <ui:VisualElement name="playerStatsContainer" style="width: 35%; flex-direction: row; scale: 1.4 1.4; transform-origin: left top; left: 0; position: absolute;">
             <NS.RomanLib.RadialFill name="energyBar" text="100" width="70" height="70" value="0.86" overlay-image-path="radialBlack" overlay-image-scale="0.914" fill-color="#3F3FF1BE" label="true" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(0, 0, 0);" />
             <ui:VisualElement style="flex-grow: 1; justify-content: space-around; align-items: flex-start; margin-left: 11px; margin-top: 12px;">
                 <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; flex-shrink: 1;">
@@ -38,14 +38,14 @@
                     </ui:VisualElement>
                     <ui:VisualElement name="parry" class="poly_InGame">
                         <ui:VisualElement name="mask" class="vectorMask">
-                            <NS.RomanLib.RadialFill text="100" width="40" height="44" fill-color="#FF000096" overlay-image-path="poly" overlay-image-scale="0.95" value="0" class="radialAbil" style="background-image: resource(&apos;ParryIcon512h&apos;);" />
+                            <NS.RomanLib.RadialFill text="100" width="40" height="44" fill-color="#FF000096" overlay-image-path="poly" overlay-image-scale="0.95" value="0" class="radialAbil" style="background-image: resource(&apos;ParryIcon512h&apos;); -unity-slice-left: 4; -unity-slice-top: 4;" />
                         </ui:VisualElement>
                         <ui:Label text="RMB" display-tooltip-when-elided="true" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="hints" style="position: absolute; right: 0; font-size: 32px; color: rgba(255, 255, 255, 0.67); flex-direction: column-reverse; bottom: 0; transform-origin: right;">
+        <ui:VisualElement name="hints" style="position: absolute; font-size: 32px; color: rgba(255, 255, 255, 0.67); flex-direction: column-reverse; transform-origin: right; bottom: 72%;">
             <ui:Label text="USE \U00F1F60F / \U00F1F80F FOR MOVEMENT" display-tooltip-when-elided="true" name="movement" class="hint" />
             <ui:Label text="USE \U00F1F60B/\U00F1F80B FOR ATTACK" display-tooltip-when-elided="true" enable-rich-text="true" name="attack" class="hint" />
             <ui:Label text="USE \U00F1F60A/ &lt;b&gt;W,S&lt;/b&gt; FOR CLIMBING THE LADDER " display-tooltip-when-elided="true" name="ladder" class="hint" />
@@ -56,13 +56,15 @@
             <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
             <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO PICK UP THE ABILITY" display-tooltip-when-elided="true" name="ability" class="hint" />
         </ui:VisualElement>
-        <ui:VisualElement name="bossStats" style="position: absolute; top: 45px; right: 66px; scale: 1.4 1.4; align-items: flex-end; display: none;">
-            <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1;">
+        <ui:VisualElement name="bossStats" style="position: absolute; right: 66px; scale: 1.4 1.4; align-items: center; display: none;">
+            <ui:Label text="OGUMO" display-tooltip-when-elided="true" name="name" style="font-size: 26px; color: rgba(255, 255, 255, 0.75); -unity-text-align: upper-right; padding-right: 0; margin-right: 0; margin-top: 0; align-items: center;" />
+            <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1; position: absolute; top: 41px; left: -53px;">
                 <ui:Label text="100%" name="broodmotherHealthBarLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-right: 13px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
-                <ui:ProgressBar value="1" name="broodmotherHealthBar" high-value="1" class="healthBar" style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 4px; padding-bottom: 0; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px;" />
             </ui:VisualElement>
-            <ui:ProgressBar value="1" name="shieldBar" high-value="1" style="width: 200px; height: 8px; margin-right: 0; margin-top: 10px; margin-bottom: 10px;" />
-            <ui:Label text="OGUMO" display-tooltip-when-elided="true" style="font-size: 32px; color: rgba(183, 39, 39, 0.75); -unity-text-align: upper-right; padding-right: 0; margin-right: 0;" />
+            <ui:VisualElement>
+                <ui:ProgressBar value="1" name="broodmotherHealthBar" high-value="1" class="healthBar" style="background-color: rgba(0, 0, 0, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); height: 4px; flex-grow: 1; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; width: 270px; margin-left: 8px; margin-right: 8px; margin-top: 8px; margin-bottom: 8px;" />
+                <ui:ProgressBar value="1" name="shieldBar" high-value="1" style="width: 270px; height: 4px; margin-left: 8px; margin-right: 8px; margin-top: 8px; margin-bottom: 8px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -6,6 +6,7 @@ public class Web : Projectile
 {
     [SerializeField] protected SlowEffectData slowEffectData;
     [SerializeField] protected RootEffectData rootEffectData;
+    private Material[] matArray;
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,6 +24,10 @@ public class Web : Projectile
         {
             effectableEnemy.EffectManager.AddEffect(new SlowEffect(slowEffectData));
             effectableEnemy.EffectManager.AddEffect(new RootEffect(rootEffectData));
+            
+            matArray = other.GetComponentInChildren<SkinnedMeshRenderer>().materials;
+            matArray[1] = slowEffectData.webMaterial;
+            other.GetComponentInChildren<SkinnedMeshRenderer>().materials = matArray;
         }
 
         Remove();
