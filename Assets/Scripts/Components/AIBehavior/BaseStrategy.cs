@@ -168,7 +168,7 @@ public class BaseStrategy : IAIBehavior
 
     protected virtual void OnTakeDamage(DamageInfo damageInfo)
     {
-        GameObject damagingEnemy = damageInfo.damageSourceObject;
+        GameObject damagingEnemy = damageInfo.damageOwnerObject;
 
         if (damagingEnemy == null)
         {

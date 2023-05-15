@@ -12,6 +12,7 @@ public class EffectManager : IEffectManager
     private List<ISlowEffect> slowEffects = new();
     private List<IDoTEffect> doTEffects = new();
     private List<IDamageEffect> damageEffects = new();
+    private List<IRootEffect> rootEffects = new();
 
     private EffectManagerData effectManagerData;
 
@@ -62,6 +63,14 @@ public class EffectManager : IEffectManager
         }
     }
 
+    private void CheckRootEffects()
+    {
+        if (rootEffects.Count < 1)
+        {
+            EffectEvent.Invoke(eEffectType.Root, eEffectStatus.Cleared);
+        }
+    }
+
     private void DealDoTDamage()
     {
         foreach (IDoTEffect doTEffect in doTEffects)
@@ -101,6 +110,11 @@ public class EffectManager : IEffectManager
                 damageEffects.Add(effect as IDamageEffect);
                 EffectEvent.Invoke(eEffectType.Damage, eEffectStatus.Added);
                 break;
+
+            case IRootEffect:
+                rootEffects.Add(effect as IRootEffect);
+                EffectEvent.Invoke(eEffectType.Root, eEffectStatus.Added);
+                break;
         }
     }
     public void RemoveEffect(IEffect effect)
@@ -129,6 +143,12 @@ public class EffectManager : IEffectManager
                 damageEffects.Remove(effect as IDamageEffect);
                 EffectEvent.Invoke(eEffectType.Damage, eEffectStatus.Removed);
                 break;
+
+            case IRootEffect:
+                rootEffects.Remove(effect as IRootEffect);
+                EffectEvent.Invoke(eEffectType.Root, eEffectStatus.Removed);
+                CheckRootEffects();
+                break;
         }
     }
 
@@ -150,6 +170,10 @@ public class EffectManager : IEffectManager
 
             case eEffectType.Damage:
                 damageEffects.Clear();
+                break;
+
+            case eEffectType.Root:
+                rootEffects.Clear();
                 break;
         }
 

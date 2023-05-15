@@ -25,11 +25,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     public ICompoundAttack CompoundAttack { get; private set; }
     public ICompoundProtection CompoundProtection { get; private set; }
 
-
     protected NoArmsWeaponView weaponView;
-    protected CreatureSpawnerView spiderSpawnerView;
-
-    protected IAIBehavior currentBehavior;
+    protected CreatureSpawnerView spiderSpawnerView;    
 
     protected override void Awake()
     {
@@ -41,7 +38,7 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         SpiderSpawnAbility = new CreatureSpawner(this, spiderSpawnPoint, creatureSpawnerData, EnergyManager);
         JumpAbility = new DefensiveJump(this, defensiveJumpData, EnergyManager, Rigidbody, Gravity, Turning);
         CompoundAttack = new SpiderboyCompoundAttack(gameObject, Weapon, SpiderSpawnAbility);
-        CompoundProtection = new SpiderboyCompoundProtection(compoundProtectionData, HealthManager, JumpAbility, EffectManager);
+        CompoundProtection = new SpiderboyCompoundProtection(gameObject, compoundProtectionData, HealthManager, JumpAbility, EffectManager, DeathManager);
 
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         spiderSpawnerView = new CreatureSpawnerView(spiderSpawnerViewData, SpiderSpawnAbility, sharedAudioSource);
@@ -52,14 +49,4 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
-
-    //private void Update()
-    //{
-    //    currentBehavior.LogicUpdate();
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    currentBehavior.PhysicsUpdate();
-    //}
 }

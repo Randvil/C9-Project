@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d5ee5dcf1cfd2408a33fcc64065130, type: 3}
   m_Name: BroodmotherSwarmSpawningData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 0
   preCastDelay: 0
   postCastDelay: 0
@@ -26,3 +27,4 @@ MonoBehaviour:
     swarmMembers:
     - {fileID: 9048720266790035559, guid: 766f34aa5b6b8d8468736feb8f185304, type: 3}
     - {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
+    - {fileID: 5726873128067666410, guid: 9f1846d6783953d4185d97dbe51a0dcd, type: 3}

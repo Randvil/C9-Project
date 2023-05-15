@@ -4,37 +4,43 @@ using UnityEngine;
 
 public class SpiderboyCompoundProtection : ICompoundProtection
 {
+    private GameObject spiderboy;
+
     private IHealthManager healthManager;
     private IAbility jump;
     private IEffectManager effectManager;
+    private IDeathManager deathManager;
 
     private bool isDisabled;
     private float relativeHealthThreshold;
+    private float enemyDistanceThreshold;
 
-    public SpiderboyCompoundProtection(CompoundProtectionData compoundProtectionData, IHealthManager healthManager, IAbility jump, IEffectManager effectManager)
+    public bool CanUseProtection => jump.CanBeUsed;
+
+    public SpiderboyCompoundProtection(GameObject spiderboy, CompoundProtectionData compoundProtectionData, IHealthManager healthManager, IAbility jump, IEffectManager effectManager, IDeathManager deathManager)
     {
+        this.spiderboy = spiderboy;
+
         relativeHealthThreshold = compoundProtectionData.relativeHealthThreshold;
+        enemyDistanceThreshold = compoundProtectionData.enemyDistanceThreshold;
 
         this.healthManager = healthManager;
         this.jump = jump;
         this.effectManager = effectManager;
+        this.deathManager = deathManager;
 
         effectManager.EffectEvent.AddListener(OnStun);
+        deathManager.DeathEvent.AddListener(OnDeath);
     }
 
-    public void Protect()
+    public void Protect(Vector2 enemyPosition)
     {
         if (isDisabled)
         {
             return;
         }
 
-        if (jump.IsPerforming)
-        {
-            return;
-        }
-
-        if (jump.CanBeUsed && healthManager.Health.currentHealth / healthManager.Health.maxHealth < relativeHealthThreshold)
+        if (Vector2.Distance(enemyPosition, spiderboy.transform.position) < enemyDistanceThreshold && healthManager.Health.currentHealth / healthManager.Health.maxHealth <= relativeHealthThreshold)
         {
             jump.StartCast();
             return;
@@ -65,5 +71,10 @@ public class SpiderboyCompoundProtection : ICompoundProtection
         {
             isDisabled = false;
         }
+    }
+
+    public void OnDeath()
+    {
+        isDisabled = true;
     }
 }

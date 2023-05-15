@@ -28,8 +28,6 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
     protected NoArmsWeaponView weaponView;
     protected InvisibilityView invisibilityView;
 
-    protected IAIBehavior currentBehavior;
-
     public Transform CheckPlatformRightTransform => checkPlatformRightTransform;
     public Transform CheckPlatformLeftTransform => checkPlatformLeftTransform;
     public PatrolmanStrategyData PatrolmanStrategyData => patrolmanStrategyData;
@@ -58,14 +56,4 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
 
         Invisibility.StartCast();
     }
-
-    //protected void Update()
-    //{
-    //    currentBehavior.LogicUpdate();
-    //}
-
-    //protected void FixedUpdate()
-    //{
-    //    currentBehavior.PhysicsUpdate();
-    //}
 }

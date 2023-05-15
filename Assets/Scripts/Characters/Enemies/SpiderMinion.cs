@@ -30,8 +30,6 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
     protected NoArmsWeaponView weaponView;
     protected CommonAbilityView jumpAbilityView;
 
-    protected IAIBehavior currentBehavior;
-
     public Transform CheckPlatformRightTransform => checkPlatformRightTransform;
     public Transform CheckPlatformLeftTransform => checkPlatformLeftTransform;
     public PatrolmanStrategyData PatrolmanStrategyData => patrolmanStrategyData;

@@ -6,5 +6,5 @@ using UnityEngine;
 public class StunEffectData : ScriptableObject
 {
     [Min(0f)]
-    public float duration;
+    public float duration = 1f;
 }

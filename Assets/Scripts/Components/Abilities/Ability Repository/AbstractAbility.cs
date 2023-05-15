@@ -55,6 +55,12 @@ public abstract class AbstractAbility : IAbility
     {
         if (IsPerforming == true)
         {
+            if (strikeCoroutine != null)
+            {
+                owner.StopCoroutine(strikeCoroutine);
+                strikeCoroutine = null;
+            }
+
             owner.StopCoroutine(abilityCoroutine);
             abilityCoroutine = null;
 
@@ -66,6 +72,7 @@ public abstract class AbstractAbility : IAbility
     {
         yield return new WaitForSeconds(preCastDelay);
 
+        //yield return strikeCoroutine = owner.StartCoroutine(ReleaseStrikeCoroutine());
         yield return ReleaseStrikeCoroutine();
 
         yield return new WaitForSeconds(postCastDelay);

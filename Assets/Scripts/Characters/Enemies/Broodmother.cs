@@ -53,8 +53,6 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     public BroodmotherStrategyData BroodmotherStrategyData => broodmotherStrategyData;
 
-    protected IAIBehavior currentBehavior;
-
     protected NoArmsWeaponView weaponView;
     protected IHealthBarView shieldBarView;
 
@@ -99,15 +97,4 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         var a = FindObjectOfType<PanelManager>();
         Document = a.panels[0];
     }
-
-    //protected void Update()
-    //{
-    //    currentBehavior.LogicUpdate();
-    //}
-
-    //protected void FixedUpdate()
-    //{
-    //    currentBehavior.PhysicsUpdate();
-    //}
-
 }

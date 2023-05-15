@@ -37,6 +37,8 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     public IHealthBarView HealthBarView { get; protected set; }
     public DeathView DeathView { get; protected set; }
 
+    protected IAIBehavior currentBehavior;
+
     protected virtual void Awake()
     {
         CloneMaterials();
@@ -83,6 +85,11 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
     protected void OnDeath()
     {
+        if (currentBehavior != null)
+        {
+            currentBehavior.Deactivate();
+        }
+
         Destroy(gameObject, 1.5f);
     }
 }

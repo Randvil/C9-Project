@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityType: 2
   cooldown: 10
-  preCastDelay: 0
+  preCastDelay: 1
   postCastDelay: 0
   cost: 10
   damageData: {fileID: 11400000, guid: d45e3de8a1adff14e9afc1617af2b4c5, type: 2}
   projectilePrefab: {fileID: 7132006248812665339, guid: 1ce35fd0ffe9ba741b98774da14cb465, type: 3}
-  fullChargeTime: 1
-  fullChargeDamageMultiplier: 2
+  fullChargeTime: 3
+  fullChargeDamageMultiplier: 5

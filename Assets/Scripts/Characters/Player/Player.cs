@@ -42,6 +42,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private DeathViewData deathViewData;
     [SerializeField] private JumpViewData jumpViewData;
+    [SerializeField] private ParryViewData parryViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
     [SerializeField] private DaikyuViewData daikyuViewData;
     [SerializeField] private KanaboViewData kanaboViewData;
@@ -147,8 +148,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         Turning = new Turning();
         Movement = new Movement(movementData, Rigidbody, Turning, EffectManager);
         Crouch = new Crouch(crouchData, Collider, EffectManager);
-        Jump = new Jump(this, jumpData, Rigidbody, Gravity);
-        Roll = new Roll(this, rollData, Collider, Rigidbody, Turning, DefenceModifierManager);
+        Jump = new Jump(this, jumpData, Rigidbody, Gravity, EffectManager);
+        Roll = new Roll(this, rollData, Collider, Rigidbody, Turning, DefenceModifierManager, EffectManager);
         Weapon = new CleaveMeleeWeapon(this, gameObject, meleeWeaponData, WeaponModifierManager, CharacterTeam, Turning);
         WeaponEnergyRegenerator = new EnergyRegenerator(energyRegeneratorData, EnergyManager, Weapon as IDamageDealer);
         SlowdownDuringAttack = new SlowEffect(slowdownDuringAttackData);
@@ -179,7 +180,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         RollView = new RollView(Roll, Animator);
         WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
-        ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, Parry, Animator);
+        ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, parryViewData, Parry, Animator, sharedAudioSource);
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
         StunView = new StunView(EffectManager, Animator);

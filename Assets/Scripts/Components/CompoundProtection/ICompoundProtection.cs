@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ICompoundProtection 
 {
-    public void Protect();
+    public void Protect(Vector2 enemyPosition);
     public void BreakProtection();
+    public bool CanUseProtection { get; }
 }
