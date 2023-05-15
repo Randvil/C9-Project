@@ -91,7 +91,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
+        //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
         
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();

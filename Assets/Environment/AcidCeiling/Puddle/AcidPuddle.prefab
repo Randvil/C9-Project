@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6bacdde3a4ec0f445874ca05ab8ccf5c, type: 2}
     - target: {fileID: 919132149155446097, guid: dd547493f5af6da43bbdd7e02e8ce205, type: 3}
       propertyPath: m_Name
-      value: CircleShockwave2
+      value: AcidCircle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd547493f5af6da43bbdd7e02e8ce205, type: 3}

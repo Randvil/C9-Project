@@ -24,16 +24,14 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: bc8562ec4af63e840b50d75c2daeed50, type: 3}
   m_ValidKeywords:
   - _RECEIVE_SHADOWS_OFF
-  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: Transparent
+    RenderType: Opaque
   disabledShaderPasses:
-  - DepthOnly
   - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
@@ -62,7 +60,7 @@ Material:
     - _Depth: 1
     - _DepthToAlpha: 1
     - _DisplacementStrength: 0
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EdgeMaxAlpha: 1
     - _NormalStrength: 0.7
     - _QueueControl: 0
@@ -72,11 +70,11 @@ Material:
     - _RippleSize: 5
     - _RippleSpeed: 1
     - _Smoothness: 0.5
-    - _SrcBlend: 5
-    - _Surface: 1
+    - _SrcBlend: 1
+    - _Surface: 0
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 0.3372549, g: 2, b: 0.50980395, a: 1}

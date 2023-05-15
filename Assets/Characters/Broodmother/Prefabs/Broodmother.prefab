@@ -846,7 +846,7 @@ VisualEffect:
       - m_Value: {x: 270, y: 90, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 11.77, y: -1.76, z: 0}
+      - m_Value: {x: 0, y: -1.4399999, z: 0}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 100, y: 100, z: 100}
@@ -1229,7 +1229,8 @@ MonoBehaviour:
   swarmSpawningData: {fileID: 11400000, guid: 9333d50b06c21474c9184e157c7e3c92, type: 2}
   broodmotherStrategyData: {fileID: 11400000, guid: 52432e9ee1161c24eb7f4b40a441852a, type: 2}
   weaponViewData: {fileID: 11400000, guid: a27f33c1ed052374c88d428e5c77f143, type: 2}
-  shieldMaterial: {fileID: 2100000, guid: f130e11ade76e804dbe155b3d062d9f5, type: 2}
+  shieldMaterial: {fileID: 0}
+  skinnedMesh: {fileID: 9113583240424049135}
 --- !u!114 &8850710953850764198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,12 +1582,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3294048809952044586, guid: 69b4ce1848b8b4946849f6e779763f12, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3294048809952044586, guid: 69b4ce1848b8b4946849f6e779763f12, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 073e7069e67708e45941753074410921, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69b4ce1848b8b4946849f6e779763f12, type: 3}
 --- !u!4 &6072406070954674222 stripped
