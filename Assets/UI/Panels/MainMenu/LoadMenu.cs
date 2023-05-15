@@ -44,6 +44,9 @@ public class LoadMenu : MonoBehaviour
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
 
+        DeathLoad deathLoad = new DeathLoad();
+        deathLoad.RewriteData();
+
         switch (gameData.CheckpointData.latestScene)
         {
             case eSceneName.CityLocation:

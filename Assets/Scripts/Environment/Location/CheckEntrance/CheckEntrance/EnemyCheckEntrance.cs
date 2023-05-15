@@ -56,7 +56,6 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                 SpawnpointsOnce once = CitySpawnpointsOnce.Find(spawnpoint => spawnpoint.id == id);
                 if (once != null && once.enemyNumber > 0)
                 {
-                    Debug.Log("Once in city checked " + once.id);
                     return true;
                 }     
             }
@@ -66,7 +65,6 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                 SpawnpointsWave wave = CitySpawnpointsWave.Find(spawnpoint => spawnpoint.id == id);
                 if (wave != null && wave.spawnWaveData.enemyPerWaveCount != 0)
                 {
-                    Debug.Log("Wave in city checked " + wave.id);
                     return true;
                 }
             }
@@ -79,7 +77,6 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                 SpawnpointsOnce once = ArcadeCenterOnce.Find(spawnpoint => spawnpoint.id == id);
                 if (once != null && once.enemyNumber > 0)
                 {
-                    Debug.Log("Once in arcade checked " + once.id);
                     return true;
                 }
             }
@@ -89,7 +86,6 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
                 SpawnpointsWave wave = ArcadeCenterWave.Find(spawnpoint => spawnpoint.id == id);
                 if (wave != null && wave.spawnWaveData.enemyPerWaveCount > 0)
                 {
-                    Debug.Log("Wave in city checked " + wave.id);
                     return true;
                 }
             }

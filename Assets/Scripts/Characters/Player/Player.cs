@@ -51,6 +51,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private VisualEffect slashGraph;
     [SerializeField] private VisualEffect kanaboGraph;
     [SerializeField] private VisualEffect tessenGraph;
+    [SerializeField] private VisualEffect regenerationGraph;
     public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
@@ -98,6 +99,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public DaikyuView DaikyuAbilityView { get; private set; }
     public TessenAbilityView TessenAbilityView { get; private set; }
     public KanaboAbilityView KanaboAbilityView { get; private set; }
+    public RegenerationAbilityView RegenerationAbilityView { get; private set; }
+    public RemoveWebView RemoveWebView { get; private set; }
 
     public IStateMachine StateMachine { get; private set; }
     public IState Standing { get; private set; }
@@ -187,6 +190,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
         TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
+        RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
+        RemoveWebView = new RemoveWebView(EffectManager, GetComponentInChildren<SkinnedMeshRenderer>());
 
         CreateStateMachine();
     }

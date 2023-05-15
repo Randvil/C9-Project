@@ -833,6 +833,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: skinnedMesh
+      value: 
+      objectReference: {fileID: 639965215}
+    - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: shieldMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f130e11ade76e804dbe155b3d062d9f5, type: 2}
+    - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: meshesToCloneMaterials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: meshesToCloneMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 639965215}
     - target: {fileID: 2016374568, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -840,6 +856,14 @@ PrefabInstance:
     - target: {fileID: 2016374568, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 304787986757931247, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: 11.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 304787986757931247, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: -1.76
       objectReference: {fileID: 0}
     - target: {fileID: 6013793081996121017, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
       propertyPath: m_AnchorMax.x
@@ -897,8 +921,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Broodmother
       objectReference: {fileID: 0}
+    - target: {fileID: 9113583240424049135, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113583240424049135, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+--- !u!137 &639965215 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9113583240424049135, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+  m_PrefabInstance: {fileID: 639965214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &645018728
 PrefabInstance:
   m_ObjectHideFlags: 0

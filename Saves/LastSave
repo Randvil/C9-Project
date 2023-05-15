@@ -1,10 +1,10 @@
 {
     "CheckpointData": {
-        "playerHealth": 1000.0,
-        "playerEnergy": 33.0,
+        "playerHealth": 955.0,
+        "playerEnergy": 0.0,
         "position": {
-            "x": -9.140000343322754,
-            "y": 10.231952667236329,
+            "x": 211.4613037109375,
+            "y": 11.132497787475586,
             "z": 0.0
         },
         "latestScene": 0,
@@ -25,7 +25,7 @@
                             "y": 11.170000076293946,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -73,7 +73,7 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -246,7 +246,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 0,
+                        "enemyNumber": -1,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -341,11 +341,11 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 1000.0,
-        "playerEnergy": 33.0,
+        "playerHealth": 955.0,
+        "playerEnergy": 0.0,
         "position": {
-            "x": -9.140000343322754,
-            "y": 10.229999542236329,
+            "x": -12.670000076293946,
+            "y": -0.8899999856948853,
             "z": 0.0
         },
         "latestScene": 0,
@@ -366,7 +366,7 @@
                             "y": 11.170000076293946,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -414,7 +414,7 @@
                             "y": -0.2800000011920929,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -587,7 +587,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 0,
+                        "enemyNumber": -1,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,

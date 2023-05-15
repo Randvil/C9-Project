@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSlowValue: 0.9
   duration: 5
+  webMaterial: {fileID: 2100000, guid: 51684f077e922bb4c828daaff716750c, type: 2}
