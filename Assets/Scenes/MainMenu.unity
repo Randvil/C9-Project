@@ -411,13 +411,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pages:
-  - {fileID: 2800000, guid: 4f7546b6cdd5cac4daddecbc42ef5d0d, type: 3}
-  - {fileID: 2800000, guid: 72afb8407b08fce4a89fab013773d848, type: 3}
-  - {fileID: 2800000, guid: a4452ad67fa34544aad12e49b25bda5b, type: 3}
+  - {fileID: 2800000, guid: c0690e04a37331243b40c0be82df15c5, type: 3}
+  - {fileID: 2800000, guid: 2fdd10c8c88c7f34083b7e86f39bd3bb, type: 3}
+  - {fileID: 2800000, guid: 8cb3dc29cb195444786c0edc53415d97, type: 3}
+  - {fileID: 2800000, guid: d0eb4769fe0459943a34f6ef3daf90e2, type: 3}
+  - {fileID: 2800000, guid: ef3bb0e7887447147b3d6cf788abca30, type: 3}
+  - {fileID: 2800000, guid: 5f984a1ff3424be4a8c8ed98b4907e23, type: 3}
+  - {fileID: 2800000, guid: 20876f72b3dba4f4fa9bf4e57854dc47, type: 3}
+  - {fileID: 2800000, guid: efcb6098fe1a2ff45b26cd8a6d2d1243, type: 3}
+  - {fileID: 2800000, guid: a6faae89c0d01a64abcf838f087cf706, type: 3}
+  - {fileID: 2800000, guid: 26157a7c2c1970347a95f4bc8e4e6eac, type: 3}
   phrases:
   - A NU IDI SUDA
   - SAMPLE TEXT 1 long sdkjfslkdfjsdlkjfsklerjfsijfisjf sfjiofje ia eokad ae oksf;of 
     s;efkao;ekf a eida edw iawj d
+  - SAMPLE TEXT 2
+  - SAMPLE TEXT 2
+  - SAMPLE TEXT 2
+  - SAMPLE TEXT 2
+  - SAMPLE TEXT 2
+  - sanya zvukar'
+  - SAMPLE TEXT 2
   - SAMPLE TEXT 2
   parentPanelManager: {fileID: 906469672916950774}
   pageManager: {fileID: 915974411}
