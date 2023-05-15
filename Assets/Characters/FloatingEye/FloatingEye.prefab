@@ -127,7 +127,7 @@ VisualEffect:
       - m_Value: {x: 0.000009334669, y: 90, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 0.63, y: 0.21049982, z: 0}
+      - m_Value: {x: -19.441774, y: 10.780499, z: 0}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -311,8 +311,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5726873128067666410}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a7a687deb964e8d4bb698e6e3a1caf2a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2b91eb5195103f64492ab54ee730fab3, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+  m_Controller: {fileID: 9100000, guid: 4f434cce2c89c1946aeec0a52b8ad2dc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
