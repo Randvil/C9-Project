@@ -25,7 +25,7 @@ public class BroodmotherShieldView
         }
         else
         {
-            matArray[1] = null;
+            matArray[1] = matArray[0];
             SkinnedMeshRenderer.materials = matArray;
         }
     }
