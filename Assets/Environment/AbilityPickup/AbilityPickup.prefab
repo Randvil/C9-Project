@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4007929090255310959}
   - component: {fileID: -3886255913225380425}
   - component: {fileID: 4914773934832471259}
-  - component: {fileID: -8323930968379815038}
+  - component: {fileID: 6068786927682764260}
   m_Layer: 10
   m_Name: AbilityPickup
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityType: 0
---- !u!114 &-8323930968379815038
+--- !u!114 &6068786927682764260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8466639367378699355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
+  m_Script: {fileID: 11500000, guid: bf1061327b2f42b4eb6896528e0181b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: ability

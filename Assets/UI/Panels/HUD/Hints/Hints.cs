@@ -7,8 +7,6 @@ public class Hints : MonoBehaviour
 {
 	private const string hiddenClass = "hidden-hint";
 
-	public float HintLifeTime { get; private set; } = 4f;
-
 	private VisualElement hintContainer;
 
 	private readonly Dictionary<string, Label> hints = new();
@@ -18,8 +16,11 @@ public class Hints : MonoBehaviour
 	private void Awake()
 	{
 		interactiveObjects = FindObjectsOfType<Hintable>().ToList(); //~0.0015s
-        interactiveObjects.ForEach
-			(obj => obj.ShowHint.AddListener(ShowHint));
+		interactiveObjects.ForEach(obj =>
+		{
+			obj.ShowHint.AddListener(ShowHint);
+			obj.HideHint.AddListener(HideHint);
+		});
 
 		hintContainer = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("hints");
 		hintContainer.Query<Label>().ForEach(label =>
@@ -29,7 +30,7 @@ public class Hints : MonoBehaviour
 		});
 	}
 
-	public void AddHintable(Hintable hintable) => interactiveObjects.Add(hintable);
+	//public void AddHintable(Hintable hintable) => interactiveObjects.Add(hintable);
 
 	private void ShowHint(string labelName)
 	{
@@ -38,14 +39,10 @@ public class Hints : MonoBehaviour
 			return;
 
 		hint.RemoveFromClassList(hiddenClass);
-
-		StartCoroutine(HideHint(hint));
 	}
 
-	private IEnumerator<object> HideHint(Label target)
+	private void HideHint(string labelName)
 	{
-		yield return new WaitForSecondsRealtime(HintLifeTime);
-
-		target.AddToClassList(hiddenClass);
+		hints[labelName].AddToClassList(hiddenClass);
 	}
 }
