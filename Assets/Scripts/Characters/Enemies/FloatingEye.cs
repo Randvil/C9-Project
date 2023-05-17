@@ -44,7 +44,7 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
         CompoundAttack = new JustWeaponCompoundAttack(gameObject, Weapon);
         Invisibility = new Invisibility(this, invisibilityData, EnergyManager, DamageHandler, Weapon);
 
-        MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
+        MovementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         invisibilityView = new InvisibilityView(this, Invisibility as Invisibility, meshesToCloneMaterials);
 

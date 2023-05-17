@@ -24,10 +24,13 @@ public class Web : Projectile
         {
             effectableEnemy.EffectManager.AddEffect(new SlowEffect(slowEffectData));
             effectableEnemy.EffectManager.AddEffect(new RootEffect(rootEffectData));
-            
-            matArray = other.GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        }
+
+        if (other.TryGetComponent(out Player player))
+        {
+            matArray = player.MainMesh.materials;
             matArray[1] = slowEffectData.webMaterial;
-            other.GetComponentInChildren<SkinnedMeshRenderer>().materials = matArray;
+            player.MainMesh.materials = matArray;
         }
 
         Remove();

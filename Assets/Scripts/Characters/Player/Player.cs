@@ -12,8 +12,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private GameObject daikyuBowObject;
     [SerializeField] private GameObject kanaboObject;
     [SerializeField] private GameObject tessenObject;
-    [SerializeField] private Transform weaponContainer;
-    [SerializeField] private Transform weaponGrip;
+    //[SerializeField] private Transform weaponContainer;
+    //[SerializeField] private Transform weaponGrip;
+    [SerializeField] private SkinnedMeshRenderer mainMesh;
     [SerializeField] private AudioSource sharedAudioSource;
     [SerializeField] private AudioSource walkAudioSource;
     [SerializeField] private AudioSource climbAudioSource;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
+    public SkinnedMeshRenderer MainMesh => mainMesh;
 
     public BoxCollider2D Collider { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
@@ -181,9 +183,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         CrouchView = new CrouchView(Crouch, Animator);
         JumpView = new JumpView(jumpViewData, Jump, Animator, sharedAudioSource);
         RollView = new RollView(Roll, Animator);
-        WeaponView = new PlayerWeaponView(weaponObject, weaponContainer, weaponGrip, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
+        WeaponView = new PlayerWeaponView(weaponObject, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
-        ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, parryViewData, Parry, Animator, sharedAudioSource);
+        ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource);
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
         StunView = new StunView(EffectManager, Animator);
@@ -192,7 +194,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
         RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
-        RemoveWebView = new RemoveWebView(EffectManager, GetComponentInChildren<SkinnedMeshRenderer>());
+        RemoveWebView = new RemoveWebView(EffectManager, mainMesh);
 
         CreateStateMachine();
     }
