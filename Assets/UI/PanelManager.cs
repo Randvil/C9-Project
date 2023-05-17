@@ -31,12 +31,9 @@ public class PanelManager : MonoBehaviour
             if (lastPanel != null)
             {
                 if (needToTweenPrev)
-                {
-                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
-                }                
+                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);       
                 
-                StartCoroutine(DisplayDisableTween(lastPanel));
-                
+                StartCoroutine(DisplayDisableTween(lastPanel));                
             }
 
             if (currentPanel != null)

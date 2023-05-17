@@ -38,6 +38,7 @@ public class Hints : MonoBehaviour
 		if (!hint.ClassListContains(hiddenClass))
 			return;
 
+		StaticAudio.Instance.PlayEffect(eAudioEffect.Hint);
 		hint.RemoveFromClassList(hiddenClass);
 	}
 

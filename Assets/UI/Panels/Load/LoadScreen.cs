@@ -8,6 +8,7 @@ public class LoadScreen : MonoBehaviour, IPanel
     private PanelManager panelManager;
 
     [SerializeField] private int indOfThisPanel;
+    [SerializeField] private int indOfNextPanel = 0;
 
     [SerializeField] bool needToStartWith = true;
 
@@ -35,7 +36,7 @@ public class LoadScreen : MonoBehaviour, IPanel
         logo.AddToClassList(hiddenRightClass);
 
         if (needToStartWith)
-            panelManager.SwitchTo(0, true, true); // To HUD
+            panelManager.SwitchTo(indOfNextPanel, true, true);
     }
 
     public void BeginOfScene()

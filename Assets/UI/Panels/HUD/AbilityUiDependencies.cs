@@ -60,7 +60,7 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckForAlreadyLearned();
     }
 
-    // � AbilityManager'e ��� ���������� �����, ������� ����� ����� ������� �� ����
+    // we need to check dis manually coz of AbilityManager hasn't reactive properties
     private void Update()
     {
         CheckAbilitiesStatus();
@@ -168,7 +168,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void SetAbilityOnSlot(eAbilityType type, int slotIndex)
     {
-        if (abilityTypeOrder.ContainsValue(slotIndex)) // ���� ���� ��� �����
+        if (abilityTypeOrder.ContainsValue(slotIndex))
             ClearAbilitySlot(slotIndex);
         else
             abilityTypeOrder.Add(type, slotIndex);
