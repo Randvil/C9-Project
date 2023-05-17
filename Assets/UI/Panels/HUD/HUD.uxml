@@ -40,7 +40,7 @@
                         <ui:VisualElement name="mask" class="vectorMask">
                             <NS.RomanLib.RadialFill text="100" width="40" height="44" fill-color="#FF000096" overlay-image-path="poly" overlay-image-scale="0.95" value="0" class="radialAbil" style="background-image: resource(&apos;ParryIcon512h&apos;); -unity-slice-left: 4; -unity-slice-top: 4;" />
                         </ui:VisualElement>
-                        <ui:Label text="RMB" display-tooltip-when-elided="true" />
+                        <ui:Label text="\U00F1F80E" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
