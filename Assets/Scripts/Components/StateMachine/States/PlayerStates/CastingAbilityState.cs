@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class CastingAbilityState : BasePlayerState
 {
     public CastingAbilityState(Player player, IStateMachine stateMachine, IPlayerInput playerInput, PlayerInterstateData playerInterstateData) : base(player, stateMachine, playerInput, playerInterstateData) { }
@@ -13,7 +15,15 @@ public class CastingAbilityState : BasePlayerState
     {
         base.Exit();
 
-        player.AbilityManager.BreakCastAbility(playerInterstateData.previousAbilityNumber);
+        if (playerInterstateData.breakPreviousAbility)
+        {
+            player.AbilityManager.BreakCastAbility(playerInterstateData.previousAbilityNumber);
+        }
+        else
+        {
+            player.AbilityManager.BreakCastAbility(playerInterstateData.abilityNumberToCast);
+        }
+        playerInterstateData.breakPreviousAbility = false;
     }
 
     public override void LogicUpdate()

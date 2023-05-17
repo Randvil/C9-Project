@@ -58,24 +58,34 @@
     transition-property: opacity;
     transition-duration: 0.4s;
     opacity: 1;
+    -unity-slice-left: 4;
+    -unity-slice-top: 4;
 }
 
 .Daikyu RadialFill {
     background-image: resource('DaikyuIcon512h');
     transition-duration: 0.4s;
     opacity: 1;
+    -unity-slice-left: 4;
+    -unity-slice-top: 4;
 }
 
 .Tessen RadialFill {
     transition-duration: 0.4s;
     opacity: 1;
     background-image: resource('TessenIcon512h');
+    -unity-slice-left: 4;
+    -unity-slice-top: 4;
 }
 
 .Regeneration RadialFill {
     transition-duration: 0.4s;
     opacity: 1;
     background-image: resource('RegenerationIcon512h');
+    -unity-slice-left: 4;
+    -unity-slice-top: 4;
+    -unity-slice-right: 0;
+    -unity-slice-bottom: 0;
 }
 
 .TessenPolyControl .polygon_icon {

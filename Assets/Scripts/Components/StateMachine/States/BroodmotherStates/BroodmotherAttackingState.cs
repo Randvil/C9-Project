@@ -19,6 +19,7 @@ public class BroodmotherAttackingState : IState
     public void Exit()
     {
         broodmother.CompoundAttack.BreakAttack();
+        broodmother.Stop();
     }
 
     public void LogicUpdate()

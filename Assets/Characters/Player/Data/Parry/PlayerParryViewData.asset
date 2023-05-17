@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b979e90cb6c31bd4b80e05b503d5c9be, type: 3}
+  m_Name: PlayerParryViewData
+  m_EditorClassIdentifier: 
+  stanceAnimatorParameter: IsParrying
+  triggerAnimatorParameter: ParryTrigger
+  startParrySound: {fileID: 0}
+  successfulParrySound: {fileID: 8300000, guid: 62b6d67f26842d346a633287d089c9b0, type: 3}
+  breakParrySound: {fileID: 0}

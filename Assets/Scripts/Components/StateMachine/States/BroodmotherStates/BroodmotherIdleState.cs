@@ -23,11 +23,10 @@ public class BroodmotherIdleState : IState
 
     public void LogicUpdate()
     {
-        if (Time.time > 1f)
+        if (Time.timeSinceLevelLoad > 1f)
         {
             broodmother.StateMachine.ChangeState(broodmother.AttackingState);
         }
-        Debug.Log("Doing Nothing");
     }
 
     public void PhysicsUpdate()

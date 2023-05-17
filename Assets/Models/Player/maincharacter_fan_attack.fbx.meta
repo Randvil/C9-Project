@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: TessenAnimation
+      name: Armature_My|Armature_MyAction
       takeName: Armature_My|Armature_MyAction
       internalID: 7525816629304519201
       firstFrame: 0

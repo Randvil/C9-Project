@@ -6,7 +6,7 @@ public class WatchmanStrategy : BaseStrategy
 {
     private WatchmanStrategyData watchmanData;
 
-    private ICompoundProtection CompoundProtection;
+    public ICompoundProtection CompoundProtection { get; private set; }
 
     public float TurningTimePeriod { get; private set; }
 
@@ -30,13 +30,5 @@ public class WatchmanStrategy : BaseStrategy
         AttackingState = new WatchmanAttackingState(this);
         StunnedState = new WatchmanStunnedState();
         DyingState = new WatchmanDyingState();
-    }
-
-    protected override void OnTakeDamage(DamageInfo damageInfo)
-    {
-        base.OnTakeDamage(damageInfo);
-
-        TurnToEnemy();
-        CompoundProtection.Protect();
     }
 }

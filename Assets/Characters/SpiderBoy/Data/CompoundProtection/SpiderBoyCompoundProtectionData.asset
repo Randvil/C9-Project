@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270a05bfb5fcccd4a9a3e08c5e300d31, type: 3}
   m_Name: SpiderBoyCompoundProtectionData
   m_EditorClassIdentifier: 
-  relativeHealthThreshold: 0.5
+  relativeHealthThreshold: 1
+  enemyDistanceThreshold: 2

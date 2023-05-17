@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerTessenAscensionAreaData
   m_EditorClassIdentifier: 
   lifetime: 3
-  impactPeriod: 0.25
+  impactPeriod: 1
   ascensionalPower: 2
   stunEffectData: {fileID: 11400000, guid: a875f222c5370ca49bebe14ac9a6742a, type: 2}
   damageData: {fileID: 11400000, guid: 3cf9a0ad594878b4bacab806f22928c6, type: 2}

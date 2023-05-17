@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpiderBoyWeaponViewData
   m_EditorClassIdentifier: 
   startAttackAudioClip: {fileID: 0}
-  releaseAttackAudioClip: {fileID: 8300000, guid: a416994fbabf79d449cb8fb298f1003a, type: 3}
+  releaseAttackAudioClip: {fileID: 8300000, guid: 490d1f7f31809f04885b2f409633e071, type: 3}

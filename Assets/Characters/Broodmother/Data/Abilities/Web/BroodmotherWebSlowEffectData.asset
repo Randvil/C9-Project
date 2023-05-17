@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1aafb0771150d448bb1f7c5ce709af, type: 3}
   m_Name: BroodmotherWebSlowEffectData
   m_EditorClassIdentifier: 
-  movementSlowValue: 0.9
+  movementSlowValue: 1
   duration: 5
   webMaterial: {fileID: 2100000, guid: 51684f077e922bb4c828daaff716750c, type: 2}

@@ -140,6 +140,11 @@ public abstract class BasePlayerState : IState
         if (actionPhase == eActionPhase.Started && player.AbilityManager.CanCastAbility(abilityNumber))
         {
             playerInterstateData.previousAbilityNumber = playerInterstateData.abilityNumberToCast;
+            if (player.AbilityManager.IsPerforming(playerInterstateData.previousAbilityNumber))
+            {
+                playerInterstateData.breakPreviousAbility = true;
+            }
+            
             playerInterstateData.abilityNumberToCast = abilityNumber;
             stateMachine.ChangeState(player.CastingAbility);
         }

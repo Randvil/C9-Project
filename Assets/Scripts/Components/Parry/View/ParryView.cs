@@ -8,16 +8,30 @@ public class ParryView
     private Transform weaponContainer;
     private Transform rightHand;
 
+    private string stanceAnimatorParameter;
+    private string triggerAnimatorParameter;
+    private AudioClip startParrySound;
+    private AudioClip successfulParrySound;
+    private AudioClip breakParrySound;
+
     private Animator animator;
+    private AudioSource audioSource;
     private IParry parry;
 
-    public ParryView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, IParry parry, Animator animator)
+    public ParryView(GameObject weaponObject, ParryViewData parryViewData, IParry parry, Animator animator, AudioSource audioSource)
     {
         this.weaponObject = weaponObject;
-        this.weaponContainer = weaponContainer;
-        this.rightHand = rightHand;
+        //this.weaponContainer = weaponContainer;
+        //this.rightHand = rightHand;
+
+        stanceAnimatorParameter = parryViewData.stanceAnimatorParameter;
+        triggerAnimatorParameter = parryViewData.triggerAnimatorParameter;
+        startParrySound = parryViewData.startParrySound;
+        successfulParrySound = parryViewData.successfulParrySound;
+        breakParrySound = parryViewData.breakParrySound;
 
         this.animator = animator;
+        this.audioSource = audioSource;
         this.parry = parry;
 
         parry.StartParryEvent.AddListener(OnStartParry);
@@ -25,27 +39,40 @@ public class ParryView
         parry.SuccessfulParryEvent.AddListener(OnSuccessfulParry);
     }
 
-    public void OnStartParry()
+    private void OnStartParry()
     {
         weaponObject.SetActive(true);
-        weaponObject.transform.parent = rightHand;
-        weaponObject.transform.position = rightHand.position;
-        weaponObject.transform.localRotation = Quaternion.identity;
+        //weaponObject.transform.parent = rightHand;
+        //weaponObject.transform.position = rightHand.position;
+        //weaponObject.transform.localRotation = Quaternion.identity;
 
-        animator.SetBool("IsParrying", true);
+        animator.SetBool(stanceAnimatorParameter, true);
+
+        PlaySound(startParrySound);
     }
 
-    public void OnBreakParry()
+    private void OnBreakParry()
     {
         weaponObject.SetActive(false);
-        weaponObject.transform.parent = weaponContainer;
+        //weaponObject.transform.parent = weaponContainer;
 
-        animator.SetBool("IsParrying", false);
+        animator.SetBool(stanceAnimatorParameter, false);
+
+        PlaySound(breakParrySound);
     }
 
-    public void OnSuccessfulParry()
+    private void OnSuccessfulParry()
     {
-        animator.SetTrigger("ParryTrigger");
+        animator.SetTrigger(triggerAnimatorParameter);
+
+        PlaySound(successfulParrySound);
     }
 
+    private void PlaySound(AudioClip audioClip)
+    {
+        if (audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+    }
 }

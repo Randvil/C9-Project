@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class AnimationAndSoundMovementView
+public class MovementView
 {
     private IMovement movement;
     private Animator animator;
     private AudioSource audioSource;
 
-    public AnimationAndSoundMovementView(IMovement movement, Animator animator, AudioSource audioSource)
+    public MovementView(IMovement movement, Animator animator, AudioSource audioSource)
     {
         this.movement = movement;
         this.animator = animator;

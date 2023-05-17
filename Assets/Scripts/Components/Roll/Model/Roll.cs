@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Roll : IRoll
+public class Roll : IRoll, IProhibitable
 {
     private MonoBehaviour owner;
 
@@ -17,20 +17,26 @@ public class Roll : IRoll
     private Rigidbody2D rigidbody;
     private ITurning turning;
     private IModifierManager defenceModifierManager;
+    private IEffectManager effectManager;
 
     private Coroutine rollCoroutine;
     private float finishCooldownTime;
     private IDamageModifier damageAbsorptionModifier;
 
+    private List<object> prohibitors = new();
+
     public bool IsRolling => rollCoroutine != null;
     public bool IsOnCooldown => Time.time < finishCooldownTime;
     public bool CanRoll => IsRolling == false && IsOnCooldown == false;
     public float RollDuration => duration;
+    public bool IsProhibited => prohibitors.Count > 0;
 
     public UnityEvent StartRollEvent { get; } = new();
     public UnityEvent BreakRollEvent { get; } = new();
+    public UnityEvent ProhibitionEvent { get; } = new();
+    public UnityEvent AllowanceEvent { get; } = new();
 
-    public Roll(MonoBehaviour owner, RollData rollData, BoxCollider2D collider, Rigidbody2D rigidbody, ITurning turning, IModifierManager defenceModifierManager)
+    public Roll(MonoBehaviour owner, RollData rollData, BoxCollider2D collider, Rigidbody2D rigidbody, ITurning turning, IModifierManager defenceModifierManager, IEffectManager effectManager)
     {
         this.owner = owner;
 
@@ -44,11 +50,14 @@ public class Roll : IRoll
         this.rigidbody = rigidbody;
         this.turning = turning;
         this.defenceModifierManager = defenceModifierManager;
+        this.effectManager = effectManager;
+
+        effectManager.EffectEvent.AddListener(OnRoot);
     }
 
     public void StartRoll()
     {
-        if (IsRolling == false)
+        if (IsRolling == false && CanRoll && IsProhibited == false)
         {
             rollCoroutine = owner.StartCoroutine(RollCoroutine());
 
@@ -92,5 +101,52 @@ public class Roll : IRoll
         yield return new WaitForSeconds(duration);
 
         BreakRoll();
+    }
+
+    public void Prohibit(object prohibitor)
+    {
+        if (prohibitors.Contains(prohibitor))
+        {
+            return;
+        }
+
+        prohibitors.Add(prohibitor);
+
+        if (prohibitors.Count > 1)
+        {
+            ProhibitionEvent.Invoke();
+        }
+    }
+
+    public void Allow(object prohibitor)
+    {
+        if (prohibitors.Remove(prohibitor) == false)
+        {
+            return;
+        }
+
+        if (prohibitors.Count == 0)
+        {
+            AllowanceEvent.Invoke();
+        }
+    }
+
+    private void OnRoot(eEffectType effectType, eEffectStatus effectStatus)
+    {
+        if (effectType != eEffectType.Root)
+        {
+            return;
+        }
+
+        switch (effectStatus)
+        {
+            case eEffectStatus.Added:
+                Prohibit(effectManager);
+                break;
+
+            case eEffectStatus.Cleared:
+                Allow(effectManager);
+                break;
+        }
     }
 }

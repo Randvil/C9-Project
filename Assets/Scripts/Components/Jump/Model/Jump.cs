@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Jump : IJump
+public class Jump : IJump, IProhibitable
 {
     private MonoBehaviour owner;
 
@@ -14,33 +14,47 @@ public class Jump : IJump
 
     private Rigidbody2D rigidbody;
     private IGravity gravity;
+    private IEffectManager effectManager;
 
     private float startJumpTime;
     private int airJumpNumber;
     private Coroutine jumpSpeedCoroutine;
 
+    private List<object> prohibitors = new();
+
     public bool IsJumping { get; private set; }
     public bool CanJump => (gravity.IsGrounded || airJumpNumber < maxJumpCount);
+    public bool IsProhibited => prohibitors.Count > 0;
+
     public UnityEvent StartJumpEvent { get; } = new();
     public UnityEvent BreakJumpEvent { get; } = new();
+    public UnityEvent ProhibitionEvent { get; } = new();
+    public UnityEvent AllowanceEvent { get; } = new();
 
-    public Jump(MonoBehaviour owner, JumpData jumpData, Rigidbody2D rigidbody, IGravity gravity)
+    public Jump(MonoBehaviour owner, JumpData jumpData, Rigidbody2D rigidbody, IGravity gravity, IEffectManager effectManager)
     {
         this.owner = owner;
 
-        maxJumpCount= jumpData.maxJumpCount;
+        maxJumpCount = jumpData.maxJumpCount;
         jumpTime = jumpData.jumpTime;
         maxSpeed = jumpData.maxSpeed;
         speedCurve = jumpData.speedCurve;
 
         this.rigidbody = rigidbody;
         this.gravity = gravity;
+        this.effectManager = effectManager;
 
         gravity.GroundedEvent.AddListener(OnGrounded);
+        effectManager.EffectEvent.AddListener(OnRoot);
     }
 
     public void StartJump()
     {
+        if (CanJump == false || IsProhibited)
+        {
+            return;
+        }
+
         if (jumpSpeedCoroutine != null)
         {
             owner.StopCoroutine(jumpSpeedCoroutine);
@@ -88,5 +102,52 @@ public class Jump : IJump
     private void OnGrounded()
     {
         airJumpNumber = 0;
+    }
+
+    public void Prohibit(object prohibitor)
+    {
+        if (prohibitors.Contains(prohibitor))
+        {
+            return;
+        }
+
+        prohibitors.Add(prohibitor);
+
+        if (prohibitors.Count > 1)
+        {
+            ProhibitionEvent.Invoke();
+        }
+    }
+
+    public void Allow(object prohibitor)
+    {
+        if (prohibitors.Remove(prohibitor) == false)
+        {
+            return;
+        }
+
+        if (prohibitors.Count == 0)
+        {
+            AllowanceEvent.Invoke();
+        }
+    }
+
+    private void OnRoot(eEffectType effectType, eEffectStatus effectStatus)
+    {
+        if (effectType != eEffectType.Root)
+        {
+            return;
+        }
+
+        switch (effectStatus)
+        {
+            case eEffectStatus.Added:
+                Prohibit(effectManager);
+                break;
+
+            case eEffectStatus.Cleared:
+                Allow(effectManager);
+                break;
+        }
     }
 }

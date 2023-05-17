@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,7 +39,29 @@ public class SceneObjectsCreator : Creator
         staticUI.newGameObject.GetComponentInChildren<DeathScreen>().SetDeathManager(player.PlayerComponent.DeathManager);
         staticUI.newGameObject.GetComponentInChildren<AbilityUiDependencies>().Parry = player.PlayerComponent.Parry;
 
-        camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
+
+        var targetGroup = camera.newGameObject.GetComponentInChildren<CinemachineTargetGroup>();
+        targetGroup.AddMember(player.PlayerComponent.transform, 17f, 0f);
+        
+        GameObject boundingShape = null;
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "CityLocation":
+                boundingShape = Object.Instantiate(prefabsData.cityBoundingShape);
+                break;
+
+            case "ArcadeCenter":
+                boundingShape = Object.Instantiate(prefabsData.arcadeBoundingShape);
+                break;
+
+            case "BossLocation":
+                boundingShape = Object.Instantiate(prefabsData.bossBoundingShape);
+                targetGroup.AddMember(GameObject.Find("Broodmother").transform, 10f, 0f);
+                break;
+        }
+        var cameraConfiner = camera.CinemachineCamera.GetComponent<CinemachineConfiner>();
+        cameraConfiner.m_BoundingShape2D = boundingShape.GetComponent<Collider2D>();
+
 
         foreach (LocationData ld in data.CurrentGameData.locations)
         {

@@ -19,6 +19,7 @@ public class WatchmanAttackingState : IState
     public void Exit()
     {
         watchman.CompoundAttack.BreakAttack();
+        watchman.CompoundProtection.BreakProtection();
     }
 
     public void LogicUpdate()
@@ -31,10 +32,16 @@ public class WatchmanAttackingState : IState
 
         watchman.TurnToEnemy();
 
+        if (watchman.CompoundProtection.CanUseProtection)
+        {
+            watchman.CompoundProtection.Protect(watchman.Enemy.transform.position);
+        }
+
         if (watchman.CompoundAttack.IsPerforming)
         {
             return;
-        }
+        }       
+                
         watchman.CompoundAttack.MakeAfficientAttack(watchman.Enemy.transform.position);
     }
 

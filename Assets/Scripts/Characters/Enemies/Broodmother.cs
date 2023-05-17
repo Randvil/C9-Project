@@ -24,6 +24,9 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
+    [SerializeField] protected CommonAbilityViewData stunAbilityViewData;
+    [SerializeField] protected CommonAbilityViewData webAbilityViewData;
+    [SerializeField] protected CommonAbilityViewData offensiveJumpAbilityViewData;
 
     [Header("Broodmother Visual Data")]
     [SerializeField] protected Material shieldMaterial;
@@ -57,10 +60,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     public BroodmotherStrategyData BroodmotherStrategyData => broodmotherStrategyData;
 
-    protected IAIBehavior currentBehavior;
-
-    protected NoArmsWeaponView weaponView;
     protected IHealthBarView shieldBarView;
+    protected MovementView movementView;
+    protected NoArmsWeaponView weaponView;
+    protected ClimbView climbView;
+    protected StunView stunView;
+    protected CommonAbilityView stunAbilityView;
+    protected CommonAbilityView webAbilityView;
+    protected CommonAbilityView offensiveJumpAbilityView;
     protected BroodmotherShieldView BroodmotherShieldView;
 
     protected override void Awake()
@@ -89,10 +96,15 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         CompoundAttack = new BroodmotherCompoundAttack(gameObject, Weapon, WebAbility, StunAbility, OffensiveJumpAbility, SwarmSpawningAbility);
 
-        MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
+        movementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
+        climbView = new ClimbView(Climb, Animator, sharedAudioSource);
+        stunView = new StunView(EffectManager, Animator);
+        stunAbilityView = new CommonAbilityView(stunAbilityViewData, StunAbility, Animator, sharedAudioSource);
+        webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
+        offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
         //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
-        
+
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
@@ -107,15 +119,4 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         var a = FindObjectOfType<PanelManager>();
         Document = a.panels[0];
     }
-
-    //protected void Update()
-    //{
-    //    currentBehavior.LogicUpdate();
-    //}
-
-    //protected void FixedUpdate()
-    //{
-    //    currentBehavior.PhysicsUpdate();
-    //}
-
 }

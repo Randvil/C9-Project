@@ -98,7 +98,7 @@ public class BroodmotherStrategy : BaseStrategy
 
     public bool Retreat()
     {
-        if (Vector2.Distance(collider.transform.position, recoveryPosition) < 0.2f)
+        if (collider.transform.position.y - recoveryPosition.y > 0f)
         {
             climb.StopClimb();
             broodmother.RegenerationAbility.StartCast();
@@ -117,7 +117,7 @@ public class BroodmotherStrategy : BaseStrategy
             return true;
         }
 
-        if (Mathf.Abs(collider.transform.position.x - recoveryPosition.x) < 0.1f)
+        if (Mathf.Abs(collider.transform.position.x - recoveryPosition.x) < 0.5f)
         {
             Stop();
             climb.StartClimb();

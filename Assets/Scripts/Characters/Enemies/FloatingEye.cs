@@ -28,8 +28,6 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
     protected NoArmsWeaponView weaponView;
     protected InvisibilityView invisibilityView;
 
-    protected IAIBehavior currentBehavior;
-
     public Transform CheckPlatformRightTransform => checkPlatformRightTransform;
     public Transform CheckPlatformLeftTransform => checkPlatformLeftTransform;
     public PatrolmanStrategyData PatrolmanStrategyData => patrolmanStrategyData;
@@ -46,7 +44,7 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
         CompoundAttack = new JustWeaponCompoundAttack(gameObject, Weapon);
         Invisibility = new Invisibility(this, invisibilityData, EnergyManager, DamageHandler, Weapon);
 
-        MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
+        MovementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         invisibilityView = new InvisibilityView(this, Invisibility as Invisibility, meshesToCloneMaterials);
 
@@ -58,14 +56,4 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
 
         Invisibility.StartCast();
     }
-
-    //protected void Update()
-    //{
-    //    currentBehavior.LogicUpdate();
-    //}
-
-    //protected void FixedUpdate()
-    //{
-    //    currentBehavior.PhysicsUpdate();
-    //}
 }
