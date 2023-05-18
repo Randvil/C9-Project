@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 8348827371946023611}
   - component: {fileID: 8348827371946023609}
   - component: {fileID: 8348827371946023612}
-  - component: {fileID: 550718106946282837}
   m_Layer: 11
   m_Name: Left Ladder
   m_TagString: Untagged
@@ -158,16 +157,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDirection: 0
   relativeXPosition: -0.3
---- !u!114 &550718106946282837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8348827371946023608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <LabelName>k__BackingField: ladder

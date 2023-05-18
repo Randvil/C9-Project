@@ -132,7 +132,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: KanaboPickup
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8323930968379815038, guid: f37cc4181ad007e4e95f9b1fb778ab1b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f37cc4181ad007e4e95f9b1fb778ab1b, type: 3}
 --- !u!4 &4609777667484056925 stripped
 Transform:

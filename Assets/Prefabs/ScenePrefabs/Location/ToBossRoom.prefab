@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5890137656740421962}
   - component: {fileID: 5890137656740421957}
   - component: {fileID: 5890137656740421956}
-  - component: {fileID: 5890137656740421959}
+  - component: {fileID: 9123968495459884165}
   m_Layer: 10
   m_Name: ToBossRoom
   m_TagString: Untagged
@@ -166,7 +166,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2288284, y: 1.6951724}
   m_EdgeRadius: 0
---- !u!114 &5890137656740421959
+--- !u!114 &9123968495459884165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5890137656740421958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
+  m_Script: {fileID: 11500000, guid: bf1061327b2f42b4eb6896528e0181b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: interact

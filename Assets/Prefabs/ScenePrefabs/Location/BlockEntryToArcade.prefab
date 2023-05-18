@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 3228927399489790593}
   - component: {fileID: 3228927399489790592}
   - component: {fileID: 3228927399489790623}
-  - component: {fileID: 3228927399489790622}
+  - component: {fileID: 5779881785957682334}
   m_Layer: 10
   m_Name: ToArcade3rdFloor
   m_TagString: Untagged
@@ -242,7 +242,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0014267, y: 1.6951724}
   m_EdgeRadius: 0
---- !u!114 &3228927399489790622
+--- !u!114 &5779881785957682334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3228927399489790621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
+  m_Script: {fileID: 11500000, guid: bf1061327b2f42b4eb6896528e0181b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: interact

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684294bf85f8ffe48a35ce6363006fff, type: 3}
   m_Name: BroodmotherMovementData
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 3

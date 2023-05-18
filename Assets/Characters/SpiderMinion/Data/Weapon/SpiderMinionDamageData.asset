@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpiderMinionDamageData
   m_EditorClassIdentifier: 
   damageType: 0
-  damageValue: 5
+  damageValue: 7

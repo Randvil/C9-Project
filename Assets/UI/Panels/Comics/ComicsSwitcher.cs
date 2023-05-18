@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class ComicsSwitcher : MonoBehaviour
@@ -28,7 +29,9 @@ public class ComicsSwitcher : MonoBehaviour
     const string pageClass = "comics-page";
     const string panelClass = "comics-panel";
 
-    public bool StartNGAfterComics { get; set; } 
+    public bool StartNGAfterComics { get; set; }
+
+    public UnityEvent ComicsEndsEvent { get; private set; } = new();
 
     private void Awake()
     {
@@ -49,10 +52,14 @@ public class ComicsSwitcher : MonoBehaviour
         page.style.backgroundImage = pages[index];
         panel.Add(page);
 
-        label = new();
-        label.AddToClassList(labelClass);
-        label.text = phrases[index];
-        panel.Add(label);
+        if (phrases.Count > index && phrases[index] != string.Empty)
+        {
+            label = new();
+            label.AddToClassList(labelClass);
+            label.text = phrases[index];
+            panel.Add(label);
+        }
+        
 
         pageManager.AddPanel(panel);
         root.Add(panel);
@@ -84,6 +91,8 @@ public class ComicsSwitcher : MonoBehaviour
             pageManager.panels.Clear();
 
             parentPanelManager.GoBack();
+
+            ComicsEndsEvent.Invoke();
         }
         else
             loadMenu.NewGame();

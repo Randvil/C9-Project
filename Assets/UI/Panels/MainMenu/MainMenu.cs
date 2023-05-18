@@ -48,10 +48,14 @@ public class MainMenu : MonoBehaviour
             comicsButton.RemoveFromClassList("inactive-menu-b");
             comicsButton.AddToClassList("menu-b");
         }
+
+        comicsSwitcher.ComicsEndsEvent.AddListener(() => StaticAudio.Instance.ChangeBackgroundTrack("mainTheme"));
     }
 
     private void ToComics(bool startNG)
     {
+        StaticAudio.Instance.ChangeBackgroundTrack("startComicsTheme");
+
         comicsSwitcher.StartNGAfterComics = startNG;
         comicsSwitcher.ToNextPage();
         panelManager.SwitchTo(1);
