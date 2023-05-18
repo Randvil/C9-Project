@@ -50,7 +50,7 @@
             <ui:Label text="USE \U00F1F60B/\U00F1F80B FOR ATTACK" display-tooltip-when-elided="true" enable-rich-text="true" name="attack" class="hint" />
             <ui:Label text="YOU NEED TO KILL ALL ENEMIES" display-tooltip-when-elided="true" name="killAll" class="hint" />
             <ui:Label text="USE \U00F1F60A/ &lt;b&gt;W,S&lt;/b&gt; FOR CLIMBING A LADDER " display-tooltip-when-elided="true" name="ladder" class="hint" />
-            <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO ENTER LOACTION" display-tooltip-when-elided="true" name="interact" class="hint" />
+            <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO ENTER LOCATION" display-tooltip-when-elided="true" name="interact" class="hint" />
             <ui:Label text="USE \U00F1F60D/&lt;b&gt;SPACE&lt;/b&gt; FOR JUMP" display-tooltip-when-elided="true" name="jump" class="hint" />
             <ui:Label text="USE \U00F1F60E/\U00F1F80E FOR PARRY" display-tooltip-when-elided="true" name="parry" class="hint" />
             <ui:Label text="USE \U00F1F60F/&lt;b&gt;TAB&lt;/b&gt; FOR ABILITY MENU" name="collection" enable-rich-text="true" class="hint" />

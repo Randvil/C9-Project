@@ -12,6 +12,7 @@ public class Daikyu : AbstractDamageAbility, ISustainableAbility
     protected IDamageModifier damageModifier;
 
     public float FullChargeTime => fullChargeTime;
+    public float PreCastDelay => preCastDelay;
 
     public Daikyu(MonoBehaviour owner, GameObject caster, DaikyuData daikyuData, IEnergyManager energyManager, IModifierManager modifierManager, ITurning turning, ITeam team) : base(owner, caster, daikyuData, energyManager, modifierManager, turning, team)
     {

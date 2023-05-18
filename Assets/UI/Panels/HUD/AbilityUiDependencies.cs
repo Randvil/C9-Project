@@ -2,6 +2,7 @@ using DG.Tweening;
 using NS.RomanLib;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -80,6 +81,12 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void OnDaikyuPrepare(Daikyu daikyu)
     {
+        StartCoroutine(WaitForDaikyuPrecast(daikyu));
+    }
+
+    private IEnumerator WaitForDaikyuPrecast(Daikyu daikyu)
+    {
+        yield return new WaitForSeconds(daikyu.PreCastDelay);
         daikyuLoadBar.style.opacity = 0.9f;
         DOTween.To(x => daikyuLoadBar.value = x, 0f, 1f, daikyu.FullChargeTime).SetEase(Ease.Linear);
     }
