@@ -17,8 +17,8 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
     {
         GameObject instantiate = Object.Instantiate(enemyPrefab, GenerateRandomPos(spawnpoint.transform.position, diff), 
             Quaternion.identity, spawnpoint.transform);
-        Material materialClone = Object.Instantiate(material);
-        instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        //Material materialClone = Object.Instantiate(material);
+        //instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
         instantiate.name = enemyPrefab.name;
         spawnEnemyCount++;
     }
