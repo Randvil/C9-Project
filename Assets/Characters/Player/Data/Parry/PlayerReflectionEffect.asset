@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc3a0dc7293d154582e03726e6cbd1a, type: 3}
-  m_Name: PlayerKanaboStunEffectData
+  m_Script: {fileID: 11500000, guid: 0560e2db5859af64db32641756acd4a9, type: 3}
+  m_Name: PlayerReflectionEffect
   m_EditorClassIdentifier: 
   effectPower: 1
-  duration: 2
+  duration: Infinity

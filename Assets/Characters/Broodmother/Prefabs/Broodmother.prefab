@@ -1346,6 +1346,7 @@ MonoBehaviour:
   - {fileID: 4658742498733326578}
   - {fileID: 8597955536379927155}
   movementAudioSource: {fileID: 7845183630836557568}
+  SelectiveffectManagerData: {fileID: 11400000, guid: 4a3abd9426dd9724b9f738af5c1ed744, type: 2}
   damageHandlerWithShieldsData: {fileID: 11400000, guid: 468dba08536c3ac4d98b4a403cc0260e, type: 2}
   shieldManagerData: {fileID: 11400000, guid: 14d743afb94ce764d8c9838e88262050, type: 2}
   energyManagerData: {fileID: 11400000, guid: b84fbca73868aeb43b93b766dfa3c394, type: 2}

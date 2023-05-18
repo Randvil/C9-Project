@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ProjectileReflection : IDamageEffect
+public class ProjectileReflection : BaseEffect, IDamageEffect
 {
     protected ITeam team;
 
-    public float EndEffectTime { get; private set; }
-
     public UnityEvent DamageEffectEvent { get; } = new();
 
-    public ProjectileReflection(ITeam team, float endEffectTime)
+    public ProjectileReflection(EffectData effectData, ITeam team) : base(effectData)
     {
         this.team = team;
-        EndEffectTime = endEffectTime;
     }
 
     public virtual void ApplyEffect(Damage incomingDamage)

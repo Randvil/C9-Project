@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StunEffectData", menuName = "Data/Effects/New Stun Effect Data")]
-public class StunEffectData : ScriptableObject
+public class StunEffectData : EffectData
 {
-    [Min(0f)]
-    public float duration = 1f;
+
 }

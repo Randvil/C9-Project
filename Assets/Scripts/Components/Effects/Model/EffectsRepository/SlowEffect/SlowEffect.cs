@@ -1,21 +1,11 @@
 using UnityEngine;
 
-public class SlowEffect : ISlowEffect
+public class SlowEffect : BaseEffect, ISlowEffect
 {
     public float MovementSlowValue { get; }
-    public float EndEffectTime { get; }
 
-    public SlowEffect(SlowEffectData slowEffectData)
+    public SlowEffect(SlowEffectData slowEffectData) : base(slowEffectData)
     {
         MovementSlowValue = slowEffectData.movementSlowValue;
-
-        if (slowEffectData.duration == float.MaxValue)
-        {
-            EndEffectTime = float.MaxValue;
-        }
-        else
-        {
-            EndEffectTime = Time.time + slowEffectData.duration;
-        }
     }
 }

@@ -19,6 +19,7 @@ public class Parry : IParry, IDamageDealer
     private float extraAttackDamage;
     private int amplifiedAttackNumber;
     private float amplifyDuration;
+    private EffectData reflectionEffectData;
 
     private ITurning turning;
     private ITeam team;
@@ -63,6 +64,7 @@ public class Parry : IParry, IDamageDealer
         extraAttackDamage = parryData.extraAttackDamage;
         amplifiedAttackNumber = parryData.amplifiedAttackNumber;
         amplifyDuration = parryData.amplifyDuration;
+        reflectionEffectData = parryData.reflectionEffectData;
 
         this.turning = turning;
         this.team = team;
@@ -128,14 +130,14 @@ public class Parry : IParry, IDamageDealer
         meleeDamageReflection = null;
         if (reflectMeleeDamage)
         {
-            meleeDamageReflection = new ParryMeleeDamageReflection(float.MaxValue, character, turning, this);
+            meleeDamageReflection = new ParryMeleeDamageReflection(reflectionEffectData, character, turning, this);
             effectManager.AddEffect(meleeDamageReflection);
         }
 
         projectileReflection = null;
         if (reflectProjectiles)
         {
-            projectileReflection = new ParryProjectileReflection(team, float.MaxValue, character, turning);
+            projectileReflection = new ParryProjectileReflection(reflectionEffectData, team, character, turning);
             effectManager.AddEffect(projectileReflection);
         }
 

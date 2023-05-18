@@ -43,6 +43,10 @@ public class SlowdownZone : MonoBehaviour
     {
         foreach(Collider2D slowedCharacter in slowedCharacters)
         {
+            if (slowedCharacter == null)
+            {
+                continue;
+            }
             slowedCharacter.GetComponent<IEffectable>().EffectManager.RemoveEffect(effect);
         }
 

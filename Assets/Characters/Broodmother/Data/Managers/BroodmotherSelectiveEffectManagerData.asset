@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc3a0dc7293d154582e03726e6cbd1a, type: 3}
-  m_Name: PlayerKanaboStunEffectData
+  m_Script: {fileID: 11500000, guid: d02b39db8ccb192499164d408ea5d620, type: 3}
+  m_Name: BroodmotherSelectiveEffectManagerData
   m_EditorClassIdentifier: 
-  effectPower: 1
-  duration: 2
+  checkEffectsPeriod: 0.25
+  susceptibilityType: 1

@@ -74,19 +74,25 @@ public class AscensionArea : MonoBehaviour
             return;
         }
 
-        if (enemy.TryGetComponent(out IGravity enemyGravity) == true)
-        {
-            enemyGravity.Disable(this);
-            Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
-            enemyRigidbody.velocity = new(enemyRigidbody.velocity.x, ascensionalPower);
-        }
-
         if (enemy.TryGetComponent(out IEffectable stunnableEnemy) == true
             && stunnedEnemies.ContainsKey(stunnableEnemy.EffectManager) == false)
         {
             IEffect stunEffect = new StunEffect(stunEffectData);
             stunnableEnemy.EffectManager.AddEffect(stunEffect);
             stunnedEnemies.Add(stunnableEnemy.EffectManager, stunEffect);
+
+            if (stunnableEnemy.EffectManager is SelectiveEffectManager selectiveEffectManager
+                && selectiveEffectManager.SusceptibilityType == eEffectPower.Strong)
+            {
+                return;
+            }
+
+            if (enemy.TryGetComponent(out IGravity enemyGravity) == true)
+            {
+                enemyGravity.Disable(this);
+                Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
+                enemyRigidbody.velocity = new(enemyRigidbody.velocity.x, ascensionalPower);
+            }
         }
 
         if (enemy.TryGetComponent(out IDamageable damageableEnemy) == true
