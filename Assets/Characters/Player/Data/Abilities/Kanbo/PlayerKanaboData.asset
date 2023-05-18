@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerKanaboData
   m_EditorClassIdentifier: 
   abilityType: 1
-  cooldown: 10
+  cooldown: 15
   preCastDelay: 1
   postCastDelay: 1
-  cost: 10
+  cost: 30
   damageData: {fileID: 11400000, guid: 23499bd354a0960478d2dbe1e4fdc115, type: 2}
   attackRange: 3
   stunEffectData: {fileID: 11400000, guid: 4e21f6365a12a654cb20fddaa3c77859, type: 2}

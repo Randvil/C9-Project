@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerTessenData
   m_EditorClassIdentifier: 
   abilityType: 3
-  cooldown: 5
+  cooldown: 10
   preCastDelay: 1.5
   postCastDelay: 0
   cost: 3

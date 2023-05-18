@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FloatingEyeDamageData
   m_EditorClassIdentifier: 
   damageType: 0
-  damageValue: 20
+  damageValue: 25

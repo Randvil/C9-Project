@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FloatingEyeHealhtManagerData
   m_EditorClassIdentifier: 
   initialHealth:
-    maxHealth: 100
-    currentHealth: 100
+    maxHealth: 400
+    currentHealth: 400
