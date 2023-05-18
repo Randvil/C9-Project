@@ -1,0 +1,18 @@
+.creditsLabel {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 32px;
+    -unity-text-align: middle-center;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.out-cont {
+    flex-grow: 1;
+}
+
+.inner-cont {
+    flex-direction: row;
+    justify-content: space-around;
+}

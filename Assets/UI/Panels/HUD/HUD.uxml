@@ -57,7 +57,7 @@
             <ui:Label display-tooltip-when-elided="true" text="CHECKPOINT" name="checkpoint" class="hint" />
             <ui:Label text="USE  \U00F1F60C/&lt;b&gt;F&lt;/b&gt;  TO PICK UP THE ABILITY" display-tooltip-when-elided="true" name="ability" class="hint" />
         </ui:VisualElement>
-        <ui:VisualElement name="bossStats" style="position: absolute; right: 66px; scale: 1.4 1.4; align-items: center; display: none;">
+        <ui:VisualElement name="bossStats" style="position: absolute; right: 66px; scale: 1.4 1.4; align-items: center; display: none; top: 0;">
             <ui:Label text="OGUMO" display-tooltip-when-elided="true" name="name" style="font-size: 26px; color: rgba(255, 255, 255, 0.75); -unity-text-align: upper-right; padding-right: 0; margin-right: 0; margin-top: 0; align-items: center;" />
             <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; margin-top: 0; flex-shrink: 1; position: absolute; top: 41px; left: -53px;">
                 <ui:Label text="100%" name="broodmotherHealthBarLabel" style="font-size: 18px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(152, 152, 155); margin-right: 13px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />

@@ -293,6 +293,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 8030733dc3c9d6242903cbe7aa9dac81, type: 3}
   - {fileID: 2800000, guid: 8cf85a6551afde14987c4949b5d566cd, type: 3}
   - {fileID: 2800000, guid: f660fa37a63b7bf45a4078e377f2001c, type: 3}
+  - {fileID: 2800000, guid: 50d9d87d70c282b48af5dadb0cc913a2, type: 3}
+  - {fileID: 2800000, guid: ef76219d13d11f44fb615a08ad1b19b6, type: 3}
   phrases: []
   parentPanelManager: {fileID: 877433215558924450}
   pageManager: {fileID: 840386875}
