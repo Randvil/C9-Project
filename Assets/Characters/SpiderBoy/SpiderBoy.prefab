@@ -940,7 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dfcf13cc967a94282312b3e9b14f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMesh: {fileID: 438865735438962936}
+  skinnedMeshes:
+  - {fileID: 438865735438962936}
   dissolveGraph: {fileID: 2438955419698176489}
   dissolveRate: 0.0125
   refreshRate: 0.025

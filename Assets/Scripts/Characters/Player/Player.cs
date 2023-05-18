@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffectable, IAbilityCaster, IDataSavable
 {
@@ -185,7 +186,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
             Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, weaponContainer, weaponGrip, parryViewData, Parry, Animator, sharedAudioSource);
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
-        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
+        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume, this);
         StunView = new StunView(EffectManager, Animator);
         DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
         DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
@@ -193,6 +194,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
         RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
         RemoveWebView = new RemoveWebView(EffectManager, GetComponentInChildren<SkinnedMeshRenderer>());
+
+        ClearVignette();
 
         CreateStateMachine();
     }
@@ -241,6 +244,14 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
                 learnedAbilityPair.pos = abilityPair.pos;
             else
                 data.learnedAbilities.Add(abilityPair);
+        }
+    }
+
+    public void ClearVignette()
+    {
+        if (volume.sharedProfile.TryGet(out Vignette vignette))
+        {
+            vignette.intensity.value = 0f;
         }
     }
 }
