@@ -8,6 +8,7 @@ public interface IParry
     public bool IsOnCooldown { get; }
     public bool CanParry { get; }
     public float Cooldown { get; }
+    public float AmplifyDuration { get; }
     public UnityEvent StartParryEvent { get; }
     public UnityEvent BreakParryEvent { get; }
     public UnityEvent SuccessfulParryEvent { get; }

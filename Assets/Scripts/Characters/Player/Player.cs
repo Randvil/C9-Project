@@ -55,6 +55,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private VisualEffect kanaboGraph;
     [SerializeField] private VisualEffect tessenGraph;
     [SerializeField] private VisualEffect regenerationGraph;
+    [SerializeField] private VisualEffect parryGraph;
     public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
@@ -186,7 +187,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         RollView = new RollView(Roll, Animator);
         WeaponView = new PlayerWeaponView(weaponObject, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
-        ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource);
+        ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource, parryGraph, this);
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume, this);
         StunView = new StunView(EffectManager, Animator);

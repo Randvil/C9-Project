@@ -46,6 +46,7 @@ public class Parry : IParry, IDamageDealer
     public UnityEvent BreakParryEvent { get; } = new();
     public UnityEvent SuccessfulParryEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
+    public float AmplifyDuration { get => amplifyDuration; }
 
     public Parry(MonoBehaviour owner, GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {

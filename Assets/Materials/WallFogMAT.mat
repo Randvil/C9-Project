@@ -59,7 +59,7 @@ Material:
     - _CloudIntensity: 0.775
     - _CloudScale: 15
     - _CloudSpeed: 0.02
-    - _Cull: 0
+    - _Cull: 2
     - _Depth: 2.5
     - _DepthToAlpha: 1
     - _DisplacementStrength: 0
