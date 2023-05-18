@@ -338,10 +338,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3196400235347730574, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6914385876978990192, guid: 584099e14d44cdf4ab7ff783968206bb, type: 3}
       propertyPath: m_Name
       value: StaticAudio
@@ -685,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indOfThisPanel: 2
+  indOfNextPanel: 0
   needToStartWith: 0
 --- !u!114 &906469672916950774
 MonoBehaviour:

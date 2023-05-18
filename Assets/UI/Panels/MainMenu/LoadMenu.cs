@@ -47,6 +47,8 @@ public class LoadMenu : MonoBehaviour
         DeathLoad deathLoad = new DeathLoad();
         deathLoad.RewriteData();
 
+        StaticAudio.Instance.SnapshotName = "InGame";
+
         switch (gameData.CheckpointData.latestScene)
         {
             case eSceneName.CityLocation:

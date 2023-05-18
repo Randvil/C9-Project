@@ -52,6 +52,7 @@ MonoBehaviour:
   backgroundTracks:
   - {fileID: 8300000, guid: 2973ef5e7fb4bf542ace884962958b89, type: 3}
   - {fileID: 8300000, guid: d5ca74d5002719a439828ab6b5b4e8c4, type: 3}
+  - {fileID: 8300000, guid: 3c6c8a27b1dc7d0449888e259714265a, type: 3}
   musicSource: {fileID: 3196400235347730574}
   buttonClickSource: {fileID: 7901695174633202882}
   hintSource: {fileID: 2014886761719570210}
@@ -70,7 +71,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

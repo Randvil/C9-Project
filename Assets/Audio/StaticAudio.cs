@@ -75,6 +75,9 @@ public class StaticAudio : MonoBehaviour
                 break;
 
             case eAudioEffect.Death:
+                Debug.Log(type);
+                Debug.Log(deathSource);
+                Debug.Log(deathSource.clip);
                 deathSource.Play();
                 break;
         }
