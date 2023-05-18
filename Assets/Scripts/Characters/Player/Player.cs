@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffectable, IAbilityCaster, IDataSavable
 {
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private VisualEffect kanaboGraph;
     [SerializeField] private VisualEffect tessenGraph;
     [SerializeField] private VisualEffect regenerationGraph;
+    [SerializeField] private VisualEffect parryGraph;
     public Volume volume;
 
     public Transform CameraFollowPoint => avatar.transform;
@@ -185,9 +187,9 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         RollView = new RollView(Roll, Animator);
         WeaponView = new PlayerWeaponView(weaponObject, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
-        ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource);
+        ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource, parryGraph, this);
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
-        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume);
+        TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume, this);
         StunView = new StunView(EffectManager, Animator);
         DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
         DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
@@ -195,6 +197,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
         RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
         RemoveWebView = new RemoveWebView(EffectManager, mainMesh);
+
+        ClearVignette();
 
         CreateStateMachine();
     }
@@ -243,6 +247,14 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
                 learnedAbilityPair.pos = abilityPair.pos;
             else
                 data.learnedAbilities.Add(abilityPair);
+        }
+    }
+
+    public void ClearVignette()
+    {
+        if (volume.sharedProfile.TryGet(out Vignette vignette))
+        {
+            vignette.intensity.value = 0f;
         }
     }
 }

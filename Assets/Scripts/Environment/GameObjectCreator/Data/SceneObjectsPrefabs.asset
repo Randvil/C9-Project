@@ -21,4 +21,16 @@ MonoBehaviour:
   cityBoundingShape: {fileID: 4490963565382592115, guid: fe8310abea07219459e8ed463197ca13, type: 3}
   arcadeBoundingShape: {fileID: 5214921312942228423, guid: 562ad61821c36fc46988b59659107c0e, type: 3}
   bossBoundingShape: {fileID: 3536144088956559141, guid: d9de5ca7c3f246043bffdc65e7532f45, type: 3}
-  targetGroupBossRoom: {fileID: 8576323225518311790, guid: beb5194eef8aef241992a6ddc711658a, type: 3}
+  abilityPickUpPrefabs:
+  - prefab: {fileID: 7626866185039041868, guid: 83437fd91f2e556428927668dd4770fd, type: 3}
+    abilityType: 3
+    position: {x: 37.059, y: 10.349, z: 8.058}
+    scene: 0
+  - prefab: {fileID: 3212893277974898943, guid: 1a05813cad0480e48be63f0bdce322ee, type: 3}
+    abilityType: 1
+    position: {x: 32.2, y: 0.25, z: 0}
+    scene: 0
+  - prefab: {fileID: 5204865135266856396, guid: eb6ab44a0dc4f1349a03798aaf1cc264, type: 3}
+    abilityType: 2
+    position: {x: 122.22, y: 7.14, z: 0}
+    scene: 0

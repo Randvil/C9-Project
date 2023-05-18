@@ -67,7 +67,7 @@ public class LocationEntry : SavePoint, IInteractive
 
         IsInteracting = true;
 
-        SaveGame();
+        SaveGame(GetData(FindAllSavableObjects()));
 
         StartCoroutine(LoadSceneCoroutine());
     }

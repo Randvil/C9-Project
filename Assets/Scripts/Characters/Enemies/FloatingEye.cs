@@ -46,7 +46,7 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
 
         MovementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        invisibilityView = new InvisibilityView(this, Invisibility as Invisibility, meshesToCloneMaterials);
+        invisibilityView = new InvisibilityView(this, Invisibility as Invisibility, meshesToCloneMaterials, invisibilityData);
 
         currentBehavior = new PatrolmanStrategy(this, this);
         currentBehavior.Activate();

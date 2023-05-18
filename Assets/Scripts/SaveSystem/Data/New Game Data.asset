@@ -15,7 +15,7 @@ MonoBehaviour:
   CheckpointData:
     playerHealth: 1000
     playerEnergy: 0
-    position: {x: -32.744, y: 9.479, z: 0}
+    position: {x: -32.744, y: 9.5, z: 0}
     latestScene: 0
     learnedAbilities:
     - pos: 1
@@ -174,7 +174,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 2
-        position: {x: 61.84, y: 0.68, z: 1.25}
+        position: {x: 50, y: 0.68, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 2
@@ -192,7 +192,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 4
-        position: {x: 61.84, y: 7.51, z: 1.25}
+        position: {x: 50, y: 7.51, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 6
-        position: {x: 61.84, y: 13.72, z: 1.25}
+        position: {x: 50, y: 13.72, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0

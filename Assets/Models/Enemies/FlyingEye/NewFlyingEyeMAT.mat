@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9075158951324909018
+--- !u!114 &-9091148933183564520
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,22 +20,28 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShieldMAT
-  m_Shader: {fileID: -6465566751694194690, guid: 8c4061a1dbd4f2d47879ca7032226154, type: 3}
-  m_ValidKeywords:
+  m_Name: NewFlyingEyeMAT
+  m_Shader: {fileID: -6465566751694194690, guid: 597608c2a942c3e4a9a43d28eb224066, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  m_CustomRenderQueue: 2450
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: af5ba2ff2d2936b4384c9ac8f56ec2b3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AmbientOcclusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,6 +74,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: acc032bcff9e4ca4bb297d85e9b51087, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -94,8 +104,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _Blend: 2
+    - _AlphaClip: 1
+    - _Ambient_Occlusion: 1
+    - _Blend: 0
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -104,14 +115,22 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 1
+    - _DissolveAmount: 0
+    - _DissolveScale: 40
+    - _DissolveWidth: 0.02
+    - _Dither: 1
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _IsHurt: 0
+    - _IsVisible: 0
     - _Metallic: 0
+    - _NormalStrength: 0.5
     - _OcclusionStrength: 1
-    - _OutlineThickness: 0.01
+    - _Opacity: 0
+    - _OpacityThreshold: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -127,8 +146,9 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _DissolveColor: {r: 1.712211, g: 0.04058822, b: 0.02422936, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.018375, g: 0.07185649, b: 0.147, a: 0}
+    - _HurtColor: {r: 7.471698, g: 0.2467072, b: 0.2467072, a: 0.5333334}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

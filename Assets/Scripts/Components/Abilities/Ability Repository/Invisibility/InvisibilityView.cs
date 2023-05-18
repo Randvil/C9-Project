@@ -7,81 +7,47 @@ public class InvisibilityView
     private MonoBehaviour owner;
     private SkinnedMeshRenderer[] skinnedMeshes;
 
-    private float fadeTime;
-    private float appearanceTime;
+    private float visibilityRate;
+    private float refreshTime;
 
-    private Coroutine fadeCoroutine;
-    private Coroutine appearCoroutine;
-
-    public InvisibilityView(MonoBehaviour owner, Invisibility invisibility, SkinnedMeshRenderer[] skinnedMeshes)
+    public InvisibilityView(MonoBehaviour owner, Invisibility invisibility, SkinnedMeshRenderer[] skinnedMeshes, InvisibilityData data)
     {
         this.owner = owner;
         this.skinnedMeshes = skinnedMeshes;
 
-        fadeTime = invisibility.FadeTime;
-        appearanceTime = invisibility.AppearanceTime;
+        visibilityRate = data.visibilityRate;
+        refreshTime = data.refreshRate;
 
-        invisibility.StartFadeEvent.AddListener(OnStartInvisibility);
-        invisibility.BreakInvisibilityEvent.AddListener(OnBrekInvisibility);
+        invisibility.StartFadeEvent.AddListener(OnStartFadeEvent);
+        invisibility.BreakInvisibilityEvent.AddListener(OnBreakInvisibility);
     }
 
-    private void OnStartInvisibility()
+    private void OnBreakInvisibility()
     {
-        if (appearCoroutine != null)
-        {
-            owner.StopCoroutine(appearCoroutine);
-            appearCoroutine = null;
-        }
-
-        fadeCoroutine = owner.StartCoroutine(ChangeTransparency(-(Time.fixedDeltaTime / fadeTime)));
+        owner.StartCoroutine(VisibilityCoroutine());
     }
 
-    private void OnBrekInvisibility()
+    private void OnStartFadeEvent()
     {
-        if (fadeCoroutine != null)
-        {
-            owner.StopCoroutine(fadeCoroutine);
-            fadeCoroutine = null;
-        }
-
-        appearCoroutine = owner.StartCoroutine(ChangeTransparency(Time.fixedDeltaTime / appearanceTime));
+        
     }
 
-    private IEnumerator ChangeTransparency(float deltaAlpha)
+    public IEnumerator VisibilityCoroutine()
     {
-        if (skinnedMeshes.Length == 0)
+        foreach (SkinnedMeshRenderer mesh in skinnedMeshes)
         {
-            Debug.LogError("Can't change transparency because there is no meshes");
-            yield break;
-        }
-
-        Material firstMaterial = skinnedMeshes[0].materials[0];
-
-        while (ChangeAlphaCondition(deltaAlpha, firstMaterial))
-        {
-            for (int i = 0; i < skinnedMeshes.Length; i++)
+            float counter = 0;
+            while (mesh.material.GetFloat("_Opacity") < 1)
             {
-                foreach (Material material in skinnedMeshes[i].materials)
+                counter += visibilityRate;
+                foreach (Material material in mesh.materials)
                 {
-                    Color newColor = material.color;
-                    newColor.a += deltaAlpha;
-                    material.color = newColor;
+                    material.SetFloat("_Opacity", counter);
+                    
                 }
+                yield return new WaitForSecondsRealtime(refreshTime);
             }
-
-            yield return new WaitForFixedUpdate();
-        }
-
-        bool ChangeAlphaCondition(float deltaAlpha, Material firstMaterial)
-        {
-            if (deltaAlpha < 0)
-            {
-                return firstMaterial.color.a > -deltaAlpha;
-            }
-            else
-            {
-                return firstMaterial.color.a < 1f - deltaAlpha;
-            }            
+            mesh.material.SetFloat("_IsVisible", 1);
         }
     }
 }

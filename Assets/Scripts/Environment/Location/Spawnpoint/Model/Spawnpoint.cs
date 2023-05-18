@@ -64,9 +64,9 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
 
     }
 
-    public void SetSpawnpointCondition(float detectPlayerRadius, float spawnRadius)
+    public void SetSpawnpointCondition(float detectPlayerRadius, float spawnRadius, int enemyNumber)
     {
-        spawnCondition = new SpawnEnemyOnce(detectPlayerRadius, spawnRadius, this, EnemyPrefab, material);
+        spawnCondition = new SpawnEnemyOnce(detectPlayerRadius, spawnRadius, this, EnemyPrefab, material, enemyNumber);
         spawnCondition.Spawn();
     }
 
@@ -104,13 +104,17 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                     case eSpawnCondition.Once:
                         SpawnpointsOnce spawnpointsOnce = new SpawnpointsOnce(id, position, conditionType, enemyType, materialType,
                             (SpawnEnemiesOnceData)spawnCondition.ReturnInfo());
+
                         foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                         {
                             if (once.id == spawnpointsOnce.id)
                             {
-                                int enemiesAlive;
-                                enemiesAlive = 1 - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-                                once.enemyNumber = enemiesAlive;
+                                if (once.enemyNumber != 0)
+                                {
+                                    int enemiesAlive;
+                                    enemiesAlive = 1 - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                                    once.enemyNumber = enemiesAlive;
+                                }
                             }
                         }
                         break;
@@ -122,10 +126,13 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                         {
                             if (wave.id == spawnpointsWave.id)
                             {
-                                int enemiesAlive;
-                                enemiesAlive = wave.spawnWaveData.enemyPerWaveCount * wave.spawnWaveData.waveCount - (spawnCondition.SpawnEnemyCount() - transform.childCount);
-                                if (enemiesAlive == 0)
-                                    wave.spawnWaveData.enemyPerWaveCount = 0;
+                                if (wave.spawnWaveData.enemyPerWaveCount != 0)
+                                {
+                                    int enemiesAlive;
+                                    enemiesAlive = wave.spawnWaveData.enemyPerWaveCount * wave.spawnWaveData.waveCount - (spawnCondition.SpawnEnemyCount() - transform.childCount);
+                                    if (enemiesAlive == 0)
+                                        wave.spawnWaveData.enemyPerWaveCount = 0;
+                                }
                             }
                         }
                         break;

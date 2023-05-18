@@ -33,16 +33,15 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
 
         if (objectsNear.Length == 0)
             return false;
-            
         else
         {
             foreach (Collider2D o in objectsNear)
             {
-                if (o.TryGetComponent(out ITeamMember teamMember) && teamMember.CharacterTeam.Team == eTeam.Player)
+                if (o.TryGetComponent(out ITeamMember teamMember) && teamMember.CharacterTeam != null
+                        && teamMember.CharacterTeam.Team == eTeam.Player)
                 {
                     return true;
                 }
-                       
             }
         }
         return false;

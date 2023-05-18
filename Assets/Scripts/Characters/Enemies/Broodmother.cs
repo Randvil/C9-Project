@@ -29,8 +29,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected CommonAbilityViewData offensiveJumpAbilityViewData;
 
     [Header("Broodmother Visual Data")]
-    [SerializeField] protected Material shieldMaterial;
-    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
+    [SerializeField] protected GameObject shield;
 
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
@@ -103,13 +102,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         stunAbilityView = new CommonAbilityView(stunAbilityViewData, StunAbility, Animator, sharedAudioSource);
         webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
         offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
-        //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
+        BroodmotherShieldView = new BroodmotherShieldView(shield, ShieldManager);
 
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DeathManager.DeathEvent.AddListener(FindObjectOfType<BroodmotherDeathCheck>().ChangeDeathStatus);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 

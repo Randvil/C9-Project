@@ -1,11 +1,12 @@
 using Cinemachine;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneObjectsCreator : Creator
 {
     private SceneObjectsCreatorData prefabsData;
-    private string currentSceneName;
+    private eSceneName currentScene;
 
     public SceneObjectsCreator(SceneObjectsCreatorData prefabsData)
     {
@@ -14,19 +15,32 @@ public class SceneObjectsCreator : Creator
 
     public override void CreateAllObjects(GameData data)
     {
-        CameraCreator camera = new CameraCreator();
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "CityLocation":
+                currentScene = eSceneName.CityLocation;
+                break;
+            case "ArcadeCenter":
+                currentScene = eSceneName.ArcadeCenter;
+                break;
+            case "BossLocation":
+                currentScene = eSceneName.BossLocation;
+                break;
+        }
+
+        CameraCreator camera = new();
         camera.CreateObject(prefabsData.cameraPrefab, data);
 
-        ManagersCreator managers = new ManagersCreator();
+        ManagersCreator managers = new();
         managers.CreateObject(prefabsData.managersPrefab, data);
 
-        StaticUICreator staticUI = new StaticUICreator();
+        StaticUICreator staticUI = new();
         staticUI.CreateObject(prefabsData.staticUIPrefab, data);
 
-        SceneEffectsCreator sceneEffects = new SceneEffectsCreator();
+        SceneEffectsCreator sceneEffects = new();
         sceneEffects.CreateObject(prefabsData.postProcessingEffects, data);
 
-        PlayerCreator player = new PlayerCreator();
+        PlayerCreator player = new();
         player.CreateObject(prefabsData.playerPrefab, data);
 
         player.PlayerComponent.volume = sceneEffects.Volume;
@@ -44,6 +58,7 @@ public class SceneObjectsCreator : Creator
         targetGroup.AddMember(player.PlayerComponent.transform, 17f, 0f);
         
         GameObject boundingShape = null;
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "CityLocation":
@@ -59,54 +74,47 @@ public class SceneObjectsCreator : Creator
                 targetGroup.AddMember(GameObject.Find("Broodmother").transform, 10f, 0f);
                 break;
         }
+
         var cameraConfiner = camera.CinemachineCamera.GetComponent<CinemachineConfiner>();
         cameraConfiner.m_BoundingShape2D = boundingShape.GetComponent<Collider2D>();
 
-
         foreach (LocationData ld in data.CurrentGameData.locations)
         {
-            switch (ld.sceneName)
-            {
-                case eSceneName.CityLocation:
-                    currentSceneName = "CityLocation";
-                    break;
-                case eSceneName.ArcadeCenter:
-                    currentSceneName = "ArcadeCenter";
-                    break;
-                case eSceneName.BossLocation:
-                    currentSceneName = "BossLocation";
-                    break;
-            }
 
-            if (currentSceneName == SceneManager.GetActiveScene().name)
+            if (currentScene == ld.sceneName)
             {
                 foreach (SpawnpointsOnce once in ld.SpawnpointsOnce)
                 {
-                    if (once.enemyNumber > 0)
-                    {
-                        SpawnpointCreator spawnpoint = new SpawnpointCreator();
-                        spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
-                        spawnpoint.SpawnpointComponent.SetSpawnpointInfo(once.id, once.position, once.enemyPrefab, once.enemyMaterial,
-                            once.spawnCondition);
-                        spawnpoint.SpawnpointComponent.SetSpawnpointCondition(once.spawnOnceData.detectPlayerRadius,
-                            once.spawnOnceData.spawnRadius);
-                    }
+                    SpawnpointCreator spawnpoint = new();
+                    spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
+                    spawnpoint.SpawnpointComponent.SetSpawnpointInfo(once.id, once.position, once.enemyPrefab, once.enemyMaterial,
+                        once.spawnCondition);
+                    spawnpoint.SpawnpointComponent.SetSpawnpointCondition(once.spawnOnceData.detectPlayerRadius,
+                        once.spawnOnceData.spawnRadius, once.enemyNumber);
                 }
 
                 foreach (SpawnpointsWave wave in ld.SpawnpointsWave)
                 {
-                    if (wave.spawnWaveData.enemyPerWaveCount > 0)
-                    {
-                        SpawnpointCreator spawnpoint = new SpawnpointCreator();
-                        spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
-                        spawnpoint.SpawnpointComponent.SetSpawnpointInfo(wave.id, wave.position, wave.enemyPrefab, wave.enemyMaterial,
-                            wave.spawnCondition);
-                        spawnpoint.SpawnpointComponent.SetSpawnpointCondition(wave.spawnWaveData.detectPlayerRadius,
-                            wave.spawnWaveData.spawnRadius, wave.spawnWaveData.waveCount, wave.spawnWaveData.enemyPerWaveCount,
-                            wave.spawnWaveData.timeBetweenWaves);
-                    }
+                    SpawnpointCreator spawnpoint = new();
+                    spawnpoint.CreateObject(prefabsData.spawnpointPrefab, data);
+                    spawnpoint.SpawnpointComponent.SetSpawnpointInfo(wave.id, wave.position, wave.enemyPrefab, wave.enemyMaterial,
+                        wave.spawnCondition);
+                    spawnpoint.SpawnpointComponent.SetSpawnpointCondition(wave.spawnWaveData.detectPlayerRadius,
+                        wave.spawnWaveData.spawnRadius, wave.spawnWaveData.waveCount, wave.spawnWaveData.enemyPerWaveCount,
+                        wave.spawnWaveData.timeBetweenWaves);
                 }
 
+            }
+        }
+
+        foreach (AbilityPickUpStruct abilityPickUp in prefabsData.abilityPickUpPrefabs)
+        {
+            if (data.CurrentGameData.learnedAbilities.FirstOrDefault(x => x.abilityType == abilityPickUp.abilityType) == null
+                && currentScene == abilityPickUp.scene)
+            {
+                AbilityPickUpCreator abilityPickUpCreator = new();
+                abilityPickUpCreator.CreateObject(abilityPickUp.prefab, data);
+                abilityPickUpCreator.newGameObject.transform.position = abilityPickUp.position;
             }
         }
     }

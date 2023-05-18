@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BroodmotherShieldView
 {
-    private SkinnedMeshRenderer SkinnedMeshRenderer;
-    private Material shieldMAT;
-    private Material[] matArray;
+    private GameObject shield;
 
-    public BroodmotherShieldView(Material shieldMAT, IHealthManager shieldManager, SkinnedMeshRenderer skinnedMeshRenderer)
+    public BroodmotherShieldView(GameObject shield, IHealthManager shieldManager)
     {
-        this.shieldMAT = shieldMAT;
-        SkinnedMeshRenderer = skinnedMeshRenderer;
-        matArray = SkinnedMeshRenderer.materials;
+        this.shield = shield;
         shieldManager.CurrentHealthChangedEvent.AddListener(ShowShield);
     }
 
@@ -20,13 +16,11 @@ public class BroodmotherShieldView
     {
         if (health.currentHealth > 0)
         {
-            matArray[1] = shieldMAT;
-            SkinnedMeshRenderer.materials = matArray;
+            shield.SetActive(true);
         }
         else
         {
-            matArray[1] = matArray[0];
-            SkinnedMeshRenderer.materials = matArray;
+            shield.SetActive(false);
         }
     }
 }
