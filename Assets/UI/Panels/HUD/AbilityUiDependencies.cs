@@ -21,6 +21,8 @@ public class AbilityUiDependencies : MonoBehaviour
     private VisualElement parryPoly;
     private Polygon[] polyInCollection;
 
+    private RadialFill daikyuLoadBar;
+
     private readonly Dictionary<eAbilityType, int> abilityTypeOrder = new();
     private readonly Dictionary<eAbilityType, bool> abilityCanBeUsed = new();
 
@@ -60,7 +62,7 @@ public class AbilityUiDependencies : MonoBehaviour
         CheckForAlreadyLearned();
     }
 
-    // we need to check dis manually coz of AbilityManager hasn't reactive properties
+    // we need to check dat manually coz of AbilityManager hasn't reactive properties
     private void Update()
     {
         CheckAbilitiesStatus();
@@ -68,15 +70,38 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private eAbilityType GetTypeByIndex(int slotIndex) => abilityTypeOrder.First(x => x.Value == slotIndex).Key;
 
+    private void SubscribeDaikyuOnLoadBar(Daikyu daikyu)
+    {
+        daikyuLoadBar = hudScreen.Q<RadialFill>("DaikyuLoadBar");
+
+        daikyu.StartCastEvent.AddListener(() => OnDaikyuPrepare(daikyu));
+        daikyu.ReleaseCastEvent.AddListener(() => OnDaikyuRelease(daikyu));
+    }
+
+    private void OnDaikyuPrepare(Daikyu daikyu)
+    {
+        daikyuLoadBar.style.opacity = 0.9f;
+        DOTween.To(x => daikyuLoadBar.value = x, 0f, 1f, daikyu.FullChargeTime).SetEase(Ease.Linear);
+    }
+
+    private void OnDaikyuRelease(Daikyu daikyu)
+    {
+        daikyuLoadBar.style.opacity = 0f;
+        daikyuLoadBar.value = 0f;
+    }
+
     private void CheckForAlreadyLearned()
     {
         int i = 0;
-        foreach (var abilityWithInd in abilityManager.LearnedAbilities)
+        foreach (var ability in abilityManager.LearnedAbilities.Values)
         {
             if (++i > polyCount)
                 return;
 
-            OnSetWithoutChecking(abilityWithInd.Value.AbilityType);
+            if (ability is Daikyu daikyu)
+                SubscribeDaikyuOnLoadBar(daikyu);                
+
+            OnSetWithoutChecking(ability.AbilityType);
         }
         CheckAllAbilitiesStatus();
     }
@@ -133,6 +158,9 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void OnSet(eAbilityType type)
     {
+        if (type == eAbilityType.Daikyu && daikyuLoadBar == null)
+            SubscribeDaikyuOnLoadBar(abilityManager.Abilities[type] as Daikyu);
+
         OnSetWithoutChecking(type);
 
         CheckAllAbilitiesStatus();

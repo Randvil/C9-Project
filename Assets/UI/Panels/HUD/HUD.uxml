@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI/Panels/HUD/HUDStyles.uss?fileID=7433441132597879392&amp;guid=c0442d01171f404418977d7baf0b01b8&amp;type=3#HUDStyles" />
     <Style src="project://database/Assets/UI/Panels/Abilities/Abilities.uss?fileID=7433441132597879392&amp;guid=e047b53d0d51cef49a3d5bce126c854d&amp;type=3#Abilities" />
     <Style src="project://database/Assets/UI/CustomControls/Polygon/Resources/PolygonStyles.uss?fileID=7433441132597879392&amp;guid=244aae9a5d60e5f4688dfaed29a3bfec&amp;type=3#PolygonStyles" />
-    <ui:VisualElement name="screen" style="flex-grow: 1; margin-left: 66px; margin-top: 66px; margin-bottom: 66px; margin-right: 66px; align-items: center;">
-        <ui:VisualElement name="playerStatsContainer" style="width: 35%; flex-direction: row; scale: 1.4 1.4; transform-origin: left top; left: 0; position: absolute;">
+    <ui:VisualElement name="screen" style="flex-grow: 1; margin-left: 66px; margin-top: 66px; margin-bottom: 66px; margin-right: 66px; align-items: center; justify-content: center;">
+        <ui:VisualElement name="playerStatsContainer" style="width: 35%; flex-direction: row; scale: 1.4 1.4; transform-origin: left top; left: 0; position: absolute; top: 0;">
             <NS.RomanLib.RadialFill name="energyBar" text="100" width="70" height="70" value="0.86" overlay-image-path="radialBlack" overlay-image-scale="0.914" fill-color="#3F3FF1BE" label="true" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; font-size: 16px; -unity-font: url(&apos;project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&amp;guid=f6d4e89c7c0e5c44992901513d4036d7&amp;type=3#InterTight-VariableFont_wght&apos;); -unity-font-definition: none; -unity-font-style: bold; color: rgb(0, 0, 0);" />
             <ui:VisualElement style="flex-grow: 1; justify-content: space-around; align-items: flex-start; margin-left: 11px; margin-top: 12px;">
                 <ui:VisualElement name="hp" style="flex-direction: row; align-items: center; flex-shrink: 1;">
@@ -67,5 +67,6 @@
                 <ui:ProgressBar value="1" name="shieldBar" high-value="1" style="width: 270px; height: 4px; margin-left: 8px; margin-right: 8px; margin-top: 8px; margin-bottom: 8px;" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <NS.RomanLib.RadialFill text="100" name="DaikyuLoadBar" value="0" width="70" height="70" style="position: absolute; opacity: 0; bottom: 20%; background-image: resource(&apos;daikyuLoadMask&apos;); overflow: hidden;" />
     </ui:VisualElement>
 </ui:UXML>
