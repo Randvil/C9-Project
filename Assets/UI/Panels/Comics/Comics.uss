@@ -1,14 +1,20 @@
 .comics-label {
     font-size: 40px;
     -unity-text-align: middle-center;
-    bottom: 5%;
     position: absolute;
     color: rgba(255, 255, 255, 0.75);
-    background-color: rgba(0, 0, 0, 0.47);
+    background-color: rgba(0, 0, 0, 0.75);
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
+    max-width: 90%;
+    white-space: normal;
+    align-items: center;
+    justify-content: center;
+    top: 3%;
+    height: 200px;
+    width: 90%;
 }
 
 .comics-page {
@@ -49,7 +55,7 @@
 }
 
 .skip-button:hover {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     transition-duration: 0.3s, 0.3s;
     transition-property: color, scale;
     scale: 1.2 1.2;

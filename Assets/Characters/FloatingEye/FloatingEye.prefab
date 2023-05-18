@@ -127,7 +127,7 @@ VisualEffect:
       - m_Value: {x: 0.000009334669, y: 90, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 0.63, y: 0.21049982, z: 0}
+      - m_Value: {x: -19.441774, y: 10.780499, z: 0}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -311,8 +311,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5726873128067666410}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a7a687deb964e8d4bb698e6e3a1caf2a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2b91eb5195103f64492ab54ee730fab3, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+  m_Controller: {fileID: 9100000, guid: 4f434cce2c89c1946aeec0a52b8ad2dc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -431,9 +431,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dfcf13cc967a94282312b3e9b14f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMesh: {fileID: 8261839103245578770}
+  skinnedMeshes:
+  - {fileID: 8261839103245578770}
+  - {fileID: 4051941392938713964}
+  - {fileID: 2097186402715737353}
+  - {fileID: 7428093290967731857}
+  - {fileID: 1849786981222120041}
+  - {fileID: 4749412690133495677}
   dissolveGraph: {fileID: 6588895649149277193}
-  dissolveRate: 0.025
+  dissolveRate: 0.0125
   refreshRate: 0.025
 --- !u!82 &6172552536687305650
 AudioSource:
@@ -1239,6 +1245,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6161448157782799470, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
+    - target: {fileID: -6072391574331347817, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4908095824827308072, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1255,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4196402109901708151, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
     - target: {fileID: -4118074505660815698, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1291,6 +1309,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: eye_animation_idle
       objectReference: {fileID: 0}
+    - target: {fileID: 1815123007507453693, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
+    - target: {fileID: 4597104371315341073, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
+    - target: {fileID: 4715851666125980649, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
     - target: {fileID: 6274622929727697754, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1307,6 +1337,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6981338451223067372, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
     - target: {fileID: 8879528566716807029, guid: 5f7165d9752f51641a36dd42debb10e9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

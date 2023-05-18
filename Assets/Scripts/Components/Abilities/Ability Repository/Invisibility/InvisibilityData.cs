@@ -14,4 +14,7 @@ public class InvisibilityData : BaseAbilityData
     public float appearanceTime = 1f;
     [Min(0.01f)]
     public float checkFinishEffectPeriod = 1f;
+
+    public float visibilityRate = 0.03f;
+    public float refreshRate = 0.02f;
 }

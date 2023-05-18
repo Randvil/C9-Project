@@ -46,7 +46,7 @@ public class SpiderMinion : BaseCreature, IPatrollingBehavior
         JumpAbility = new OffensiveJump(this, offensiveJumpData, EnergyManager, Rigidbody, Collider, Gravity, Turning, CharacterTeam, WeaponModifierManager);
         CompoundAttack = new SpiderMinionCompoundAttack(gameObject, spiderMinionCompoundAttackData, Weapon, JumpAbility);
 
-        MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
+        MovementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
         jumpAbilityView = new CommonAbilityView(jumpViewData, JumpAbility, Animator, sharedAudioSource);
 

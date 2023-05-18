@@ -63,7 +63,7 @@ public class EnemyCheckEntrance : MonoBehaviour, ICheckEntrance
             foreach (int id in spawnpointsID.CityLocation)
             {
                 SpawnpointsWave wave = CitySpawnpointsWave.Find(spawnpoint => spawnpoint.id == id);
-                if (wave != null && wave.spawnWaveData.enemyPerWaveCount != 0)
+                if (wave != null && wave.spawnWaveData.enemyPerWaveCount > 0)
                 {
                     return true;
                 }

@@ -24,10 +24,12 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
+    [SerializeField] protected CommonAbilityViewData stunAbilityViewData;
+    [SerializeField] protected CommonAbilityViewData webAbilityViewData;
+    [SerializeField] protected CommonAbilityViewData offensiveJumpAbilityViewData;
 
     [Header("Broodmother Visual Data")]
-    [SerializeField] protected Material shieldMaterial;
-    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
+    [SerializeField] protected GameObject shield;
 
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
@@ -57,8 +59,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
     public BroodmotherStrategyData BroodmotherStrategyData => broodmotherStrategyData;
 
-    protected NoArmsWeaponView weaponView;
     protected IHealthBarView shieldBarView;
+    protected MovementView movementView;
+    protected NoArmsWeaponView weaponView;
+    protected ClimbView climbView;
+    protected StunView stunView;
+    protected CommonAbilityView stunAbilityView;
+    protected CommonAbilityView webAbilityView;
+    protected CommonAbilityView offensiveJumpAbilityView;
     protected BroodmotherShieldView BroodmotherShieldView;
 
     protected override void Awake()
@@ -87,15 +95,21 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         CompoundAttack = new BroodmotherCompoundAttack(gameObject, Weapon, WebAbility, StunAbility, OffensiveJumpAbility, SwarmSpawningAbility);
 
-        MovementView = new AnimationAndSoundMovementView(Movement, Animator, movementAudioSource);
+        movementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        //BroodmotherShieldView = new BroodmotherShieldView(shieldMaterial, ShieldManager, skinnedMesh);
-        
+        climbView = new ClimbView(Climb, Animator, sharedAudioSource);
+        stunView = new StunView(EffectManager, Animator);
+        stunAbilityView = new CommonAbilityView(stunAbilityViewData, StunAbility, Animator, sharedAudioSource);
+        webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
+        offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
+        BroodmotherShieldView = new BroodmotherShieldView(shield, ShieldManager);
+
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
         DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        DeathManager.DeathEvent.AddListener(FindObjectOfType<BroodmotherDeathCheck>().ChangeDeathStatus);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
 

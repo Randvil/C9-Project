@@ -6,18 +6,20 @@ public class SpawnEnemyOnce : SpawnEnemyCondition
 {
     private float detectPlayerRadius;
     private float spawnRadius;
+    private int enemyNumber;
     private Spawnpoint spawnpoint;
     private GameObject enemyPrefab;
     private Material material;
 
     public SpawnEnemyOnce(float detectPlayerRadius, float spawnRadius, Spawnpoint spawnpoint, GameObject enemyPrefab, 
-        Material material)
+        Material material, int enemyNumber)
     {
         this.detectPlayerRadius = detectPlayerRadius;
         this.spawnRadius = spawnRadius;
         this.spawnpoint = spawnpoint;
         this.enemyPrefab = enemyPrefab;
         this.material = material;
+        this.enemyNumber = enemyNumber;
         spawnEnemyCount = 0;
     }
 
@@ -28,7 +30,10 @@ public class SpawnEnemyOnce : SpawnEnemyCondition
 
     public override void Spawn()
     {
-        spawnpoint.StartCoroutine(SpawnEnemyCoroutine());
+        if (enemyNumber == 1)
+        {
+            spawnpoint.StartCoroutine(SpawnEnemyCoroutine());
+        }
     }
 
     public IEnumerator SpawnEnemyCoroutine()

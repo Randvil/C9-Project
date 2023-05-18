@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ParryView
 {
@@ -18,11 +19,14 @@ public class ParryView
     private AudioSource audioSource;
     private IParry parry;
 
-    public ParryView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, ParryViewData parryViewData, IParry parry, Animator animator, AudioSource audioSource)
+    private VisualEffect parryEffect;
+    private MonoBehaviour owner;
+
+    public ParryView(GameObject weaponObject, ParryViewData parryViewData, IParry parry, Animator animator, AudioSource audioSource, VisualEffect visualEffect, MonoBehaviour owner)
     {
         this.weaponObject = weaponObject;
-        this.weaponContainer = weaponContainer;
-        this.rightHand = rightHand;
+        //this.weaponContainer = weaponContainer;
+        //this.rightHand = rightHand;
 
         stanceAnimatorParameter = parryViewData.stanceAnimatorParameter;
         triggerAnimatorParameter = parryViewData.triggerAnimatorParameter;
@@ -33,6 +37,8 @@ public class ParryView
         this.animator = animator;
         this.audioSource = audioSource;
         this.parry = parry;
+        parryEffect = visualEffect;
+        this.owner = owner;
 
         parry.StartParryEvent.AddListener(OnStartParry);
         parry.BreakParryEvent.AddListener(OnBreakParry);
@@ -42,9 +48,9 @@ public class ParryView
     private void OnStartParry()
     {
         weaponObject.SetActive(true);
-        weaponObject.transform.parent = rightHand;
-        weaponObject.transform.position = rightHand.position;
-        weaponObject.transform.localRotation = Quaternion.identity;
+        //weaponObject.transform.parent = rightHand;
+        //weaponObject.transform.position = rightHand.position;
+        //weaponObject.transform.localRotation = Quaternion.identity;
 
         animator.SetBool(stanceAnimatorParameter, true);
 
@@ -54,7 +60,7 @@ public class ParryView
     private void OnBreakParry()
     {
         weaponObject.SetActive(false);
-        weaponObject.transform.parent = weaponContainer;
+        //weaponObject.transform.parent = weaponContainer;
 
         animator.SetBool(stanceAnimatorParameter, false);
 
@@ -65,6 +71,8 @@ public class ParryView
     {
         animator.SetTrigger(triggerAnimatorParameter);
 
+        owner.StartCoroutine(ParryVFXCoroutine());
+
         PlaySound(successfulParrySound);
     }
 
@@ -74,5 +82,12 @@ public class ParryView
         {
             audioSource.PlayOneShot(audioClip);
         }
+    }
+
+    private IEnumerator ParryVFXCoroutine()
+    {
+        parryEffect.Play();
+        yield return new WaitForSeconds(parry.AmplifyDuration);
+        parryEffect.Stop();
     }
 }

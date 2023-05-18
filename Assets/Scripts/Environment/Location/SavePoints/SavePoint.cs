@@ -14,14 +14,12 @@ public abstract class SavePoint : MonoBehaviour
         dataHandler = new FileDataHandler("Saves", "LastSave");
     }
 
-    public void SaveGame()
+    public void SaveGame(GameData gameData)
     {
-        savableObjects = FindAllSavableObjects();
-        gameData = GetData(savableObjects);
         dataHandler.Save(gameData);
     }
 
-    private List<IDataSavable> FindAllSavableObjects()
+    public List<IDataSavable> FindAllSavableObjects()
     {
         IEnumerable<IDataSavable> dataSavableObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IDataSavable>();

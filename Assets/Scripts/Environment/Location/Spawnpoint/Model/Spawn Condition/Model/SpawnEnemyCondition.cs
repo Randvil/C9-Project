@@ -17,8 +17,8 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
     {
         GameObject instantiate = Object.Instantiate(enemyPrefab, GenerateRandomPos(spawnpoint.transform.position, diff), 
             Quaternion.identity, spawnpoint.transform);
-        Material materialClone = Object.Instantiate(material);
-        instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
+        //Material materialClone = Object.Instantiate(material);
+        //instantiate.GetComponentInChildren<SkinnedMeshRenderer>().material = materialClone;
         instantiate.name = enemyPrefab.name;
         spawnEnemyCount++;
     }
@@ -33,16 +33,15 @@ public abstract class SpawnEnemyCondition : ISpawnEnemyCondition
 
         if (objectsNear.Length == 0)
             return false;
-            
         else
         {
             foreach (Collider2D o in objectsNear)
             {
-                if (o.TryGetComponent(out ITeamMember teamMember) && teamMember.CharacterTeam.Team == eTeam.Player)
+                if (o.TryGetComponent(out ITeamMember teamMember) && teamMember.CharacterTeam != null
+                        && teamMember.CharacterTeam.Team == eTeam.Player)
                 {
                     return true;
                 }
-                       
             }
         }
         return false;

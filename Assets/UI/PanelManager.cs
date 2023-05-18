@@ -31,12 +31,9 @@ public class PanelManager : MonoBehaviour
             if (lastPanel != null)
             {
                 if (needToTweenPrev)
-                {
-                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
-                }                
+                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);       
                 
-                StartCoroutine(DisplayDisableTween(lastPanel));
-                
+                StartCoroutine(DisplayDisableTween(lastPanel));                
             }
 
             if (currentPanel != null)
@@ -44,6 +41,8 @@ public class PanelManager : MonoBehaviour
                 if (currentPanel.style.opacity.value > 0.001f) // Если игрок слишком быстро переключает панели (балуется)
                     DisplayDisableImmediate(lastPanel);
 
+                if (needToTweenNext)
+                    currentPanel.style.opacity = 0f;
                 currentPanel.style.display = DisplayStyle.Flex;
 
                 if (needToTweenNext)

@@ -33,7 +33,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
     public IDeathManager DeathManager { get; protected set; }
 
     public TurningView TurningView { get; protected set; }
-    public AnimationAndSoundMovementView MovementView { get; protected set; }
+    public MovementView MovementView { get; protected set; }
     public IHealthBarView HealthBarView { get; protected set; }
     public DeathView DeathView { get; protected set; }
 

@@ -18,5 +18,5 @@ MonoBehaviour:
   bossPrefab: {fileID: 9048720266790035559, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
   dissolveSpiderBoyMaterial: {fileID: 2100000, guid: 365f0abc06c4fe24a9c92536aa7546a3, type: 2}
   dissolveSpiderMaterial: {fileID: 2100000, guid: d36972801abd993489faffe1d429b1f8, type: 2}
-  dissolveFlyingEyeMaterial: {fileID: 2100000, guid: 63a02c802270a0449a3e255c4227c4a2, type: 2}
+  dissolveFlyingEyeMaterial: {fileID: 2100000, guid: 93b3b8517cda28744bdda9a88f2ebeca, type: 2}
   dissolveBossMaterial: {fileID: 2100000, guid: ad1a2fe27fdd99e4daa869b917c453ff, type: 2}

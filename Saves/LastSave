@@ -1,10 +1,10 @@
 {
     "CheckpointData": {
-        "playerHealth": 1000.0,
-        "playerEnergy": 0.0,
+        "playerHealth": 910.0,
+        "playerEnergy": 100.0,
         "position": {
-            "x": -32.74399948120117,
-            "y": 9.556059837341309,
+            "x": 407.20001220703127,
+            "y": 20.99302101135254,
             "z": 0.0
         },
         "latestScene": 0,
@@ -12,6 +12,18 @@
             {
                 "pos": 1,
                 "abilityType": 4
+            },
+            {
+                "pos": 2,
+                "abilityType": 3
+            },
+            {
+                "pos": 3,
+                "abilityType": 1
+            },
+            {
+                "pos": 4,
+                "abilityType": 2
             }
         ],
         "locations": [
@@ -25,7 +37,7 @@
                             "y": 11.170000076293946,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -41,7 +53,7 @@
                             "y": 10.699999809265137,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -57,7 +69,7 @@
                             "y": 7.800000190734863,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -73,7 +85,7 @@
                             "y": 17.700000762939454,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -89,7 +101,7 @@
                             "y": 21.399999618530275,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -105,7 +117,7 @@
                             "y": 0.19900000095367433,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -162,7 +174,7 @@
                             "detectPlayerRadius": 40.0,
                             "spawnRadius": 15.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -180,7 +192,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -198,7 +210,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -216,7 +228,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 3,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -234,7 +246,7 @@
                             "detectPlayerRadius": 10.0,
                             "spawnRadius": 1.0,
                             "waveCount": 4,
-                            "enemyPerWaveCount": 3,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 5.0
                         }
                     },
@@ -252,7 +264,7 @@
                             "detectPlayerRadius": 10.0,
                             "spawnRadius": 1.0,
                             "waveCount": 4,
-                            "enemyPerWaveCount": 3,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 5.0
                         }
                     }
@@ -268,7 +280,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -284,7 +296,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -300,7 +312,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -316,7 +328,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -332,7 +344,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -348,7 +360,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -364,7 +376,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -380,7 +392,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -396,7 +408,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -412,7 +424,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -428,7 +440,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -444,7 +456,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -459,11 +471,11 @@
         ]
     },
     "CurrentGameData": {
-        "playerHealth": 1000.0,
-        "playerEnergy": 0.0,
+        "playerHealth": 910.0,
+        "playerEnergy": 100.0,
         "position": {
-            "x": -32.74399948120117,
-            "y": 9.479000091552735,
+            "x": -12.670000076293946,
+            "y": -0.8899999856948853,
             "z": 0.0
         },
         "latestScene": 0,
@@ -471,6 +483,18 @@
             {
                 "pos": 1,
                 "abilityType": 4
+            },
+            {
+                "pos": 2,
+                "abilityType": 3
+            },
+            {
+                "pos": 3,
+                "abilityType": 1
+            },
+            {
+                "pos": 4,
+                "abilityType": 2
             }
         ],
         "locations": [
@@ -484,7 +508,7 @@
                             "y": 11.170000076293946,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -500,7 +524,7 @@
                             "y": 10.699999809265137,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -516,7 +540,7 @@
                             "y": 7.800000190734863,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -532,7 +556,7 @@
                             "y": 17.700000762939454,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -548,7 +572,7 @@
                             "y": 21.399999618530275,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -564,7 +588,7 @@
                             "y": 0.19900000095367433,
                             "z": 0.0
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -621,7 +645,7 @@
                             "detectPlayerRadius": 40.0,
                             "spawnRadius": 15.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -639,7 +663,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -657,7 +681,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 2,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -675,7 +699,7 @@
                             "detectPlayerRadius": 20.0,
                             "spawnRadius": 10.0,
                             "waveCount": 3,
-                            "enemyPerWaveCount": 1,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 1.0
                         }
                     },
@@ -693,7 +717,7 @@
                             "detectPlayerRadius": 10.0,
                             "spawnRadius": 1.0,
                             "waveCount": 4,
-                            "enemyPerWaveCount": 3,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 5.0
                         }
                     },
@@ -711,7 +735,7 @@
                             "detectPlayerRadius": 10.0,
                             "spawnRadius": 1.0,
                             "waveCount": 4,
-                            "enemyPerWaveCount": 3,
+                            "enemyPerWaveCount": 0,
                             "timeBetweenWaves": 5.0
                         }
                     }
@@ -727,7 +751,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -743,7 +767,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -759,7 +783,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -775,7 +799,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -791,7 +815,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -807,7 +831,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": 1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -823,7 +847,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -839,7 +863,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -855,7 +879,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,
@@ -871,7 +895,7 @@
                             "y": 0.6800000071525574,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -887,7 +911,7 @@
                             "y": 7.510000228881836,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 0,
                         "enemyMaterial": 0,
@@ -903,7 +927,7 @@
                             "y": 13.720000267028809,
                             "z": 1.25
                         },
-                        "enemyNumber": -1,
+                        "enemyNumber": 0,
                         "spawnCondition": 0,
                         "enemyPrefab": 2,
                         "enemyMaterial": 2,

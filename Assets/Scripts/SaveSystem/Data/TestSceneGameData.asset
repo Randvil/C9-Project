@@ -16,7 +16,7 @@ MonoBehaviour:
     playerHealth: 1000
     playerEnergy: 100
     position: {x: 0, y: 0, z: 0}
-    latestScene: 
+    latestScene: 2
     learnedAbilities:
     - pos: 1
       abilityType: 1
@@ -27,5 +27,6 @@ MonoBehaviour:
     - pos: 4
       abilityType: 4
     locations:
-    - sceneName: TestScene
-      spawnpoints: []
+    - sceneName: 2
+      SpawnpointsOnce: []
+      SpawnpointsWave: []

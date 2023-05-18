@@ -1249,7 +1249,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stunned
-  m_Speed: 0.01
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1261,7 +1261,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4061839508520268033, guid: 7e4e4d6f772106043869c6b9c358f42b, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: d6e2f4dc94fb5ff42b223041d225ae6d, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

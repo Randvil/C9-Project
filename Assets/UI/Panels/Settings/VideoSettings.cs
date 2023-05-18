@@ -58,6 +58,6 @@ public class VideoSettings : MonoBehaviour
         string[] parsed = resolutionsDropdown.value.Split(' ', 'x', '@');
         Resolution n = new() { width = int.Parse(parsed[0]), height = int.Parse(parsed[1]), refreshRate = int.Parse(parsed[2]) };
 
-        Screen.SetResolution(n.width, n.height, true, n.refreshRate);
+        Screen.SetResolution(n.width, n.height, fullScreenToggle.value, n.refreshRate);
     }
 }

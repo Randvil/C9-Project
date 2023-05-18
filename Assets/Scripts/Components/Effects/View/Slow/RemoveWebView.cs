@@ -15,7 +15,7 @@ public class RemoveWebView
 
     private void RemoveWeb(eEffectType type, eEffectStatus status)
     {
-        if (type == eEffectType.Slow && status == eEffectStatus.Removed)
+        if (type == eEffectType.Root && status == eEffectStatus.Cleared)
         {
             matArray = mesh.materials;
             matArray[1] = matArray[0];

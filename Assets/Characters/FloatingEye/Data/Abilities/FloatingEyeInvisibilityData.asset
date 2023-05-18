@@ -21,3 +21,5 @@ MonoBehaviour:
   fadeTime: 1
   appearanceTime: 1
   checkFinishEffectPeriod: 1
+  visibilityRate: 0.03
+  refreshRate: 0.005

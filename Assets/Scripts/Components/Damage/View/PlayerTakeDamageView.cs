@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 public class PlayerTakeDamageView
 {
-    private IDamageHandler damageHandler;
+    private MonoBehaviour owner;
     private AudioSource audioSource;
     private VolumeProfile volumeProfile;
     private Vignette vignette;
 
-    public PlayerTakeDamageView(IDamageHandler damageHandler, AudioSource audioSource, Volume volume)
+    public PlayerTakeDamageView(IDamageHandler damageHandler, AudioSource audioSource, Volume volume, MonoBehaviour owner)
     {
-        this.damageHandler = damageHandler;
+        this.owner = owner;
         this.audioSource = audioSource;
         volumeProfile = volume.sharedProfile;
 
@@ -31,18 +31,25 @@ public class PlayerTakeDamageView
         {
             audioSource.Play();
         }
-        
-        ShowRedVignette();
+
+        owner.StartCoroutine(ShowVignetteCoroutine());
     }
 
-    public async void ShowRedVignette()
+    public IEnumerator ShowVignetteCoroutine()
     {
         if (volumeProfile.TryGet(out vignette))
         {
             vignette.intensity.value = 0.3f;
-            await Task.Delay(100);
-            vignette.intensity.value = 0;
-        }
+
+            float counter = 0.3f;
+            while (vignette.intensity.value > 0)
+            {
+                counter -= 0.01f;
+                vignette.intensity.value = counter;
+                yield return new WaitForSeconds(0.001f);
+            }
             
+        }
     }
+
 }

@@ -117,7 +117,7 @@ public class BroodmotherStrategy : BaseStrategy
             return true;
         }
 
-        if (Mathf.Abs(collider.transform.position.x - recoveryPosition.x) < 0.1f)
+        if (Mathf.Abs(collider.transform.position.x - recoveryPosition.x) < 0.5f)
         {
             Stop();
             climb.StartClimb();

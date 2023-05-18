@@ -21,12 +21,11 @@ public class PlayerWeaponView
 
     private bool enemyWasHit;
 
-    public PlayerWeaponView(GameObject weaponObject, Transform weaponContainer, Transform rightHand, PlayerWeaponViewData playerWeaponViewData, 
-        IWeapon weapon, IDamageDealer damageDealer, Animator animator, AudioSource audioSource, VisualEffect slashGraph)
+    public PlayerWeaponView(GameObject weaponObject, PlayerWeaponViewData playerWeaponViewData, IWeapon weapon, IDamageDealer damageDealer, Animator animator, AudioSource audioSource, VisualEffect slashGraph)
     {
         this.weaponObject = weaponObject;
-        this.weaponContainer = weaponContainer;
-        this.rightHand = rightHand;
+        //this.weaponContainer = weaponContainer;
+        //this.rightHand = rightHand;
 
         takeSword = playerWeaponViewData.takeSword;
         putAwaySword = playerWeaponViewData.putAwaySword;
@@ -49,9 +48,9 @@ public class PlayerWeaponView
     public void OnStartAttack()
     {
         weaponObject.SetActive(true);
-        weaponObject.transform.parent = rightHand;
-        weaponObject.transform.position = rightHand.position;
-        weaponObject.transform.localRotation = Quaternion.identity;
+        //weaponObject.transform.parent = rightHand;
+        //weaponObject.transform.position = rightHand.position;
+        //weaponObject.transform.localRotation = Quaternion.identity;
 
         animator.SetBool("IsAttacking", true);
         animator.SetTrigger("AttackTrigger");
@@ -63,7 +62,7 @@ public class PlayerWeaponView
     public void OnBreakAttack()
     {
         weaponObject.SetActive(false);
-        weaponObject.transform.parent = weaponContainer;
+        //weaponObject.transform.parent = weaponContainer;
 
         animator.SetBool("IsAttacking", false);
 
