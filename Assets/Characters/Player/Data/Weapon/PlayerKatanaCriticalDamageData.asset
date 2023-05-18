@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerKatanaCriticalDamageData
   m_EditorClassIdentifier: 
   damageType: 0
-  damageValue: 20
+  damageValue: 60
