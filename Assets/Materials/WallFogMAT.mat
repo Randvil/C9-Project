@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WallFogMAT
-  m_Shader: {fileID: -6465566751694194690, guid: bc8562ec4af63e840b50d75c2daeed50, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7cd372b2e8ff7984c9a4803477485d10, type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _RECEIVE_SHADOWS_OFF
@@ -30,7 +30,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -59,17 +59,17 @@ Material:
     - _CloudIntensity: 0.775
     - _CloudScale: 15
     - _CloudSpeed: 0.02
-    - _Cull: 0
+    - _Cull: 2
     - _Depth: 2.5
     - _DepthToAlpha: 1
     - _DisplacementStrength: 0
     - _DstBlend: 10
-    - _EdgeMaxAlpha: 0.4
+    - _EdgeMaxAlpha: 1
     - _NormalStrength: 0.7
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _RippleIntensity: 0.79
+    - _RippleIntensity: 0.3
     - _RippleSize: 7
     - _RippleSpeed: 2
     - _Smoothness: 0.5
