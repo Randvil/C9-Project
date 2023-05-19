@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum eEffectPower
 {
-    Weak    = 0,
-    Strong  = 1,
+    Weak     = 0,
+    Strong   = 1,
+    Immunity = 2,
 }

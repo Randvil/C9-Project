@@ -22,6 +22,7 @@ public class Roll : IRoll, IProhibitable
     private Coroutine rollCoroutine;
     private float finishCooldownTime;
     private IDamageModifier damageAbsorptionModifier;
+    private eEffectPower initialEffectManagerSusceptibility;
 
     private List<object> prohibitors = new();
 
@@ -52,6 +53,11 @@ public class Roll : IRoll, IProhibitable
         this.defenceModifierManager = defenceModifierManager;
         this.effectManager = effectManager;
 
+        if (effectManager is SelectiveEffectManager selectiveEffectManager)
+        {
+            initialEffectManagerSusceptibility = selectiveEffectManager.SusceptibilityType;
+        }
+
         effectManager.EffectEvent.AddListener(OnRoot);
     }
 
@@ -79,6 +85,11 @@ public class Roll : IRoll, IProhibitable
 
         defenceModifierManager.RemoveModifier(damageAbsorptionModifier);
 
+        if (effectManager is SelectiveEffectManager selectiveEffectManager)
+        {
+            selectiveEffectManager.SusceptibilityType = initialEffectManagerSusceptibility;
+        }
+
         owner.StopCoroutine(rollCoroutine);
         rollCoroutine = null;
 
@@ -97,6 +108,12 @@ public class Roll : IRoll, IProhibitable
 
         damageAbsorptionModifier = new RelativeDamageModifier(-damageAbsorption);
         defenceModifierManager.AddModifier(damageAbsorptionModifier);
+
+        if (effectManager is SelectiveEffectManager selectiveEffectManager)
+        {
+            selectiveEffectManager.SusceptibilityType = eEffectPower.Immunity;
+            Debug.Log("Effect immunity");
+        }
 
         yield return new WaitForSeconds(duration);
 

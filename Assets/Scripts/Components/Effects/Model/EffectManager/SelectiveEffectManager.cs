@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectiveEffectManager : EffectManager
 {
-    public eEffectPower SusceptibilityType { get; } = eEffectPower.Weak;
+    public eEffectPower SusceptibilityType { get; set; } = eEffectPower.Weak;
 
     public SelectiveEffectManager(MonoBehaviour owner, SelectiveEffectManagerData effectManagerData) : base(owner, effectManagerData)
     {

@@ -1001,7 +1001,7 @@ MonoBehaviour:
   takeDamageAudioSource: {fileID: 3695995159119896902}
   healthManagerData: {fileID: 11400000, guid: ea445498983c758458fc1dee4551fd60, type: 2}
   energyManagerData: {fileID: 11400000, guid: bd47de99132d74947be0aab2d0daca6f, type: 2}
-  effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
+  effectManagerData: {fileID: 11400000, guid: 2e76ceb39bb7acd4688f15d94d8c4261, type: 2}
   interactData: {fileID: 11400000, guid: b3933f27dccf32b4daaf89b9474f1728, type: 2}
   movementData: {fileID: 11400000, guid: f07d37b7579840348a617f66f58fbcdb, type: 2}
   jumpData: {fileID: 11400000, guid: 4191ed8f4edc169478c281175ce59019, type: 2}

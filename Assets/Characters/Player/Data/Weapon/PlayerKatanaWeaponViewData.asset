@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e205ebe68902444095631cee12c7c8c, type: 3}
   m_Name: PlayerKatanaWeaponViewData
   m_EditorClassIdentifier: 
-  takeSword: {fileID: 8300000, guid: b8ca753d7718ddd43a1b2998e3f8f38b, type: 3}
-  putAwaySword: {fileID: 8300000, guid: ad9340538a9270c47bff2007accd1e8c, type: 3}
-  hitEnemy: {fileID: 8300000, guid: 56917ee2da52d5e4e909d90d10647813, type: 3}
-  missEnemy: {fileID: 8300000, guid: fe4cd44311f785045a22683dbf0d8fe7, type: 3}
+  takeSwordAudioClip: {fileID: 8300000, guid: b8ca753d7718ddd43a1b2998e3f8f38b, type: 3}
+  putAwaySwordAudioClip: {fileID: 8300000, guid: ad9340538a9270c47bff2007accd1e8c, type: 3}
+  hitAudioClips:
+  - {fileID: 8300000, guid: 2bc372c95652b4849a9d5a9930c5f688, type: 3}
+  - {fileID: 8300000, guid: e4a7d146c372bf64eaaeffc55c325682, type: 3}
+  - {fileID: 8300000, guid: 8dc4ffb994d5acd4382eb0d8c9a457af, type: 3}
+  - {fileID: 8300000, guid: 103c9e66546108b47a3b42a551413c82, type: 3}
+  - {fileID: 8300000, guid: c871a0816191e054a88048a5680a862e, type: 3}
+  missAudioClip: {fileID: 8300000, guid: fe4cd44311f785045a22683dbf0d8fe7, type: 3}

@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
 
     [SerializeField] private HealthManagerData healthManagerData;
     [SerializeField] private EnergyManagerData energyManagerData;
-    [SerializeField] private EffectManagerData effectManagerData;
+    [SerializeField] private SelectiveEffectManagerData effectManagerData;
     [SerializeField] private InteractData interactData;
     [SerializeField] private MovementData movementData;
     [SerializeField] private JumpData jumpData;
@@ -146,7 +146,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         CharacterTeam = new CharacterTeam(eTeam.Player);
         HealthManager = new HealthManager(healthManagerData);
         EnergyManager = new EnergyManager(energyManagerData);
-        EffectManager = new EffectManager(this, effectManagerData);
+        EffectManager = new SelectiveEffectManager(this, effectManagerData);
         DeathManager = new DeathManager(HealthManager);
         WeaponModifierManager = new ModifierManager();
         AbilityModifierManager = new ModifierManager();

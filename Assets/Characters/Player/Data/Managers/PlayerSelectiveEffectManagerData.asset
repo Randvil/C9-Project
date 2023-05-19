@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1aafb0771150d448bb1f7c5ce709af, type: 3}
-  m_Name: BroodmotherWebSlowEffectData
+  m_Script: {fileID: 11500000, guid: d02b39db8ccb192499164d408ea5d620, type: 3}
+  m_Name: PlayerSelectiveEffectManagerData
   m_EditorClassIdentifier: 
-  effectPower: 2
-  duration: 5
-  movementSlowValue: 1
+  checkEffectsPeriod: 0.25
+  susceptibilityType: 0
