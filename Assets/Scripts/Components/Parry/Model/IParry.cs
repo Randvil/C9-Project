@@ -12,4 +12,5 @@ public interface IParry
     public UnityEvent StartParryEvent { get; }
     public UnityEvent BreakParryEvent { get; }
     public UnityEvent SuccessfulParryEvent { get; }
+    public UnityEvent BreakSuccessfulParryEvent { get; }
 }
