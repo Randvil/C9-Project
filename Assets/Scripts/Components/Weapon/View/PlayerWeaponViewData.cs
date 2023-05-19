@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerWeaponViewData", menuName = "Data/Weapon/View/New Player Weapon View Data")]
 public class PlayerWeaponViewData : ScriptableObject
 {
-    public AudioClip takeSword;
-    public AudioClip putAwaySword;
-    public AudioClip hitEnemy;
-    public AudioClip missEnemy;
+    public AudioClip takeSwordAudioClip;
+    public AudioClip putAwaySwordAudioClip;
+    public AudioClip[] hitAudioClips;
+    public AudioClip missAudioClip;
 }

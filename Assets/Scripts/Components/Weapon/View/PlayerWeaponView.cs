@@ -7,10 +7,10 @@ public class PlayerWeaponView
     private Transform weaponContainer;
     private Transform rightHand;
 
-    private AudioClip takeSword;
-    private AudioClip putAwaySword;
-    private AudioClip hitEnemy;
-    private AudioClip missEnemy;
+    private AudioClip takeSwordAudioClip;
+    private AudioClip putAwaySwordAudioClip;
+    private AudioClip[] hitAudioClips;
+    private AudioClip missAudioClip;
 
     private IWeapon weapon;
     private IDamageDealer damageDealer;
@@ -27,10 +27,10 @@ public class PlayerWeaponView
         //this.weaponContainer = weaponContainer;
         //this.rightHand = rightHand;
 
-        takeSword = playerWeaponViewData.takeSword;
-        putAwaySword = playerWeaponViewData.putAwaySword;
-        hitEnemy = playerWeaponViewData.hitEnemy;
-        missEnemy = playerWeaponViewData.missEnemy;
+        takeSwordAudioClip = playerWeaponViewData.takeSwordAudioClip;
+        putAwaySwordAudioClip = playerWeaponViewData.putAwaySwordAudioClip;
+        hitAudioClips = playerWeaponViewData.hitAudioClips;
+        missAudioClip = playerWeaponViewData.missAudioClip;
 
         this.weapon = weapon;
         this.damageDealer = damageDealer;
@@ -45,7 +45,7 @@ public class PlayerWeaponView
         this.slashGraph = slashGraph;
     }
 
-    public void OnStartAttack()
+    private void OnStartAttack()
     {
         weaponObject.SetActive(true);
         //weaponObject.transform.parent = rightHand;
@@ -56,35 +56,36 @@ public class PlayerWeaponView
         animator.SetTrigger("AttackTrigger");
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
 
-        //audioSource.PlayOneShot(takeSword);
+        //PlaySound(takeSword);
     }
 
-    public void OnBreakAttack()
+    private void OnBreakAttack()
     {
         weaponObject.SetActive(false);
         //weaponObject.transform.parent = weaponContainer;
 
         animator.SetBool("IsAttacking", false);
 
-        //audioSource.PlayOneShot(putAwaySword);
+        //PlaySound(putAwaySword);
     }
 
-    public void OnReleaseAttack()
+    private void OnReleaseAttack()
     {
         SlashSwordVFXPlay();
 
         if (enemyWasHit == true)
         {
-            audioSource.PlayOneShot(hitEnemy);
+            AudioClip randomHitAudioClip = hitAudioClips[Random.Range(0, hitAudioClips.Length)];
+            PlaySound(randomHitAudioClip);
             enemyWasHit = false;
         }
         else
         {
-            audioSource.PlayOneShot(missEnemy);
+            PlaySound(missAudioClip);
         }
     }
 
-    public void OnDamageDeal(DamageInfo damageInfo)
+    private void OnDamageDeal(DamageInfo damageInfo)
     {
         enemyWasHit = true;
     }
@@ -104,5 +105,13 @@ public class PlayerWeaponView
                 break;
         }
         slashGraph.Play();
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        if (audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
     }
 }

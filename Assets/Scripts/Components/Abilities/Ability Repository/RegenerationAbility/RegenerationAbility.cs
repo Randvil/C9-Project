@@ -11,7 +11,7 @@ public class RegenerationAbility : AbstractAbility, ISustainableAbility
 
     protected IHealthManager healthManager;
 
-    public override bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= cost * impactPeriod;
+    public override bool CanBeUsed => IsPerforming == false && IsOnCooldown == false && energyManager.Energy.currentEnergy >= cost * impactPeriod && healthManager.Health.currentHealth < healthManager.Health.maxHealth;
 
 
     public RegenerationAbility(MonoBehaviour owner, RegenerationAbilityData regenerationAbilityData, IEnergyManager energyManager, IHealthManager healthManager) : base(owner, regenerationAbilityData, energyManager)
