@@ -10,6 +10,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected AudioSource movementAudioSource;
 
     [Header("Broodmother Data")]
+    [SerializeField] protected SelectiveEffectManagerData SelectiveffectManagerData;
     [SerializeField] protected DamageHandlerWithShieldsData damageHandlerWithShieldsData;
     [SerializeField] protected HealthManagerData shieldManagerData;
     [SerializeField] protected EnergyManagerData energyManagerData;
@@ -79,6 +80,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     {
         base.Awake();
 
+        EffectManager = new SelectiveEffectManager(this, SelectiveffectManagerData);
         ShieldManager = new HealthManager(shieldManagerData);
         DamageHandler = new DamageHandlerWithShields(damageHandlerWithShieldsData, HealthManager, ShieldManager, DefenceModifierManager, EffectManager, DeathManager);
         EnergyManager = new EnergyManager(energyManagerData);

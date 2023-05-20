@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc3a0dc7293d154582e03726e6cbd1a, type: 3}
   m_Name: PlayerKanaboStunEffectData
   m_EditorClassIdentifier: 
+  effectPower: 1
   duration: 2

@@ -19,6 +19,7 @@ public class Parry : IParry, IDamageDealer
     private float extraAttackDamage;
     private int amplifiedAttackNumber;
     private float amplifyDuration;
+    private EffectData reflectionEffectData;
 
     private ITurning turning;
     private ITeam team;
@@ -41,12 +42,14 @@ public class Parry : IParry, IDamageDealer
     public bool IsOnCooldown { get => Time.time < finishCooldownTime; }
     public bool CanParry => IsParrying == false && IsOnCooldown == false;
     public float Cooldown => cooldown;
+    public float AmplifyDuration { get => amplifyDuration; }
 
     public UnityEvent StartParryEvent { get; } = new();
     public UnityEvent BreakParryEvent { get; } = new();
     public UnityEvent SuccessfulParryEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
-    public float AmplifyDuration { get => amplifyDuration; }
+
+    public UnityEvent BreakSuccessfulParryEvent { get; } = new();
 
     public Parry(MonoBehaviour owner, GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {
@@ -64,6 +67,7 @@ public class Parry : IParry, IDamageDealer
         extraAttackDamage = parryData.extraAttackDamage;
         amplifiedAttackNumber = parryData.amplifiedAttackNumber;
         amplifyDuration = parryData.amplifyDuration;
+        reflectionEffectData = parryData.reflectionEffectData;
 
         this.turning = turning;
         this.team = team;
@@ -129,14 +133,14 @@ public class Parry : IParry, IDamageDealer
         meleeDamageReflection = null;
         if (reflectMeleeDamage)
         {
-            meleeDamageReflection = new ParryMeleeDamageReflection(float.MaxValue, character, turning, this);
+            meleeDamageReflection = new ParryMeleeDamageReflection(reflectionEffectData, character, turning, this);
             effectManager.AddEffect(meleeDamageReflection);
         }
 
         projectileReflection = null;
         if (reflectProjectiles)
         {
-            projectileReflection = new ParryProjectileReflection(team, float.MaxValue, character, turning);
+            projectileReflection = new ParryProjectileReflection(reflectionEffectData, team, character, turning);
             effectManager.AddEffect(projectileReflection);
         }
 
@@ -199,6 +203,8 @@ public class Parry : IParry, IDamageDealer
         weaponModifierManager.RemoveModifier(damageAmplification);
         weapon.ReleaseAttackEvent.RemoveListener(OnReleaseAttack);
 
+        BreakSuccessfulParryEvent.Invoke();
+        Debug.Log("Break amplification");
         owner.StopCoroutine(amplifyDamageCoroutine);
         amplifyDamageCoroutine = null;
     }

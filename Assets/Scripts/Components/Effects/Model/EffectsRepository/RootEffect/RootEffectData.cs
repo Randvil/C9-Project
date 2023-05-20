@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RootEffectData", menuName = "Data/Effects/New Root Effect Data")]
-public class RootEffectData : ScriptableObject
+public class RootEffectData : EffectData
 {
-    [Min(0f)]
-    public float duration = 1f;
+
 }

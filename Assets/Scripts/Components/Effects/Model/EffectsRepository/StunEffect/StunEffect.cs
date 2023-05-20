@@ -1,11 +1,8 @@
 using UnityEngine;
 
-public class StunEffect : IStunEffect
+public class StunEffect : BaseEffect, IStunEffect
 {
-    public float EndEffectTime { get; }
-
-    public StunEffect(StunEffectData stunEffectData)
+    public StunEffect(EffectData effectData) : base(effectData)
     {
-        EndEffectTime = Time.time + stunEffectData.duration;
     }
 }

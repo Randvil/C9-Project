@@ -638,6 +638,7 @@ GameObject:
   - component: {fileID: 1840521996777109483}
   - component: {fileID: 1220786217500986877}
   - component: {fileID: 7868286366202939299}
+  - component: {fileID: 1562184883991840569}
   m_Layer: 0
   m_Name: Regeneration
   m_TagString: Untagged
@@ -653,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3905253816190203015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.053, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -699,6 +700,15 @@ VisualEffect:
       - m_Value: {x: 1000, y: 1000, z: 1000}
         m_Name: Transform (Player)_scale
         m_Overridden: 1
+      - m_Value: {x: 270.01978, y: -0, z: 0}
+        m_Name: Transform(Cylinder)_angles
+        m_Overridden: 1
+      - m_Value: {x: 0, y: -0.59669995, z: 0}
+        m_Name: Transform(Cylinder)_position
+        m_Overridden: 1
+      - m_Value: {x: 40, y: 40, z: 3.5663152}
+        m_Name: Transform(Cylinder)_scale
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -715,6 +725,9 @@ VisualEffect:
       m_Array:
       - m_Value: {fileID: 8123558904145004282}
         m_Name: SkinnedMeshRenderer
+        m_Overridden: 1
+      - m_Value: {fileID: 2534964839176971238, guid: 9f9821e2796d10c48bf621c37097f926, type: 3}
+        m_Name: CylinderMesh
         m_Overridden: 1
     m_Bool:
       m_Array: []
@@ -773,6 +786,7 @@ MonoBehaviour:
   m_ExecuteInEditor: 1
   m_Bindings:
   - {fileID: 7868286366202939299}
+  - {fileID: 1562184883991840569}
   m_VisualEffect: {fileID: 5836764360844343721}
 --- !u!114 &7868286366202939299
 MonoBehaviour:
@@ -789,6 +803,21 @@ MonoBehaviour:
   m_Property:
     m_Name: Transform (Player)
   Target: {fileID: 4813489545620154001}
+--- !u!114 &1562184883991840569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905253816190203015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: Transform(Cylinder)
+  Target: {fileID: 4416649648488252766}
 --- !u!1 &3995136034711824329
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +1001,7 @@ MonoBehaviour:
   takeDamageAudioSource: {fileID: 3695995159119896902}
   healthManagerData: {fileID: 11400000, guid: ea445498983c758458fc1dee4551fd60, type: 2}
   energyManagerData: {fileID: 11400000, guid: bd47de99132d74947be0aab2d0daca6f, type: 2}
-  effectManagerData: {fileID: 11400000, guid: 72a58f802e7e57048a4eb09d252c3989, type: 2}
+  effectManagerData: {fileID: 11400000, guid: 2e76ceb39bb7acd4688f15d94d8c4261, type: 2}
   interactData: {fileID: 11400000, guid: b3933f27dccf32b4daaf89b9474f1728, type: 2}
   movementData: {fileID: 11400000, guid: f07d37b7579840348a617f66f58fbcdb, type: 2}
   jumpData: {fileID: 11400000, guid: 4191ed8f4edc169478c281175ce59019, type: 2}
@@ -1434,6 +1463,7 @@ Transform:
   m_Children:
   - {fileID: 6641374187180108059}
   - {fileID: 6593489729103078630}
+  - {fileID: 7420555060591294596}
   m_Father: {fileID: 5242086771253099536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1537,6 +1567,89 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &6037226376140099951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4416649648488252766}
+  - component: {fileID: 3101237885953795882}
+  - component: {fileID: 180769903200545200}
+  m_Layer: 0
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4416649648488252766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037226376140099951}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0, y: -0.459, z: 0}
+  m_LocalScale: {x: 40, y: 40, z: 3.5663152}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7420555060591294596}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3101237885953795882
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037226376140099951}
+  m_Mesh: {fileID: 2534964839176971238, guid: 9f9821e2796d10c48bf621c37097f926, type: 3}
+--- !u!23 &180769903200545200
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037226376140099951}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1f5d59f34ebab6c4799c90caa8f0c273, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6120484034613272973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,6 +1776,8 @@ GameObject:
   - component: {fileID: 6622321914174102455}
   - component: {fileID: 5549709591376786713}
   - component: {fileID: 2497123968760646276}
+  - component: {fileID: 6538184094712225748}
+  - component: {fileID: 4281865673721667344}
   m_Layer: 0
   m_Name: ParryGraph
   m_TagString: Untagged
@@ -1678,8 +1793,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6997968154118014372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.13, z: 0}
-  m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5554701910331376252}
@@ -1705,7 +1820,16 @@ VisualEffect:
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 270.01978, y: -0, z: 0}
+        m_Name: Transform(Cylinder)_angles
+        m_Overridden: 1
+      - m_Value: {x: 0, y: -0.59669995, z: 0}
+        m_Name: Transform(Cylinder)_position
+        m_Overridden: 1
+      - m_Value: {x: 40, y: 40, z: 3.5663152}
+        m_Name: Transform(Cylinder)_scale
+        m_Overridden: 1
     m_Vector4f:
       m_Array:
       - m_Value: {x: 1.3333334, y: 0, z: 0.039215688, w: 1}
@@ -1722,7 +1846,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 2534964839176971238, guid: 9f9821e2796d10c48bf621c37097f926, type: 3}
+        m_Name: Mesh
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!73398921 &2497123968760646276
@@ -1765,6 +1892,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6538184094712225748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997968154118014372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 4281865673721667344}
+  m_VisualEffect: {fileID: 5549709591376786713}
+--- !u!114 &4281865673721667344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997968154118014372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: Transform(Cylinder)
+  Target: {fileID: 4416649648488252766}
 --- !u!1 &7219848578104188544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,6 +1984,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 535210081563073327}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7904040751384044094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7420555060591294596}
+  m_Layer: 0
+  m_Name: CylinderForEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7420555060591294596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904040751384044094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4416649648488252766}
+  m_Father: {fileID: 5242086771832609348}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &832026661551058678

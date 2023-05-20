@@ -23,3 +23,4 @@ MonoBehaviour:
   extraAttackDamage: 1
   amplifiedAttackNumber: 3
   amplifyDuration: 5
+  reflectionEffectData: {fileID: 11400000, guid: 82de331bd3bd9874d81e33ae9808b67c, type: 2}

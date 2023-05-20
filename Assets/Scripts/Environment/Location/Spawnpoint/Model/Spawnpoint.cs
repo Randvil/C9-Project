@@ -109,7 +109,7 @@ public class Spawnpoint : MonoBehaviour, IDataSavable
                         {
                             if (once.id == spawnpointsOnce.id)
                             {
-                                if (once.enemyNumber != 0)
+                                if (once.enemyNumber != 0 && once.enemyNumber != -1)
                                 {
                                     int enemiesAlive;
                                     enemiesAlive = 1 - (spawnCondition.SpawnEnemyCount() - transform.childCount);

@@ -48,6 +48,11 @@ public class CastingAbilityState : BasePlayerState
             return;
         }
 
+        if (player.AbilityManager.IsPerforming(playerInterstateData.abilityNumberToCast))
+        {
+            return;
+        }
+
         base.OnAbilityUse(actionPhase, abilityNumber);
     }
 

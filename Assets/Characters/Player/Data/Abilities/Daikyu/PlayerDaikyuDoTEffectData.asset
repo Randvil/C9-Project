@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45407fc39f00864f934ed81bccc77fa, type: 3}
   m_Name: PlayerDaikyuDoTEffectData
   m_EditorClassIdentifier: 
+  effectPower: 1
+  duration: 3
   damageData: {fileID: 11400000, guid: acd40e1fa904a3d43b02ca1ba4a09075, type: 2}
   damagePeriod: 0.25
-  duration: 3

@@ -8,7 +8,7 @@ public class ParryMeleeDamageReflection : MeleeDamageReflection
     private GameObject parryingCharacter;
     private ITurning turning;
 
-    public ParryMeleeDamageReflection(float endEffectTime, GameObject parryingCharacter, ITurning turning, IDamageDealer damageDealer) : base(endEffectTime, damageDealer)
+    public ParryMeleeDamageReflection(EffectData effectData, GameObject parryingCharacter, ITurning turning, IDamageDealer damageDealer) : base(effectData, damageDealer)
     {
         this.parryingCharacter = parryingCharacter;
         this.turning = turning;

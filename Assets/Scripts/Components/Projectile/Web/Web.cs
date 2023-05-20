@@ -6,7 +6,7 @@ public class Web : Projectile
 {
     [SerializeField] protected SlowEffectData slowEffectData;
     [SerializeField] protected RootEffectData rootEffectData;
-    private Material[] matArray;
+    [SerializeField] protected Material webMaterial;
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,8 +28,8 @@ public class Web : Projectile
 
         if (other.TryGetComponent(out Player player))
         {
-            matArray = player.MainMesh.materials;
-            matArray[1] = slowEffectData.webMaterial;
+            Material[] matArray = player.MainMesh.materials;
+            matArray[1] = webMaterial;
             player.MainMesh.materials = matArray;
         }
 

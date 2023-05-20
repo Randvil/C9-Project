@@ -85,7 +85,7 @@ public class EffectManager : IEffectManager
         }
     }
 
-    public void AddEffect(IEffect effect)
+    public virtual void AddEffect(IEffect effect)
     {
         effects.Add(effect);
 
@@ -119,7 +119,10 @@ public class EffectManager : IEffectManager
     }
     public void RemoveEffect(IEffect effect)
     {
-        effects.Remove(effect);
+        if (effects.Remove(effect) == false)
+        {
+            return;
+        }
 
         switch (effect)
         {

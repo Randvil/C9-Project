@@ -39,12 +39,12 @@ public class PlayerTakeDamageView
     {
         if (volumeProfile.TryGet(out vignette))
         {
-            vignette.intensity.value = 0.3f;
+            vignette.intensity.value = 0.4f;
 
-            float counter = 0.3f;
+            float counter = 0.4f;
             while (vignette.intensity.value > 0)
             {
-                counter -= 0.01f;
+                counter -= 0.001f;
                 vignette.intensity.value = counter;
                 yield return new WaitForSeconds(0.001f);
             }

@@ -8,7 +8,7 @@ public class ParryProjectileReflection : ProjectileReflection
     private GameObject parryingCharacter;
     private ITurning turning;
 
-    public ParryProjectileReflection(ITeam team, float endEffectTime, GameObject parryingCharacter, ITurning turning) : base(team, endEffectTime)
+    public ParryProjectileReflection(EffectData effectData, ITeam team, GameObject parryingCharacter, ITurning turning) : base(effectData, team)
     {
         this.parryingCharacter = parryingCharacter;
         this.turning = turning;

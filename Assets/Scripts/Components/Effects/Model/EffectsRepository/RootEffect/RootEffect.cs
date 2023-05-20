@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootEffect : IRootEffect
+public class RootEffect : BaseEffect, IRootEffect
 {
-    public float EndEffectTime { get; }
-
-    public RootEffect(RootEffectData rootEffectData)
+    public RootEffect(RootEffectData rootEffectData) : base(rootEffectData)
     {
-        EndEffectTime = Time.time + rootEffectData.duration;
+
     }
 }

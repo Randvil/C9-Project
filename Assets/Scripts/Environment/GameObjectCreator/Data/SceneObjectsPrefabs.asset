@@ -28,7 +28,7 @@ MonoBehaviour:
     scene: 0
   - prefab: {fileID: 3212893277974898943, guid: 1a05813cad0480e48be63f0bdce322ee, type: 3}
     abilityType: 1
-    position: {x: 32.2, y: 0.25, z: 0}
+    position: {x: 34, y: 0.25, z: 0}
     scene: 0
   - prefab: {fileID: 5204865135266856396, guid: eb6ab44a0dc4f1349a03798aaf1cc264, type: 3}
     abilityType: 2

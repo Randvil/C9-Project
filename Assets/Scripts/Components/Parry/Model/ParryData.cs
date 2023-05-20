@@ -35,4 +35,6 @@ public class ParryData : ScriptableObject
 
     [Min(0f), Tooltip("How long the attack buff will last? [seconds]")]
     public float amplifyDuration = 3f;
+
+    public EffectData reflectionEffectData;
 }

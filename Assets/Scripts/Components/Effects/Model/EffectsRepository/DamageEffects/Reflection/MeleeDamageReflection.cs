@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MeleeDamageReflection : IDamageEffect
+public class MeleeDamageReflection : BaseEffect, IDamageEffect
 {
     private IDamageDealer damageDealer;
 
-    public float EndEffectTime { get; private set; }
-
     public UnityEvent DamageEffectEvent { get; } = new();
 
-    public MeleeDamageReflection(float endEffectTime, IDamageDealer damageDealer)
+    public MeleeDamageReflection(EffectData effectData, IDamageDealer damageDealer) : base(effectData)
     {
-        EndEffectTime = endEffectTime;
         this.damageDealer = damageDealer;
     }
 

@@ -274,3 +274,4 @@ MonoBehaviour:
   projectileData: {fileID: 11400000, guid: 222890ee49f59204c8b1613bd3cb5813, type: 2}
   slowEffectData: {fileID: 11400000, guid: d127ee5d5c808e14381e05a2d6ce9ac0, type: 2}
   rootEffectData: {fileID: 11400000, guid: 70af3bd1b82735e4e8fbb0673df2b533, type: 2}
+  webMaterial: {fileID: 2100000, guid: 51684f077e922bb4c828daaff716750c, type: 2}
