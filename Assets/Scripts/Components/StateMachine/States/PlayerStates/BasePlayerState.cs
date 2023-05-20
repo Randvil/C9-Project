@@ -59,7 +59,7 @@ public abstract class BasePlayerState : IState
 
     public virtual void LogicUpdate()
     {
-        if (player.Climb.CanClimb == true)
+        if (player.Climb.CanClimb == true && (playerInterstateData.climbUp || (playerInterstateData.climbDown && player.Gravity.IsGrounded == false)))
         {
             stateMachine.ChangeState(player.Climbing);
         }
@@ -88,6 +88,18 @@ public abstract class BasePlayerState : IState
         //{
         //    stateMachine.ChangeState(player.Crouching);
         //}
+
+        Debug.Log("Climb phase: " + actionPhase);
+        switch (actionPhase)
+        {
+            case eActionPhase.Started:
+                playerInterstateData.climbDown = true;
+                break;
+
+            case eActionPhase.Canceled:
+                playerInterstateData.climbDown = false;
+                break;
+        }
     }
 
     protected virtual void OnJump(eActionPhase actionPhase)
@@ -132,7 +144,16 @@ public abstract class BasePlayerState : IState
 
     protected virtual void OnClimbUp(eActionPhase actionPhase)
     {
+        switch (actionPhase)
+        {
+            case eActionPhase.Started:
+                playerInterstateData.climbUp = true;
+                break;
 
+            case eActionPhase.Canceled:
+                playerInterstateData.climbUp = false;
+                break;
+        }
     }
 
     protected virtual void OnAbilityUse(eActionPhase actionPhase, int abilityNumber)

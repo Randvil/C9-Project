@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291ff59b61e384b4b935a991f575ca6b, type: 3}
   m_Name: BroodmotherOffensiveJumpData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 30
   preCastDelay: 1
-  postCastDelay: 1
+  postCastDelay: 0
   cost: 0
   jumpTime: 1
   initialJumpSpeed: {x: 15, y: 0.5}
