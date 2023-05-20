@@ -18,11 +18,24 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement class="out-cont">
+            <ui:Label text="ЗВУКОРЕЖИССЁР" display-tooltip-when-elided="true" class="creditsLabel" />
+            <ui:VisualElement class="inner-cont">
+                <ui:Label text="АЛЕКСАНДР ПАЛЯН" display-tooltip-when-elided="true" class="creditsLabel" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="out-cont">
             <ui:Label text="ПРОГРАММИСТЫ" display-tooltip-when-elided="true" class="creditsLabel" />
             <ui:VisualElement class="inner-cont">
                 <ui:Label text="ПАВЕЛ ВОЛКОВ" display-tooltip-when-elided="true" class="creditsLabel" />
                 <ui:Label text="АННА ШИЛЬНИКОВА" display-tooltip-when-elided="true" class="creditsLabel" />
                 <ui:Label text="МАКСИМ ХОХЛОВ" display-tooltip-when-elided="true" class="creditsLabel" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="out-cont">
+            <ui:Label text="КУРАТОРЫ" display-tooltip-when-elided="true" class="creditsLabel" />
+            <ui:VisualElement class="inner-cont">
+                <ui:Label text="АНДРЕЙ КАЛУГИН" display-tooltip-when-elided="true" class="creditsLabel" />
+                <ui:Label text="ДАНИИЛ ПАВЛОВ" display-tooltip-when-elided="true" class="creditsLabel" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

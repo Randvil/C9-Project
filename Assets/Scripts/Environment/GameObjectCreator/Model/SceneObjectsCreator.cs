@@ -52,6 +52,7 @@ public class SceneObjectsCreator : Creator
         staticUI.PanelManager.Abilities = player.PlayerComponent.AbilityManager;
         staticUI.newGameObject.GetComponentInChildren<DeathScreen>().SetDeathManager(player.PlayerComponent.DeathManager);
         staticUI.newGameObject.GetComponentInChildren<AbilityUiDependencies>().Parry = player.PlayerComponent.Parry;
+        staticUI.newGameObject.GetComponentInChildren<EffectUiDependencies>().EffectManager = player.PlayerComponent.EffectManager;
 
 
         var targetGroup = camera.newGameObject.GetComponentInChildren<CinemachineTargetGroup>();
@@ -62,10 +63,12 @@ public class SceneObjectsCreator : Creator
         switch (SceneManager.GetActiveScene().name)
         {
             case "CityLocation":
+                camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
                 boundingShape = Object.Instantiate(prefabsData.cityBoundingShape);
                 break;
 
             case "ArcadeCenter":
+                camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
                 boundingShape = Object.Instantiate(prefabsData.arcadeBoundingShape);
                 break;
 
@@ -107,6 +110,7 @@ public class SceneObjectsCreator : Creator
             }
         }
 
+        Hints hintView = staticUI.newGameObject.GetComponentInChildren<Hints>();
         foreach (AbilityPickUpStruct abilityPickUp in prefabsData.abilityPickUpPrefabs)
         {
             if (data.CurrentGameData.learnedAbilities.FirstOrDefault(x => x.abilityType == abilityPickUp.abilityType) == null
@@ -115,6 +119,9 @@ public class SceneObjectsCreator : Creator
                 AbilityPickUpCreator abilityPickUpCreator = new();
                 abilityPickUpCreator.CreateObject(abilityPickUp.prefab, data);
                 abilityPickUpCreator.newGameObject.transform.position = abilityPickUp.position;
+                Debug.Log(hintView);
+                Debug.Log(abilityPickUpCreator.newGameObject.GetComponent<Hintable>());
+                hintView.AddHintable(abilityPickUpCreator.newGameObject.GetComponent<Hintable>());
             }
         }
     }

@@ -30,9 +30,14 @@ public class Hints : MonoBehaviour
 		});
 	}
 
-	//public void AddHintable(Hintable hintable) => interactiveObjects.Add(hintable);
+    public void AddHintable(Hintable hintable)
+    {
+        interactiveObjects.Add(hintable);
+		hintable.ShowHint.AddListener(ShowHint);
+		hintable.HideHint.AddListener(HideHint);
+    }
 
-	private void ShowHint(string labelName)
+    private void ShowHint(string labelName)
 	{
 		Label hint = hints[labelName];
 		if (!hint.ClassListContains(hiddenClass))

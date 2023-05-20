@@ -70,6 +70,8 @@ public class LoadMenu : MonoBehaviour
     {
         panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
 
+        StaticAudio.Instance.SnapshotName = "InGame";
+
         newGameSave.CreateNewGameSave();
         switch (newGameSave.gameData.CheckpointData.latestScene)
         {

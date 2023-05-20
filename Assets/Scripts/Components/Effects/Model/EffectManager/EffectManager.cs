@@ -206,6 +206,40 @@ public class EffectManager : IEffectManager
         return maxStunDuration;
     }
 
+    public float GetMaxEffectDuration(eEffectType effectType)
+    {
+        float maxDuration = 0f;
+
+        IList effects = null;
+        switch (effectType)
+        {
+            case eEffectType.Stun:
+                effects = stunEffects;
+                break;
+            case eEffectType.Slow:
+                effects = slowEffects;
+                break;
+            case eEffectType.DoT:
+                effects = doTEffects;
+                break;
+            case eEffectType.Damage:
+                effects = damageEffects;
+                break;
+            case eEffectType.Root:
+                effects = rootEffects;
+                break;
+        }
+
+        foreach (IEffect effect in effects)
+        {
+            float remainingStunDuration = effect.EndEffectTime - Time.time;
+            if (remainingStunDuration > maxDuration)
+                maxDuration = remainingStunDuration;
+        }
+
+        return maxDuration;
+    }
+
     public float GetCumulativeSlowEffect()
     {
         float remainingSpeed = 1f;
