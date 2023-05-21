@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerDaikyuDamageData
   m_EditorClassIdentifier: 
   damageType: 2
-  damageValue: 40
+  damageValue: 18

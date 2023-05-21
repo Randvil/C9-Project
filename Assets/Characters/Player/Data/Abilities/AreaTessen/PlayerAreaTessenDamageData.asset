@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerAreaTessenDamageData
   m_EditorClassIdentifier: 
   damageType: 2
-  damageValue: 5
+  damageValue: 20

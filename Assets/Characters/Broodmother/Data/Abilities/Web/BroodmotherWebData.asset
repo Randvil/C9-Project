@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538c08fcbe7b7464eba3a11a224b623d, type: 3}
   m_Name: BroodmotherWebData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 15
   preCastDelay: 2
   postCastDelay: 2

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae207b2d78f1ca04e9893663d4e9886a, type: 3}
   m_Name: BroodmotherRegenerationAbilityData
   m_EditorClassIdentifier: 
+  abilityType: 0
   cooldown: 0
   preCastDelay: 0
   postCastDelay: 0
   cost: 0
-  healthPerSecond: 10
+  healthPerSecond: 75
   maxRegenerationTime: Infinity
   impactPeriod: 0.25

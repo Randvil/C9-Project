@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b789a23fe36e542956fdbb97a8bc75, type: 3}
   m_Name: PlayerKatanaEnergyRegeneratorData
   m_EditorClassIdentifier: 
-  energyPerHit: 3
+  energyPerHit: 2

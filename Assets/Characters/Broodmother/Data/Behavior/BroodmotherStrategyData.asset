@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BroodmotherStrategyData
   m_EditorClassIdentifier: 
   recoveryPosition: {x: 0, y: 7.5}
-  phaseTwoThresholdRelativeHealth: 0.6666667
-  phaseThreeThresholdRelativeHealth: 0.33333334
+  phaseTwoThresholdRelativeHealth: 0.8
+  phaseThreeThresholdRelativeHealth: 0.4

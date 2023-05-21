@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerDaikyuData
   m_EditorClassIdentifier: 
   abilityType: 2
-  cooldown: 25
-  preCastDelay: 1
+  cooldown: 20
+  preCastDelay: 0.5
   postCastDelay: 0
-  cost: 40
+  cost: 25
   damageData: {fileID: 11400000, guid: d45e3de8a1adff14e9afc1617af2b4c5, type: 2}
   projectilePrefab: {fileID: 7132006248812665339, guid: 1ce35fd0ffe9ba741b98774da14cb465, type: 3}
-  fullChargeTime: 3
+  fullChargeTime: 2
   fullChargeDamageMultiplier: 5

@@ -21,6 +21,6 @@ MonoBehaviour:
   - 0.6
   - 0.6
   - 0.6
-  postAttackDelay: 0.1
+  postAttackDelay: 0.5
   attackSpeed: 2
   backAttackDistance: 0.5
