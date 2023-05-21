@@ -5,12 +5,12 @@
             <ui:VisualElement name="logo" style="position: absolute; left: 0; top: 0; width: 100%; height: 20%;" />
             <ui:Button text="PLAY" display-tooltip-when-elided="true" name="playB" class="menu-b" />
             <ui:Button text="SETTINGS" display-tooltip-when-elided="true" enable-rich-text="true" focusable="false" name="settingsB" class="menu-b" />
+            <ui:Button text="SPOILERS" display-tooltip-when-elided="true" name="spoilersB" class="menu-b" />
             <ui:Button text="QUIT" display-tooltip-when-elided="true" focusable="false" name="quitB" class="menu-b" />
         </ui:VisualElement>
-        <ui:VisualElement name="play" class="second-menu menu">
+        <ui:VisualElement name="play" class="second-menu menu hidden-menu">
             <ui:Button text="CONTINUE" display-tooltip-when-elided="true" focusable="false" name="continueB" class="inactive-menu-b" />
             <ui:Button text="NEW GAME" display-tooltip-when-elided="true" name="newGameB" class="menu-b" />
-            <ui:Button text="COMICS" display-tooltip-when-elided="true" name="comicsB" class="inactive-menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
         <ui:VisualElement name="settings" class="menu second-menu hidden-menu">
@@ -18,6 +18,13 @@
             <ui:Button text="AUDIO" display-tooltip-when-elided="true" focusable="false" name="audioB" class="menu-b" />
             <ui:Button text="CONTROLS" display-tooltip-when-elided="true" enable-rich-text="true" focusable="false" name="controlsMenuB" class="menu-b" />
             <ui:VisualElement name="separator" class="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="spoilers" class="menu second-menu">
+            <ui:Button text="START COMICS" display-tooltip-when-elided="true" name="comicsB" class="inactive-menu-b" />
+            <ui:Button text="TO ARCADE CENTER" display-tooltip-when-elided="true" name="arcadeCenterB" class="menu-b" />
+            <ui:Button text="TO BOSSFIGHT" display-tooltip-when-elided="true" name="bossfightB" class="menu-b" />
+            <ui:Button text="END COMICS" display-tooltip-when-elided="true" name="endComicsB" class="menu-b" />
+            <ui:VisualElement name="separator" />
         </ui:VisualElement>
         <ui:VisualElement name="video" class="menu third-menu hidden-menu">
             <ui:VisualElement class="labels-controls-container">

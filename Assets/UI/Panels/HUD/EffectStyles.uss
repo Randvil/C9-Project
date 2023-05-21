@@ -1,0 +1,47 @@
+.effect-out {
+    position: absolute;
+    flex-direction: row;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+}
+
+.1-effect {
+    position: absolute;
+    top: 0;
+    transition-property: top;
+    transition-duration: 0.4s;
+}
+
+.2-effect {
+    position: absolute;
+    top: 60px;
+    transition-property: top;
+    transition-duration: 0.4s;
+}
+
+.3-effect {
+    position: absolute;
+    top: 120px;
+    transition-duration: 0.4s;
+    transition-property: top;
+}
+
+.4-effect {
+    top: 180px;
+    transition-duration: 0.4s;
+    transition-property: top;
+    position: absolute;
+}
+
+.effect-label {
+    -unity-text-align: middle-left;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.hidden-effect {
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    opacity: 0;
+}

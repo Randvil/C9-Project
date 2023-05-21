@@ -46,7 +46,24 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="effects" style="left: 0; position: absolute;" />
+        <ui:VisualElement name="effects" style="left: 0; position: absolute; height: 30%;">
+            <ui:VisualElement name="Stun" class="effect-out">
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.67" fill-color="#FFA201BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <ui:Label text="STUN" display-tooltip-when-elided="true" class="effect-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Root" class="effect-out">
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.22" fill-color="#713400BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <ui:Label text="ROOT" display-tooltip-when-elided="true" class="effect-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="DoT" class="effect-out">
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.94" fill-color="#1BFF00BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <ui:Label text="POISON" display-tooltip-when-elided="true" class="effect-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Slow" class="effect-out">
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.34" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <ui:Label text="SLOWDOWN" display-tooltip-when-elided="true" class="effect-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="hints" style="position: absolute; font-size: 32px; color: rgba(255, 255, 255, 0.67); flex-direction: column-reverse; transform-origin: right; bottom: 69%;">
             <ui:Label text="USE \U00F1F60F / \U00F1F80F FOR MOVEMENT" display-tooltip-when-elided="true" name="movement" class="hint" />
             <ui:Label text="USE \U00F1F60B/\U00F1F80B FOR ATTACK" display-tooltip-when-elided="true" enable-rich-text="true" name="attack" class="hint" />

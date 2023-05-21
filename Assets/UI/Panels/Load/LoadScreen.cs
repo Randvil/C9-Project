@@ -48,7 +48,7 @@ public class LoadScreen : MonoBehaviour, IPanel
     {
         logo.RemoveFromClassList(hiddenRightClass);
         logo.AddToClassList(hiddenLeftClass); 
-        panelManager.SwitchTo(indOfThisPanel);
+        panelManager.SwitchTo(indOfThisPanel, true, false);
               
         logo.RemoveFromClassList(hiddenLeftClass);
     }

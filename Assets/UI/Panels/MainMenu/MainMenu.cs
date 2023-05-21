@@ -27,6 +27,9 @@ public class MainMenu : MonoBehaviour
         MenuNode settings = new("settings", root, false);
         main.AddChild(settings);
 
+        MenuNode spoilers = new("spoilers", root, false);
+        main.AddChild(spoilers);
+
         MenuNode video = new("video", root, false);
         settings.AddChild(video);
 
@@ -43,7 +46,7 @@ public class MainMenu : MonoBehaviour
 
         if (GetComponentInChildren<LoadMenu>().IsAnySaveFile)
         {
-            Button comicsButton = play.Panel.Q<Button>("comicsB");
+            Button comicsButton = spoilers.Panel.Q<Button>("comicsB");
             comicsButton.clicked += () => ToComics(false);
             comicsButton.RemoveFromClassList("inactive-menu-b");
             comicsButton.AddToClassList("menu-b");

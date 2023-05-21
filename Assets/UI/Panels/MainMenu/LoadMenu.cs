@@ -10,8 +10,12 @@ public class LoadMenu : MonoBehaviour
     const string path = "Saves";
 
     [SerializeField] private NewGameSave newGameSave;
+    [SerializeField] private NewGameSave arcadeGameSave;
+    [SerializeField] private NewGameSave bossroomGameSave;
 
     private PanelManager panelManager;
+
+    private LoadScreen loadScreen;
 
     public LoadMenu()
     {
@@ -24,6 +28,7 @@ public class LoadMenu : MonoBehaviour
     private void Awake()
     {
         panelManager = GetComponentInParent<PanelManager>();
+        loadScreen = panelManager.GetComponentInChildren<LoadScreen>();
 
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -35,11 +40,22 @@ public class LoadMenu : MonoBehaviour
             continueB.RemoveFromClassList("inactive-menu-b");
             continueB.AddToClassList("menu-b");
         }
+
+        Button toArcadeCenter = root.Q<Button>("arcadeCenterB");
+        toArcadeCenter.clicked += () => NewGame(arcadeGameSave);
+        Button toBossfight = root.Q<Button>("bossfightB");
+        toBossfight.clicked += () => NewGame(bossroomGameSave);
+        Button toEndComics = root.Q<Button>("endComicsB");
+        toEndComics.clicked += () =>
+        {
+            loadScreen.EndOfScene();
+            StartCoroutine(LoadSceneCoroutine("TheEnd"));
+        };
     }
 
     private void LoadSave()
     {
-        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene();
+        loadScreen.EndOfScene();
 
         FileDataHandler handler = new("Saves", "LastSave");
         GameData gameData = handler.Load();
@@ -66,14 +82,16 @@ public class LoadMenu : MonoBehaviour
 
     public bool IsAnySaveFile => directory.GetFiles("LastSave").Length > 0;
 
-    public void NewGame()
+    public void NewGame() => NewGame(newGameSave);
+
+    public void NewGame(NewGameSave gameSave)
     {
-        panelManager.GetComponentInChildren<LoadScreen>().EndOfScene(); // To load screen
+        loadScreen.EndOfScene(); // To load screen
 
         StaticAudio.Instance.SnapshotName = "InGame";
 
-        newGameSave.CreateNewGameSave();
-        switch (newGameSave.gameData.CheckpointData.latestScene)
+        gameSave.CreateNewGameSave();
+        switch (gameSave.gameData.CheckpointData.latestScene)
         {
             case eSceneName.CityLocation:
                 StartCoroutine(LoadSceneCoroutine("CityLocation"));
