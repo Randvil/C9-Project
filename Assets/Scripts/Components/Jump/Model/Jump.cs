@@ -23,7 +23,7 @@ public class Jump : IJump, IProhibitable
 
     public int MaxJumpCount { get; set; }
     public bool IsJumping { get; private set; }
-    public bool CanJump => (gravity.IsGrounded || airJumpNumber < MaxJumpCount);
+    public bool CanJump => (gravity.IsGrounded || airJumpNumber < MaxJumpCount) && IsProhibited == false;
     public bool IsProhibited => prohibitors.Count > 0;
 
     public UnityEvent StartJumpEvent { get; } = new();
