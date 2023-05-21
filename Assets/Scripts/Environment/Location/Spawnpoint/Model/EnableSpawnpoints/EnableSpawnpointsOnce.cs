@@ -26,10 +26,18 @@ public class EnableSpawnpointsOnce : MonoBehaviour
             {
                 case eSceneName.ArcadeCenter:
                     // enables spawnpoints in ArcadeCenter
-                    for (int i = 1; i < locationData.SpawnpointsOnce.Count + 1; i++)
+                    foreach (SpawnpointsOnce spawnpoint in locationData.SpawnpointsOnce)
                     {
-                        if (locationData.SpawnpointsOnce.Find(spawnpoint => spawnpoint.id == i).enemyNumber == -1)
-                            locationData.SpawnpointsOnce.Find(spawnpoint => spawnpoint.id == i).enemyNumber = 1;
+                        if (spawnpoint.enemyNumber == -1)
+                            spawnpoint.enemyNumber = 1;
+                    }
+                    break;
+                case eSceneName.CityLocation:
+                    // enables spawnpoints in CityLocation
+                    foreach (SpawnpointsOnce spawnpoint in locationData.SpawnpointsOnce)
+                    {
+                        if (spawnpoint.enemyNumber == -1)
+                            spawnpoint.enemyNumber = 1;
                     }
                     break;
             }
