@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196590190107637839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 407.35, y: 20.9, z: 0}
+  m_LocalPosition: {x: 408.03, y: 20.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47,7 +47,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.7233734, y: 0.40019035}
+  m_Offset: {x: 0.016262054, y: 0.5068836}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -58,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5161438, y: 1.8003807}
+  m_Size: {x: 0.28938293, y: 2.0137672}
   m_EdgeRadius: 0
 --- !u!114 &1196590190107637834
 MonoBehaviour:
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: checkpoint
+  <LifeTime>k__BackingField: 4
 --- !u!1 &1196590190110362776
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196590190159208401}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 310.368, y: 11.21, z: 0.000015258789}
+  m_LocalPosition: {x: 308.84, y: 11.21, z: 0.000015258789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,7 +168,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.033233643, y: 0.5314865}
+  m_Offset: {x: 0.35256386, y: 0.35421133}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -178,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7295532, y: 2.062973}
+  m_Size: {x: 0.96198654, y: 1.7084227}
   m_EdgeRadius: 0
 --- !u!114 &1196590190159207982
 MonoBehaviour:
@@ -205,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: checkpoint
+  <LifeTime>k__BackingField: 4
 --- !u!1 &1196590190437374883
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196590190437374883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 111.51, y: 7.35, z: 0}
+  m_LocalPosition: {x: 111.32, y: 7.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -252,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.58800507, y: 0.6608865}
+  m_Offset: {x: 0.7427521, y: 0.5770633}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -263,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.624649, y: 2.321773}
+  m_Size: {x: 1.9480591, y: 2.1541266}
   m_EdgeRadius: 0
 --- !u!114 &1196590190437374881
 MonoBehaviour:
@@ -290,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LabelName>k__BackingField: checkpoint
+  <LifeTime>k__BackingField: 4
 --- !u!1 &1196590190625806147
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +304,6 @@ GameObject:
   - component: {fileID: 1196590190625806174}
   - component: {fileID: 1196590190625806145}
   - component: {fileID: 1196590190625806144}
-  - component: {fileID: 1196590190625806175}
   m_Layer: 10
   m_Name: Checkpoint1
   m_TagString: Untagged
@@ -317,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196590190625806147}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -32.744, y: 9.5, z: 0}
+  m_LocalPosition: {x: -32.469, y: 9.479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -362,16 +364,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.30644798, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1196590190625806175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196590190625806147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b597b012b86a9044afa816f39fc5575, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <LabelName>k__BackingField: checkpoint
