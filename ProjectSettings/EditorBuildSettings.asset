@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: bf08e082f710c434ba194f79e6bc66ae
   - enabled: 1
     path: Assets/Scenes/CityLocation.unity
-    guid: 76ae94cd626c38e47a66fdb3d2cc2a38
+    guid: 90b04bddce606bc4eaa560277c66245b
   - enabled: 1
     path: Assets/Scenes/ArcadeCenter.unity
     guid: b7e884b60d377be4daa73282c8a25b45
