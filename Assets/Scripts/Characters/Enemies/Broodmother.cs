@@ -70,6 +70,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     protected CommonAbilityView webAbilityView;
     protected CommonAbilityView offensiveJumpAbilityView;
     protected BroodmotherShieldView BroodmotherShieldView;
+    protected BroodmotherDeathView BroodmotherDeathView;
 
     protected override void Awake()
     {
@@ -106,6 +107,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
         offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
         BroodmotherShieldView = new BroodmotherShieldView(shield, ShieldManager);
+        BroodmotherDeathView = new BroodmotherDeathView(this, DeathManager, GetComponent<EnemyVisualEffect>());
 
         ITalent selfStun = new BroodmotherSelfStun(selfStunData, EffectManager, ShieldManager);
         selfStun.Learn();
@@ -113,8 +115,8 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();
 
-        DeathManager.DeathEvent.AddListener(OnDeath);
-        DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
+        //DeathManager.DeathEvent.AddListener(OnDeath);
+        //DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DeathManager.DeathEvent.AddListener(FindObjectOfType<BroodmotherDeathCheck>().ChangeDeathStatus);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
     }
@@ -125,4 +127,15 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         var a = FindObjectOfType<PanelManager>();
         Document = a.panels[0];
     }
+
+    public void DeactivateBroodmotherBehaviour()
+    {
+        DeactivateBehaviour();
+    }
+
+    public void DestroyBroodmotherObject()
+    {
+        OnDeath();
+    }
+
 }

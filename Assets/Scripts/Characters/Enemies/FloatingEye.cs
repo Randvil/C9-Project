@@ -51,6 +51,7 @@ public class FloatingEye : BaseCreature, IPatrollingBehavior
         currentBehavior = new PatrolmanStrategy(this, this);
         currentBehavior.Activate();
 
+        DeathManager.DeathEvent.AddListener(OnDeath);
         DeathManager.DeathEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyDissolve);
         DamageHandler.TakeDamageEvent.AddListener(GetComponent<EnemyVisualEffect>().ApplyHurtEffect);
 
