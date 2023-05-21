@@ -28,7 +28,7 @@ public class Roll : IRoll, IProhibitable
 
     public bool IsRolling => rollCoroutine != null;
     public bool IsOnCooldown => Time.time < finishCooldownTime;
-    public bool CanRoll => IsRolling == false && IsOnCooldown == false;
+    public bool CanRoll => IsRolling == false && IsOnCooldown == false && IsProhibited == false;
     public float RollDuration => duration;
     public bool IsProhibited => prohibitors.Count > 0;
 

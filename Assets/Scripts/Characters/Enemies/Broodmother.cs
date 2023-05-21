@@ -22,6 +22,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected BroodmotherWebData broodmotherWebData;
     [SerializeField] protected RegenerationAbilityData regenerationAbilityData;
     [SerializeField] protected SwarmSpawningData swarmSpawningData;
+    [SerializeField] protected StunEffectData selfStunData;
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
@@ -105,6 +106,9 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
         offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
         BroodmotherShieldView = new BroodmotherShieldView(shield, ShieldManager);
+
+        ITalent selfStun = new BroodmotherSelfStun(selfStunData, EffectManager, ShieldManager);
+        selfStun.Learn();
 
         currentBehavior = new BroodmotherStrategy(this, this, enemy);
         currentBehavior.Activate();

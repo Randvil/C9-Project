@@ -1358,6 +1358,7 @@ MonoBehaviour:
   broodmotherWebData: {fileID: 11400000, guid: f48863a659cdac340970386bfa4eb607, type: 2}
   regenerationAbilityData: {fileID: 11400000, guid: 0caf210ca5e0b3a43bcb193cd213a6aa, type: 2}
   swarmSpawningData: {fileID: 11400000, guid: 9333d50b06c21474c9184e157c7e3c92, type: 2}
+  selfStunData: {fileID: 11400000, guid: b9ca374e83dac144e975a1611348afd9, type: 2}
   broodmotherStrategyData: {fileID: 11400000, guid: 52432e9ee1161c24eb7f4b40a441852a, type: 2}
   weaponViewData: {fileID: 11400000, guid: baed50dd77be0d64d9f32a37ce6ed895, type: 2}
   stunAbilityViewData: {fileID: 11400000, guid: d6129901c27cd0548846c5a823d1a3f6, type: 2}
