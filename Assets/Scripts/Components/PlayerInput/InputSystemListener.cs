@@ -19,7 +19,11 @@ public class InputSystemListener : IPlayerInput
     public UnityEvent<eActionPhase> ClimbUpEvent { get; } = new();
     public UnityEvent<eActionPhase, int> AbilityEvent { get; } = new();
     public UnityEvent<eActionPhase> ChangeAbilityLayoutEvent { get; } = new();
-        
+    public UnityEvent ToggleMoveSpeedCheatEvent { get; } = new();
+    public UnityEvent ToggleIncreaseWeaponDamageCheatEvent { get; } = new();
+    public UnityEvent ToggleDecreaseTakenDamageCheatEvent { get; } = new();
+    public UnityEvent ToggleCountlessJumpsCheatEvent { get; } = new();
+
     public InputSystemListener(PlayerInput unityInputSystem)
     {
         this.unityInputSystem = unityInputSystem;
@@ -135,6 +139,30 @@ public class InputSystemListener : IPlayerInput
                     ChangeAbilityLayoutEvent.Invoke(eActionPhase.Started);
                 else if (context.action.phase == InputActionPhase.Canceled)
                     ChangeAbilityLayoutEvent.Invoke(eActionPhase.Canceled);
+
+                break;
+
+            case "MoveSpeedCheat":
+                if (context.action.phase == InputActionPhase.Started)
+                    ToggleMoveSpeedCheatEvent.Invoke();
+
+                break;
+
+            case "WeaponDamageCheat":
+                if (context.action.phase == InputActionPhase.Started)
+                    ToggleIncreaseWeaponDamageCheatEvent.Invoke();
+
+                break;
+
+            case "TakenDamageCheat":
+                if (context.action.phase == InputActionPhase.Started)
+                    ToggleDecreaseTakenDamageCheatEvent.Invoke();
+
+                break;
+
+            case "CountlessJumpsCheat":
+                if (context.action.phase == InputActionPhase.Started)
+                    ToggleCountlessJumpsCheatEvent.Invoke();
 
                 break;
 

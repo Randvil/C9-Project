@@ -8,7 +8,6 @@ public class Jump : IJump, IProhibitable
     private MonoBehaviour owner;
 
     private float jumpTime;
-    private int maxJumpCount;
     private float maxSpeed;
     private AnimationCurve speedCurve;
 
@@ -22,8 +21,9 @@ public class Jump : IJump, IProhibitable
 
     private List<object> prohibitors = new();
 
+    public int MaxJumpCount { get; set; }
     public bool IsJumping { get; private set; }
-    public bool CanJump => (gravity.IsGrounded || airJumpNumber < maxJumpCount);
+    public bool CanJump => (gravity.IsGrounded || airJumpNumber < MaxJumpCount);
     public bool IsProhibited => prohibitors.Count > 0;
 
     public UnityEvent StartJumpEvent { get; } = new();
@@ -35,7 +35,7 @@ public class Jump : IJump, IProhibitable
     {
         this.owner = owner;
 
-        maxJumpCount = jumpData.maxJumpCount;
+        MaxJumpCount = jumpData.maxJumpCount;
         jumpTime = jumpData.jumpTime;
         maxSpeed = jumpData.maxSpeed;
         speedCurve = jumpData.speedCurve;

@@ -14,4 +14,8 @@ public interface IPlayerInput
     public UnityEvent<eActionPhase> ClimbUpEvent { get; }
     public UnityEvent<eActionPhase, int> AbilityEvent { get; }
     public UnityEvent<eActionPhase> ChangeAbilityLayoutEvent { get; }
+    public UnityEvent ToggleMoveSpeedCheatEvent { get; }
+    public UnityEvent ToggleIncreaseWeaponDamageCheatEvent { get; }
+    public UnityEvent ToggleDecreaseTakenDamageCheatEvent { get; }
+    public UnityEvent ToggleCountlessJumpsCheatEvent { get; }
 }

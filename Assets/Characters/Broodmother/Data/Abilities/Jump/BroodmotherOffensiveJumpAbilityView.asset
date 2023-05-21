@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorParameter: IsUsingOffensiveJump
   startCastSoundEffect: {fileID: 0}
-  releaseCastSoundEffect: {fileID: 0}
+  releaseCastSoundEffect: {fileID: 8300000, guid: f1a523979b294a143a11d3d0bb86cfd1, type: 3}
   breakCastSoundEffect: {fileID: 0}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef752d7396432374f814e0e46aeea2a9, type: 3}
-  m_Name: SpiderMinionWeaponViewData
+  m_Name: BroodmotherWeaponView
   m_EditorClassIdentifier: 
   startAttackAudioClip: {fileID: 0}
-  releaseAttackAudioClip: {fileID: 8300000, guid: 6f9b9f15000ed4142849acb22a12e503, type: 3}
+  releaseAttackAudioClip: {fileID: 8300000, guid: fce58c68adc963843a2dc7bf9fd73489, type: 3}

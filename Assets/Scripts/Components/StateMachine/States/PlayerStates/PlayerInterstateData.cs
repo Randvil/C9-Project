@@ -9,4 +9,6 @@ public class PlayerInterstateData
     public int abilityNumberToCast;
     public bool breakPreviousAbility;
     public int previousAbilityNumber;
+    public bool climbUp;
+    public bool climbDown;
 }

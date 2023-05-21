@@ -16,16 +16,6 @@ public class StunnedState : BasePlayerState
 
     }
 
-    protected override void OnMove(eDirection direction)
-    {
-
-    }
-
-    protected override void OnStop()
-    {
-
-    }
-
     protected override void OnCrouch(eActionPhase actionPhase)
     {
 

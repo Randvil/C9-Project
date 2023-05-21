@@ -112,7 +112,6 @@ public class Roll : IRoll, IProhibitable
         if (effectManager is SelectiveEffectManager selectiveEffectManager)
         {
             selectiveEffectManager.SusceptibilityType = eEffectPower.Immunity;
-            Debug.Log("Effect immunity");
         }
 
         yield return new WaitForSeconds(duration);
