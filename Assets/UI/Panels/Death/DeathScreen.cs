@@ -24,6 +24,7 @@ public class DeathScreen : MonoBehaviour, IPanel
     private void OnDeath()
     {
         StaticAudio.Instance.PlayEffect(eAudioEffect.Death);
+        StaticAudio.Instance.SnapshotName = "Pause";
 
         panelManager.SwitchTo(3);
 
@@ -42,6 +43,7 @@ public class DeathScreen : MonoBehaviour, IPanel
     private IEnumerator ReloadSceneCoroutine(DeathLoad deathLoad)
     {
         yield return new WaitForSecondsRealtime(panelManager.PanelTweenDuration);
+        StaticAudio.Instance.SnapshotName = "InGame";
         deathLoad.LoadCheckpoint();
     }
 
