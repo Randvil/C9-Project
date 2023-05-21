@@ -68,7 +68,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        panelManager.SwitchTo(0);
+        panelManager.SwitchTo(0, false, false);
         StaticAudio.Instance.ChangeBackgroundTrack("mainTheme");
         StartCoroutine(ActivateMenuCoroutine());
     }
