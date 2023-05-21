@@ -77,6 +77,7 @@ public class AbilityUiDependencies : MonoBehaviour
 
         daikyu.StartCastEvent.AddListener(() => OnDaikyuPrepare(daikyu));
         daikyu.ReleaseCastEvent.AddListener(() => OnDaikyuRelease(daikyu));
+        daikyu.BreakCastEvent.AddListener(() => OnDaikyuRelease(daikyu));
     }
 
     private void OnDaikyuPrepare(Daikyu daikyu)

@@ -67,7 +67,7 @@ public class EffectUiDependencies : MonoBehaviour
     private void EffectAdded(eEffectType type)
     {
         VisualElement effectView = effectViews[type];
-        effectView.AddToClassList((effectTypeOrder.Count + 1) + "-effect");
+        effectView.AddToClassList("effect" + (effectTypeOrder.Count + 1));
 
         effectTypeOrder.Add(type);
 
@@ -81,15 +81,8 @@ public class EffectUiDependencies : MonoBehaviour
         RemoveEffectAt(type, effectTypeOrder.IndexOf(type));
     }
 
-    private void ChangePosOfEffect(eEffectType type, int pos)
-    {
-        //MoveEffectToPos(type, pos);
-        RemoveEffectAt(type, effectTypeOrder.IndexOf(type));
-    }
-
     private void RemoveEffectAt(eEffectType type, int pos)
     {
-        Debug.Log(type.ToString() + pos);
         VisualElement removedEffect = effectViews[type];
 
         removedEffect.AddToClassList("hidden-effect");
@@ -99,12 +92,12 @@ public class EffectUiDependencies : MonoBehaviour
             for (int i = pos; i < effectTypeOrder.Count - 1; i++)
             {
                 VisualElement nextEffect = effectViews[effectTypeOrder[i + 1]];
-                nextEffect.AddToClassList(i + 1 + "-effect");
-                nextEffect.RemoveFromClassList((i + 2) + "-effect");
+                nextEffect.AddToClassList("effect" + (i + 1));
+                nextEffect.RemoveFromClassList("effect" + (i + 2));
             }
         }
         
-        removedEffect.RemoveFromClassList(pos + "-effect");
+        removedEffect.RemoveFromClassList("effect" + pos);
 
         effectTypeOrder.RemoveAt(pos);
     }

@@ -13,14 +13,16 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private ComicsSwitcher comicsSwitcher;
 
+    MenuNode main;
+
     private void Awake()
     {
         panelManager = GetComponentInParent<PanelManager>();
 
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        MenuNode main = new("main", root, true);
-
+        main = new("main", root, false);
+        
         MenuNode play = new("play", root, false);
         main.AddChild(play);
 
@@ -52,7 +54,7 @@ public class MainMenu : MonoBehaviour
             comicsButton.AddToClassList("menu-b");
         }
 
-        comicsSwitcher.ComicsEndsEvent.AddListener(() => StaticAudio.Instance.ChangeBackgroundTrack("mainTheme"));
+        comicsSwitcher.ComicsEndsEvent.AddListener(() => StaticAudio.Instance.ChangeBackgroundTrack("mainTheme"));  
     }
 
     private void ToComics(bool startNG)
@@ -68,5 +70,12 @@ public class MainMenu : MonoBehaviour
     {
         panelManager.SwitchTo(0);
         StaticAudio.Instance.ChangeBackgroundTrack("mainTheme");
+        StartCoroutine(ActivateMenuCoroutine());
+    }
+
+    private IEnumerator ActivateMenuCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        main.Active = true;
     }
 }

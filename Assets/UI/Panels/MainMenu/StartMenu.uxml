@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Panels/MainMenu/mainMenu.uss?fileID=7433441132597879392&amp;guid=b230ee4403d5de44ebcc4831f33f5349&amp;type=3#mainMenu" />
-    <ui:VisualElement name="screen" style="flex-grow: 1; flex-direction: row; background-image: url(&apos;project://database/Assets/Sprites/Backgrounds/menuBackground.jpg?fileID=2800000&amp;guid=4d316b86a02891848b506940a85df208&amp;type=3#menuBackground&apos;);">
+    <ui:VisualElement name="screen" style="flex-grow: 1; flex-direction: row; background-image: url(&apos;project://database/Assets/Sprites/Backgrounds/menuBackground.jpg?fileID=2800000&amp;guid=4d316b86a02891848b506940a85df208&amp;type=3#menuBackground&apos;); -unity-background-scale-mode: scale-and-crop;">
         <ui:VisualElement name="main" class="menu" style="display: flex;">
-            <ui:VisualElement name="logo" style="position: absolute; left: 0; top: 0; width: 100%; height: 20%;" />
+            <ui:VisualElement name="logo" style="position: absolute; left: 0; top: 0; width: 100%; height: 20%; background-image: url(&apos;project://database/Assets/Sprites/gif4.gif?fileID=2800000&amp;guid=489746e0ec89d4348beb54fe702b05b7&amp;type=3#gif4&apos;); -unity-background-scale-mode: scale-to-fit; margin-bottom: 20px; margin-top: 20px;" />
             <ui:Button text="PLAY" display-tooltip-when-elided="true" name="playB" class="menu-b" />
             <ui:Button text="SETTINGS" display-tooltip-when-elided="true" enable-rich-text="true" focusable="false" name="settingsB" class="menu-b" />
             <ui:Button text="SPOILERS" display-tooltip-when-elided="true" name="spoilersB" class="menu-b" />

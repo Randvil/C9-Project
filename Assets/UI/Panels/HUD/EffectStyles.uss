@@ -6,28 +6,28 @@
     transition-duration: 0.4s;
 }
 
-.1-effect {
+.effect1 {
     position: absolute;
     top: 0;
     transition-property: top;
     transition-duration: 0.4s;
 }
 
-.2-effect {
+.effect2 {
     position: absolute;
     top: 60px;
     transition-property: top;
     transition-duration: 0.4s;
 }
 
-.3-effect {
+.effect3 {
     position: absolute;
     top: 120px;
     transition-duration: 0.4s;
     transition-property: top;
 }
 
-.4-effect {
+.effect4 {
     top: 180px;
     transition-duration: 0.4s;
     transition-property: top;

@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newGameSave: {fileID: 428315644}
+  arcadeGameSave: {fileID: 1770446854}
+  bossroomGameSave: {fileID: 464418701}
 --- !u!1 &428315642
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1904d7cd8ae37384a8ea6304255fcf7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGameData: {fileID: 11400000, guid: bba82d6f2a4a516488bd70186f2defc7, type: 2}
+  newGameData: {fileID: 11400000, guid: 7181e769fba6f3146836394e3fbd291f, type: 2}
 --- !u!1001 &854293680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -774,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1904d7cd8ae37384a8ea6304255fcf7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGameData: {fileID: 11400000, guid: bba82d6f2a4a516488bd70186f2defc7, type: 2}
+  newGameData: {fileID: 11400000, guid: 4e87d59636ca7024395834b7fe050352, type: 2}
 --- !u!114 &906469672916950774
 MonoBehaviour:
   m_ObjectHideFlags: 0
