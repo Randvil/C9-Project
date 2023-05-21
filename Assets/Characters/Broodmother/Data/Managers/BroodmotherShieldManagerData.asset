@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BroodmotherShieldManagerData
   m_EditorClassIdentifier: 
   initialHealth:
-    maxHealth: 250
-    currentHealth: 250
+    maxHealth: 1500
+    currentHealth: 1500

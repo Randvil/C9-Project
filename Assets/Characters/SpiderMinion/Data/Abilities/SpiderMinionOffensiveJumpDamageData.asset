@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpiderMinionOffensiveJumpDamageData
   m_EditorClassIdentifier: 
   damageType: 2
-  damageValue: 20
+  damageValue: 10

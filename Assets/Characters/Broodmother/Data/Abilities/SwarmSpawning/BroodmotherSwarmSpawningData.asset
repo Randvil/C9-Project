@@ -17,14 +17,20 @@ MonoBehaviour:
   preCastDelay: 0
   postCastDelay: 0
   cost: 0
-  spawnDuration: 20
+  spawnDuration: 12
   swarms:
-  - firstCreatureSpawnDelay: 1
-    spawnDelay: 3
+  - firstCreatureSpawnDelay: 2
+    spawnDelay: 1
     spawnAreaCenter: {x: 0, y: 10}
-    spawnAreaSize: {x: 14, y: 1}
+    spawnAreaSize: {x: 7, y: 1}
     spawnRelativeToCaster: 0
     swarmMembers:
     - {fileID: 9048720266790035559, guid: 766f34aa5b6b8d8468736feb8f185304, type: 3}
+  - firstCreatureSpawnDelay: 3
+    spawnDelay: 3
+    spawnAreaCenter: {x: 0, y: 10}
+    spawnAreaSize: {x: 7, y: 1}
+    spawnRelativeToCaster: 0
+    swarmMembers:
     - {fileID: 5726873128067666410, guid: 6147b366f4b0d7e42a1c02bea3ed48aa, type: 3}
     - {fileID: 5726873128067666410, guid: 9f1846d6783953d4185d97dbe51a0dcd, type: 3}

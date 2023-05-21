@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbcdd784c2b6374594fd88eb935144f, type: 3}
   m_Name: BroodmotherDamageHandlerWithShieldsData
   m_EditorClassIdentifier: 
-  shieldPercentageAbsorption: 0.75
+  shieldPercentageAbsorption: 0.9

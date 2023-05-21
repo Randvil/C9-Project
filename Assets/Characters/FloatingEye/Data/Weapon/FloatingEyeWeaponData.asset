@@ -17,5 +17,5 @@ MonoBehaviour:
   attackRange: 2
   preAttackDelays:
   - 1
-  postAttackDelay: 0.5
+  postAttackDelay: 0.7
   attackSpeed: 1

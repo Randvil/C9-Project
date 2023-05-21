@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BroodmotherStunDamageData
   m_EditorClassIdentifier: 
   damageType: 2
-  damageValue: 50
+  damageValue: 80

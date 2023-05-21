@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1aafb0771150d448bb1f7c5ce709af, type: 3}
   m_Name: AcidPuddleSlowEffectData
   m_EditorClassIdentifier: 
-  movementSlowValue: 0.25
+  effectPower: 0
   duration: 3
+  movementSlowValue: 0.2

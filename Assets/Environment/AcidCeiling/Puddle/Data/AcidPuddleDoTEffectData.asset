@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45407fc39f00864f934ed81bccc77fa, type: 3}
   m_Name: AcidPuddleDoTEffectData
   m_EditorClassIdentifier: 
-  damageData: {fileID: 11400000, guid: 793f909c273256248aca1d35c3d48782, type: 2}
-  damagePeriod: 2
+  effectPower: 0
   duration: 5
+  damageData: {fileID: 11400000, guid: 793f909c273256248aca1d35c3d48782, type: 2}
+  damagePeriod: 1

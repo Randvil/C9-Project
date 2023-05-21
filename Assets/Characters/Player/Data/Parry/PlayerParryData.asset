@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3815159c9a3632449ff4570a3754d52, type: 3}
   m_Name: PlayerParryData
   m_EditorClassIdentifier: 
-  duration: 0.5
-  cooldown: 2
+  duration: 0.23
+  cooldown: 1
   damageAbsorption: 1
   reflectMeleeDamage: 0
   reflectProjectiles: 1
   reflectionDamageMultiplier: 1
   meleeAmplifyDamage: 1
   rangeAmplifyDamage: 0
-  extraAttackDamage: 1
+  extraAttackDamage: 0.5
   amplifiedAttackNumber: 3
   amplifyDuration: 5
   reflectionEffectData: {fileID: 11400000, guid: 82de331bd3bd9874d81e33ae9808b67c, type: 2}
