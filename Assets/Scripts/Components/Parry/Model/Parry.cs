@@ -47,9 +47,9 @@ public class Parry : IParry, IDamageDealer
     public UnityEvent StartParryEvent { get; } = new();
     public UnityEvent BreakParryEvent { get; } = new();
     public UnityEvent SuccessfulParryEvent { get; } = new();
+    public UnityEvent AddDamageAmplificationEvent { get; } = new();
+    public UnityEvent RemoveDamageApmlificationEvent { get; } = new();
     public UnityEvent<DamageInfo> DealDamageEventCallback { get; } = new();
-
-    public UnityEvent BreakSuccessfulParryEvent { get; } = new();
 
     public Parry(MonoBehaviour owner, GameObject character, ParryData parryData, ITurning turning, ITeam team, IDamageHandler damageHandler, IWeapon weapon, IModifierManager defenceModifierManager, IModifierManager weaponModifierManager, IEffectManager effectManager)
     {
@@ -167,6 +167,14 @@ public class Parry : IParry, IDamageDealer
                     return;
                 }
                 break;
+
+            default:
+                return;
+        }
+
+        if (amplifyDamageCoroutine != null)
+        {
+            return;
         }
 
         amplifyDamageCoroutine = owner.StartCoroutine(AmplifyDamageCoroutine());
@@ -178,6 +186,8 @@ public class Parry : IParry, IDamageDealer
         weaponModifierManager.AddModifier(damageAmplification);
         weapon.ReleaseAttackEvent.AddListener(OnReleaseAttack);
         attackCounter = 0;
+
+        AddDamageAmplificationEvent.Invoke();
 
         yield return new WaitForSeconds(amplifyDuration);
 
@@ -202,10 +212,9 @@ public class Parry : IParry, IDamageDealer
 
         weaponModifierManager.RemoveModifier(damageAmplification);
         weapon.ReleaseAttackEvent.RemoveListener(OnReleaseAttack);
-
-        BreakSuccessfulParryEvent.Invoke();
-        Debug.Log("Break amplification");
         owner.StopCoroutine(amplifyDamageCoroutine);
         amplifyDamageCoroutine = null;
+
+        RemoveDamageApmlificationEvent.Invoke();
     }
 }
