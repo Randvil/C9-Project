@@ -178,6 +178,8 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
 
         LastChance = new LastChance(this, lastChanceData, DeathManager as IForbiddableDeath, HealthManager, DefenceModifierManager);
         LastChance.Learn();
+        ITalent cheats = new Cheats(PlayerInput, EffectManager, WeaponModifierManager, DefenceModifierManager, Jump as Jump);
+        cheats.Learn();
 
         GravityView = new GravityView(Gravity, Animator);
         TurningView = new TurningView(this, avatar, turningViewData, Turning);

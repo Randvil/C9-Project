@@ -16,7 +16,16 @@ public class ClimbingState : BasePlayerState
             playerInterstateData.haveToTurn = true;
         }
 
-        player.Gravity.SetFallingState();
+        //player.Gravity.SetFallingState();
+
+        if (playerInterstateData.climbUp)
+        {
+            player.Climb.ClimbUp();
+        }
+        else if (playerInterstateData.climbDown)
+        {
+            player.Climb.ClimbDown();
+        }
     }
 
     public override void Exit()
@@ -25,34 +34,34 @@ public class ClimbingState : BasePlayerState
 
         player.Climb.BreakClimb();
 
-        player.Gravity.SetFallingState();
+        //player.Gravity.SetFallingState();
     }
 
     public override void LogicUpdate()
     {
-        if (player.Climb.IsClimbing == false)
+        if (player.Climb.CanClimb == false)
         {
             stateMachine.ChangeState(player.Standing);
         }
 
-        if (player.Gravity.IsGrounded && player.Climb.ClimbSpeed < 0f)
-        {
-            player.Climb.StopClimb();
-        }
+        //if (player.Gravity.IsGrounded && player.Climb.ClimbSpeed < 0f)
+        //{
+        //    player.Climb.StopClimb();
+        //}
     }
 
     protected override void OnCrouch(eActionPhase actionPhase)
     {
-        switch(actionPhase)
-        {
-            case eActionPhase.Started:
-                player.Climb.ClimbDown();
-                break;
+        base.OnCrouch(actionPhase);
 
-            case eActionPhase.Canceled:
-                player.Climb.StopClimb();
-                break;
-        }        
+        if (playerInterstateData.climbDown)
+        {
+            player.Climb.ClimbDown();
+        }
+        else
+        {
+            player.Climb.StopClimb();
+        }
     }
 
     protected override void OnJump(eActionPhase actionPhase)
@@ -83,15 +92,15 @@ public class ClimbingState : BasePlayerState
 
     protected override void OnClimbUp(eActionPhase actionPhase)
     {
-        switch (actionPhase)
-        {
-            case eActionPhase.Started:
-                player.Climb.ClimbUp();
-                break;
+        base.OnClimbUp(actionPhase);
 
-            case eActionPhase.Canceled:
-                player.Climb.StopClimb();
-                break;
+        if (playerInterstateData.climbUp)
+        {
+            player.Climb.ClimbUp();
+        }
+        else
+        {
+            player.Climb.StopClimb();
         }
     }
 

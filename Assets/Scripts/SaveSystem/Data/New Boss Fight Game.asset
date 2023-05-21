@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b168d8eb501fc40855691b790f96f3, type: 3}
+  m_Name: New Boss Fight Game
+  m_EditorClassIdentifier: 
+  CheckpointData:
+    playerHealth: 200
+    playerEnergy: 100
+    position: {x: -12.67, y: -0.89, z: 0}
+    latestScene: 2
+    learnedAbilities:
+    - pos: 1
+      abilityType: 4
+    - pos: 2
+      abilityType: 1
+    - pos: 3
+      abilityType: 3
+    - pos: 4
+      abilityType: 2
+    locations: []

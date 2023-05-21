@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorParameter: IsUsingStun
   startCastSoundEffect: {fileID: 0}
-  releaseCastSoundEffect: {fileID: 0}
+  releaseCastSoundEffect: {fileID: 8300000, guid: b4353b72454172049895b8d1937a98ad, type: 3}
   breakCastSoundEffect: {fileID: 0}

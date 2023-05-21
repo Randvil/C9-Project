@@ -25,6 +25,11 @@ public class RollingState : BasePlayerState
 
     }
 
+    protected override void OnAttack(eActionPhase actionPhase)
+    {
+        
+    }
+
     private void OnBreakRoll()
     {
         stateMachine.ChangeState(player.Standing);

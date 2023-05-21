@@ -1359,7 +1359,7 @@ MonoBehaviour:
   regenerationAbilityData: {fileID: 11400000, guid: 0caf210ca5e0b3a43bcb193cd213a6aa, type: 2}
   swarmSpawningData: {fileID: 11400000, guid: 9333d50b06c21474c9184e157c7e3c92, type: 2}
   broodmotherStrategyData: {fileID: 11400000, guid: 52432e9ee1161c24eb7f4b40a441852a, type: 2}
-  weaponViewData: {fileID: 11400000, guid: a27f33c1ed052374c88d428e5c77f143, type: 2}
+  weaponViewData: {fileID: 11400000, guid: baed50dd77be0d64d9f32a37ce6ed895, type: 2}
   stunAbilityViewData: {fileID: 11400000, guid: d6129901c27cd0548846c5a823d1a3f6, type: 2}
   webAbilityViewData: {fileID: 11400000, guid: d72ba6b2285e17e45882cf9a9a3dbe1a, type: 2}
   offensiveJumpAbilityViewData: {fileID: 11400000, guid: 8d4b5137186bf5f45903fa160bffaa00, type: 2}
