@@ -60,7 +60,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
         HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
         DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
 
-        DeathManager.DeathEvent.AddListener(OnDeath);
+        //DeathManager.DeathEvent.AddListener(OnDeath);
     }
 
     protected void CloneMaterials()
@@ -91,5 +91,13 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
         }
 
         Destroy(gameObject, 1.5f);
+    }
+
+    protected void DeactivateBehaviour()
+    {
+        if (currentBehavior != null)
+        {
+            currentBehavior.Deactivate();
+        }
     }
 }
