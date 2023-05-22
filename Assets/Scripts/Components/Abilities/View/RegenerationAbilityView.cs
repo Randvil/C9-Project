@@ -3,13 +3,17 @@ using UnityEngine.VFX;
 
 public class RegenerationAbilityView
 {
+    private AudioClip startHealAudioClip;
     private VisualEffect regenerationEffectGraph;
     private IAbility ability;
+    private AudioSource audioSource;
 
-    public RegenerationAbilityView(VisualEffect regenerationEffectGraph, IAbility ability)
+    public RegenerationAbilityView(CommonAbilityViewData regeneraionViewData, VisualEffect regenerationEffectGraph, IAbility ability, AudioSource audioSource)
     {
+        startHealAudioClip = regeneraionViewData.startCastSoundEffect;
         this.regenerationEffectGraph = regenerationEffectGraph;
         this.ability = ability;
+        this.audioSource = audioSource;
 
         ability.StartCastEvent.AddListener(OnStartCast);
         ability.BreakCastEvent.AddListener(OnBreakCast);
@@ -17,6 +21,7 @@ public class RegenerationAbilityView
 
     private void OnStartCast()
     {
+        audioSource.PlayOneShot(startHealAudioClip);
         PlayHealingVFXGraph();
     }
 

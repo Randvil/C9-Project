@@ -89,7 +89,6 @@ public abstract class BasePlayerState : IState
         //    stateMachine.ChangeState(player.Crouching);
         //}
 
-        Debug.Log("Climb phase: " + actionPhase);
         switch (actionPhase)
         {
             case eActionPhase.Started:
