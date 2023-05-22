@@ -36,7 +36,7 @@
 
 .effect-label {
     -unity-text-align: middle-left;
-    font-size: 14px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 0.75);
 }
 
