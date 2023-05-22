@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class BroodmotherShieldView
 {
-    private GameObject shield;
+    private Material shieldMaterial;
+    private MonoBehaviour owner;
+    private float dissolveRate;
+    private float refreshRate = 0.025f;
 
-    public BroodmotherShieldView(GameObject shield, IHealthManager shieldManager)
+    public BroodmotherShieldView(GameObject shield, IHealthManager shieldManager, MonoBehaviour owner, float dissolveRate)
     {
-        this.shield = shield;
+        this.owner = owner;
+        this.dissolveRate = dissolveRate;
+        shieldMaterial = shield.GetComponent<MeshRenderer>().material;
+
         shieldManager.CurrentHealthChangedEvent.AddListener(ShowShield);
     }
 
@@ -16,11 +22,30 @@ public class BroodmotherShieldView
     {
         if (health.currentHealth > 0)
         {
-            shield.SetActive(true);
+            shieldMaterial.SetFloat("_DissolveAmount", 0);
         }
         else
         {
-            shield.SetActive(false);
+            ApplyDissolve();
+        }
+    }
+
+    public void ApplyDissolve()
+    {
+        owner.StartCoroutine(DissolveCoroutine());
+    }
+
+    public IEnumerator DissolveCoroutine()
+    {
+        float counter = 0;
+
+        while (shieldMaterial.GetFloat("_DissolveAmount") < 1)
+        {
+
+            counter += dissolveRate;
+            shieldMaterial.SetFloat("_DissolveAmount", counter);
+
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 }

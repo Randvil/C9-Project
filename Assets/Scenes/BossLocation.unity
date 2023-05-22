@@ -1359,6 +1359,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+      propertyPath: shieldSphere
+      value: 
+      objectReference: {fileID: 639965215}
+    - target: {fileID: -453446543281138187, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
       propertyPath: shieldMaterial
       value: 
       objectReference: {fileID: 2100000, guid: f130e11ade76e804dbe155b3d062d9f5, type: 2}
@@ -1486,7 +1490,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
 --- !u!1 &639965215 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 795344582649406888, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2569062139159568798, guid: 54c0a6b456997634c9c1cf521e3f1554, type: 3}
   m_PrefabInstance: {fileID: 639965214}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &639965216 stripped
