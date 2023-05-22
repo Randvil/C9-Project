@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private AudioSource sharedAudioSource;
     [SerializeField] private AudioSource walkAudioSource;
     [SerializeField] private AudioSource climbAudioSource;
+    [SerializeField] private AudioSource fallAudioSource;
     [SerializeField] private AudioSource takeDamageAudioSource;
 
     [SerializeField] private HealthManagerData healthManagerData;
@@ -44,11 +45,14 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
     [SerializeField] private TurningViewData turningViewData;
     [SerializeField] private DeathViewData deathViewData;
     [SerializeField] private JumpViewData jumpViewData;
+    [SerializeField] private FallViewData fallViewData;
+    [SerializeField] private RollViewData rollViewData;
     [SerializeField] private ParryViewData parryViewData;
     [SerializeField] private PlayerWeaponViewData playerWeaponViewData;
     [SerializeField] private DaikyuViewData daikyuViewData;
     [SerializeField] private KanaboViewData kanaboViewData;
     [SerializeField] private TessenViewData tessenViewData;
+    [SerializeField] private CommonAbilityViewData regeneraionViewData;
 
     [Header("Player Prefab VFX")]
     [SerializeField] private VisualEffect slashGraph;
@@ -181,12 +185,12 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         ITalent cheats = new Cheats(PlayerInput, EffectManager, WeaponModifierManager, DefenceModifierManager, Jump as Jump);
         cheats.Learn();
 
-        GravityView = new GravityView(Gravity, Animator);
+        GravityView = new GravityView(fallViewData, Gravity, Animator, fallAudioSource, sharedAudioSource);
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
         MovementView = new PlayerMovementView(Movement, Gravity, Animator, walkAudioSource);
         CrouchView = new CrouchView(Crouch, Animator);
         JumpView = new JumpView(jumpViewData, Jump, Animator, sharedAudioSource);
-        RollView = new RollView(Roll, Animator);
+        RollView = new RollView(rollViewData, Roll, Animator, sharedAudioSource);
         WeaponView = new PlayerWeaponView(weaponObject, playerWeaponViewData, Weapon, Weapon as IDamageDealer, 
             Animator, sharedAudioSource, slashGraph);
         ParryView = new ParryView(weaponObject, parryViewData, Parry, Animator, sharedAudioSource, parryGraph, this);
@@ -197,7 +201,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
         TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
-        RegenerationAbilityView = new RegenerationAbilityView(regenerationGraph, regeneration);
+        RegenerationAbilityView = new RegenerationAbilityView(regeneraionViewData, regenerationGraph, regeneration, sharedAudioSource);
         RemoveWebView = new RemoveWebView(EffectManager, mainMesh);
 
         ClearVignette();

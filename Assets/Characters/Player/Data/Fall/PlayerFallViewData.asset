@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56afa6945007a7c44be9313fefcdbf3f, type: 3}
+  m_Name: PlayerFallViewData
+  m_EditorClassIdentifier: 
+  animatorParameter: IsFalling
+  landingAudioClip: {fileID: 8300000, guid: 647fd418b8775774d86439356ad131d3, type: 3}
