@@ -135,7 +135,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 100
+      - m_Value: 101
         m_Name: TrailSpawnRate
         m_Overridden: 1
     m_Vector2f:
