@@ -31,6 +31,8 @@ public class StaticAudio : MonoBehaviour
     [SerializeField] private AudioSource hintSource;
     [SerializeField] private AudioSource deathSource;
 
+    [SerializeField] private AudioSource locationSource;
+
     void Awake()
     {
         if (Instance)
@@ -56,6 +58,11 @@ public class StaticAudio : MonoBehaviour
             SnapshotName = "Pause";
         else
             SnapshotName = "InGame";
+    }
+
+    public void PlayLocationClip(AudioClip clip)
+    {
+        locationSource.PlayOneShot(clip);
     }
 
     public void PlayEffect(eAudioEffect type)

@@ -71,14 +71,6 @@ public class EffectManager : IEffectManager
         }
     }
 
-    private void CheckDoTEffects()
-    {
-        if (rootEffects.Count < 1)
-        {
-            EffectEvent.Invoke(eEffectType.DoT, eEffectStatus.Cleared);
-        }
-    }
-
     private void DealDoTDamage()
     {
         foreach (IDoTEffect doTEffect in doTEffects)
@@ -148,7 +140,6 @@ public class EffectManager : IEffectManager
             case IDoTEffect:
                 doTEffects.Remove(effect as IDoTEffect);
                 EffectEvent.Invoke(eEffectType.DoT, eEffectStatus.Removed);
-                //CheckDoTEffects();
                 break;
 
             case IDamageEffect:
