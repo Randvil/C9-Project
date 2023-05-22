@@ -17,8 +17,6 @@ public class BroodmotherShieldView
     {
         this.owner = owner;
 
-        this.shield = shield;
-
         this.dissolveRate = dissolveRate;
         shieldDestroyingAudioClip = shieldViewData.shieldDestroyingAudioClip;
 
