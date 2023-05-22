@@ -98,6 +98,7 @@ public class EffectUiDependencies : MonoBehaviour
         
         removedEffect.RemoveFromClassList("effect" + pos);
 
-        effectTypeOrder.RemoveAt(pos);
+        if (effectTypeOrder.Count > pos)
+            effectTypeOrder.RemoveAt(pos);
     }
 }
