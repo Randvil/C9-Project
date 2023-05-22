@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275b7f361b59ac8468ad62fdb679cc48, type: 3}
   m_Name: PlayerJumpViewData
   m_EditorClassIdentifier: 
-  jumpAudioClip: {fileID: 8300000, guid: adadd3da376ab12459688e9838be0d93, type: 3}
+  jumpAudioClip: {fileID: 8300000, guid: ae8976657c466f54a9da23208c47c87f, type: 3}
