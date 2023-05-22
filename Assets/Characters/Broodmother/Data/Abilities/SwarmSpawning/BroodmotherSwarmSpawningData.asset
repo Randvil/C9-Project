@@ -20,7 +20,7 @@ MonoBehaviour:
   spawnDuration: 12
   swarms:
   - firstCreatureSpawnDelay: 2
-    spawnDelay: 1
+    spawnDelay: 2
     spawnAreaCenter: {x: 0, y: 10}
     spawnAreaSize: {x: 7, y: 1}
     spawnRelativeToCaster: 0
