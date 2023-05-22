@@ -35,7 +35,8 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected CommonAbilityViewData regenerationAbilityViewData;
 
     [Header("Broodmother Visual Data")]
-    [SerializeField] protected GameObject shield;
+    [SerializeField] protected GameObject shieldSphere;
+    [SerializeField] protected float dissolveRate = 0.0225f;
 
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
@@ -114,7 +115,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
         offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
         swarmSpawnAbilityView = new CommonAbilityView(swarmSpawningViewData, SwarmSpawningAbility, Animator, sharedAudioSource);
         regenerationAbilityView = new CommonAbilityView(regenerationAbilityViewData, RegenerationAbility, Animator, sharedAudioSource);
-        BroodmotherShieldView = new BroodmotherShieldView(shield, shieldViewData, ShieldManager, sharedAudioSource);
+        BroodmotherShieldView = new BroodmotherShieldView(this, shieldSphere, shieldViewData, ShieldManager, sharedAudioSource, dissolveRate);
         BroodmotherDeathView = new BroodmotherDeathView(this, DeathManager, GetComponent<EnemyVisualEffect>());
 
         ITalent selfStun = new BroodmotherSelfStun(selfStunData, EffectManager, ShieldManager);
