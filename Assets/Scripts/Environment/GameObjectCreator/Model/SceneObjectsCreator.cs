@@ -119,8 +119,6 @@ public class SceneObjectsCreator : Creator
                 AbilityPickUpCreator abilityPickUpCreator = new();
                 abilityPickUpCreator.CreateObject(abilityPickUp.prefab, data);
                 abilityPickUpCreator.newGameObject.transform.position = abilityPickUp.position;
-                Debug.Log(hintView);
-                Debug.Log(abilityPickUpCreator.newGameObject.GetComponent<Hintable>());
                 hintView.AddHintable(abilityPickUpCreator.newGameObject.GetComponent<Hintable>());
             }
         }

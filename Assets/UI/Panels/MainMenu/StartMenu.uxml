@@ -21,8 +21,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="spoilers" class="menu second-menu">
             <ui:Button text="START COMICS" display-tooltip-when-elided="true" name="comicsB" class="inactive-menu-b" />
-            <ui:Button text="TO ARCADE CENTER" display-tooltip-when-elided="true" name="arcadeCenterB" class="menu-b" />
-            <ui:Button text="TO BOSSFIGHT" display-tooltip-when-elided="true" name="bossfightB" class="menu-b" />
+            <ui:Button text="ARCADE CENTER" display-tooltip-when-elided="true" name="arcadeCenterB" class="menu-b" />
+            <ui:Button text="BOSSFIGHT" display-tooltip-when-elided="true" name="bossfightB" class="menu-b" />
             <ui:Button text="END COMICS" display-tooltip-when-elided="true" name="endComicsB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
