@@ -30,10 +30,11 @@
     width: 120px;
     -unity-font: url('project://database/Assets/UI/Fonts/InterTight-VariableFont_wght.ttf?fileID=12800000&guid=f6d4e89c7c0e5c44992901513d4036d7&type=3#InterTight-VariableFont_wght');
     -unity-font-style: bold;
-    font-size: 15px;
+    font-size: 24px;
     color: rgba(210, 210, 210, 0.5);
     -unity-font-definition: none;
-    margin-right: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .disabledPoly {
@@ -108,6 +109,12 @@
 
 .RegenerationPolyControl .polygon_icon {
     background-image: resource('RegenerationIcon512h');
+    opacity: 1;
+    flex-grow: 42;
+}
+
+.ParryPolyControl .polygon_icon {
+    background-image: resource('ParryIcon512h');
     opacity: 1;
     flex-grow: 42;
 }

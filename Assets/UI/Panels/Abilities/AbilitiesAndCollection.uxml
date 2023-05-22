@@ -13,6 +13,7 @@
                 <Polygon poly-image-path="poly512h" text="2" name="p2" class="poly_InGame poly_like-hud" />
                 <Polygon poly-image-path="poly512h" text="3" name="p3" class="poly_InGame poly_like-hud" />
                 <Polygon poly-image-path="poly512h" text="4" name="p4" class="poly_InGame poly_like-hud" />
+                <Polygon name="parryPoly" poly-image-path="poly512h" text="\U00F1F80E" class="poly_like-hud ParryPolyControl" />
             </ui:VisualElement>
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
@@ -58,6 +59,16 @@
                 <ui:Label display-tooltip-when-elided="true" text="Turn energy into health&#10;Health/s 10&#10;Energy cost 3" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnRegenerationB" class="menu-b" />
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ParryDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+            <ui:VisualElement style="align-items: center; justify-content: center;">
+                <Polygon poly-image-path="poly512h" text=" " icon-path="ParryIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
+            </ui:VisualElement>
+            <ui:VisualElement>
+                <ui:Label text="PARRY" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
+                <ui:Label display-tooltip-when-elided="true" text="LMAO BOTTOM TEXT" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+            </ui:VisualElement>
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
     </ui:VisualElement>

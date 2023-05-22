@@ -66,6 +66,11 @@ public class Abilities : MonoBehaviour, IPanel
             if (IsAbilityLearned(type)) // изучение при загрузке происходит раньше чем подпись на события
                 ActivateSetPossibility(abilities, description, icon);
         }
+
+        //special govnocode for parry
+        MenuNode parryDescription = new("ParryDescription", root, false);
+        parryDescription.ParentButton.RegisterCallback<MouseEnterEvent>(ZIndexFix);
+        abilities.AddChild(parryDescription);
     }
 
     private void ActivateSetPossibility(MenuNode abilities, MenuNode description, VisualElement icon)
