@@ -53,7 +53,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="Root" class="effect-out">
                 <NS.RomanLib.RadialFill text="100" width="98" height="98" value="0.22" fill-color="#FFFFFFFF" overlay-image-scale="0.914" overlay-image-path="root512h" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; opacity: 0.9;" />
-                <ui:Label text="ROOT" display-tooltip-when-elided="true" class="effect-label" />
+                <ui:Label text="GROUND" class="effect-label" />
             </ui:VisualElement>
             <ui:VisualElement name="DoT" class="effect-out">
                 <NS.RomanLib.RadialFill text="100" width="98" height="98" value="0.94" fill-color="#FFFFFFAA" overlay-image-path="poison512h" overlay-image-scale="0.914" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; opacity: 0.9;" />

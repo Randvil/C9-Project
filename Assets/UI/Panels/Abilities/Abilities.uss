@@ -131,7 +131,7 @@
 
 .effect-discr-text {
     flex-grow: 1;
-    -unity-text-align: middle-left;
+    -unity-text-align: middle-center;
 }
 
 .effect-icon {
