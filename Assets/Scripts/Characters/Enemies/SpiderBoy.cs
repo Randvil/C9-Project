@@ -13,8 +13,10 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     [SerializeField] private CreatureSpawnerData creatureSpawnerData;
     [SerializeField] private DefensiveJumpData defensiveJumpData;
     [SerializeField] private CompoundProtectionData compoundProtectionData;
-    [SerializeField] private CreatureSpawnerViewData spiderSpawnerViewData;
     [SerializeField] private WatchmanStrategyData watchmanData;
+
+    [SerializeField] private CommonAbilityViewData spiderSpawnerViewData;
+    [SerializeField] private CommonAbilityViewData defensiveJumpViewData;
 
     public WatchmanStrategyData WatchmanStrategyData => watchmanData;
     public IModifierManager WeaponModifierManager { get; private set; }
@@ -26,7 +28,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
     public ICompoundProtection CompoundProtection { get; private set; }
 
     protected NoArmsWeaponView weaponView;
-    protected CreatureSpawnerView spiderSpawnerView;    
+    protected CommonAbilityView spiderSpawnerView;
+    protected CommonAbilityView defensiveJumpView;
 
     protected override void Awake()
     {
@@ -41,7 +44,8 @@ public class SpiderBoy : BaseCreature, IWatchmanBehavior
         CompoundProtection = new SpiderboyCompoundProtection(gameObject, compoundProtectionData, HealthManager, JumpAbility, EffectManager, DeathManager);
 
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        spiderSpawnerView = new CreatureSpawnerView(spiderSpawnerViewData, SpiderSpawnAbility, sharedAudioSource);
+        spiderSpawnerView = new CommonAbilityView(spiderSpawnerViewData, SpiderSpawnAbility, Animator, sharedAudioSource);
+        defensiveJumpView = new CommonAbilityView(defensiveJumpViewData, JumpAbility, Animator, sharedAudioSource);
 
         currentBehavior = new WatchmanStrategy(this, this);
         currentBehavior.Activate();

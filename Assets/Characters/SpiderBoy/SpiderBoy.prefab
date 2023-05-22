@@ -412,8 +412,9 @@ MonoBehaviour:
   creatureSpawnerData: {fileID: 11400000, guid: 03aa6e3d612b86c4e8a7e901cdf42565, type: 2}
   defensiveJumpData: {fileID: 11400000, guid: 0d860882a88ab354c9dff304939461f8, type: 2}
   compoundProtectionData: {fileID: 11400000, guid: c0187f83c42722841aac5c1d46f7fdf5, type: 2}
-  spiderSpawnerViewData: {fileID: 11400000, guid: ef149a53020df31438f06f8da9cd9144, type: 2}
   watchmanData: {fileID: 11400000, guid: 0bc32c69329ff064ba9b1baa2ac1a380, type: 2}
+  spiderSpawnerViewData: {fileID: 11400000, guid: d651e558122665544b4329635d7aa96d, type: 2}
+  defensiveJumpViewData: {fileID: 11400000, guid: b26e7fa71853a08469d3fadf7e3e1565, type: 2}
 --- !u!114 &6994209470384226410
 MonoBehaviour:
   m_ObjectHideFlags: 0

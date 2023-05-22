@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7e587e590c428429a6bc7ba16dfa90, type: 3}
-  m_Name: SpiderBoySpiderSpawnerViewData
+  m_Script: {fileID: 11500000, guid: 42a07ae5fb5b0924e8720fa17d8078fc, type: 3}
+  m_Name: SpiderBoyDefensiveJumpViewData
   m_EditorClassIdentifier: 
-  spawnCreatureAudioClip: {fileID: 8300000, guid: a416994fbabf79d449cb8fb298f1003a, type: 3}
+  animatorParameter: IsUsingDefensiveJump
+  startCastSoundEffect: {fileID: 0}
+  releaseCastSoundEffect: {fileID: 0}
+  breakCastSoundEffect: {fileID: 0}
