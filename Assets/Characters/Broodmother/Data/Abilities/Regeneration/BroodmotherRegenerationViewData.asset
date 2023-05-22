@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42a07ae5fb5b0924e8720fa17d8078fc, type: 3}
-  m_Name: BroodmotherWebAbilityView
+  m_Name: BroodmotherRegenerationViewData
   m_EditorClassIdentifier: 
-  animatorParameter: IsUsingWeb
-  startCastSoundEffect: {fileID: 8300000, guid: b679f1aae14081146b0128c0479707c0, type: 3}
-  releaseCastSoundEffect: {fileID: 8300000, guid: c9109eacebd1dcb439e46de4eebcd4ec, type: 3}
-  breakCastSoundEffect: {fileID: 8300000, guid: c39284b9eaefdce4eba12aa24c6077d9, type: 3}
+  animatorParameter: IsUsingRegeneration
+  startCastSoundEffect: {fileID: 8300000, guid: 74b9bc9409ed3ab42a4054990fd86ab1, type: 3}
+  releaseCastSoundEffect: {fileID: 0}
+  breakCastSoundEffect: {fileID: 0}

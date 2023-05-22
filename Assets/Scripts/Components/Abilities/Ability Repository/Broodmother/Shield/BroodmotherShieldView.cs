@@ -6,9 +6,18 @@ public class BroodmotherShieldView
 {
     private GameObject shield;
 
-    public BroodmotherShieldView(GameObject shield, IHealthManager shieldManager)
+    private AudioClip shieldDestroyingAudioClip;
+
+    private AudioSource audioSource;
+
+    public BroodmotherShieldView(GameObject shield, ShieldViewData shieldViewData, IHealthManager shieldManager, AudioSource audioSource)
     {
         this.shield = shield;
+
+        shieldDestroyingAudioClip = shieldViewData.shieldDestroyingAudioClip;
+
+        this.audioSource = audioSource;
+
         shieldManager.CurrentHealthChangedEvent.AddListener(ShowShield);
     }
 
@@ -21,6 +30,7 @@ public class BroodmotherShieldView
         else
         {
             shield.SetActive(false);
+            audioSource.PlayOneShot(shieldDestroyingAudioClip);
         }
     }
 }

@@ -98,15 +98,20 @@ public class BroodmotherStrategy : BaseStrategy
 
     public bool Retreat()
     {
+        if (shieldManager.Health.currentHealth == shieldManager.Health.maxHealth)
+        {
+            return false;
+        }
+
+        if (broodmother.RegenerationAbility.IsPerforming)
+        {
+            return true;
+        }
+
         if (collider.transform.position.y - recoveryPosition.y > 0f)
         {
             climb.StopClimb();
             broodmother.RegenerationAbility.StartCast();
-
-            if (shieldManager.Health.currentHealth == shieldManager.Health.maxHealth)
-            {
-                return false;
-            }
 
             return true;
         }
@@ -132,7 +137,7 @@ public class BroodmotherStrategy : BaseStrategy
 
     public void BreakRetreat()
     {
-        broodmother.RegenerationAbility.BreakCast();
+        //broodmother.RegenerationAbility.BreakCast();
         climb.BreakClimb();
     }
 

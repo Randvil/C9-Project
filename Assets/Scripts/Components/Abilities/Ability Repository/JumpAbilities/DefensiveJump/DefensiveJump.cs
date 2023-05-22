@@ -48,6 +48,9 @@ public class DefensiveJump : AbstractAbility
         startJumpTime = Time.time;
         float horizontalSpeed = turning.Direction == eDirection.Right ? initialSpeed.x : -initialSpeed.x;
         rigidbody.velocity = new(horizontalSpeed, 0f);
+
+        ReleaseCastEvent.Invoke();
+
         while (Time.time - startJumpTime < jumpTime)
         {
             float verticalSpeed = initialSpeed.y * speedCurve.Evaluate((Time.time - startJumpTime) / jumpTime);

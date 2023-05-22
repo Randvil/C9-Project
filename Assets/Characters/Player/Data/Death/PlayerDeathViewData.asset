@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerDeathViewData
   m_EditorClassIdentifier: 
   animatorParameter: IsDying
-  deathAudioClip: {fileID: 8300000, guid: 23758080400382340a289b52bf3b5260, type: 3}
+  deathAudioClip: {fileID: 0}

@@ -1212,6 +1212,7 @@ GameObject:
   - component: {fileID: 8850710953850764198}
   - component: {fileID: 7845183630836557568}
   - component: {fileID: 8022143023300157512}
+  - component: {fileID: -1050464984166680160}
   m_Layer: 7
   m_Name: Broodmother
   m_TagString: Untagged
@@ -1346,6 +1347,7 @@ MonoBehaviour:
   - {fileID: 4658742498733326578}
   - {fileID: 8597955536379927155}
   movementAudioSource: {fileID: 7845183630836557568}
+  climbAudioSource: {fileID: -1050464984166680160}
   SelectiveffectManagerData: {fileID: 11400000, guid: 4a3abd9426dd9724b9f738af5c1ed744, type: 2}
   damageHandlerWithShieldsData: {fileID: 11400000, guid: 468dba08536c3ac4d98b4a403cc0260e, type: 2}
   shieldManagerData: {fileID: 11400000, guid: 14d743afb94ce764d8c9838e88262050, type: 2}
@@ -1361,9 +1363,12 @@ MonoBehaviour:
   selfStunData: {fileID: 11400000, guid: b9ca374e83dac144e975a1611348afd9, type: 2}
   broodmotherStrategyData: {fileID: 11400000, guid: 52432e9ee1161c24eb7f4b40a441852a, type: 2}
   weaponViewData: {fileID: 11400000, guid: baed50dd77be0d64d9f32a37ce6ed895, type: 2}
+  shieldViewData: {fileID: 11400000, guid: d39927ec500f1cd46aef7bb65cecb95e, type: 2}
   stunAbilityViewData: {fileID: 11400000, guid: d6129901c27cd0548846c5a823d1a3f6, type: 2}
   webAbilityViewData: {fileID: 11400000, guid: d72ba6b2285e17e45882cf9a9a3dbe1a, type: 2}
   offensiveJumpAbilityViewData: {fileID: 11400000, guid: 8d4b5137186bf5f45903fa160bffaa00, type: 2}
+  swarmSpawningViewData: {fileID: 11400000, guid: a4e665fc26dbc26478f6dbbe3021bc4d, type: 2}
+  regenerationAbilityViewData: {fileID: 11400000, guid: c873d5d113311cf4bb76242d8be2f42c, type: 2}
   shield: {fileID: 795344582649406888}
 --- !u!114 &8850710953850764198
 MonoBehaviour:
@@ -1437,7 +1442,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1563,7 +1568,103 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &-1050464984166680160
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048720266790035559}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8686646881147265316, guid: 641ce8892fb30864a973a4d9b5daae0c, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 0d3b38e242914fa449b840492492b7ef, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 7
+  MaxDistance: 12
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 1
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

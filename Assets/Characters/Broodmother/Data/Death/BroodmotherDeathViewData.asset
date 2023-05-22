@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BroodmotherDeathViewData
   m_EditorClassIdentifier: 
   animatorParameter: IsDying
-  deathAudioClip: {fileID: 8300000, guid: d86819506d72c074f9d36fa01fcdfe53, type: 3}
+  deathAudioClip: {fileID: 8300000, guid: 5d2b1f8cfea3a5449942111e55b8b862, type: 3}

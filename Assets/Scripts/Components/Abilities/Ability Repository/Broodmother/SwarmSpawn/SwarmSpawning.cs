@@ -18,6 +18,7 @@ public class SwarmSpawning : AbstractAbility
         energyManager.ChangeCurrentEnergy(-cost);
         finishCooldownTime = Time.time + cooldown;
         ReleaseCastEvent.Invoke();
+        Debug.Log("Start spawning swarm");
 
         float startTime = Time.time;
         Dictionary<Swarm, float> swarmSpawnTimes = new();

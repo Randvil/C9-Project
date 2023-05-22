@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5237a38ad2812d2408dc217ef5956aef, type: 3}
   m_Name: BroodmotherClimbData
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7.5
   searchPeriod: 10
   searchRadius: 0
   fallProhibitionPeriod: 0
