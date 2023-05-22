@@ -5,6 +5,7 @@
     <ui:VisualElement name="screen" style="flex-grow: 1; color: rgba(255, 255, 255, 0.7); background-color: rgba(0, 0, 0, 0.51); flex-direction: row;">
         <ui:VisualElement name="main" class="menu">
             <ui:Button text="ABILITIES" display-tooltip-when-elided="true" name="abilitiesB" class="menu-b" />
+            <ui:Button text="EFFECTS" name="effectsB" class="menu-b" />
         </ui:VisualElement>
         <ui:VisualElement name="abilities" class="menu second-menu" style="align-items: center; justify-content: center; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
             <ui:Instance template="honeycombs" name="honeycombs" />
@@ -17,57 +18,81 @@
             </ui:VisualElement>
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="TessenDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="effects" class="second-menu menu hidden-menu" style="width: 80%;">
+            <ui:VisualElement name="poison" class="out-effect-discr">
+                <ui:VisualElement class="effect-labelAndIcon" style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;poison512h&apos;);" />
+                    <ui:Label text="POISON" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="A character that is poisoned takes damage over time." class="effect-discr-text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="stun" text="LMAO SAMPLE TEXT" class="out-effect-discr">
+                <ui:VisualElement class="effect-labelAndIcon">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;stun512h&apos;);" />
+                    <ui:Label text="STUN" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="A character that is stunned is unable to control its movement,&#10;declare attacks, cast abilities.&#10;Interrupts attack windups and all channeled and charged abilities." display-tooltip-when-elided="true" class="effect-discr-text" style="white-space: normal;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="root" class="out-effect-discr">
+                <ui:VisualElement class="effect-labelAndIcon" style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;root512h&apos;);" />
+                    <ui:Label text="GROUND" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="A character that is grounded is unable to activate roll and jump for&#10;the duration. This effect does not innately knockdown a target&#10;that is already performing a roll or jump.&#10;Grounded character can move." display-tooltip-when-elided="true" class="effect-discr-text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TessenDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="TessenIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="TESSEN" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label display-tooltip-when-elided="true" text="Long-range attack type.&#10;At a certain distance (2-3 paces from the character) creates a stream of wind that tosses opponents into the air and damages them. It has a tipping effect.&#10;The main purpose of the ability is control.&#10;Damage 1+&#10;Energy cost 1+&#10;Cooldown 3s" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label display-tooltip-when-elided="true" text="Tessen creates a wind flow in front of the character, which lifts enemies into the air and deals minor damage.&#10;Energy cost: 12" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnTessenB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="DaikyuDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="DaikyuDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="DaikyuIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="DAIKYU" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label display-tooltip-when-elided="true" text="Ranged attack type. Fires an arrow that strikes opponents on the path, damaging them. Has a weak effect of slowing opponents&apos; movement speed. Holding the ability key increases the arrow&apos;s range and the damage it deals.&#10;The main purpose of the ability is to deal damage.&#10;Damage 10-20&#10;Energy cost 10&#10;Cooldown 5" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label text="The Daikyu fires an arrow that hits enemies in its path. The arrow deals damage, applies slowing and damage over time. While holding the ability, the damage dealt increases in proportion to the duration of the hold.&#10;Energy cost: 20" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnDaikyuB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="KanaboDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="KanaboDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="KanaboIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="KANABO" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label display-tooltip-when-elided="true" text="Melee type of attack. A heavy kanabo strike on the ground, dealing damage. Has a rollover effect. Radius is tripled in relation to the character&apos;s main attack.&#10;The main purpose of the ability is control.&#10;Damage 30&#10;Energy cost 10&#10;Cooldown 1s" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label text="Slams the ground with Kanabo, stunning and dealing with damage enemies in an area.&#10;Energy cost: 10" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnKanaboB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="RegenerationDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="RegenerationDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" text=" " icon-path="RegenerationIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="REGENERATION" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label display-tooltip-when-elided="true" text="Turn energy into health&#10;Health/s 10&#10;Energy cost 3" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label display-tooltip-when-elided="true" text="Restores the character&apos;s health in proportion to the energy expended." style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnRegenerationB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="ParryDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="ParryDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" text=" " icon-path="ParryIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="PARRY" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label display-tooltip-when-elided="true" text="LMAO BOTTOM TEXT" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label display-tooltip-when-elided="true" text="The ability absorbs damage from melee attacks and reflects ranged attacks. Successfully parrying melee attacks temporarily increases the player&apos;s damage." style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:VisualElement name="separator" />
         </ui:VisualElement>

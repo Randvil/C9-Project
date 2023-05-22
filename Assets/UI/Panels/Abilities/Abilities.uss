@@ -118,3 +118,31 @@
     opacity: 1;
     flex-grow: 42;
 }
+
+.out-effect-discr {
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.effect-discr-label {
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+}
+
+.effect-discr-text {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+}
+
+.effect-icon {
+    background-image: url('project://database/Packages/com.unity.timeline/Editor/StyleSheets/Images/Icons/d_TrackMuteButtonEnabled@2x.png?fileID=2800000&guid=e54e20c7a9730fe4c822d63228527ae4&type=3#d_TrackMuteButtonEnabled@2x');
+    -unity-background-scale-mode: scale-to-fit;
+    width: 170px;
+    height: 170px;
+}
+
+.effect-labelAndIcon {
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+}

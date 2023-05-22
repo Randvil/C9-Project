@@ -70,6 +70,7 @@ public class SceneObjectsCreator : Creator
             case "ArcadeCenter":
                 camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
                 boundingShape = Object.Instantiate(prefabsData.arcadeBoundingShape);
+                camera.CinemachineCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_YDamping = 0.2f;
                 break;
 
             case "BossLocation":

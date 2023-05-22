@@ -16,6 +16,8 @@ public class PanelManager : MonoBehaviour
     private bool needToTweenNext = true;
     private bool needToTweenPrev = true;
 
+    public bool Blocked { get; set; } = false;
+
     private VisualElement lastPanel;
 
     private VisualElement currentPanel;
@@ -24,16 +26,16 @@ public class PanelManager : MonoBehaviour
         get => currentPanel;
 
         private set
-        {        
+        {
             lastPanel = currentPanel;
             currentPanel = value;
 
             if (lastPanel != null)
             {
                 if (needToTweenPrev)
-                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);       
-                
-                StartCoroutine(DisplayDisableTween(lastPanel));                
+                    DOTween.To(x => lastPanel.style.opacity = x, 1f, 0f, PanelTweenDuration).SetUpdate(true);
+
+                StartCoroutine(DisplayDisableTween(lastPanel));
             }
 
             if (currentPanel != null)
@@ -49,7 +51,7 @@ public class PanelManager : MonoBehaviour
                     DOTween.To(x => currentPanel.style.opacity = x, 0f, 1f, PanelTweenDuration).SetUpdate(true);
                 else
                     currentPanel.style.opacity = 1f;
-            }      
+            }
         }
     }
 
@@ -58,7 +60,7 @@ public class PanelManager : MonoBehaviour
 
     private PlayerInput _input;
     public PlayerInput Input
-    { 
+    {
         get => _input;
         set
         {
@@ -95,7 +97,10 @@ public class PanelManager : MonoBehaviour
 
     public void SwitchTo(VisualElement panel)
     {
-        if (panel == CurrentPanel)
+        if (Blocked || panel == CurrentPanel)
+            return;
+
+        if (CurrentPanel != null && CurrentPanel.name.Contains("Death") && !panel.name.Contains("Load"))
             return;
         
         if (CurrentPanel != null)
