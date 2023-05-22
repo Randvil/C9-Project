@@ -183,9 +183,9 @@ MonoBehaviour:
     m_Name: xbox-pc-combinedSheet_17
     m_HashCode: 291160589
   - m_ElementType: 2
-    m_Unicode: 65534
+    m_Unicode: 15857180
     m_GlyphIndex: 18
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: xbox-pc-combinedSheet_18
     m_HashCode: 291160578
   - m_ElementType: 2
@@ -595,8 +595,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -64
-      m_HorizontalBearingY: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 100
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 512
