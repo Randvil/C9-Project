@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class BroodmotherShieldView
 {
-    private GameObject shield;
+    private MonoBehaviour owner;
+    private float dissolveRate;
+    private float refreshRate = 0.025f;
+    private Material shieldMaterial;
 
-    public BroodmotherShieldView(GameObject shield, IHealthManager shieldManager)
+    private AudioClip shieldDestroyingAudioClip;
+
+    private AudioSource audioSource;
+
+    public BroodmotherShieldView(MonoBehaviour owner, GameObject shield, ShieldViewData shieldViewData, IHealthManager shieldManager, AudioSource audioSource, float dissolveRate)
     {
-        this.shield = shield;
+        this.owner = owner;
+
+        this.dissolveRate = dissolveRate;
+        shieldDestroyingAudioClip = shieldViewData.shieldDestroyingAudioClip;
+
+        this.audioSource = audioSource;
+        shieldMaterial = shield.GetComponent<MeshRenderer>().material;
+
         shieldManager.CurrentHealthChangedEvent.AddListener(ShowShield);
     }
 
@@ -16,11 +30,32 @@ public class BroodmotherShieldView
     {
         if (health.currentHealth > 0)
         {
-            shield.SetActive(true);
+            shieldMaterial.SetFloat("_DissolveAmount", 0);
         }
         else
         {
-            shield.SetActive(false);
+            audioSource.PlayOneShot(shieldDestroyingAudioClip);
+            
+            ApplyDissolve();
+        }
+    }
+
+    public void ApplyDissolve()
+    {
+        owner.StartCoroutine(DissolveCoroutine());
+    }
+
+    public IEnumerator DissolveCoroutine()
+    {
+        float counter = 0;
+
+        while (shieldMaterial.GetFloat("_DissolveAmount") < 1)
+        {
+
+            counter += dissolveRate;
+            shieldMaterial.SetFloat("_DissolveAmount", counter);
+
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 }

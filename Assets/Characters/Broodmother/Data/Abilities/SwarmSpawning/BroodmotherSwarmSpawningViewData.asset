@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42a07ae5fb5b0924e8720fa17d8078fc, type: 3}
-  m_Name: BroodmotherWebAbilityView
+  m_Name: BroodmotherSwarmSpawningViewData
   m_EditorClassIdentifier: 
-  animatorParameter: IsUsingWeb
-  startCastSoundEffect: {fileID: 8300000, guid: b679f1aae14081146b0128c0479707c0, type: 3}
-  releaseCastSoundEffect: {fileID: 8300000, guid: c9109eacebd1dcb439e46de4eebcd4ec, type: 3}
-  breakCastSoundEffect: {fileID: 8300000, guid: c39284b9eaefdce4eba12aa24c6077d9, type: 3}
+  animatorParameter: IsUsingSwarmSpawn
+  startCastSoundEffect: {fileID: 8300000, guid: ee8823ea20b595242ad8bd62774faf5c, type: 3}
+  releaseCastSoundEffect: {fileID: 0}
+  breakCastSoundEffect: {fileID: 8300000, guid: c92a3cc9b5a3d2b4fae7bcfa9786c0cc, type: 3}

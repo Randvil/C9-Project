@@ -23,7 +23,7 @@ public class DeathView
     public void OnDeath()
     {
         SetAnimatorParameter(true);
-        //PlayDeathSound();
+        PlayDeathSound();
     }
 
     public void OnResurrect()

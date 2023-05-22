@@ -8,6 +8,7 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [Header("Broodmother Prefab Components")]
     [SerializeField] protected Transform[] webSpawnPoints;
     [SerializeField] protected AudioSource movementAudioSource;
+    [SerializeField] protected AudioSource climbAudioSource;
 
     [Header("Broodmother Data")]
     [SerializeField] protected SelectiveEffectManagerData SelectiveffectManagerData;
@@ -26,12 +27,16 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     [SerializeField] protected BroodmotherStrategyData broodmotherStrategyData;
 
     [SerializeField] protected NoArmsWeaponViewData weaponViewData;
+    [SerializeField] protected ShieldViewData shieldViewData;
     [SerializeField] protected CommonAbilityViewData stunAbilityViewData;
     [SerializeField] protected CommonAbilityViewData webAbilityViewData;
     [SerializeField] protected CommonAbilityViewData offensiveJumpAbilityViewData;
+    [SerializeField] protected CommonAbilityViewData swarmSpawningViewData;
+    [SerializeField] protected CommonAbilityViewData regenerationAbilityViewData;
 
     [Header("Broodmother Visual Data")]
-    [SerializeField] protected GameObject shield;
+    [SerializeField] protected GameObject shieldSphere;
+    [SerializeField] protected float dissolveRate = 0.0225f;
 
     public IHealthManager ShieldManager { get; protected set; }
     public IMovement Movement { get; protected set; }
@@ -69,6 +74,8 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     protected CommonAbilityView stunAbilityView;
     protected CommonAbilityView webAbilityView;
     protected CommonAbilityView offensiveJumpAbilityView;
+    protected CommonAbilityView swarmSpawnAbilityView;
+    protected CommonAbilityView regenerationAbilityView;
     protected BroodmotherShieldView BroodmotherShieldView;
     protected BroodmotherDeathView BroodmotherDeathView;
 
@@ -101,12 +108,14 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
 
         movementView = new MovementView(Movement, Animator, movementAudioSource);
         weaponView = new NoArmsWeaponView(weaponViewData, Weapon, Animator, sharedAudioSource);
-        climbView = new ClimbView(Climb, Animator, sharedAudioSource);
+        climbView = new ClimbView(Climb, Animator, climbAudioSource);
         stunView = new StunView(EffectManager, Animator);
         stunAbilityView = new CommonAbilityView(stunAbilityViewData, StunAbility, Animator, sharedAudioSource);
         webAbilityView = new CommonAbilityView(webAbilityViewData, WebAbility, Animator, sharedAudioSource);
         offensiveJumpAbilityView = new CommonAbilityView(offensiveJumpAbilityViewData, OffensiveJumpAbility, Animator, sharedAudioSource);
-        BroodmotherShieldView = new BroodmotherShieldView(shield, ShieldManager);
+        swarmSpawnAbilityView = new CommonAbilityView(swarmSpawningViewData, SwarmSpawningAbility, Animator, sharedAudioSource);
+        regenerationAbilityView = new CommonAbilityView(regenerationAbilityViewData, RegenerationAbility, Animator, sharedAudioSource);
+        BroodmotherShieldView = new BroodmotherShieldView(this, shieldSphere, shieldViewData, ShieldManager, sharedAudioSource, dissolveRate);
         BroodmotherDeathView = new BroodmotherDeathView(this, DeathManager, GetComponent<EnemyVisualEffect>());
 
         ITalent selfStun = new BroodmotherSelfStun(selfStunData, EffectManager, ShieldManager);
@@ -136,6 +145,16 @@ public class Broodmother : BaseCreature, IBroodmotherBehavior
     public void DestroyBroodmotherObject()
     {
         OnDeath();
+    }
+
+    protected override void OnDeath()
+    {
+        if (currentBehavior != null)
+        {
+            currentBehavior.Deactivate();
+        }
+
+        Destroy(gameObject, 5f);
     }
 
 }

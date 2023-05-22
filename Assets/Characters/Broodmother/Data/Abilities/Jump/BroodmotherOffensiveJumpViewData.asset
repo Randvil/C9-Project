@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42a07ae5fb5b0924e8720fa17d8078fc, type: 3}
-  m_Name: BroodmotherOffensiveJumpAbilityView
+  m_Name: BroodmotherOffensiveJumpViewData
   m_EditorClassIdentifier: 
   animatorParameter: IsUsingOffensiveJump
   startCastSoundEffect: {fileID: 0}
-  releaseCastSoundEffect: {fileID: 8300000, guid: f1a523979b294a143a11d3d0bb86cfd1, type: 3}
+  releaseCastSoundEffect: {fileID: 8300000, guid: 1ac3530079bd8474fb996e8b0a893fd2, type: 3}
   breakCastSoundEffect: {fileID: 0}

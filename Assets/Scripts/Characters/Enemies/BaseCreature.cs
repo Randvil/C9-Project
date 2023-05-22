@@ -83,7 +83,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
         }
     }
 
-    protected void OnDeath()
+    protected virtual void OnDeath()
     {
         if (currentBehavior != null)
         {

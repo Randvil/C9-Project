@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BroodmotherSelfStunEffectData
   m_EditorClassIdentifier: 
   effectPower: 2
-  duration: 3
+  duration: 4
