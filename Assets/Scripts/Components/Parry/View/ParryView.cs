@@ -43,7 +43,8 @@ public class ParryView
         parry.StartParryEvent.AddListener(OnStartParry);
         parry.BreakParryEvent.AddListener(OnBreakParry);
         parry.SuccessfulParryEvent.AddListener(OnSuccessfulParry);
-        parry.BreakSuccessfulParryEvent.AddListener(OnBreakSuccessfulParry);
+        parry.AddDamageAmplificationEvent.AddListener(OnAddDamageAmplification);
+        parry.RemoveDamageApmlificationEvent.AddListener(OnRemoveDamageAmplification);
     }
 
     private void OnStartParry()
@@ -72,9 +73,6 @@ public class ParryView
     {
         animator.SetTrigger(triggerAnimatorParameter);
 
-        //parryEffect.Play();
-        owner.StartCoroutine(ParryVFXCoroutine());
-
         PlaySound(successfulParrySound);
     }
 
@@ -86,15 +84,13 @@ public class ParryView
         }
     }
 
-    private void OnBreakSuccessfulParry()
-    {
-        parryEffect.Stop();
-    }
-
-    private IEnumerator ParryVFXCoroutine()
+    private void OnAddDamageAmplification()
     {
         parryEffect.Play();
-        yield return new WaitForSeconds(parry.AmplifyDuration);
+    }
+
+    private void OnRemoveDamageAmplification()
+    {
         parryEffect.Stop();
     }
 }

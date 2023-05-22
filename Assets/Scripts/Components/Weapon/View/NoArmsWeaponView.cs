@@ -25,6 +25,7 @@ public class NoArmsWeaponView
 
     public void OnStartAttack()
     {
+        animator.SetTrigger("AttackTrigger");
         animator.SetBool("IsAttacking", true);
         animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
 
