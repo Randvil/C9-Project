@@ -35,7 +35,6 @@ public class EffectUiDependencies : MonoBehaviour
     {
         if (type == eEffectType.Damage || type == eEffectType.Slow)
             return;
-        Debug.Log(type + " " + status);
 
         switch (status)
         {

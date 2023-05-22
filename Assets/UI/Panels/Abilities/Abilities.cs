@@ -27,6 +27,9 @@ public class Abilities : MonoBehaviour, IPanel
         main.AddChild(abilities);
 
         RegisterDescriptions(abilities);
+
+        MenuNode effects = new("effects", root, false);
+        main.AddChild(effects);
     }
 
     private void RegisterDescriptions(MenuNode abilities)
