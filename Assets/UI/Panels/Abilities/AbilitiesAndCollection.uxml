@@ -5,8 +5,9 @@
     <ui:VisualElement name="screen" style="flex-grow: 1; color: rgba(255, 255, 255, 0.7); background-color: rgba(0, 0, 0, 0.51); flex-direction: row;">
         <ui:VisualElement name="main" class="menu">
             <ui:Button text="ABILITIES" display-tooltip-when-elided="true" name="abilitiesB" class="menu-b" />
+            <ui:Button text="EFFECTS" name="effectsB" class="menu-b" />
         </ui:VisualElement>
-        <ui:VisualElement name="abilities" class="menu second-menu" style="align-items: center; justify-content: center; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
+        <ui:VisualElement name="abilities" class="menu second-menu hidden-menu" style="align-items: center; justify-content: center; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
             <ui:Instance template="honeycombs" name="honeycombs" />
             <ui:VisualElement style="position: absolute; top: 50px; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; flex-direction: row;">
                 <Polygon poly-image-path="poly512h" text="1" name="p1" class="poly_InGame poly_like-hud" />
@@ -17,7 +18,31 @@
             </ui:VisualElement>
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="TessenDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="effects" class="second-menu menu" style="width: 80%;">
+            <ui:VisualElement name="poison" class="out-effect-discr">
+                <ui:VisualElement style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" />
+                    <ui:Label text="POISON" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="LMAO SAMPLE TEXT" class="effect-discr-text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="stun" text="LMAO SAMPLE TEXT" class="out-effect-discr">
+                <ui:VisualElement style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" />
+                    <ui:Label text="STUN" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="LMAO SAMPLE TEXT" display-tooltip-when-elided="true" class="effect-discr-text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="root" class="out-effect-discr">
+                <ui:VisualElement style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" />
+                    <ui:Label text="ROOT" display-tooltip-when-elided="true" class="effect-discr-label" />
+                </ui:VisualElement>
+                <ui:Label text="LMAO SAMPLE TEXT" display-tooltip-when-elided="true" class="effect-discr-text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="separator" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TessenDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="TessenIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
@@ -28,7 +53,7 @@
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnTessenB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="DaikyuDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="DaikyuDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="DaikyuIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
@@ -39,7 +64,7 @@
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnDaikyuB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="KanaboDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="KanaboDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="KanaboIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
@@ -50,7 +75,7 @@
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnKanaboB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="RegenerationDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="RegenerationDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" text=" " icon-path="RegenerationIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
@@ -61,7 +86,7 @@
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnRegenerationB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="ParryDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="ParryDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" text=" " icon-path="ParryIcon512h" class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>

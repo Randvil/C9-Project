@@ -48,19 +48,19 @@
         </ui:VisualElement>
         <ui:VisualElement name="effects" style="left: 0; position: absolute; height: 30%;">
             <ui:VisualElement name="Stun" class="effect-out">
-                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.67" fill-color="#FFA201BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.67" fill-color="#FFA201BE" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
                 <ui:Label text="STUN" display-tooltip-when-elided="true" class="effect-label" />
             </ui:VisualElement>
             <ui:VisualElement name="Root" class="effect-out">
-                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.22" fill-color="#713400BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.22" fill-color="#713400BE" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
                 <ui:Label text="ROOT" display-tooltip-when-elided="true" class="effect-label" />
             </ui:VisualElement>
             <ui:VisualElement name="DoT" class="effect-out">
-                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.94" fill-color="#1BFF00BE" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.94" fill-color="#1BFF00BE" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
                 <ui:Label text="POISON" display-tooltip-when-elided="true" class="effect-label" />
             </ui:VisualElement>
             <ui:VisualElement name="Slow" class="effect-out">
-                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.34" style="overflow: hidden; background-image: resource(&apos;daikyuLoadMask&apos;);" />
+                <NS.RomanLib.RadialFill text="100" width="40" height="40" value="0.34" style="overflow: hidden; border-top-left-radius: 50%; border-bottom-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%;" />
                 <ui:Label text="SLOWDOWN" display-tooltip-when-elided="true" class="effect-label" />
             </ui:VisualElement>
         </ui:VisualElement>
