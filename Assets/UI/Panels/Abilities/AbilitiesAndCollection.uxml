@@ -20,22 +20,22 @@
         </ui:VisualElement>
         <ui:VisualElement name="effects" class="second-menu menu" style="width: 80%;">
             <ui:VisualElement name="poison" class="out-effect-discr">
-                <ui:VisualElement style="width: 20%;">
-                    <ui:VisualElement class="effect-icon" />
+                <ui:VisualElement class="effect-labelAndIcon" style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;poison512h&apos;);" />
                     <ui:Label text="POISON" display-tooltip-when-elided="true" class="effect-discr-label" />
                 </ui:VisualElement>
                 <ui:Label text="LMAO SAMPLE TEXT" class="effect-discr-text" />
             </ui:VisualElement>
             <ui:VisualElement name="stun" text="LMAO SAMPLE TEXT" class="out-effect-discr">
-                <ui:VisualElement style="width: 20%;">
-                    <ui:VisualElement class="effect-icon" />
+                <ui:VisualElement class="effect-labelAndIcon">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;stun512h&apos;);" />
                     <ui:Label text="STUN" display-tooltip-when-elided="true" class="effect-discr-label" />
                 </ui:VisualElement>
                 <ui:Label text="LMAO SAMPLE TEXT" display-tooltip-when-elided="true" class="effect-discr-text" />
             </ui:VisualElement>
             <ui:VisualElement name="root" class="out-effect-discr">
-                <ui:VisualElement style="width: 20%;">
-                    <ui:VisualElement class="effect-icon" />
+                <ui:VisualElement class="effect-labelAndIcon" style="width: 20%;">
+                    <ui:VisualElement class="effect-icon" style="background-image: resource(&apos;root512h&apos;);" />
                     <ui:Label text="ROOT" display-tooltip-when-elided="true" class="effect-discr-label" />
                 </ui:VisualElement>
                 <ui:Label text="LMAO SAMPLE TEXT" display-tooltip-when-elided="true" class="effect-discr-text" />

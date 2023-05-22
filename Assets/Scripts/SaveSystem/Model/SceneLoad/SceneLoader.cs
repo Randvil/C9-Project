@@ -16,6 +16,7 @@ public class SceneLoader : MonoBehaviour
 
         creator = new SceneObjectsCreator(prefabsData);
         creator.CreateAllObjects(gameData);
-    }
 
+        Time.timeScale = 1.0f;
+    }
 }

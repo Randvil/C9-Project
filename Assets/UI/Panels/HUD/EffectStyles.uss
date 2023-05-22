@@ -15,20 +15,20 @@
 
 .effect2 {
     position: absolute;
-    top: 60px;
+    top: 120px;
     transition-property: top;
     transition-duration: 0.4s;
 }
 
 .effect3 {
     position: absolute;
-    top: 120px;
+    top: 240px;
     transition-duration: 0.4s;
     transition-property: top;
 }
 
 .effect4 {
-    top: 180px;
+    top: 360px;
     transition-duration: 0.4s;
     transition-property: top;
     position: absolute;
@@ -38,6 +38,7 @@
     -unity-text-align: middle-left;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.75);
+    margin-left: 20px;
 }
 
 .hidden-effect {
