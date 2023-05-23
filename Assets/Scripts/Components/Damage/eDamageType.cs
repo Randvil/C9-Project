@@ -1,6 +1,7 @@
 public enum eDamageType
 {
-    MeleeWeapon,
-    RangedWeapon,
-    Ability,
+    MeleeWeapon     = 0,
+    RangedWeapon    = 1,
+    Ability         = 2,
+    ShieldCrush     = 3
 }

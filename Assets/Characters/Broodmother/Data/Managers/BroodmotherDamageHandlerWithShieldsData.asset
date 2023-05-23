@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BroodmotherDamageHandlerWithShieldsData
   m_EditorClassIdentifier: 
   shieldPercentageAbsorption: 0.9
+  shieldCrushMuliplierDamage: 6

@@ -30,12 +30,12 @@ public class DamageHandler : IDamageHandler
         effectManager.ApplyDamageEffects(incomingDamage);
 
         float effectiveDamage = defenceModifierManager.ApplyModifiers(incomingDamage.EffectiveDamage);
-        ChangeHealth(effectiveDamage);
+        ChangeHealth(incomingDamage, effectiveDamage);
 
         InvokeEvents(incomingDamage, effectiveDamage, damageDealer.DealDamageEventCallback);
     }
 
-    protected virtual void ChangeHealth(float effectiveDamage)
+    protected virtual void ChangeHealth(Damage damage, float effectiveDamage)
     {
         healthManager.ChangeCurrentHealth(-effectiveDamage);
     }
