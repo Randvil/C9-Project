@@ -75,7 +75,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator ActivateMenuCoroutine()
     {
-        yield return new WaitForSecondsRealtime(0.7f);
+        yield return new WaitForSecondsRealtime(0.9f);
         main.Active = true;
     }
 }

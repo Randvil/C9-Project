@@ -13,7 +13,7 @@
             <ui:VisualElement class="inner-cont">
                 <ui:Label text="АНАСТАСИЯ БОРЕЦ" display-tooltip-when-elided="true" class="creditsLabel" />
                 <ui:Label text="НАДЕЖДА ЛАРЬКОВА" display-tooltip-when-elided="true" class="creditsLabel" />
-                <ui:Label text="АНАСТАСИЯ СИГАЧЁВА" display-tooltip-when-elided="true" class="creditsLabel" />
+                <ui:Label text="АННА СИГАЧЁВА" display-tooltip-when-elided="true" class="creditsLabel" />
                 <ui:Label text="ПОЛИНА ГОРЯЧАЯ" display-tooltip-when-elided="true" class="creditsLabel" />
             </ui:VisualElement>
         </ui:VisualElement>
