@@ -1369,7 +1369,8 @@ MonoBehaviour:
   offensiveJumpAbilityViewData: {fileID: 11400000, guid: 8d4b5137186bf5f45903fa160bffaa00, type: 2}
   swarmSpawningViewData: {fileID: 11400000, guid: a4e665fc26dbc26478f6dbbe3021bc4d, type: 2}
   regenerationAbilityViewData: {fileID: 11400000, guid: c873d5d113311cf4bb76242d8be2f42c, type: 2}
-  shield: {fileID: 795344582649406888}
+  shieldSphere: {fileID: 0}
+  dissolveRate: 0.0225
 --- !u!114 &8850710953850764198
 MonoBehaviour:
   m_ObjectHideFlags: 0
