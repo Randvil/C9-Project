@@ -82,6 +82,9 @@ public class EffectUiDependencies : MonoBehaviour
 
     private void RemoveEffectAt(eEffectType type, int pos)
     {
+        if (pos < 0)
+            return;
+
         VisualElement removedEffect = effectViews[type];
 
         removedEffect.AddToClassList("hidden-effect");
