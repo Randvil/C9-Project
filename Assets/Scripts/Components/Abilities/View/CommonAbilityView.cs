@@ -47,7 +47,7 @@ public class CommonAbilityView
 
     private void PlaySoundEffect(AudioClip soundEffect)
     {
-        if (soundEffect != null)
+        if (soundEffect != null && audioSource.isPlaying == false)
         {
             audioSource.PlayOneShot(soundEffect);
         }

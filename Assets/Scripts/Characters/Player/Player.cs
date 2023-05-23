@@ -197,7 +197,7 @@ public class Player : MonoBehaviour, ITeamMember, IDamageable, IMortal, IEffecta
         ClimbView = new ClimbView(Climb, Animator, climbAudioSource);
         TakeDamageView = new PlayerTakeDamageView(DamageHandler, takeDamageAudioSource, volume, this);
         StunView = new StunView(EffectManager, Animator);
-        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+        DeathView = new DeathView(this, deathViewData, DeathManager, Animator, sharedAudioSource);
         DaikyuAbilityView = new DaikyuView(daikyuViewData, daikyuBowObject, daikyu, Animator, sharedAudioSource);
         TessenAbilityView = new TessenAbilityView(tessenObject, tessenViewData, tessenGraph, areaTessen, Turning, Animator, sharedAudioSource);
         KanaboAbilityView = new KanaboAbilityView(kanaboObject, kanaboViewData,  kanaboGraph, kanabo, Turning, Animator, sharedAudioSource);
