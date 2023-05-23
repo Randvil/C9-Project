@@ -96,8 +96,6 @@ public class BroodmotherCompoundAttack : ICompoundAttack
 
     public void ChangePhase(int newPhase)
     {
-        Debug.Log("Change Phase");
-
         if (newPhase > CurrentPhase)
         {
             swarmSpawningAbility.StartCast();
