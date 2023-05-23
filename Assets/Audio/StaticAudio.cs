@@ -30,6 +30,7 @@ public class StaticAudio : MonoBehaviour
     [SerializeField] private AudioSource buttonClickSource;
     [SerializeField] private AudioSource hintSource;
     [SerializeField] private AudioSource deathSource;
+    [SerializeField] private AudioSource checkpointSource;
 
     [SerializeField] private AudioSource locationSource;
 
@@ -60,12 +61,18 @@ public class StaticAudio : MonoBehaviour
         switch (newScene.name)
         {
             case "CityLocation":
+                musicSource.volume = 1.0f;
                 ChangeBackgroundTrack("streetSounds");
                 break;
             case "ArcadeCenter":
+                musicSource.volume = 0.4f;
                 ChangeBackgroundTrack("arcadeCenterSounds");
                 break;
             case "BossLocation":
+                musicSource.volume = 1.0f;
+                break;
+            default:
+                musicSource.volume = 1.0f;
                 break;
         }
     }
@@ -101,6 +108,10 @@ public class StaticAudio : MonoBehaviour
 
             case eAudioEffect.Death:
                 deathSource.Play();
+                break;
+
+            case eAudioEffect.Checkpoint:
+                checkpointSource.Play();
                 break;
         }
     }
