@@ -287,7 +287,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 2
-        position: {x: 50, y: 13.72, z: 1.25}
+        position: {x: 55, y: 13.72, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 3
-        position: {x: 49.15, y: 7.51, z: 1.25}
+        position: {x: 44, y: 7.51, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 4
-        position: {x: 50, y: 7.51, z: 1.25}
+        position: {x: 53, y: 7.51, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
           detectPlayerRadius: 10
           spawnRadius: 1
       - id: 5
-        position: {x: 50, y: 13.72, z: 1.25}
+        position: {x: 42, y: 13.72, z: 1.25}
         enemyNumber: 1
         spawnCondition: 0
         enemyPrefab: 0
