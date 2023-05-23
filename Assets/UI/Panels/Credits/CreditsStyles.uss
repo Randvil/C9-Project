@@ -10,9 +10,22 @@
 
 .out-cont {
     flex-grow: 1;
+    justify-content: center;
 }
 
 .inner-cont {
     flex-direction: row;
     justify-content: space-around;
+}
+
+.column1 {
+    width: 50%;
+}
+
+.right-label {
+    -unity-text-align: middle-left;
+}
+
+.left-label {
+    -unity-text-align: middle-right;
 }
