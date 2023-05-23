@@ -22,6 +22,7 @@ public class AbilityUiDependencies : MonoBehaviour
     private Polygon[] polyInCollection;
 
     private RadialFill daikyuLoadBar;
+    private IEnumerator waitForPrecastCoroutine;
 
     private readonly Dictionary<eAbilityType, int> abilityTypeOrder = new();
     private readonly Dictionary<eAbilityType, bool> abilityCanBeUsed = new();
@@ -81,7 +82,8 @@ public class AbilityUiDependencies : MonoBehaviour
 
     private void OnDaikyuPrepare(Daikyu daikyu)
     {
-        StartCoroutine(WaitForDaikyuPrecast(daikyu));
+        waitForPrecastCoroutine = WaitForDaikyuPrecast(daikyu);
+        StartCoroutine(waitForPrecastCoroutine);
     }
 
     private IEnumerator WaitForDaikyuPrecast(Daikyu daikyu)
@@ -95,6 +97,8 @@ public class AbilityUiDependencies : MonoBehaviour
     {
         daikyuLoadBar.style.opacity = 0f;
         daikyuLoadBar.value = 0f;
+
+        StopCoroutine(waitForPrecastCoroutine);
     }
 
     private void CheckForAlreadyLearned()

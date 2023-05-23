@@ -43,7 +43,10 @@ public class Hints : MonoBehaviour
 		if (!hint.ClassListContains(hiddenClass))
 			return;
 
-		StaticAudio.Instance.PlayEffect(eAudioEffect.Hint);
+		if (labelName == "checkpoint")
+			StaticAudio.Instance.PlayEffect(eAudioEffect.Checkpoint);
+		else
+			StaticAudio.Instance.PlayEffect(eAudioEffect.Hint);
 		hint.RemoveFromClassList(hiddenClass);
 	}
 

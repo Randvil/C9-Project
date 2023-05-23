@@ -6,5 +6,6 @@ public enum eAudioEffect
     ButtonClick,
     Hint,
     Music,
-    Death
+    Death,
+    Checkpoint
 }
