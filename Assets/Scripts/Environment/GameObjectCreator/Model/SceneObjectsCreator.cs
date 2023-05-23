@@ -65,12 +65,16 @@ public class SceneObjectsCreator : Creator
             case "CityLocation":
                 camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
                 boundingShape = Object.Instantiate(prefabsData.cityBoundingShape);
+
+                StaticAudio.Instance.ChangeBackgroundTrack("streetSounds");
                 break;
 
             case "ArcadeCenter":
                 camera.CinemachineCamera.Follow = player.PlayerComponent.CameraFollowPoint;
                 boundingShape = Object.Instantiate(prefabsData.arcadeBoundingShape);
                 camera.CinemachineCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_YDamping = 0.2f;
+
+                StaticAudio.Instance.ChangeBackgroundTrack("arcadeCenterSounds");
                 break;
 
             case "BossLocation":

@@ -42,14 +42,32 @@ public class StaticAudio : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
 
-            SceneManager.activeSceneChanged += (_, _) => SubscribeButtonsOnSound();
-            SceneManager.activeSceneChanged += (_, _) => musicSource.Stop();
+            SceneManager.activeSceneChanged += OnSceneChanged;
         }
     }
 
     private void Start()
     {
         SnapshotName = "InGame";
+    }
+
+    private void OnSceneChanged(Scene prevScene, Scene newScene)
+    {
+        SubscribeButtonsOnSound();
+
+        musicSource.Stop();
+
+        switch (newScene.name)
+        {
+            case "CityLocation":
+                ChangeBackgroundTrack("streetSounds");
+                break;
+            case "ArcadeCenter":
+                ChangeBackgroundTrack("arcadeCenterSounds");
+                break;
+            case "BossLocation":
+                break;
+        }
     }
 
     public void ToggleSnapshot()
