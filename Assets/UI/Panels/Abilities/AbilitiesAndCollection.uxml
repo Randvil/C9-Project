@@ -64,13 +64,13 @@
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnDaikyuB" class="menu-b" />
             <ui:VisualElement name="separator" />
         </ui:VisualElement>
-        <ui:VisualElement name="KanaboDescription" class="third-menu menu hidden-menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
+        <ui:VisualElement name="KanaboDescription" class="third-menu menu" style="position: absolute; height: 100%; width: 40%; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%; right: 0; left: auto;">
             <ui:VisualElement style="align-items: center; justify-content: center;">
                 <Polygon poly-image-path="poly512h" icon-path="KanaboIcon512h" text=" " class="poly_InGame" style="width: 168px; height: 288px;" />
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label text="KANABO" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 32px;" />
-                <ui:Label text="Slams the ground with Kanabo, stunning and dealing with damage enemies in an area.&#10;Energy cost: 10" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
+                <ui:Label text="Slams the ground with Kanabo, stunning and dealing with damage enemies in an area. Deals increased damage to armor.&#10;Energy cost: 10" style="white-space: normal; -unity-text-align: middle-center; font-size: 20px; -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:Button text="SET" display-tooltip-when-elided="true" name="learnKanaboB" class="menu-b" />
             <ui:VisualElement name="separator" />
