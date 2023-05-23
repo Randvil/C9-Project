@@ -24,9 +24,12 @@ public class DamageHandlerWithShields : DamageHandler
 
         if (shieldDamage * multiplier > shieldManager.Health.currentHealth)
         {
-            shieldDamage = shieldManager.Health.currentHealth;
+            shieldManager.ChangeCurrentHealth(-shieldManager.Health.currentHealth);
         }
-        shieldManager.ChangeCurrentHealth(-(shieldDamage * multiplier));
+        else
+        {
+            shieldManager.ChangeCurrentHealth(-shieldDamage * multiplier);
+        }
 
         healthManager.ChangeCurrentHealth(shieldDamage - effectiveDamage);
     }
