@@ -1,15 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class DeathView
 {
+    private MonoBehaviour owner;
+
     private string animatorParameter;
     private AudioClip deathAudioClip;
 
     private Animator animator;
     private AudioSource audioSource;
 
-    public DeathView(DeathViewData deathViewData, IDeathManager deathManager, Animator animator, AudioSource audioSource)
+    public DeathView(MonoBehaviour owner, DeathViewData deathViewData, IDeathManager deathManager, Animator animator, AudioSource audioSource)
     {
+        this.owner = owner;
+
         animatorParameter = deathViewData.animatorParameter; 
         deathAudioClip = deathViewData.deathAudioClip;
 
@@ -23,7 +28,7 @@ public class DeathView
     public void OnDeath()
     {
         SetAnimatorParameter(true);
-        PlayDeathSound();
+        owner.StartCoroutine(PlayDeathSound());
     }
 
     public void OnResurrect()
@@ -36,10 +41,11 @@ public class DeathView
         animator.SetBool(animatorParameter, value);
     }
 
-    private void PlayDeathSound()
+    private IEnumerator PlayDeathSound()
     {
         if (deathAudioClip != null)
         {
+            yield return new WaitUntil(() => audioSource.isPlaying == false);
             audioSource.PlayOneShot(deathAudioClip);
         }
     }

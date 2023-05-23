@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b6a376283fed54dad035887c1ceace, type: 3}
   m_Name: PlayerKanaboDamageData
   m_EditorClassIdentifier: 
-  damageType: 2
-  damageValue: 30
+  damageType: 3
+  damageValue: 45

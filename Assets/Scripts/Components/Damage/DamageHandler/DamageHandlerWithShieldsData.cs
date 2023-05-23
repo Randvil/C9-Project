@@ -7,4 +7,5 @@ public class DamageHandlerWithShieldsData : ScriptableObject
 {
     [Range(0f, 1f), Tooltip("How much damage will be absorbed by the shield")]
     public float shieldPercentageAbsorption = 0.5f;
+    public float shieldCrushMuliplierDamage = 4f;
 }

@@ -58,7 +58,7 @@ public abstract class BaseCreature : MonoBehaviour, ITeamMember, IDamageable, IE
 
         TurningView = new TurningView(this, avatar, turningViewData, Turning);
         HealthBarView = new HealthBarView(healthBarSlider, HealthManager, DeathManager);
-        DeathView = new DeathView(deathViewData, DeathManager, Animator, sharedAudioSource);
+        DeathView = new DeathView(this, deathViewData, DeathManager, Animator, sharedAudioSource);
 
         //DeathManager.DeathEvent.AddListener(OnDeath);
     }
